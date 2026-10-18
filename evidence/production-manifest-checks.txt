@@ -1,0 +1,13 @@
+PASS valid shape
+PASS demo
+PASS insecure origin
+PASS trailing slash
+PASS oversize metadata
+PASS missing service role declaration
+PASS live missing browser RPC
+PASS invalid key
+PASS cron no secret
+PASS secret field
+PASS nonzero referral
+PASS fractional batch
+12 synthetic manifest checks passed; no services contacted.

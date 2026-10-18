@@ -1,0 +1,22 @@
+{
+  "mode": "mainnet-readonly",
+  "origin": "https://app.example.com",
+  "supabaseUrl": "https://abcdefghijklmnopqrst.supabase.co",
+  "assetBucket": "stonklaunch-assets",
+  "browserRpcConfigured": false,
+  "serverRpcConfigured": false,
+  "supabaseAnonKeyConfigured": false,
+  "supabaseServiceRoleConfigured": false,
+  "platformId": "",
+  "platformAdmin": "",
+  "solConfigId": "",
+  "cpmmConfigId": "",
+  "platformFeeWallet": "",
+  "platformFeeBps": 50,
+  "creatorFeeBps": 50,
+  "shareFeeBps": 0,
+  "indexerMode": "worker",
+  "indexerBatchSize": 50,
+  "indexerPollIntervalMs": 10000,
+  "cronSecretAtLeast32Characters": false
+}

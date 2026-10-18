@@ -1,0 +1,9 @@
+PASS success and single-flight
+PASS cache expiry
+PASS missing config no network
+PASS demo not ready
+PASS denied dependency
+PASS wrong cluster
+PASS bounded timeout
+PASS invalid URL no data exposure
+8 mocked readiness checks passed; no live service contacted

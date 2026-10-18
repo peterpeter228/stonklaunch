@@ -1,0 +1,351 @@
+{
+  "runId": "39154935566",
+  "jobId": "117756101854",
+  "sourceSha": "8e05667e760c1ec0215f98557789359e1144e03c",
+  "conclusion": "success",
+  "records": [
+    {
+      "observedAt": "2026-10-18T18:36:58.9292564Z",
+      "stage": "prepare-trade",
+      "number": 1,
+      "method": "getGenesisHash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 172,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:58.9720768Z",
+      "stage": "prepare-trade",
+      "number": 2,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 38,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.0158694Z",
+      "stage": "prepare-trade",
+      "number": 3,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 37,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.0557706Z",
+      "stage": "prepare-trade",
+      "number": 4,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 39,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.1782215Z",
+      "stage": "prepare-trade",
+      "number": 5,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 160,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.2159967Z",
+      "stage": "prepare-trade",
+      "number": 6,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.2543074Z",
+      "stage": "prepare-trade",
+      "number": 7,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 37,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.2915799Z",
+      "stage": "prepare-trade",
+      "number": 8,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 37,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.3332554Z",
+      "stage": "prepare-trade",
+      "number": 9,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 38,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.3737988Z",
+      "stage": "prepare-trade",
+      "number": 10,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 35,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.4121327Z",
+      "stage": "prepare-trade",
+      "number": 11,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.4198545Z",
+      "stage": "prepare-trade",
+      "number": 12,
+      "method": "getTokenAccountsByOwner",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 43,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.5411445Z",
+      "stage": "prepare-trade",
+      "number": 13,
+      "method": "getTokenAccountsByOwner",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 164,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.6422110Z",
+      "stage": "prepare-trade",
+      "number": 14,
+      "method": "getMinimumBalanceForRentExemption",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 35,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.6799189Z",
+      "stage": "prepare-trade",
+      "number": 15,
+      "method": "getMultipleAccounts",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.7163564Z",
+      "stage": "prepare-trade",
+      "number": 16,
+      "method": "getSlot",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.7559585Z",
+      "stage": "prepare-trade",
+      "number": 17,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.7920376Z",
+      "stage": "prepare-trade",
+      "number": 18,
+      "method": "getLatestBlockhash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 34,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.8329872Z",
+      "stage": "prepare-trade",
+      "number": 19,
+      "method": "getLatestBlockhash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 35,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.8705387Z",
+      "stage": "prepare-trade",
+      "number": 20,
+      "method": "simulateTransaction",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.9068711Z",
+      "stage": "prepare-trade",
+      "number": 21,
+      "method": "getFeeForMessage",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 35,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.9442096Z",
+      "stage": "exact-submission-helper",
+      "number": 22,
+      "method": "getGenesisHash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:36:59.9814859Z",
+      "stage": "exact-submission-helper",
+      "number": 23,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.0250393Z",
+      "stage": "exact-submission-helper",
+      "number": 24,
+      "method": "getMinimumBalanceForRentExemption",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.0615384Z",
+      "stage": "exact-submission-helper",
+      "number": 25,
+      "method": "getBlockHeight",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "blockHeight": 499741924,
+      "durationMs": 35,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.0620332Z",
+      "stage": "exact-submission-helper",
+      "helperStage": "awaiting_signature",
+      "requests": 25,
+      "validity": {
+        "blockhash": "9TWjfB9AFCWjx7QLqXYyCdz2k9JDCa6Gm16UUeuUsjVM",
+        "lastValidBlockHeight": 499742074,
+        "expiresAt": "2026-10-18T18:37:19.336Z",
+        "phase": "before-sign",
+        "observedAt": "2026-10-18T18:37:00.061Z",
+        "readAttempts": 1,
+        "observedBlockHeight": 499741924
+      },
+      "synthetic": true,
+      "broadcast": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1000375Z",
+      "stage": "callback-reads",
+      "number": 26,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 37,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1072469Z",
+      "stage": "callback-reads",
+      "number": 28,
+      "method": "getFeeForMessage",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 43,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1076311Z",
+      "stage": "callback-reads",
+      "number": 27,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 45,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1462498Z",
+      "stage": "callback-simulation",
+      "number": 29,
+      "method": "simulateTransaction",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 36,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1878887Z",
+      "stage": "helper-after-callback",
+      "number": 30,
+      "method": "getBlockHeight",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "blockHeight": 499741925,
+      "durationMs": 40,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1883742Z",
+      "stage": "helper-after-callback",
+      "helperStage": "submitted",
+      "requests": 30,
+      "synthetic": true,
+      "broadcast": false
+    },
+    {
+      "observedAt": "2026-10-18T18:37:00.1893788Z",
+      "status": "EXACT_SUBMISSION_READERS_COMPLETE",
+      "requests": 30,
+      "stage": "helper-after-callback",
+      "beforeHeight": 499741924,
+      "quoteExpired": false,
+      "syntheticSignature": true,
+      "cryptographicSigning": false,
+      "broadcast": false,
+      "ledgerWrites": false
+    }
+  ],
+  "finding": "Actual signAndSubmitPlan read path reached synthetic submitted boundary after 30 HTTP200 RPC requests. Post-callback blockheight read succeeded. Forced stop before send; no cryptographic signing or ledger writes. Earlier failure cause remains unproven.",
+  "cryptographicSigning": false,
+  "broadcast": false,
+  "ledgerWrites": false
+}
