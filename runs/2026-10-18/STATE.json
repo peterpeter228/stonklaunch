@@ -26,9 +26,9 @@
     "deployed": false,
     "runtime_url": "http://localhost:3010",
     "repository": "https://github.com/peterpeter228/stonklaunch",
-    "commit": "ba06d922ea2e43bca8e7843e7b72c8c37b4eb944",
+    "commit": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
-    "commit_scope": "Verified source/evidence checkpoint before this continuity update; HTTP confirmation fix and durable wallet recovery already persisted.",
+    "commit_scope": "Latest reviewed implementation; subsequent commits retain public claims and evidence.",
     "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment"
   },
   "evidence_scope": [
@@ -188,13 +188,14 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Implement and verify fail-closed public remote claim gating, then run one reviewed devnet acceptance step per dispatch using fixed funded wallet",
-    "Continue bounded non-funded failure-path review and actual DEMO UI regression per Sentinel_46a58ef43c9481919e1c62325272645f",
-    "Complete remaining deployment/auth/metadata and migration acceptance; never substitute simulation for execution"
+    "Diagnose exact transport status of bounded GitHub runner getBlockHeight failure without further signing",
+    "Preserve consumed signed claims and reconcile originals before any reviewed recovery",
+    "Restore actual rendered UI QA; current fresh tests blocked",
+    "Complete remaining deployment/auth/metadata/migration acceptance; no mainnet release yet"
   ],
-  "last_completed_work": "Unfunded recovery hardening: 18 unit tests, typecheck, direct route smoke checks and production build PASS. Current rendered browser regression BLOCKED before app load; no new UI or chain PASS claimed.",
+  "last_completed_work": "Durable wallet funded with 5devnetSOL; independent recovery and one new finalized devnet launch PASS. Two buy attempts stopped before broadcast; second diagnosed BLOCKHEIGHT_RPC_FAILED after3readonly attempts, not quote expiry. No buy/sell/creator-claim PASS inferred.",
   "verified_checks": [
-    "18 unit tests pass (2026-10-18 13:50 UTC)",
+    "29 unit tests pass; typecheck and production build PASS for diagnostic patch",
     "server route demo/read-only transaction refusal passed",
     "initial five-page Next production build passed",
     "embedded PostgreSQL migration/RLS ownership/forged financial-write tests passed with auth stub"
@@ -217,7 +218,7 @@
     "completed_short_review_count": 3
   },
   "remaining_blockers": [
-    "Creator acceptance execution pending durable single-step claim gating; fixed signer recovered and funded with 5devnetSOL.",
+    "Durable buy halted before broadcast on blockheight RPC read failure; signature retained, balance unchanged except successful launch. Need concrete transport diagnosis; do not reset signed claim or extend retry gate blindly.",
     "Supabase project/Auth/storage not configured or deployed",
     "NonSOL assets not enabled; xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
@@ -246,7 +247,25 @@
       "recovery": "PASS",
       "evidence": "evidence/DURABLE_DEVNET_WALLET.json",
       "run_url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39108491594",
-      "funding": "FINALIZED_5_DEVNET_SOL"
+      "funding": "FINALIZED_5_DEVNET_SOL",
+      "latest_balance_lamports": 4979382960,
+      "latest_balance_slot": 512521657
+    },
+    "durable_execution": {
+      "ledger": "evidence/DURABLE_CREATOR_LEDGER.json",
+      "launch": "PASS_finalized_slot512517543",
+      "launch_run": 39151585237,
+      "launch_receipt": "evidence/DURABLE_LAUNCH_INDEPENDENT_RECEIPT.json",
+      "buy": "BLOCKED_preserved_signed_claim_no_broadcast",
+      "buy_runs": [
+        39151817814,
+        39152770076
+      ],
+      "buy_error": "BLOCKHEIGHT_RPC_FAILED",
+      "buy_evidence": "evidence/DURABLE_BUY_ATTEMPT_2_RECONCILIATION.json",
+      "sell": "NOT_RUN",
+      "creator_claim": "NOT_RUN",
+      "no_automatic_retry": true
     }
   },
   "unfunded_followup": {
