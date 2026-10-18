@@ -188,12 +188,12 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Diagnose exact transport status of bounded GitHub runner getBlockHeight failure without further signing",
+    "Earlier post-sign BLOCKHEIGHT_RPC_FAILED remains unproven despite successful complete readonly SDK sequence; retain signed claim and do not blindly retry or declare live readiness.",
     "Preserve consumed signed claims and reconcile originals before any reviewed recovery",
     "Restore actual rendered UI QA; current fresh tests blocked",
     "Complete remaining deployment/auth/metadata/migration acceptance; no mainnet release yet"
   ],
-  "last_completed_work": "Durable wallet funded with 5devnetSOL; independent recovery and one new finalized devnet launch PASS. Two buy attempts stopped before broadcast; second diagnosed BLOCKHEIGHT_RPC_FAILED after3readonly attempts, not quote expiry. No buy/sell/creator-claim PASS inferred.",
+  "last_completed_work": "Durable wallet funded with 5devnetSOL; independent recovery and one new finalized devnet launch PASS. Two buy attempts stopped before broadcast; second diagnosed BLOCKHEIGHT_RPC_FAILED after3readonly attempts, not quote expiry. No buy/sell/creator-claim PASS inferred. Complete 29-request secret-free SDK probe PASS, including guard/simulation/before-after heights; prior signing-run transport cause remains unknown.",
   "verified_checks": [
     "29 unit tests pass; typecheck and production build PASS for diagnostic patch",
     "server route demo/read-only transaction refusal passed",
@@ -286,5 +286,16 @@
     "new_chain_transactions": 0,
     "release_ready": false
   },
-  "last_funding_confirmation": "evidence/DURABLE_DEVNET_FUNDING_RECEIPT_20261018.json"
+  "last_funding_confirmation": "evidence/DURABLE_DEVNET_FUNDING_RECEIPT_20261018.json",
+  "readonly_diagnosis": {
+    "status": "complete_sequence_passes_prior_signed_failure_not_reproduced",
+    "light_run": 39153125599,
+    "final_sdk_run": 39153989662,
+    "rpc_requests": 29,
+    "http_200": 29,
+    "quote_expired": false,
+    "signing": false,
+    "broadcast": false,
+    "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
+  }
 }
