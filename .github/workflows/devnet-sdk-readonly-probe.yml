@@ -20,5 +20,5 @@ jobs:
         run: |
           npm install --global pnpm@11.25.0 --ignore-scripts
           pnpm install --frozen-lockfile --ignore-scripts
-      - name: Trace at most 25 readonly RPC requests, never sign or submit
+      - name: Trace at most 30 readonly RPC requests, never sign or submit
         run: node --import tsx scripts/devnet-sdk-readonly-probe.ts
