@@ -1,0 +1,22 @@
+{
+  "startedAt": "2026-10-18T04:09:24Z",
+  "endpoint": "https://api.xiaoyiapi.xyz",
+  "model": "gemini-4-argon",
+  "files": [
+    "src/lib/raydium/client-transactions.ts",
+    "src/components/transaction-control.tsx",
+    "src/lib/auth/server.ts"
+  ],
+  "thinkingLevel": "low",
+  "actualCharge": null,
+  "httpStatus": 200,
+  "usage": {
+    "promptTokenCount": 6771,
+    "candidatesTokenCount": 1571,
+    "totalTokenCount": 8342,
+    "cachedContentTokenCount": 0
+  },
+  "finishReason": "STOP",
+  "elapsedSeconds": 37.95,
+  "answerCharacters": 3981
+}

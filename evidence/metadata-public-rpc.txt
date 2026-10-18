@@ -1,0 +1,2 @@
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+{"name":"USD Coin","symbol":"USDC","uri":"","slot":458296202,"address":"5x38Kp4hvdomTCnCrAny4UtMUt5rQBdB6px2K1Ui45Wq"}

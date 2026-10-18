@@ -4,7 +4,7 @@ import { usePathname } from 'next/navigation';
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { ArrowUpRight, ArrowRight, Wallet, X, Orbit, ShieldCheck, Info, RefreshCw, Check, Copy } from 'lucide-react';
 import type { RuntimeConfig, AssetCapability, Launch, ApiEnvelope } from '@/types/domain';
-export async function api<T>(url: string, body?: unknown): Promise<T> { const res = await fetch(url, body ? { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) } : { cache: 'no-store' }); const result = await res.json() as ApiEnvelope<T>; if ('error' in result)
+export async function api<T>(url: string, body?: unknown): Promise<T> { const res = await fetch(url, body ? { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-wallet-address': typeof window==='undefined'?'':((window as unknown as {solana?:{publicKey?:{toBase58:()=>string}}}).solana?.publicKey?.toBase58()||'') }, body: JSON.stringify(body) } : { cache: 'no-store' }); const result = await res.json() as ApiEnvelope<T>; if ('error' in result)
     throw new Error(`${result.error.message} (${result.error.code})`); if (!res.ok)
     throw new Error('The service is unavailable. Your inputs are safe.'); return result.data; }
 export function useApi<T>(url: string) { const [data, setData] = useState<T | null>(null); const [error, setError] = useState(''); const [loading, setLoading] = useState(true); const [revision, setRevision] = useState(0); useEffect(() => { let active = true; setLoading(true); api<T>(url).then(d => { if (active) {

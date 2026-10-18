@@ -1,0 +1,33 @@
+{
+  "startedAt": "2026-10-18T04:06:22Z",
+  "endpoint": "https://api.xiaoyiapi.xyz",
+  "model": "gemini-4-argon",
+  "inputBytes": 96021,
+  "files": [
+    "src/lib/monetization.ts",
+    "src/lib/raydium/chain.ts",
+    "src/lib/raydium/service.ts",
+    "src/lib/raydium/client-transactions.ts",
+    "src/lib/raydium/reconcile.ts",
+    "src/lib/raydium/metadata.ts",
+    "src/components/transaction-control.tsx",
+    "src/lib/auth/server.ts",
+    "supabase/migrations/0001_initial.sql",
+    "evidence/BROWSER_QA.md",
+    "evidence/GEMINI_REVIEW_DECISIONS.md"
+  ],
+  "maxOutputTokens": 6000,
+  "credentialSaved": false,
+  "budgetLimitRemovedBy": "Sentinel_f359134ce780819183e0397b7a4b5f7a",
+  "actualCharge": null,
+  "httpStatus": 200,
+  "usage": {
+    "promptTokenCount": 26294,
+    "totalTokenCount": 37744,
+    "thoughtsTokenCount": 11450,
+    "cachedContentTokenCount": 0
+  },
+  "interrupted": "overall_time_limit",
+  "elapsedSeconds": 151.94,
+  "answerCharacters": 0
+}

@@ -5,7 +5,7 @@
   "timezone": "Asia/Shanghai",
   "artifact_kind": "dot_development_handoff",
   "phase": "d04",
-  "phase_status": "partial_acceptance_external_review_and_live_configuration_blocked",
+  "phase_status": "partial_acceptance_devnet_funding_and_live_configuration_blocked",
   "d00_confirmation": {
     "received": true,
     "message_id": "Sentinel_cfb0ddb72cb48191b9d6e8dfc86c6185",
@@ -26,9 +26,9 @@
     "deployed": false,
     "runtime_url": "http://localhost:3010",
     "repository": "https://github.com/peterpeter228/stonklaunch",
-    "commit": "0afc9ac4213b846b5d84309581e630fb44562370",
+    "commit": "b59504d18b114b10e5c0a7d9915602170ae4ab5b",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
-    "commit_scope": "Verified implementation checkpoint; later UI fixes and final evidence pending follow-up commit",
+    "commit_scope": "Prior verified checkpoint; current Argon hardening and evidence prepared for next commit",
     "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment"
   },
   "evidence_scope": [
@@ -41,7 +41,7 @@
     "repository": "raydium-io/raydium-sdk-V2",
     "ref": "e2e8bcd865189c994682a9477ec8eaf1e2da8aaf",
     "package_version": "0.2.74-alpha",
-    "installed": false,
+    "installed": true,
     "cluster_compatibility_verified": false
   },
   "fee_policy": {
@@ -137,7 +137,9 @@
     "routine_local_development": "per_user_task",
     "mainnet_funds": "user_execution_required",
     "external_publish_or_paid_services": "follow_existing_explicit_authorization_else_prepare_for_review",
-    "secrets_included": false
+    "secrets_included": false,
+    "disposable_devnet_tests": "Explicitly approved Sentinel_7eb7253e0ad48191aaefdaa3b2ea6607; in-memory key only, free test SOL, no mainnet",
+    "dependency_registry_audit": "Same explicit approval; completed"
   },
   "retry_counts": {},
   "known_constraints": [
@@ -146,14 +148,14 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Record explicit d00 confirmation from the executing user message",
-    "Inspect actual dot runtime and project directory without assuming access",
-    "Resolve supported Next.js/SDK versions and establish code project",
-    "Start d01 with SOL config and platform fee binding read/prepare flow; parallel UI/data work where possible"
+    "Obtain free devnet SOL through permitted human faucet assistance; no mainnet funds",
+    "Run authorized disposable devnet platform/create/buy/sell/claim journeys",
+    "Configure actual Supabase Auth/storage and verify wallet browser flows",
+    "Resolve remaining historical fee decoders and production gates before release"
   ],
-  "last_completed_work": "Five-page DEMO browser journey and all observed UI defect regressions passed; PostgreSQL/RLS embedded checks pass; private source checkpoint verified; Argon connectivity succeeds but budget-bounded review awaits pricing.",
+  "last_completed_work": "Two completed Argon reviews; independently verified findings and hardened transactions; 13 tests and production build pass; post-fix browser checks pass.",
   "verified_checks": [
-    "7 unit tests pass",
+    "13 unit tests pass",
     "server route demo/read-only transaction refusal passed",
     "initial five-page Next production build passed",
     "embedded PostgreSQL migration/RLS ownership/forged financial-write tests passed with auth stub"
@@ -164,19 +166,19 @@
     "changes": "Separate external read-only discovery; preserve verified platform policy; reject fee unit error, unsupported revenue/competitor claims, defer obsolete Jupiter v1 Zap-In and unapproved extra fee."
   },
   "argon_review": {
-    "status": "pending_verified_pricing_or_hard_quota",
-    "budget_cny": 20,
+    "status": "two_reviews_completed_findings_independently_verified",
+    "budget_cny": null,
     "connectivity": "HTTP200_ARGON_OK_native_streaming",
     "endpoint": "https://api.xiaoyiapi.xyz",
-    "project_source_sent": false,
-    "key_saved": false
+    "project_source_sent": true,
+    "key_saved": false,
+    "budget_limit_removed_by_user": true,
+    "actual_charge_cny": null
   },
   "remaining_blockers": [
-    "Argon review pricing/hard quota unavailable",
-    "Final dependency audit approval pending",
+    "Devnet wallet balance zero; RPC faucet internal error then429; official web faucet disallows AI use; human assistance requested",
     "Supabase project/Auth/storage not configured or deployed",
     "Own PlatformConfig and operator public keys/economic allocations not provided",
-    "Wallet signing and real financial tests user-executed; none done",
     "NonSOL assets not enabled; xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
     "Exact360px and realmobile not tested",

@@ -6,7 +6,7 @@ Private full-stack Solana LaunchLab application. Next.js15.5.28 / React19.3.1 / 
 
 The five-page **DEMO** application builds and has been exercised in a real cloud browser, including validation, draft recovery, PNG/QR, terminal and graduation states. Backend mode boundaries and embedded PostgreSQL RLS checks pass. All observed UI defects were fixed and retested.
 
-This is **not a launched or revenue-verified platform**. Own PlatformConfig, live Supabase deployment, real wallet transactions/fee claims, non-SOL capability, and parts of historical fee indexing remain unverified or incomplete. Argon connectivity succeeds; independent review awaits verified pricing/hard quota within the authorized CNY20 budget.
+This is **not a launched or revenue-verified platform**. Own PlatformConfig, live Supabase deployment, real wallet transactions/fee claims, non-SOL capability, and parts of historical fee indexing remain unverified or incomplete. Two native-streaming Argon reviews completed; verified findings were fixed and retested. Devnet execution is currently blocked by zero test balance and the public faucet limit. No mainnet transactions have been performed.
 
 Read [DELIVERY_README_ZH.md](DELIVERY_README_ZH.md), [state](runs/2026-10-18/STATE.json) and [browser evidence](evidence/BROWSER_QA.md). The kickoff documents are the requested specification, not proof that every requirement passed.
 

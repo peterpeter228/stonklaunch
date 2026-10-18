@@ -1,0 +1,56 @@
+$ node --import tsx --test tests/*.test.ts
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+✔ migration threshold is not confirmed graduation (1.548004ms)
+✔ unknown confirmation must not create duplicate economic action (0.156315ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.15327ms)
+✔ on-chain metadata prefix validates mint and bounded UTF8 fields (0.697056ms)
+✔ client guard rejects unreviewed pools and arbitrary system transfers before signing (5.41554ms)
+✖ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (3924.685828ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (1.496487ms)
+✔ invalid configuration is rejected, never silently defaulted (0.29321ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.237506ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.370126ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 9
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4590.908023
+
+✖ failing tests:
+
+test at tests/lifecycle.test.ts:2:5410
+✖ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (3924.685828ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Simulation failed/. Input:
+  
+  'Error: 405 Not Allowed: <html>\r\n' +
+    '<head><title>405 Not Allowed</title></head>\r\n' +
+    '<body>\r\n' +
+    '<center><h1>405 Not Allowed</h1></center>\r\n' +
+    '<hr><center>openresty/1.27.1.1</center>\r\n' +
+    '</body>\r\n' +
+    '</html>\r\n'
+  
+      at process.processTicksAndRejections (node:internal/process/task_queues:104:5)
+      at async TestContext.<anonymous> (/workspace/scratch/c01bd6fe117d/stonklaunch/tests/lifecycle.test.ts:37:53)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: 405 Not Allowed: <html>
+    <head><title>405 Not Allowed</title></head>
+    <body>
+    <center><h1>405 Not Allowed</h1></center>
+    <hr><center>openresty/1.27.1.1</center>
+    </body>
+    </html>
+    
+        at ClientBrowser.callServer (/workspace/scratch/c01bd6fe117d/stonklaunch/node_modules/.pnpm/@solana+web3.js@1.99.0_bufferutil@4.1.0_typescript@5.9.3_utf-8-validate@6.0.6/node_modules/@solana/web3.js/src/connection.ts:1733:18)
+        at process.processTicksAndRejections (node:internal/process/task_queues:104:5),
+    expected: /Simulation failed/,
+    operator: 'rejects',
+    diff: 'simple'
+  }
+[ELIFECYCLE] Test failed. See above for more details.

@@ -1,0 +1,23 @@
+{
+  "startedAt": "2026-10-18T04:15:33Z",
+  "endpoint": "https://api.xiaoyiapi.xyz",
+  "model": "gemini-4-argon",
+  "files": [
+    "src/lib/raydium/service.ts",
+    "src/lib/raydium/reconcile.ts",
+    "src/lib/raydium/transaction-guard.ts",
+    "src/lib/monetization.ts"
+  ],
+  "thinkingLevel": "low",
+  "actualCharge": null,
+  "httpStatus": 200,
+  "usage": {
+    "promptTokenCount": 12078,
+    "candidatesTokenCount": 3206,
+    "totalTokenCount": 15284,
+    "cachedContentTokenCount": 0
+  },
+  "finishReason": "STOP",
+  "elapsedSeconds": 54.79,
+  "answerCharacters": 7398
+}

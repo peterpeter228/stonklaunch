@@ -1,15 +1,23 @@
-✔ migration threshold is not confirmed graduation (1.114033ms)
-✔ unknown confirmation must not create duplicate economic action (0.174071ms)
-✔ event uniqueness includes cluster and instruction, not just signature (0.227171ms)
-✔ 50 bps is 5000 LaunchLab units; referral disabled (1.519462ms)
-✔ invalid configuration is rejected, never silently defaulted (0.251929ms)
-✔ fee owner and platform binding cannot be cosmetically replaced (0.230616ms)
-✔ amount parsing exact, exponent and overprecision rejected (0.428233ms)
-ℹ tests 7
+$ node --import tsx --test tests/*.test.ts
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+✔ migration threshold is not confirmed graduation (1.181194ms)
+✔ unknown confirmation must not create duplicate economic action (0.147171ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.130847ms)
+✔ on-chain metadata prefix validates mint and bounded UTF8 fields (0.613351ms)
+✔ client guard validates trade discriminator, amounts, pool and extra instructions (13.163021ms)
+✔ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (13.365675ms)
+✔ official seeded WSOL setup and close shape passes the client guard without a real transaction (4.375702ms)
+✔ recovery journals remain isolated across wallets and networks; corruption blocks continuation (0.336966ms)
+✔ Chinese token names follow protocol UTF8-byte limit before upload (2.394005ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (1.342957ms)
+✔ invalid configuration is rejected, never silently defaulted (0.343166ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.241292ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.367932ms)
+ℹ tests 13
 ℹ suites 0
-ℹ pass 7
+ℹ pass 13
 ℹ fail 0
 ℹ cancelled 0
 ℹ skipped 0
 ℹ todo 0
-ℹ duration_ms 269.955012
+ℹ duration_ms 686.806286

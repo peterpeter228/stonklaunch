@@ -1,5 +1,6 @@
 'use client';
-import { useRef, useState } from 'react';
+import {readRecovery,writeRecovery} from '@/lib/raydium/recovery';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { ArrowRight, RefreshCw, ExternalLink } from 'lucide-react';
 import type { LaunchDraft, TransactionPlan } from '@/types/domain';
@@ -14,7 +15,7 @@ type WalletProvider = SigningWallet & {
 async function currentWallet(expected: string | null) { const p = (window as unknown as {
     solana?: WalletProvider;
 }).solana; if (!p?.publicKey || !p.signTransaction || p.publicKey.toBase58() !== expected)
-    throw new Error('Connect the same Solana wallet before continuing.'); return p; }
+    throw new Error('Connect the same Solana wallet before continuing.'); const {PublicKey}=await import('@solana/web3.js'); return {publicKey:new PublicKey(p.publicKey.toBase58()),signTransaction:p.signTransaction.bind(p),signMessage:p.signMessage?.bind(p)}; }
 async function authenticate(p: WalletProvider) { const session = await api<{
     session: {
         wallet: string;
@@ -46,27 +47,33 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
     const [signature, setSignature] = useState('');
     const [createdMint, setCreatedMint] = useState('');
     const [summaryOpen, setSummaryOpen] = useState(false);
-    const pending = useRef(false);
-    async function login() { setBusy(true); setError(''); try {
+    const pending = useRef(false);const epoch=useRef(0);
+    const inputFingerprint=JSON.stringify(draft||input||{});
+    useEffect(()=>{epoch.current++;setPlan(null);setSummaryOpen(false);setAuthenticated(false);mint.current=null;requestId.current=null;pending.current=false;setSignature('');setCreatedMint('');setStage('idle');
+      try{const saved=runtime&&wallet?readRecovery('transaction',runtime.cluster,wallet):null;if(saved?.cluster===runtime?.cluster&&saved?.wallet===wallet&&['submitted','confirmation_unknown'].includes(saved.state||'')){pending.current=true;setSignature(saved.signature||'');setStage('confirmation_unknown');}}catch(e){pending.current=true;setStage('confirmation_unknown');setError(e instanceof Error?e.message:'Recovery record unavailable');}
+    },[wallet,runtime?.cluster]);
+    useEffect(()=>{epoch.current++;setPlan(null);setSummaryOpen(false);if(!pending.current)setStage('idle');},[inputFingerprint]);
+    async function login() { const currentEpoch=epoch.current;setBusy(true); setError(''); try {
         const p = await currentWallet(wallet);
         await authenticate(p);
-        setAuthenticated(true);
+        if(currentEpoch===epoch.current)setAuthenticated(true);
     }
     catch (e) {
+        if(currentEpoch!==epoch.current)return;
         setError(e instanceof Error ? e.message : 'Login was not completed.');
     }
     finally {
         setBusy(false);
     } }
-    async function prepare() { if (!runtime || !['devnet', 'mainnet-live'].includes(runtime.mode) || !runtime.walletEnabled) {
+    async function prepare() { const currentEpoch=epoch.current;if (!runtime || !['devnet', 'mainnet-live'].includes(runtime.mode) || !runtime.walletEnabled) {
         setError('Financial transactions are not enabled in this mode.');
         return;
     } setBusy(true); setError(''); setStage('validating'); try {
-        const original = localStorage.getItem('stonklaunch.pendingTransaction');
+        const original = wallet?readRecovery('transaction',runtime.cluster,wallet):null;
         if (original) {
-            const saved = JSON.parse(original);
+            const saved = original;
             if ((saved.state === 'submitted' || saved.state === 'confirmation_unknown') && saved.cluster===runtime.cluster && saved.wallet===wallet) {
-                setSignature(saved.signature);
+                setSignature(saved.signature||'');
                 pending.current = true;
                 setStage('confirmation_unknown');
                 throw new Error('A previous transaction has an unresolved outcome. Check the original signature before preparing another.');
@@ -89,7 +96,7 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
                 mint.current = createClientMint();
             if (!requestId.current)
                 requestId.current = crypto.randomUUID();
-            const res = await fetch('/api/launches/prepare', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': requestId.current }, body: JSON.stringify({ ...draft, clientMintPublicKey: mint.current.publicKey.toBase58(), initialBuyRaw: '0' }) });
+            const res = await fetch('/api/launches/prepare', { method: 'POST', headers: { 'Content-Type': 'application/json', 'Idempotency-Key': requestId.current, 'x-wallet-address': wallet || '' }, body: JSON.stringify({ ...draft, clientMintPublicKey: mint.current.publicKey.toBase58(), initialBuyRaw: '0' }) });
             const body = await res.json();
             if (body.error)
                 throw new Error(body.error.message);
@@ -98,6 +105,7 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
         else {
             response = await api<TransactionPlan>(endpoint!, input);
         }
+        if(currentEpoch!==epoch.current)return;
         if (response.blockers.length)
             throw new Error(response.blockers.join(' · '));
         setPlan(response);
@@ -105,6 +113,7 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
         setSummaryOpen(true);
     }
     catch (e) {
+        if(currentEpoch!==epoch.current)return;
         setError(e instanceof Error ? e.message : 'Preparation failed. Inputs are preserved.');
         if (!pending.current)
             setStage('failed');
@@ -114,12 +123,13 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
     } }
     async function connection(): Promise<Connection> { const url = process.env.NEXT_PUBLIC_SOLANA_RPC_URL; if (!url)
         throw new Error('A browser-safe Solana RPC endpoint must be configured before signing.'); const { Connection } = await import('@solana/web3.js'); return new Connection(url, 'confirmed'); }
-    async function sign() { if (!plan || !runtime || pending.current)
+    async function sign() { const currentEpoch=epoch.current;if (!plan || !runtime || pending.current)
         return; setBusy(true); setError(''); try {
+        if(!draft&&input){for(const k of ['poolId','side','quoteMint'])if(input[k]!==undefined&&plan.summary[k]!==input[k])throw new Error('Reviewed plan no longer matches the selected operation.');if(input.amountRaw!==undefined&&plan.summary.amountInRaw!==input.amountRaw)throw new Error('Reviewed amount no longer matches the input.');}
         const p = await currentWallet(wallet);
         const c = await connection();
         const helpers = await import('@/lib/raydium/client-transactions');
-        const onStage = (s: TransactionStage, detail?: string) => { setStage(s === 'confirmed' ? 'submitted' : s); if (['submitted', 'confirmed', 'confirmation_unknown'].includes(s) && detail) {
+        const onStage = (s: TransactionStage, detail?: string) => { if(currentEpoch!==epoch.current)return; if(s==='failed')pending.current=false; setStage(s === 'confirmed' ? 'submitted' : s); if (['submitted', 'confirmed', 'confirmation_unknown'].includes(s) && detail) {
             setSignature(detail);
             pending.current = s !== 'confirmed';
         } };
@@ -135,7 +145,7 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
         else {
             sig = await helpers.signAndSubmitPlan(plan, p, runtime, c, onStage);
         }
-        setSignature(sig);
+        if(currentEpoch!==epoch.current)return;setSignature(sig);
         await api('/api/transactions/observe', { signature: sig });
         if (draft) {
             await api('/api/launches/' + mint.current!.publicKey.toBase58());
@@ -145,33 +155,35 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
         onConfirmed?.();
     }
     catch (e) {
+        if(currentEpoch!==epoch.current)return;
         setError(e instanceof Error ? e.message : 'The operation did not complete. Your draft is preserved.');
     }
     finally {
         setBusy(false);
     } }
-    async function observe() { setBusy(true); try {
-        const result = await api<Record<string, unknown>>('/api/transactions/observe', { signature });
+    async function observe() { const currentEpoch=epoch.current;setBusy(true); try {
+        const result = await api<Record<string, unknown>>('/api/transactions/observe', { signature });if(currentEpoch!==epoch.current)return;
         if (result.state === 'confirmed' || result.state === 'finalized') {
             pending.current = false;
             setStage('confirmed');
             setError('The original transaction is confirmed. Pool binding and balances must still be read before treating the economic operation as settled.');
-            const saved = JSON.parse(localStorage.getItem('stonklaunch.pendingTransaction') || '{}');
-            localStorage.setItem('stonklaunch.pendingTransaction', JSON.stringify({ ...saved, state: 'confirmed' }));
+            const saved = runtime&&wallet?readRecovery('transaction',runtime.cluster,wallet):null;
+            if(saved)writeRecovery('transaction',{ ...saved, state: 'confirmed' });
             onConfirmed?.();
         }
         else if (result.state === 'failed') {
             pending.current = false;
             setStage('failed');
             setError('The original transaction failed on-chain. Review its error before preparing any new action.');
-            const saved = JSON.parse(localStorage.getItem('stonklaunch.pendingTransaction') || '{}');
-            localStorage.setItem('stonklaunch.pendingTransaction', JSON.stringify({ ...saved, state: 'failed' }));
+            const saved = runtime&&wallet?readRecovery('transaction',runtime.cluster,wallet):null;
+            if(saved)writeRecovery('transaction',{ ...saved, state: 'failed' });
         }
         else {
             setError('The original transaction is still pending or unverified. Do not repeat the economic action.');
         }
     }
     catch (e) {
+        if(currentEpoch!==epoch.current)return;
         setError(e instanceof Error ? e.message : 'Confirmation remains unknown.');
     }
     finally {
