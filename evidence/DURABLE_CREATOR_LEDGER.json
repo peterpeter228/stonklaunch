@@ -17,36 +17,11 @@
       "slot": 512517543
     },
     "buy": {
-      "nonce": "stonk-buy-diag-20261018-180649",
-      "sourceSha": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
-      "runId": "39152770076",
-      "state": "signed",
-      "recoveryOfRunId": "39151817814",
-      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
-      "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
-      "signature": "5jSwoniJbRn7eLRpGmHFEekBgzxUCwedHPiyvfWGH7LJmKfRH1QWfLXLdpaNxdhYiYzmydFDutBtcC7XvQNnKkJb",
-      "messageHash": "ecaf6c8baef2f1c096dd6cfdfb11b9630b77758c483aba15c9d22329b60670b9",
-      "validity": {
-        "blockhash": "8XReEE7UMcRBRXbg3En5TSKLszoncoZozmNGQ61USrmv",
-        "lastValidBlockHeight": 499734995,
-        "expiresAt": "2026-10-18T18:08:59.127Z",
-        "phase": "before-sign",
-        "observedAt": "2026-10-18T18:08:39.732Z",
-        "readAttempts": 1,
-        "observedBlockHeight": 499734845
-      },
-      "failure": {
-        "code": "BLOCKHEIGHT_RPC_FAILED",
-        "validity": {
-          "blockhash": "8XReEE7UMcRBRXbg3En5TSKLszoncoZozmNGQ61USrmv",
-          "lastValidBlockHeight": 499734995,
-          "expiresAt": "2026-10-18T18:08:59.127Z",
-          "phase": "after-sign",
-          "observedAt": "2026-10-18T18:08:41.815Z",
-          "readAttempts": 3
-        },
-        "broadcastAttempted": false
-      }
+      "nonce": "stonk-buy-paced-20261018-190720",
+      "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
+      "runId": null,
+      "state": "claimed",
+      "recoveryOfRunId": "39152770076"
     }
   },
   "attemptHistory": [
@@ -105,6 +80,64 @@
         "ledgerBlobSha": "d7700694d9f4f6a2d632ea481b57db62e8176a14",
         "reviewedAt": "2026-10-18T18:06:49Z",
         "evidencePath": "evidence/DURABLE_BUY_ATTEMPT_1_RECONCILIATION.json"
+      }
+    },
+    {
+      "step": "buy",
+      "claim": {
+        "nonce": "stonk-buy-diag-20261018-180649",
+        "sourceSha": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
+        "runId": "39152770076",
+        "state": "signed",
+        "recoveryOfRunId": "39151817814",
+        "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+        "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
+        "signature": "5jSwoniJbRn7eLRpGmHFEekBgzxUCwedHPiyvfWGH7LJmKfRH1QWfLXLdpaNxdhYiYzmydFDutBtcC7XvQNnKkJb",
+        "messageHash": "ecaf6c8baef2f1c096dd6cfdfb11b9630b77758c483aba15c9d22329b60670b9",
+        "validity": {
+          "blockhash": "8XReEE7UMcRBRXbg3En5TSKLszoncoZozmNGQ61USrmv",
+          "lastValidBlockHeight": 499734995,
+          "expiresAt": "2026-10-18T18:08:59.127Z",
+          "phase": "before-sign",
+          "observedAt": "2026-10-18T18:08:39.732Z",
+          "readAttempts": 1,
+          "observedBlockHeight": 499734845
+        },
+        "failure": {
+          "code": "BLOCKHEIGHT_RPC_FAILED",
+          "validity": {
+            "blockhash": "8XReEE7UMcRBRXbg3En5TSKLszoncoZozmNGQ61USrmv",
+            "lastValidBlockHeight": 499734995,
+            "expiresAt": "2026-10-18T18:08:59.127Z",
+            "phase": "after-sign",
+            "observedAt": "2026-10-18T18:08:41.815Z",
+            "readAttempts": 3
+          },
+          "broadcastAttempted": false
+        }
+      },
+      "proof": {
+        "runUrl": "https://github.com/peterpeter228/stonklaunch/actions/runs/39152770076",
+        "runStatus": "completed",
+        "runConclusion": "failure",
+        "runAttempt": 1,
+        "errorCode": "BLOCKHEIGHT_RPC_FAILED",
+        "broadcastAttempted": false,
+        "ledgerBlobSha": "6a688b21f68d5643aae992e067998c8d81444aa0",
+        "reviewedAt": "2026-10-18T19:07:34.187Z",
+        "evidencePath": "evidence/DURABLE_BUY_ATTEMPT_2_EXPIRY.json",
+        "commitment": "finalized",
+        "blockHeight": 499743878,
+        "blockhashValid": false,
+        "blockhashContextSlot": 512530531,
+        "signatureStatus": null,
+        "searchTransactionHistory": true,
+        "transaction": null,
+        "walletBalanceLamports": 4979382960,
+        "walletBalanceSlot": 512530537,
+        "tokenAta": "EhPWDSteuHz8YchU9Ub3QGhJy38E6V1J8hSDkBzeY21Z",
+        "tokenAtaAccount": null,
+        "tokenAtaSlot": 512530539
       }
     }
   ]
