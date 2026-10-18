@@ -61,7 +61,19 @@
       "nonce": "stonk-creator-20261018-193300",
       "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
       "runId": "39159461927",
-      "state": "signing"
+      "state": "signed",
+      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+      "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
+      "signature": "3Nxwjs17i1f3NxqqxUAA2mnE3uSvCNphGPxHdE27PoKpciEG25NS5xoHa2PhhYjBXLpWkKWjVZWK24ENshfydz65",
+      "messageHash": "aece0b6335332d3c1489628317eb1377b7b8d66d3b0294bd07e7f8cae1b52060",
+      "validity": {
+        "blockhash": "9LU6zVzULhL9YSr8fXNaN3SX1XZyKcm9J1JbMgzABPmD",
+        "lastValidBlockHeight": 499756829,
+        "phase": "before-sign",
+        "observedAt": "2026-10-18T19:36:05.522Z",
+        "readAttempts": 1,
+        "observedBlockHeight": 499756686
+      }
     }
   },
   "attemptHistory": [
