@@ -1,0 +1,43 @@
+{
+  "runId": 39151038033,
+  "jobId": 117744565279,
+  "sourceSha": "78f91071d443819c999fa0c92754993560ba67fd",
+  "conclusion": "failure",
+  "failureCode": "LOOKUP_TABLE_NOT_ALLOWED",
+  "failureAt": "2026-10-18T17:45:51Z",
+  "stage": "signing_claim_consumed_before_funded_wallet_signature",
+  "walletSignaturePersisted": false,
+  "broadcastReached": false,
+  "ledgerPreserved": true,
+  "publicArtifactId": 12145356729,
+  "verificationAt": "2026-10-18T17:46:56Z",
+  "rpc": [
+    {
+      "jsonrpc": "2.0",
+      "result": {
+        "context": {
+          "apiVersion": "4.4.0-beta.0",
+          "slot": 512515993
+        },
+        "value": 5000000000
+      },
+      "id": 1
+    },
+    {
+      "jsonrpc": "2.0",
+      "result": [
+        {
+          "blockTime": 1792344852,
+          "confirmationStatus": "finalized",
+          "err": null,
+          "memo": null,
+          "signature": "34bZ48UNTSVB3LGgPqbcLUZQ88oLZ9AVoZuXStcxCKx7UKVu7iepuVPoeppWeMrSGDxDwcbL8VmxRDE556vNc7gq",
+          "slot": 512512779,
+          "transactionIndex": 4
+        }
+      ],
+      "id": 2
+    }
+  ],
+  "next": "Review bounded ALT resolution; explicitly archive this attempt before any new run. Never rerun or erase this consumed claim."
+}
