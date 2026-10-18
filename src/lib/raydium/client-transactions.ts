@@ -33,6 +33,17 @@ export async function buildClientLaunch(plan: TransactionPlan, mintSigner: Keypa
     throw Error('创建计划不适用'); const params = plan.summary.clientCreate as Record<string, string | number | boolean> | undefined; if (!params || params.owner !== wallet.publicKey.toBase58() || params.mint !== mintSigner.publicKey.toBase58() || params.platformId !== runtime.platformId || Date.parse(String(plan.summary.expiresAt)) < Date.now())
     throw Error('计划已过期或钱包/mint/平台不匹配，请重新核验'); const expectedProgram = runtime.cluster === 'devnet' ? DEV_LAUNCHPAD_PROGRAM : LAUNCHPAD_PROGRAM; if (params.programId !== expectedProgram.toBase58() || params.buyAmount !== '0' || params.shareFeeRate !== '0' || params.createOnly !== true)
     throw Error('不允许变更创建交易的协议或费用'); const raydium = await Raydium.load({ connection, owner: wallet.publicKey, cluster: runtime.cluster === 'devnet' ? 'devnet' : 'mainnet', disableLoadToken: true, disableFeatureCheck: true,apiRequestTimeout:10000 }); const result = await raydium.launchpad.createLaunchpad({ programId: expectedProgram, mintA: mintSigner.publicKey, platformId: new PublicKey(String(params.platformId)), configId: new PublicKey(String(params.configId)), name: String(params.name), symbol: String(params.symbol), uri: String(params.uri), mintBDecimals: Number(params.mintBDecimals), supply: new BN(String(params.supply)), totalSellA: new BN(String(params.totalSellA)), totalFundRaisingB: new BN(String(params.totalFundRaisingB)), totalLockedAmount: new BN(0), migrateType: 'cpmm', createOnly: true, buyAmount: new BN(0), shareFeeRate: new BN(0), extraSigners: [mintSigner], txVersion: TxVersion.V0 }); if (result.transactions.length !== 1) throw Error('MULTI_TRANSACTION_CREATE_NOT_SUPPORTED: creation must fit one atomic transaction; nothing was signed or sent'); return { expiresAt:String(plan.summary.expiresAt),transactions: result.transactions, signers: result.signers, mint: mintSigner.publicKey.toBase58(), poolId: result.extInfo.address.poolId.toBase58() }; }
+// HTTP-only confirmation also works when a wallet/RPC environment cannot establish WebSockets.
+// Never rebroadcast here: a missing status remains uncertain until reconciled separately.
+export async function confirmByHttp(c:Connection,signature:string,timeoutMs=45000,pollMs=1200){
+ const deadline=Date.now()+timeoutMs;
+ while(true){
+  const observed=await c.getSignatureStatuses([signature],{searchTransactionHistory:true});const status=observed.value[0];
+  if(status?.err||status?.confirmationStatus==='confirmed'||status?.confirmationStatus==='finalized')return {value:{err:status.err}};
+  if(Date.now()>=deadline)throw Error('确认超时');
+  await new Promise(resolve=>setTimeout(resolve,Math.min(pollMs,Math.max(0,deadline-Date.now()))));
+ }
+}
 async function submit(tx: VersionedTransaction, wallet: SigningWallet, c: Connection, blockhash: string, lastValidBlockHeight: number, onStage: StageCallback,context:{cluster:string;kind:string}) { checkPending(wallet,context.cluster);if (!tx.message.staticAccountKeys[0].equals(wallet.publicKey))
     throw Error('交易付款钱包与已连接钱包不一致'); if ((await c.getBlockHeight('confirmed')) > lastValidBlockHeight)
     throw Error('区块哈希已过期，请重新准备并审阅'); onStage('awaiting_signature'); const reviewedMessage = tx.message.serialize(); let signed: VersionedTransaction; try {
@@ -45,7 +56,7 @@ catch (e) {
     throw Error('签名返回的交易消息已改变'); if (!signed.signatures[0]?.some(b => b !== 0))
     throw Error('钱包没有返回有效签名'); const signature = base58(signed.signatures[0]); const record = { ...context,wallet:wallet.publicKey.toBase58(),signature, blockhash, lastValidBlockHeight, state: 'submitted', at: new Date().toISOString() }; writeRecovery('transaction',record); onStage('submitted', signature); let broadcastAccepted=false; try {
     await c.sendRawTransaction(signed.serialize(), { skipPreflight: false, maxRetries: 0 }); broadcastAccepted=true;
-    let timer:ReturnType<typeof setTimeout>|undefined;const result=await Promise.race([c.confirmTransaction({signature,blockhash,lastValidBlockHeight},'confirmed'),new Promise<never>((_,reject)=>{timer=setTimeout(()=>reject(Error('确认超时')),45000);})]).finally(()=>{if(timer)clearTimeout(timer);});
+    const result=await confirmByHttp(c,signature);
     if (result.value.err) {
         onStage('failed', signature);
         writeRecovery('transaction',{ ...record, state: 'failed' });

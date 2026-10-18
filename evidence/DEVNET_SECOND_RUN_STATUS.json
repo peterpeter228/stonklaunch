@@ -1,0 +1,32 @@
+{
+  "network": "devnet",
+  "realFunds": false,
+  "replacementWallet": "B2yhMVcoJxBgV9w7esdtKzeHUfsxkrxrvEQrRoexGavC",
+  "authorizationMessage": "Sentinel_822a6e9129548191a60ccf2f717e6ede",
+  "privateKeyPersisted": false,
+  "reusedPlatform": "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+  "role": "separate creator wallet; not platform admin/claimant",
+  "negativeServiceChecks": [
+    {
+      "name": "unauthorized-platform",
+      "code": "CLAIM_WALLET_REQUIRED"
+    },
+    {
+      "name": "empty-platform",
+      "code": "NOTHING_TO_CLAIM"
+    }
+  ],
+  "stage": "closed unfunded after user declined further faucet attempts",
+  "firstRunProcess": "exited; secret key unrecoverable by design; five finalized receipts recovered publicly",
+  "restrictionMessage": "Sentinel_1c9e4f9bfe8c8191a1cde7943baab0b5",
+  "realCreatorClaim": "NOT_RUN",
+  "newWalletFunding": "last observed0lamports",
+  "closedAt": "2026-10-18T07:13:42Z",
+  "creatorClaimSimulation": {
+    "passed": true,
+    "slot": 512356487,
+    "unitsConsumed": 17477,
+    "broadcast": false,
+    "signatureVerified": false
+  }
+}

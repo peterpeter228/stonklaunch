@@ -1,0 +1,65 @@
+{
+  "network": "devnet",
+  "realFunds": false,
+  "wallet": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+  "privateKeyPersisted": false,
+  "fundingVerifiedAt": "2026-10-18T06:55:41Z",
+  "balanceLamportsBefore": "10000000000",
+  "platformId": "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+  "globalConfig": "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+  "cpmmConfig": "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+  "testLpAllocation": "100%burn test-only, not production decision",
+  "steps": [
+    {
+      "step": "platform",
+      "signature": "3ft1kLvKEJq28ieAKHAZLyTJRsrKXbZTMpob8T81qsrR3LJ5sG2fdix8MPikPeqy1DiWXE9RR8u1ogPPXVzptJPZ",
+      "status": "finalized",
+      "err": null,
+      "slot": 512352312,
+      "issue": "WebSocket DNS EAI_AGAIN caused45s wait; HTTP status reconciliation confirmed success; no repeat transaction"
+    },
+    {
+      "step": "launch",
+      "signature": "4zPogNeJhs6ybcZ7EXkAmFzWA1rpnitQcBs6p1Rq5ReNY7TNuXNHSSTu6Ceg4kH4HxSS4a1BDkMknBmwaUDLH7ts",
+      "status": "finalized",
+      "err": null,
+      "slot": 512353031,
+      "metadataHosting": "synthetic example.invalid URI, not hosted metadata acceptance"
+    },
+    {
+      "step": "buy",
+      "signature": "3dPqtvAuDvMGPeHhvtxZUMcYyzmhm9Hj7eVCJubVB2gPqfn9MixZVZTuszgUajRJ2CA7FiY7MpnV3pRRNFF2CBhB",
+      "status": "finalized",
+      "err": null,
+      "slot": 512353289
+    },
+    {
+      "step": "sell",
+      "signature": "4wH53h6ESR7PG4jMeksc5ks5t1kwvX6RnbXuQZVLBHaM9rvEYzh6SQhDXg7Ltabp4TgSNY1ssCwhYafx5qypLDLa",
+      "status": "finalized",
+      "err": null,
+      "slot": 512353562
+    },
+    {
+      "step": "claim-platform",
+      "signature": "enc3BaW2FXv3hN12NnV8Dd33pNcRRNiDXjiRKDkGZtg7ovaKzqMLYgQvLkrgcUv2K8w93xdg7oNtCkahn2hk8E1",
+      "status": "finalized",
+      "err": null,
+      "slot": 512353776
+    }
+  ],
+  "platformReadback": {
+    "id": "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+    "claimWallet": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+    "feeRate": "5000",
+    "creatorFeeRate": "5000",
+    "cpmm": "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+    "lp": [
+      "0",
+      "0",
+      "1000000"
+    ]
+  },
+  "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+  "poolId": "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR"
+}

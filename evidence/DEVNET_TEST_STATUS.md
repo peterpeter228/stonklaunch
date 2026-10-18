@@ -1,3 +1,7 @@
+# Current status
+Five finalized devnet transactions now verified; real creator claim remains unverified. See DEVNET_ACCEPTANCE_SUMMARY.md and DEVNET_RECEIPT_ASSERTIONS.md. Both temporary key processes are no longer available; do not fund those addresses.
+
+# Historical funding preparation
 # Disposable devnet test status
 2026-10-18 04:46 UTC. Explicit approval: Sentinel_7eb7253e0ad48191aaefdaa3b2ea6607.
 One wallet generated only in process memory: DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2. No private key written or transmitted to reviewers. Exact devnet genesis verified.

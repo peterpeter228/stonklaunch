@@ -1,0 +1,26 @@
+$ node --import tsx --test tests/*.test.ts
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+✔ migration threshold is not confirmed graduation (1.199381ms)
+✔ unknown confirmation must not create duplicate economic action (0.155363ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.16649ms)
+✔ on-chain metadata prefix validates mint and bounded UTF8 fields (0.582845ms)
+✔ client guard validates trade discriminator, amounts, pool and extra instructions (15.270546ms)
+✔ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (13.048857ms)
+✔ official seeded WSOL setup and close shape passes the client guard without a real transaction (4.372267ms)
+✔ recovery journals remain isolated across wallets and networks; corruption blocks continuation (0.29315ms)
+✔ Chinese token names follow protocol UTF8-byte limit before upload (2.511903ms)
+✔ transfer-cost inspection uses capped integer fees and the active epoch, not promised income (1.112902ms)
+✔ mint inspection separates demo, verified no-fee, bad owners and epoch rollover without transactions (43.053574ms)
+✔ confirmation uses HTTP status without websocket subscriptions or rebroadcast (4.317315ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (1.964841ms)
+✔ invalid configuration is rejected, never silently defaulted (0.293991ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.337507ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.497377ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 655.549295

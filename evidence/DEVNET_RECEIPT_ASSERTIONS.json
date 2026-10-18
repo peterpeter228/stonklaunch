@@ -1,0 +1,1001 @@
+{
+  "scope": "Offline deterministic receipt review; no network writes, keys, signing, or test files",
+  "sourceFiles": [
+    {
+      "path": "evidence/DEVNET_RECEIPTS_20261018.json",
+      "sha256": "5ac3f331a32d587e3080a7b455e5fa762a8170a9e11d307a18f64c1ce1fdd981"
+    },
+    {
+      "path": "evidence/DEVNET_EXECUTION_20261018.json",
+      "sha256": "e7694aca48058e1577737df8fbc6421e6f893e7cd2ee456d47edeb35c3c29dfb"
+    }
+  ],
+  "network": "devnet",
+  "genesis": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+  "wallet": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+  "derivedAddresses": {
+    "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+    "creatorVault": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+    "claimWsolAta": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA"
+  },
+  "summary": {
+    "passed": 49,
+    "failed": 0
+  },
+  "checks": [
+    {
+      "id": "devnet-genesis",
+      "status": "PASS",
+      "details": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG"
+    },
+    {
+      "id": "platform-pda",
+      "status": "PASS",
+      "details": "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz"
+    },
+    {
+      "id": "platform-finalized-success",
+      "status": "PASS",
+      "details": {
+        "slot": 512352312,
+        "signature": "3ft1kLvKEJq28ieAKHAZLyTJRsrKXbZTMpob8T81qsrR3LJ5sG2fdix8MPikPeqy1DiWXE9RR8u1ogPPXVzptJPZ"
+      }
+    },
+    {
+      "id": "platform-payer",
+      "status": "PASS",
+      "details": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+    },
+    {
+      "id": "platform-allowed-programs",
+      "status": "PASS",
+      "details": {
+        "observed": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "11111111111111111111111111111111"
+        ],
+        "allowlist": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "11111111111111111111111111111111"
+        ]
+      }
+    },
+    {
+      "id": "platform-one-top-level-launchlab",
+      "status": "PASS",
+      "details": 1
+    },
+    {
+      "id": "platform-discriminator",
+      "status": "PASS",
+      "details": "createPlatformConfig"
+    },
+    {
+      "id": "platform-economic-parameters",
+      "status": "PASS",
+      "details": {
+        "lp": [
+          "0",
+          "0",
+          "1000000"
+        ],
+        "platformFeeRate": "5000",
+        "creatorFeeRate": "5000",
+        "vestingScale": "0",
+        "metadata": [
+          "StonkLaunch",
+          "https://example.invalid/stonklaunch-devnet",
+          ""
+        ]
+      }
+    },
+    {
+      "id": "platform-recipients-and-cpmm",
+      "status": "PASS",
+      "details": [
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+        "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+        "11111111111111111111111111111111",
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+      ]
+    },
+    {
+      "id": "launch-finalized-success",
+      "status": "PASS",
+      "details": {
+        "slot": 512353031,
+        "signature": "4zPogNeJhs6ybcZ7EXkAmFzWA1rpnitQcBs6p1Rq5ReNY7TNuXNHSSTu6Ceg4kH4HxSS4a1BDkMknBmwaUDLH7ts"
+      }
+    },
+    {
+      "id": "launch-payer",
+      "status": "PASS",
+      "details": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+    },
+    {
+      "id": "launch-allowed-programs",
+      "status": "PASS",
+      "details": {
+        "observed": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "11111111111111111111111111111111",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        ],
+        "allowlist": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "11111111111111111111111111111111",
+          "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        ]
+      }
+    },
+    {
+      "id": "launch-one-top-level-launchlab",
+      "status": "PASS",
+      "details": 1
+    },
+    {
+      "id": "launch-discriminator",
+      "status": "PASS",
+      "details": "initializeV2"
+    },
+    {
+      "id": "launch-identity-binding",
+      "status": "PASS",
+      "details": [
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+        "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+        "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+        "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR",
+        "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+        "So11111111111111111111111111111111111111112",
+        "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+        "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+        "21aWjFkce7eEubQhEbyeG4FTjhVX66JLKUBVFxLCR7Np",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
+        "11111111111111111111111111111111",
+        "SysvarRent111111111111111111111111111111111",
+        "4uAB7seenFJKPUXqYewAdfra2u6baBgjiXU8x1SC7Ycz",
+        "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6"
+      ]
+    },
+    {
+      "id": "buy-finalized-success",
+      "status": "PASS",
+      "details": {
+        "slot": 512353289,
+        "signature": "3dPqtvAuDvMGPeHhvtxZUMcYyzmhm9Hj7eVCJubVB2gPqfn9MixZVZTuszgUajRJ2CA7FiY7MpnV3pRRNFF2CBhB"
+      }
+    },
+    {
+      "id": "buy-payer",
+      "status": "PASS",
+      "details": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+    },
+    {
+      "id": "buy-allowed-programs",
+      "status": "PASS",
+      "details": {
+        "observed": [
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "11111111111111111111111111111111",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6"
+        ],
+        "allowlist": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "11111111111111111111111111111111"
+        ]
+      }
+    },
+    {
+      "id": "buy-one-top-level-launchlab",
+      "status": "PASS",
+      "details": 1
+    },
+    {
+      "id": "buy-discriminator",
+      "status": "PASS",
+      "details": "buyExactIn"
+    },
+    {
+      "id": "buy-instruction-shape-no-referral",
+      "status": "PASS",
+      "details": {
+        "amountInRaw": "10000000",
+        "minOutRaw": "351312611716",
+        "actualInputRaw": "10000000",
+        "actualOutputRaw": "353078001725",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "50000",
+        "creatorFeeRaw": "50000"
+      }
+    },
+    {
+      "id": "buy-pool-platform-mints",
+      "status": "PASS",
+      "details": [
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+        "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+        "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+        "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR",
+        "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+        "3ZCsmBMuuHiBHk5yqmF6DVnZEtP4SttAbkFGEuGmLt4m",
+        "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+        "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+        "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+        "So11111111111111111111111111111111111111112",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "4uAB7seenFJKPUXqYewAdfra2u6baBgjiXU8x1SC7Ycz",
+        "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+        "11111111111111111111111111111111",
+        "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv"
+      ]
+    },
+    {
+      "id": "buy-exact-input",
+      "status": "PASS",
+      "details": {
+        "amountInRaw": "10000000",
+        "minOutRaw": "351312611716",
+        "actualInputRaw": "10000000",
+        "actualOutputRaw": "353078001725",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "50000",
+        "creatorFeeRaw": "50000"
+      }
+    },
+    {
+      "id": "buy-minimum-output",
+      "status": "PASS",
+      "details": {
+        "amountInRaw": "10000000",
+        "minOutRaw": "351312611716",
+        "actualInputRaw": "10000000",
+        "actualOutputRaw": "353078001725",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "50000",
+        "creatorFeeRaw": "50000"
+      }
+    },
+    {
+      "id": "buy-base-wallet-delta",
+      "status": "PASS",
+      "details": {
+        "delta": "353078001725"
+      }
+    },
+    {
+      "id": "buy-separate-derived-fee-vaults",
+      "status": "PASS",
+      "details": {
+        "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "creatorVault": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+        "platformIncrease": "50000",
+        "creatorIncrease": "50000"
+      }
+    },
+    {
+      "id": "buy-requested-input",
+      "status": "PASS",
+      "details": "10000000"
+    },
+    {
+      "id": "sell-finalized-success",
+      "status": "PASS",
+      "details": {
+        "slot": 512353562,
+        "signature": "4wH53h6ESR7PG4jMeksc5ks5t1kwvX6RnbXuQZVLBHaM9rvEYzh6SQhDXg7Ltabp4TgSNY1ssCwhYafx5qypLDLa"
+      }
+    },
+    {
+      "id": "sell-payer",
+      "status": "PASS",
+      "details": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+    },
+    {
+      "id": "sell-allowed-programs",
+      "status": "PASS",
+      "details": {
+        "observed": [
+          "11111111111111111111111111111111",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6"
+        ],
+        "allowlist": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "11111111111111111111111111111111"
+        ]
+      }
+    },
+    {
+      "id": "sell-one-top-level-launchlab",
+      "status": "PASS",
+      "details": 1
+    },
+    {
+      "id": "sell-discriminator",
+      "status": "PASS",
+      "details": "sellExactIn"
+    },
+    {
+      "id": "sell-instruction-shape-no-referral",
+      "status": "PASS",
+      "details": {
+        "amountInRaw": "176539000862",
+        "minOutRaw": "4852200",
+        "actualInputRaw": "176539000862",
+        "actualOutputRaw": "4876583",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "24691",
+        "creatorFeeRaw": "24691"
+      }
+    },
+    {
+      "id": "sell-pool-platform-mints",
+      "status": "PASS",
+      "details": [
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+        "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+        "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+        "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR",
+        "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+        "EYuRcYWBXHy6acoqBeWJDfru1R4Taj5ozmuz3PRBs7hA",
+        "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+        "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+        "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+        "So11111111111111111111111111111111111111112",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "4uAB7seenFJKPUXqYewAdfra2u6baBgjiXU8x1SC7Ycz",
+        "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+        "11111111111111111111111111111111",
+        "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv"
+      ]
+    },
+    {
+      "id": "sell-exact-input",
+      "status": "PASS",
+      "details": {
+        "amountInRaw": "176539000862",
+        "minOutRaw": "4852200",
+        "actualInputRaw": "176539000862",
+        "actualOutputRaw": "4876583",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "24691",
+        "creatorFeeRaw": "24691"
+      }
+    },
+    {
+      "id": "sell-minimum-output",
+      "status": "PASS",
+      "details": {
+        "amountInRaw": "176539000862",
+        "minOutRaw": "4852200",
+        "actualInputRaw": "176539000862",
+        "actualOutputRaw": "4876583",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "24691",
+        "creatorFeeRaw": "24691"
+      }
+    },
+    {
+      "id": "sell-base-wallet-delta",
+      "status": "PASS",
+      "details": {
+        "delta": "-176539000862"
+      }
+    },
+    {
+      "id": "sell-separate-derived-fee-vaults",
+      "status": "PASS",
+      "details": {
+        "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "creatorVault": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+        "platformIncrease": "24691",
+        "creatorIncrease": "24691"
+      }
+    },
+    {
+      "id": "sell-half-existing-base",
+      "status": "PASS",
+      "details": {
+        "before": "353078001725",
+        "amount": "176539000862"
+      }
+    },
+    {
+      "id": "sell-native-receipt-net-fee",
+      "status": "PASS",
+      "details": {
+        "nativeDelta": "4871583",
+        "fee": 5000,
+        "actualOut": "4876583"
+      }
+    },
+    {
+      "id": "claim-platform-finalized-success",
+      "status": "PASS",
+      "details": {
+        "slot": 512353776,
+        "signature": "enc3BaW2FXv3hN12NnV8Dd33pNcRRNiDXjiRKDkGZtg7ovaKzqMLYgQvLkrgcUv2K8w93xdg7oNtCkahn2hk8E1"
+      }
+    },
+    {
+      "id": "claim-platform-payer",
+      "status": "PASS",
+      "details": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+    },
+    {
+      "id": "claim-platform-allowed-programs",
+      "status": "PASS",
+      "details": {
+        "observed": [
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "11111111111111111111111111111111"
+        ],
+        "allowlist": [
+          "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "11111111111111111111111111111111"
+        ]
+      }
+    },
+    {
+      "id": "claim-platform-one-top-level-launchlab",
+      "status": "PASS",
+      "details": 1
+    },
+    {
+      "id": "claim-platform-discriminator",
+      "status": "PASS",
+      "details": "claimPlatformFeeFromVault"
+    },
+    {
+      "id": "claim-platform-binding",
+      "status": "PASS",
+      "details": [
+        "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "9JkxvRLjBnnjxmdQQ8iZVP3GUFfe4xtXNRigkPPZ8wyd",
+        "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+        "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+        "So11111111111111111111111111111111111111112",
+        "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+        "11111111111111111111111111111111",
+        "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+      ]
+    },
+    {
+      "id": "claim-exact-receipt",
+      "status": "PASS",
+      "details": {
+        "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "destinationAta": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+        "vaultDelta": "-74691",
+        "ataDelta": "74691",
+        "innerTransferRaw": "74691",
+        "ataLamportsDelta": "1563131",
+        "newAtaRentLamports": "1488440"
+      }
+    },
+    {
+      "id": "claim-vault-drained",
+      "status": "PASS",
+      "details": {
+        "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "destinationAta": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+        "vaultDelta": "-74691",
+        "ataDelta": "74691",
+        "innerTransferRaw": "74691",
+        "ataLamportsDelta": "1563131",
+        "newAtaRentLamports": "1488440"
+      }
+    },
+    {
+      "id": "claim-native-cost-explained",
+      "status": "PASS",
+      "details": {
+        "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "destinationAta": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+        "vaultDelta": "-74691",
+        "ataDelta": "74691",
+        "innerTransferRaw": "74691",
+        "ataLamportsDelta": "1563131",
+        "newAtaRentLamports": "1488440"
+      }
+    }
+  ],
+  "transactions": [
+    {
+      "step": "platform",
+      "signature": "3ft1kLvKEJq28ieAKHAZLyTJRsrKXbZTMpob8T81qsrR3LJ5sG2fdix8MPikPeqy1DiWXE9RR8u1ogPPXVzptJPZ",
+      "slot": 512352312,
+      "networkFeeLamports": 5000,
+      "walletNativeLamportsDelta": "-5450760",
+      "topLevelInstructions": [
+        {
+          "program": "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+            "5MxLgy9oPdTC3YgkiePHqr3EoCRD9uLVYRQS2ANAs7wy",
+            "11111111111111111111111111111111",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+          ],
+          "dataHex": "b05ac4affd71dc140000000000000000000000000000000040420f000000000088130000000000000b00000053746f6e6b4c61756e63682a00000068747470733a2f2f6578616d706c652e696e76616c69642f73746f6e6b6c61756e63682d6465766e65740000000088130000000000000000000000000000"
+        }
+      ],
+      "checkedTransfers": [],
+      "tokenBalanceChanges": [],
+      "platform": {
+        "lp": [
+          "0",
+          "0",
+          "1000000"
+        ],
+        "platformFeeRate": "5000",
+        "creatorFeeRate": "5000",
+        "vestingScale": "0",
+        "metadata": [
+          "StonkLaunch",
+          "https://example.invalid/stonklaunch-devnet",
+          ""
+        ]
+      }
+    },
+    {
+      "step": "launch",
+      "signature": "4zPogNeJhs6ybcZ7EXkAmFzWA1rpnitQcBs6p1Rq5ReNY7TNuXNHSSTu6Ceg4kH4HxSS4a1BDkMknBmwaUDLH7ts",
+      "slot": 512353031,
+      "networkFeeLamports": 10000,
+      "walletNativeLamportsDelta": "-20617040",
+      "topLevelInstructions": [
+        {
+          "program": "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+            "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+            "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+            "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR",
+            "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+            "So11111111111111111111111111111111111111112",
+            "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+            "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+            "21aWjFkce7eEubQhEbyeG4FTjhVX66JLKUBVFxLCR7Np",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s",
+            "11111111111111111111111111111111",
+            "SysvarRent111111111111111111111111111111111",
+            "4uAB7seenFJKPUXqYewAdfra2u6baBgjiXU8x1SC7Ycz",
+            "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6"
+          ],
+          "dataHex": "4399af27da102620061500000053746f6e6b4c61756e6368204465766e657420514104000000535451412f00000068747470733a2f2f6578616d706c652e696e76616c69642f73746f6e6b6c61756e63682d6465766e65742e6a736f6e000080c6a47e8d03000078c5fb51d10200001265ca130000000100000000000000000000000000000000000000000000000000"
+        }
+      ],
+      "checkedTransfers": [],
+      "tokenBalanceChanges": [
+        {
+          "address": "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "owner": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "preRaw": "0",
+          "postRaw": "1000000000000000",
+          "deltaRaw": "1000000000000000"
+        },
+        {
+          "address": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "preRaw": "0",
+          "postRaw": "0",
+          "deltaRaw": "0"
+        }
+      ]
+    },
+    {
+      "step": "buy",
+      "signature": "3dPqtvAuDvMGPeHhvtxZUMcYyzmhm9Hj7eVCJubVB2gPqfn9MixZVZTuszgUajRJ2CA7FiY7MpnV3pRRNFF2CBhB",
+      "slot": 512353289,
+      "networkFeeLamports": 5000,
+      "walletNativeLamportsDelta": "-14470320",
+      "topLevelInstructions": [
+        {
+          "program": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+            "11111111111111111111111111111111",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          ],
+          "dataHex": "01"
+        },
+        {
+          "program": "11111111111111111111111111111111",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "3ZCsmBMuuHiBHk5yqmF6DVnZEtP4SttAbkFGEuGmLt4m"
+          ],
+          "dataHex": "03000000be4f77be6cb6eab3a4e4ae875d9a1cee07439013c0c2b3f18099c63c341b5287200000000000000036776e6a44454d724e37393358724779586342646e773644346d587153717058b84caf0000000000a50000000000000006ddf6e1d765a193d9cbe146ceeb79ac1cb485ed5f5b37913a8cf5857eff00a9"
+        },
+        {
+          "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "accounts": [
+            "3ZCsmBMuuHiBHk5yqmF6DVnZEtP4SttAbkFGEuGmLt4m",
+            "So11111111111111111111111111111111111111112",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "SysvarRent111111111111111111111111111111111"
+          ],
+          "dataHex": "01"
+        },
+        {
+          "program": "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+            "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+            "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+            "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR",
+            "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+            "3ZCsmBMuuHiBHk5yqmF6DVnZEtP4SttAbkFGEuGmLt4m",
+            "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+            "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+            "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+            "So11111111111111111111111111111111111111112",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "4uAB7seenFJKPUXqYewAdfra2u6baBgjiXU8x1SC7Ycz",
+            "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+            "11111111111111111111111111111111",
+            "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+            "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv"
+          ],
+          "dataHex": "faea0d7bd59c13ec80969800000000008409ddcb510000000000000000000000"
+        },
+        {
+          "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "accounts": [
+            "3ZCsmBMuuHiBHk5yqmF6DVnZEtP4SttAbkFGEuGmLt4m",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+          ],
+          "dataHex": "09"
+        }
+      ],
+      "checkedTransfers": [
+        {
+          "source": "3ZCsmBMuuHiBHk5yqmF6DVnZEtP4SttAbkFGEuGmLt4m",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "authority": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+          "amountRaw": "10000000"
+        },
+        {
+          "source": "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "destination": "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+          "authority": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "amountRaw": "353078001725"
+        },
+        {
+          "source": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+          "authority": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "amountRaw": "50000"
+        },
+        {
+          "source": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+          "authority": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "amountRaw": "50000"
+        }
+      ],
+      "tokenBalanceChanges": [
+        {
+          "address": "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "owner": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "preRaw": "1000000000000000",
+          "postRaw": "999646921998275",
+          "deltaRaw": "-353078001725"
+        },
+        {
+          "address": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "preRaw": "0",
+          "postRaw": "9900000",
+          "deltaRaw": "9900000"
+        },
+        {
+          "address": "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "owner": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+          "preRaw": "0",
+          "postRaw": "353078001725",
+          "deltaRaw": "353078001725"
+        },
+        {
+          "address": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "9JkxvRLjBnnjxmdQQ8iZVP3GUFfe4xtXNRigkPPZ8wyd",
+          "preRaw": "0",
+          "postRaw": "50000",
+          "deltaRaw": "50000"
+        },
+        {
+          "address": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "AnWhtzWn6RxXXYAJW3UCMYvyvC7hGNWHUJzVWKfT2GBX",
+          "preRaw": "0",
+          "postRaw": "50000",
+          "deltaRaw": "50000"
+        }
+      ],
+      "trade": {
+        "amountInRaw": "10000000",
+        "minOutRaw": "351312611716",
+        "actualInputRaw": "10000000",
+        "actualOutputRaw": "353078001725",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "50000",
+        "creatorFeeRaw": "50000"
+      }
+    },
+    {
+      "step": "sell",
+      "signature": "4wH53h6ESR7PG4jMeksc5ks5t1kwvX6RnbXuQZVLBHaM9rvEYzh6SQhDXg7Ltabp4TgSNY1ssCwhYafx5qypLDLa",
+      "slot": 512353562,
+      "networkFeeLamports": 5000,
+      "walletNativeLamportsDelta": "4871583",
+      "topLevelInstructions": [
+        {
+          "program": "11111111111111111111111111111111",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "EYuRcYWBXHy6acoqBeWJDfru1R4Taj5ozmuz3PRBs7hA"
+          ],
+          "dataHex": "03000000be4f77be6cb6eab3a4e4ae875d9a1cee07439013c0c2b3f18099c63c341b5287200000000000000036563838564e4d42686a7a56436f343166324439615967597244556e78576b3138b6160000000000a50000000000000006ddf6e1d765a193d9cbe146ceeb79ac1cb485ed5f5b37913a8cf5857eff00a9"
+        },
+        {
+          "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "accounts": [
+            "EYuRcYWBXHy6acoqBeWJDfru1R4Taj5ozmuz3PRBs7hA",
+            "So11111111111111111111111111111111111111112",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "SysvarRent111111111111111111111111111111111"
+          ],
+          "dataHex": "01"
+        },
+        {
+          "program": "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+            "7ZR4zD7PYfY2XxoG1Gxcy2EgEeGYrpxrwzPuwdUBssEt",
+            "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+            "3nwA7Py3AFUDwJv6Q9UWmyovKsQ12uQpWg7nsDsw58nR",
+            "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+            "EYuRcYWBXHy6acoqBeWJDfru1R4Taj5ozmuz3PRBs7hA",
+            "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+            "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+            "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+            "So11111111111111111111111111111111111111112",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "4uAB7seenFJKPUXqYewAdfra2u6baBgjiXU8x1SC7Ycz",
+            "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+            "11111111111111111111111111111111",
+            "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+            "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv"
+          ],
+          "dataHex": "9527de9bd37c981a1e608b1a29000000e8094a00000000000000000000000000"
+        },
+        {
+          "program": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+          "accounts": [
+            "EYuRcYWBXHy6acoqBeWJDfru1R4Taj5ozmuz3PRBs7hA",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2"
+          ],
+          "dataHex": "09"
+        }
+      ],
+      "checkedTransfers": [
+        {
+          "source": "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "destination": "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+          "authority": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+          "amountRaw": "176539000862"
+        },
+        {
+          "source": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "EYuRcYWBXHy6acoqBeWJDfru1R4Taj5ozmuz3PRBs7hA",
+          "authority": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "amountRaw": "4876583"
+        },
+        {
+          "source": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+          "authority": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "amountRaw": "24691"
+        },
+        {
+          "source": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+          "authority": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "amountRaw": "24691"
+        }
+      ],
+      "tokenBalanceChanges": [
+        {
+          "address": "7YE8W8NBpNBQtNY6kJeFx6SzQ8da31SttzhK8NkMR5Gq",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "owner": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+          "preRaw": "353078001725",
+          "postRaw": "176539000863",
+          "deltaRaw": "-176539000862"
+        },
+        {
+          "address": "CgYUMQqxYb1QRuQPprHKU2963wqa3VjEszhUyM8kEy16",
+          "mint": "6oeScPH9gs5qytR1KLwC3z8ky23WzWchXosMGwgNVSbT",
+          "owner": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "preRaw": "999646921998275",
+          "postRaw": "999823460999137",
+          "deltaRaw": "176539000862"
+        },
+        {
+          "address": "7qnWDRszKikyE8o5REdBPPGENDUacBo342CQ4NnwzGY7",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "5xqNaZXX5eUi4p5HU4oz9i5QnwRNT2y6oN7yyn4qENeq",
+          "preRaw": "9900000",
+          "postRaw": "4974035",
+          "deltaRaw": "-4925965"
+        },
+        {
+          "address": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "9JkxvRLjBnnjxmdQQ8iZVP3GUFfe4xtXNRigkPPZ8wyd",
+          "preRaw": "50000",
+          "postRaw": "74691",
+          "deltaRaw": "24691"
+        },
+        {
+          "address": "3Z9ku1ebsnRpTs9q3mBv9Zz9frNNy6q7Xp69m1VfUQdv",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "AnWhtzWn6RxXXYAJW3UCMYvyvC7hGNWHUJzVWKfT2GBX",
+          "preRaw": "50000",
+          "postRaw": "74691",
+          "deltaRaw": "24691"
+        }
+      ],
+      "trade": {
+        "amountInRaw": "176539000862",
+        "minOutRaw": "4852200",
+        "actualInputRaw": "176539000862",
+        "actualOutputRaw": "4876583",
+        "shareFeeRate": "0",
+        "platformFeeRaw": "24691",
+        "creatorFeeRaw": "24691"
+      }
+    },
+    {
+      "step": "claim-platform",
+      "signature": "enc3BaW2FXv3hN12NnV8Dd33pNcRRNiDXjiRKDkGZtg7ovaKzqMLYgQvLkrgcUv2K8w93xdg7oNtCkahn2hk8E1",
+      "slot": 512353776,
+      "networkFeeLamports": 5000,
+      "walletNativeLamportsDelta": "-1493440",
+      "topLevelInstructions": [
+        {
+          "program": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "So11111111111111111111111111111111111111112",
+            "11111111111111111111111111111111",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+          ],
+          "dataHex": "01"
+        },
+        {
+          "program": "DRay6fNdQ5J82H7xV6uq2aV3mNrUZ1J4PgSKsWgptcm6",
+          "accounts": [
+            "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+            "9JkxvRLjBnnjxmdQQ8iZVP3GUFfe4xtXNRigkPPZ8wyd",
+            "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+            "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+            "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+            "So11111111111111111111111111111111111111112",
+            "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+            "11111111111111111111111111111111",
+            "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+          ],
+          "dataHex": "75f1c6a8f8da501d"
+        }
+      ],
+      "checkedTransfers": [
+        {
+          "source": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+          "mint": "So11111111111111111111111111111111111111112",
+          "destination": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+          "authority": "9JkxvRLjBnnjxmdQQ8iZVP3GUFfe4xtXNRigkPPZ8wyd",
+          "amountRaw": "74691"
+        }
+      ],
+      "tokenBalanceChanges": [
+        {
+          "address": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "9JkxvRLjBnnjxmdQQ8iZVP3GUFfe4xtXNRigkPPZ8wyd",
+          "preRaw": "74691",
+          "postRaw": "0",
+          "deltaRaw": "-74691"
+        },
+        {
+          "address": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+          "mint": "So11111111111111111111111111111111111111112",
+          "owner": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+          "preRaw": "0",
+          "postRaw": "74691",
+          "deltaRaw": "74691"
+        }
+      ],
+      "claim": {
+        "platformVault": "6td1HPHFpAWUSZRE4dGQxwa3bf7hx1X3eMtJzccLQmVD",
+        "destinationAta": "5ExT1tmXzE3LJmG7coTGTBMP98VJpa9ihjH4LFEYB4LA",
+        "vaultDelta": "-74691",
+        "ataDelta": "74691",
+        "innerTransferRaw": "74691",
+        "ataLamportsDelta": "1563131",
+        "newAtaRentLamports": "1488440"
+      }
+    }
+  ],
+  "limitations": [
+    "Creator claim was not submitted; creator vault accrual is proven but creator receipt is NOT_RUN.",
+    "Same wallet is administrator, creator, trader and claimant. These receipts do not test unauthorized-wallet rejection or independent role separation.",
+    "No saved prepared-plan summary is present in these files. Minimum output is checked against the executed instruction, not an independently preserved user-review quote.",
+    "Program allowlist and decoded transfers establish observed paths, not a full formal security audit or comprehensive validation of every instruction field.",
+    "Evidence is devnet SOL only, not mainnet economic readiness, migration execution, LP rights, hosted metadata, UI acceptance, or historical revenue coverage.",
+    "The disposable wallet key was not persisted, per parent report; balance presence is not evidence of future recoverability."
+  ]
+}

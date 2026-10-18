@@ -1,0 +1,56 @@
+{
+  "observedAt": "2026-10-18T07:13:08.976Z",
+  "network": "devnet",
+  "privateKeyPersisted": false,
+  "keyStorage": "process memory only; not restorable",
+  "wallet": "B2yhMVcoJxBgV9w7esdtKzeHUfsxkrxrvEQrRoexGavC",
+  "mint": null,
+  "poolId": null,
+  "signatures": {},
+  "records": [
+    {
+      "step": "use-existing-test-platform",
+      "platformId": "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
+      "admin": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+      "creatorWallet": "B2yhMVcoJxBgV9w7esdtKzeHUfsxkrxrvEQrRoexGavC",
+      "claimWallet": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+      "feeRate": "5000",
+      "creatorFeeRate": "5000",
+      "testOnly": true
+    },
+    {
+      "step": "negative-claims",
+      "results": [
+        {
+          "name": "unauthorized-platform",
+          "code": "CLAIM_WALLET_REQUIRED"
+        },
+        {
+          "name": "empty-platform",
+          "code": "NOTHING_TO_CLAIM"
+        }
+      ]
+    },
+    {
+      "step": "simulate-original-creator-claim",
+      "summary": {
+        "wallet": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "quoteMint": "So11111111111111111111111111111111111111112",
+        "claimScope": "creator+quote protocol-wide",
+        "expectedAmountRaw": "74691",
+        "attributionStatus": "unallocated",
+        "destinationOwner": "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+        "notice": "领取总额不等于本平台本期收入；不自动兑换。",
+        "simulation": {
+          "slot": 512356487,
+          "unitsConsumed": 17477
+        },
+        "networkFeeLamports": 5000
+      },
+      "guardPassed": true,
+      "simulationOnly": true,
+      "signatureVerified": false,
+      "broadcast": false
+    }
+  ]
+}

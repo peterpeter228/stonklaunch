@@ -100,3 +100,9 @@ test('mint inspection separates demo, verified no-fee, bad owners and epoch roll
   await assert.rejects(inspectToken('invalid'),/有效/);
  }finally{globalThis.fetch=originalFetch;if(mode===undefined)delete process.env.APP_MODE;else process.env.APP_MODE=mode;}
 });
+import {confirmByHttp} from '../src/lib/raydium/client-transactions';
+test('confirmation uses HTTP status without websocket subscriptions or rebroadcast',async()=>{
+ let calls=0;const c={getSignatureStatuses:async()=>({value:[++calls===1?{err:null,confirmationStatus:'processed'}:{err:null,confirmationStatus:'confirmed'}]}),confirmTransaction:()=>{throw Error('Websocket confirmation forbidden in fixture');}} as unknown as Connection;
+ assert.deepEqual(await confirmByHttp(c,'fixture-only',100,0),{value:{err:null}});assert.equal(calls,2);
+ await assert.rejects(confirmByHttp({getSignatureStatuses:async()=>({value:[null]})} as unknown as Connection,'fixture-only',0,0),/超时/);
+});
