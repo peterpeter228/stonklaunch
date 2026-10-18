@@ -15,6 +15,12 @@
       "signature": "2Mt9qNp4ae64K65vG78HvYRTUBvNdbd8KNf17ydKetpaXNqxbM62ak4badP5nLgtGKc7oEqDkAXWj2A3JTN8FoyZ",
       "messageHash": "f475bf20ad5ceaf01d2958c4623692ed5f7a10085594622a923ca18c0fe1c341",
       "slot": 512517543
+    },
+    "buy": {
+      "nonce": "stonk-buy-20261018-175345",
+      "sourceSha": "60431d61defb46eb026999a45a0c4155399243ed",
+      "runId": null,
+      "state": "claimed"
     }
   },
   "attemptHistory": [
