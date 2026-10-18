@@ -6,7 +6,7 @@
   "secretSavedAt": "2026-10-18T07:36:31Z",
   "storageVerification": "GitHub UI confirmed Repository secret added and secret name present",
   "actionsRecoveryVerification": "PASS",
-  "funding": "AWAITING_USER",
+  "funding": "FINALIZED",
   "restrictions": [
     "Free devnet test SOL only",
     "Never fund old ephemeral wallets",
@@ -32,5 +32,16 @@
     "rpcCalls": 0,
     "secretPresentInLogs": false,
     "method": "Built-in Node.js crypto Ed25519; no checkout, dependency install, or external actions"
+  },
+  "fundingEvidence": {
+    "verifiedAt": "2026-10-18T17:35:26Z",
+    "balanceLamports": 5000000000,
+    "balanceSlot": 512512987,
+    "transactionSlot": 512512779,
+    "signature": "34bZ48UNTSVB3LGgPqbcLUZQ88oLZ9AVoZuXStcxCKx7UKVu7iepuVPoeppWeMrSGDxDwcbL8VmxRDE556vNc7gq",
+    "err": null,
+    "genesisHash": "EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG",
+    "preBalanceLamports": 0,
+    "postBalanceLamports": 5000000000
   }
 }
