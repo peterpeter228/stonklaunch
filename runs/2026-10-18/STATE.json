@@ -188,9 +188,8 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
+    "Implement and verify fail-closed public remote claim gating, then run one reviewed devnet acceptance step per dispatch using fixed funded wallet",
     "Continue bounded non-funded failure-path review and actual DEMO UI regression per Sentinel_46a58ef43c9481919e1c62325272645f",
-    "Await user faucet claim to the verified durable wallet; user estimates quota recovery around 2026-10-18T15:45:21Z, not verified provider reset",
-    "Run remaining creator claim only after funding and approved devnet-only workflow checks",
     "Complete remaining deployment/auth/metadata and migration acceptance; never substitute simulation for execution"
   ],
   "last_completed_work": "Unfunded recovery hardening: 18 unit tests, typecheck, direct route smoke checks and production build PASS. Current rendered browser regression BLOCKED before app load; no new UI or chain PASS claimed.",
@@ -218,7 +217,7 @@
     "completed_short_review_count": 3
   },
   "remaining_blockers": [
-    "Real creator claim not completed; durable signer recovery PASS, waiting for free devnet funding.",
+    "Creator acceptance execution pending durable single-step claim gating; fixed signer recovered and funded with 5devnetSOL.",
     "Supabase project/Auth/storage not configured or deployed",
     "NonSOL assets not enabled; xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
@@ -241,13 +240,13 @@
     "receipt_assertions_passed": 49,
     "creator_claim": "unsigned_simulation_only",
     "ephemeral_wallets": "processes closed; no restorable signing keys",
-    "faucet": "AWAITING_USER; QuickNode actual form rejected empty-mainnet wallet despite FAQ; do not fund real SOL. User will claim after official quota recovery.",
+    "faucet": "Completed by user; finalized 5devnetSOL. Do not request further claims.",
     "durable_wallet": {
       "public_key": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
       "recovery": "PASS",
       "evidence": "evidence/DURABLE_DEVNET_WALLET.json",
       "run_url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39108491594",
-      "funding": "AWAITING_USER"
+      "funding": "FINALIZED_5_DEVNET_SOL"
     }
   },
   "unfunded_followup": {
@@ -267,5 +266,6 @@
     "real_wallet_signing": "NOT_RUN",
     "new_chain_transactions": 0,
     "release_ready": false
-  }
+  },
+  "last_funding_confirmation": "evidence/DURABLE_DEVNET_FUNDING_RECEIPT_20261018.json"
 }
