@@ -1,0 +1,51 @@
+{
+  "observedAt": "2026-10-18T18:09:32.667Z",
+  "runId": "39152770076",
+  "signature": "5jSwoniJbRn7eLRpGmHFEekBgzxUCwedHPiyvfWGH7LJmKfRH1QWfLXLdpaNxdhYiYzmydFDutBtcC7XvQNnKkJb",
+  "messageHash": "ecaf6c8baef2f1c096dd6cfdfb11b9630b77758c483aba15c9d22329b60670b9",
+  "status": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512521659
+    },
+    "value": [
+      null
+    ]
+  },
+  "balance": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512521657
+    },
+    "value": 4979382960
+  },
+  "history": [
+    {
+      "blockTime": 1792345990,
+      "confirmationStatus": "finalized",
+      "err": null,
+      "memo": null,
+      "signature": "2Mt9qNp4ae64K65vG78HvYRTUBvNdbd8KNf17ydKetpaXNqxbM62ak4badP5nLgtGKc7oEqDkAXWj2A3JTN8FoyZ",
+      "slot": 512517543,
+      "transactionIndex": 3
+    },
+    {
+      "blockTime": 1792344852,
+      "confirmationStatus": "finalized",
+      "err": null,
+      "memo": null,
+      "signature": "34bZ48UNTSVB3LGgPqbcLUZQ88oLZ9AVoZuXStcxCKx7UKVu7iepuVPoeppWeMrSGDxDwcbL8VmxRDE556vNc7gq",
+      "slot": 512512779,
+      "transactionIndex": 4
+    }
+  ],
+  "failure": {
+    "code": "BLOCKHEIGHT_RPC_FAILED",
+    "broadcastAttempted": false,
+    "readAttempts": 3,
+    "observedAt": "2026-10-18T18:08:41.815Z",
+    "expiresAt": "2026-10-18T18:08:59.127Z",
+    "lastValidBlockHeight": 499734995
+  },
+  "analysis": "Typed post-sign height query failure after three readonly attempts, not quote expiry. Signed claim retained; no retry or reset."
+}
