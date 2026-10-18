@@ -1,4 +1,5 @@
 import { defineConfig } from '@playwright/test';
+import { fileURLToPath } from 'node:url';
 
 // Fixed local DEMO target only. Never point this suite at production or a wallet.
 export default defineConfig({
@@ -28,6 +29,7 @@ export default defineConfig({
     { name: 'mobile-360', use: { viewport: { width: 360, height: 800 }, isMobile: true, hasTouch: true } },
   ],
   webServer: {
+    cwd: fileURLToPath(new URL('..', import.meta.url)),
     command: 'node node_modules/next/dist/bin/next start --hostname 127.0.0.1 --port 3110',
     url: 'http://127.0.0.1:3110/api/runtime',
     reuseExistingServer: false,
