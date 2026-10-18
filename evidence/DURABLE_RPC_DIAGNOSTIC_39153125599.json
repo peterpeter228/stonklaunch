@@ -1,0 +1,51 @@
+{
+  "runId": "39153125599",
+  "jobId": "117750703288",
+  "sourceSha": "5ec7bd49adeaed3125deac1e5d1693c94153cfaf",
+  "conclusion": "success",
+  "endpoint": "https://api.devnet.solana.com",
+  "records": [
+    {
+      "observedAt": "2026-10-18T18:12:58.2990331Z",
+      "method": "getGenesisHash",
+      "id": 1,
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 231,
+      "genesisMatches": true,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:12:58.3105334Z",
+      "method": "getLatestBlockhash",
+      "id": 2,
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 34,
+      "resultHeight": 499736077,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:12:58.3429139Z",
+      "method": "getBlockHeight",
+      "id": 3,
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 33,
+      "resultHeight": 499735927,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:12:59.3758367Z",
+      "method": "getBlockHeight",
+      "id": 4,
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 33,
+      "resultHeight": 499735931,
+      "stopped": false
+    }
+  ],
+  "scope": "Four fixed read-only requests; no wallet secret, dependencies, signing, broadcast, or ledger changes.",
+  "finding": "No HTTP/RPC failure reproduced in this run. Does not establish underlying cause of earlier BLOCKHEIGHT_RPC_FAILED."
+}
