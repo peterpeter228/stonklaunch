@@ -1,0 +1,39 @@
+$ node --import tsx --test tests/*.test.ts
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+✔ migration threshold is not confirmed graduation (2.083799ms)
+✔ unknown confirmation must not create duplicate economic action (0.224974ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.207881ms)
+✔ on-chain metadata prefix validates mint and bounded UTF8 fields (1.077926ms)
+✔ client guard validates trade discriminator, amounts, pool and extra instructions (21.424991ms)
+✔ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (21.823725ms)
+✔ official seeded WSOL setup and close shape passes the client guard without a real transaction (6.111798ms)
+✔ recovery journals remain isolated across wallets and networks; corruption blocks continuation (0.355962ms)
+✔ Chinese token names follow protocol UTF8-byte limit before upload (4.118073ms)
+✔ transfer-cost inspection uses capped integer fees and the active epoch, not promised income (1.370399ms)
+✔ mint inspection separates demo, verified no-fee, bad owners and epoch rollover without transactions (59.635519ms)
+✔ confirmation uses HTTP status without websocket subscriptions or rebroadcast (5.985985ms)
+✔ post-sign expiry and pending checks prevent broadcast; definitive failure keeps its terminal state (524.603763ms)
+✔ server observation never treats processed or legacy unconfirmed errors as terminal (8.146758ms)
+✔ durable claim binds exact repository, ref, attempt, source, nonce and run before signing (0.730313ms)
+✔ consumed or out-of-order durable slots cannot be reused, even without a signature (0.462943ms)
+✔ ledger CAS must succeed and read back before advancing; stale simultaneous claimant is rejected (2.055407ms)
+✔ ambiguous ledger write stops after a read and is never retried or treated as authorization (0.495458ms)
+✔ durable signed checkpoint cannot be replaced or moved back to a signable state (0.716732ms)
+✔ bounded ALT resolution gives identical live and historical receipt account identities (1.167774ms)
+✔ only the exact terminal pre-sign ALT failure can be preserved for one manually created replacement claim (1.19127ms)
+✔ forward claim transition preserves archived unsigned attempt and its proof without mutation (0.71279ms)
+✔ height retries are readonly, bounded and only transient; expiry or invalid response is never retried (502.687329ms)
+✔ post-sign diagnostics preserve signed identity and cannot reset or overwrite the claim (1.43414ms)
+✔ sole reviewed prebroadcast buy recovery retains original signed claim and requires exact proof (0.833567ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (2.164277ms)
+✔ invalid configuration is rejected, never silently defaulted (0.618313ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.401599ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.573287ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 29
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2087.538365

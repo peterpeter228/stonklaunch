@@ -8,9 +8,47 @@ import type { RuntimeConfig, TransactionPlan } from '@/types/domain';
 export type SigningWallet = {
     publicKey: PublicKey;
     signTransaction: (tx: VersionedTransaction) => Promise<VersionedTransaction>;
+    captureValidity?: (validity: TransactionValidity) => void;
+    readOnlyBlockheightRetries?: 0 | 1 | 2;
 };
 export type TransactionStage = 'validating' | 'awaiting_signature' | 'submitted' | 'confirmed' | 'failed' | 'confirmation_unknown';
-export type StageCallback = (stage: TransactionStage, detail?: string) => void;
+export type TransactionValidity={blockhash:string;lastValidBlockHeight:number;expiresAt?:string;phase:'before-sign'|'after-sign';observedAt:string;observedBlockHeight?:number;readAttempts:number};
+export type ValidityCode='BLOCKHEIGHT_RPC_FAILED'|'BLOCKHEIGHT_INVALID_RESPONSE'|'BLOCKHASH_EXPIRED'|'QUOTE_EXPIRED'|'QUOTE_INVALID';
+export class TransactionValidityError extends Error {
+ constructor(readonly code:ValidityCode,readonly validity:TransactionValidity){super(code+(code==='BLOCKHASH_EXPIRED'?' 区块哈希已过期，请重新准备并审阅':code==='QUOTE_EXPIRED'||code==='QUOTE_INVALID'?' 计划已过期或缺少有效期限，请重新准备并审阅':''));}
+}
+export type StageCallback = (stage: TransactionStage, detail?: string, validity?:TransactionValidity) => void;
+/** Retry only readonly transient height queries. Never sign, send, refresh a quote or extend its expiry here. */
+export async function checkTransactionValidity(c:Connection,context:{blockhash:string;lastValidBlockHeight:number;expiresAt?:string},phase:TransactionValidity['phase'],retries:0|1|2=0){
+ const validity:TransactionValidity={...context,phase,observedAt:new Date().toISOString(),readAttempts:0};
+ const fail=(code:ValidityCode):never=>{validity.observedAt=new Date().toISOString();throw new TransactionValidityError(code,{...validity});};
+ const expiry=context.expiresAt===undefined?Infinity:Date.parse(context.expiresAt);
+ if(!Number.isFinite(expiry)&&expiry!==Infinity)fail('QUOTE_INVALID');
+ if(!Number.isSafeInteger(context.lastValidBlockHeight)||context.lastValidBlockHeight<0)fail('BLOCKHEIGHT_INVALID_RESPONSE');
+ const deadline=Math.min(expiry,Date.now()+20000);
+ for(let attempt=0;attempt<=Math.min(2,Math.max(0,retries));attempt++){
+  if(Date.now()>=expiry)fail('QUOTE_EXPIRED');
+  if(Date.now()>=deadline)fail('BLOCKHEIGHT_RPC_FAILED');
+  validity.readAttempts++;
+  let timer:ReturnType<typeof setTimeout>|undefined;
+  try{
+   const height=retries===0?await c.getBlockHeight('confirmed'):await Promise.race([c.getBlockHeight('confirmed'),new Promise<never>((_,reject)=>{timer=setTimeout(()=>reject(new DOMException('Readonly blockheight timeout','TimeoutError')),Math.min(4000,Math.max(1,deadline-Date.now())));})]);
+   if(!Number.isSafeInteger(height)||height<0)fail('BLOCKHEIGHT_INVALID_RESPONSE');
+   validity.observedBlockHeight=height;
+   if(height>context.lastValidBlockHeight)fail('BLOCKHASH_EXPIRED');
+   if(Date.now()>=expiry)fail('QUOTE_EXPIRED');
+   validity.observedAt=new Date().toISOString();return validity;
+  }catch(error){
+   if(error instanceof TransactionValidityError)throw error;
+   if(error instanceof Error&&error.name==='StructError')fail('BLOCKHEIGHT_INVALID_RESPONSE');
+   const transient=error instanceof Error&&(['TimeoutError','AbortError'].includes(error.name)||/\b429\b|Too Many Requests|fetch failed|ECONNRESET|ETIMEDOUT|ENOTFOUND|EAI_AGAIN|network error|socket hang up/i.test(error.message));
+   if(Date.now()>=expiry)fail('QUOTE_EXPIRED');
+   if(!transient||attempt>=retries||Date.now()+250>=deadline)fail('BLOCKHEIGHT_RPC_FAILED');
+   await new Promise(resolve=>setTimeout(resolve,250));
+  }finally{if(timer)clearTimeout(timer);}
+ }
+ return fail('BLOCKHEIGHT_RPC_FAILED');
+}
 // Call only from an explicit Create action. Never persist/export this temporary secret.
 export function createClientMint() { return Keypair.generate(); }
 function boundedConnection(c:Connection){return new Connection(c.rpcEndpoint,{commitment:'confirmed',disableRetryOnRateLimit:true,fetch:(input,init)=>fetch(input,{...init,signal:AbortSignal.timeout(12000)})});}
@@ -45,8 +83,8 @@ export async function confirmByHttp(c:Connection,signature:string,timeoutMs=4500
  }
 }
 async function submit(tx: VersionedTransaction, wallet: SigningWallet, c: Connection, blockhash: string, lastValidBlockHeight: number, onStage: StageCallback,context:{cluster:string;kind:string;expiresAt?:string}) { checkPending(wallet,context.cluster);if (!tx.message.staticAccountKeys[0].equals(wallet.publicKey))
-    throw Error('交易付款钱包与已连接钱包不一致'); if ((await c.getBlockHeight('confirmed')) > lastValidBlockHeight)
-    throw Error('区块哈希已过期，请重新准备并审阅'); onStage('awaiting_signature'); const reviewedMessage = tx.message.serialize(); let signed: VersionedTransaction; try {
+    throw Error('交易付款钱包与已连接钱包不一致'); const validityContext={blockhash,lastValidBlockHeight,...(context.expiresAt?{expiresAt:context.expiresAt}:{})}; const beforeSigning=await checkTransactionValidity(c,validityContext,'before-sign',wallet.readOnlyBlockheightRetries); onStage('awaiting_signature',undefined,beforeSigning); const reviewedMessage = tx.message.serialize(); let signed: VersionedTransaction; try {
+    wallet.captureValidity?.(beforeSigning);
     signed = await wallet.signTransaction(tx);
 }
 catch (e) {
@@ -56,9 +94,8 @@ catch (e) {
     throw Error('签名返回的交易消息已改变'); if (!signed.signatures[0]?.some(b => b !== 0))
     throw Error('钱包没有返回有效签名'); try {
     // Approval may take longer than the reviewed quote or blockhash lifetime.
-    if((await c.getBlockHeight('confirmed'))>lastValidBlockHeight)throw Error('区块哈希已过期，请重新准备并审阅');
-    if(context.expiresAt)validExpiry(context.expiresAt);
-} catch(e) { onStage('failed','签名后核验失败；未广播交易'); throw e; } checkPending(wallet,context.cluster); const signature = base58(signed.signatures[0]); const record = { ...context,wallet:wallet.publicKey.toBase58(),signature, blockhash, lastValidBlockHeight, state: 'submitted', at: new Date().toISOString() }; writeRecovery('transaction',record); onStage('submitted', signature); let broadcastAccepted=false; let result:Awaited<ReturnType<typeof confirmByHttp>>; try {
+    await checkTransactionValidity(c,validityContext,'after-sign',wallet.readOnlyBlockheightRetries);
+} catch(e) { onStage('failed',e instanceof TransactionValidityError?e.code:'签名后核验失败；未广播交易',e instanceof TransactionValidityError?e.validity:undefined); throw e; } checkPending(wallet,context.cluster); const signature = base58(signed.signatures[0]); const record = { ...context,wallet:wallet.publicKey.toBase58(),signature, blockhash, lastValidBlockHeight, state: 'submitted', at: new Date().toISOString() }; writeRecovery('transaction',record); onStage('submitted', signature); let broadcastAccepted=false; let result:Awaited<ReturnType<typeof confirmByHttp>>; try {
     await c.sendRawTransaction(signed.serialize(), { skipPreflight: false, maxRetries: 0 }); broadcastAccepted=true;
     result=await confirmByHttp(c,signature);
 }

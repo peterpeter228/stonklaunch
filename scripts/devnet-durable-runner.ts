@@ -5,8 +5,8 @@ import {Connection, PublicKey, Keypair, VersionedTransaction, ComputeBudgetProgr
 import {anchorDataBuf, DEV_LAUNCHPAD_PROGRAM, getPdaCreatorVault} from '@raydium-io/raydium-sdk-v2';
 import {getAssociatedTokenAddressSync} from '@solana/spl-token';
 import {getRuntime} from '../src/lib/runtime';
-import {buildClientLaunch, signAndSubmitLaunch, signAndSubmitPlan} from '../src/lib/raydium/client-transactions';
-import {WALLET, PLATFORM, STEPS, assertClaim, readLedger, transition, verifySource, messageHash, publicSignature, resolveAcceptanceKeys, type Identity, type Step, type Claim} from './devnet-claim';
+import {buildClientLaunch, signAndSubmitLaunch, signAndSubmitPlan, TransactionValidityError, type TransactionValidity} from '../src/lib/raydium/client-transactions';
+import {WALLET, PLATFORM, STEPS, assertClaim, readLedger, transition, verifySource, messageHash, publicSignature, resolveAcceptanceKeys, annotateSignedFailure, type Identity, type Step, type Claim} from './devnet-claim';
 import {readPlatform, sdk, WSOL} from '../src/lib/raydium/chain';
 import {getVerifiedLaunch, readFees, prepareLaunch, prepareTrade, prepareFeeClaim} from '../src/lib/raydium/service';
 
@@ -18,6 +18,7 @@ const runId=process.env.GITHUB_RUN_ID || 'local';
 const attempt=process.env.GITHUB_RUN_ATTEMPT || '1';
 const checkpoint:{[key:string]:unknown}={schemaVersion:1,network:'devnet',wallet:WALLET,platformId:PLATFORM,runId,attempt,mode,step,privateKeyPersisted:true,walletSecretAccessed:false,keyStorage:'GitHub Actions repository secret STONK_DEVNET_KEYPAIR_JSON; not accessed by this read-only runner',mint:null,poolId:null,signature:null,status:'initializing'};
 let outputDirectory:string;
+let annotateFailure:((error:TransactionValidityError)=>Promise<void>)|undefined;
 function record(status:string, fields:Record<string,unknown>={}) {
  Object.assign(checkpoint,fields,{status,observedAt:new Date().toISOString()});
  // Append-only numbered snapshots, never overwrite previous evidence or print arbitrary exceptions.
@@ -96,23 +97,26 @@ async function executeClaim(gateOnly:boolean){
  checkpoint.walletSecretAccessed=true;checkpoint.keyStorage='Existing GitHub Actions secret, recovered in process memory only';
  // Browser helpers need a public in-memory journal; durable uniqueness remains the repository ledger.
  const storage=new Map<string,string>();Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:(k:string)=>storage.get(k)??null,setItem:(k:string,v:string)=>storage.set(k,v)}});
- let signedOnce=false;
- const signingWallet={publicKey:wallet.publicKey,signTransaction:async(tx:VersionedTransaction)=>{
+ let signedOnce=false;let signingValidity:TransactionValidity|undefined;
+ const signingWallet={publicKey:wallet.publicKey,readOnlyBlockheightRetries:2 as const,captureValidity:(validity:TransactionValidity)=>{signingValidity={...validity};},signTransaction:async(tx:VersionedTransaction)=>{
+  const validity=signingValidity;
   if(signedOnce||!mint||!poolId)throw Error('ONE_SIGNATURE_ONLY');signedOnce=true;
-  await assertInstruction(tx,id.step,mint,poolId);
-  const fresh=await readLedger();assertClaim(fresh.ledger,id,'signing');
-  const before=await c.getAccountInfoAndContext(wallet.publicKey,'confirmed');if(!before.value)throw Error('PAYER_ACCOUNT_MISSING');
+  if(!validity||validity.blockhash!==tx.message.recentBlockhash)throw Error('VALIDITY_CONTEXT_REQUIRED');
+  const [,fresh,before,feeResult]=await Promise.all([assertInstruction(tx,id.step,mint,poolId),readLedger(),c.getAccountInfoAndContext(wallet.publicKey,'confirmed'),c.getFeeForMessage(tx.message,'confirmed')]);
+  assertClaim(fresh.ledger,id,'signing');if(!before.value)throw Error('PAYER_ACCOUNT_MISSING');
   const simulation=await c.simulateTransaction(tx,{sigVerify:false,commitment:'confirmed',minContextSlot:before.context.slot,accounts:{encoding:'base64',addresses:[WALLET]}});
-  const after=simulation.value.accounts?.[0]?.lamports,fee=(await c.getFeeForMessage(tx.message,'confirmed')).value;
+  const after=simulation.value.accounts?.[0]?.lamports,fee=feeResult.value;
   const cap=id.step==='launch'?50000000:id.step==='buy'?20000000:10000000;
   if(simulation.value.err||typeof after!=='number'||fee===null||before.value.lamports-after+fee>cap)throw Error('SIMULATION_OR_DEBIT_CAP');
+  record('reviewed-before-sign',{validity,mint,poolId});
   tx.sign([wallet]);const signature=publicSignature(tx.signatures[0]);
   // The wallet callback is awaited by existing submit helpers; no broadcast happens before this durable write/readback.
-  current=await transition(fresh,id,'signing','signed',{mint,poolId,signature,messageHash:messageHash(tx.message.serialize())});
-  record('signed-before-broadcast',{mint,poolId,signature,messageHash:messageHash(tx.message.serialize())});
+  current=await transition(fresh,id,'signing','signed',{mint,poolId,signature,messageHash:messageHash(tx.message.serialize()),validity});
+  record('signed-before-broadcast',{mint,poolId,signature,messageHash:messageHash(tx.message.serialize()),validity});
   return tx;
  }};
- const onStage=(state:string,signature?:string)=>record('submission-stage',{submissionState:state,...(signature&&/^[1-9A-HJ-NP-Za-km-z]{64,88}$/.test(signature)?{signature}:{})});
+ annotateFailure=async(error)=>{if(current.ledger.steps[id.step]?.state==='signed'&&error.validity.phase==='after-sign'){current=await annotateSignedFailure(current,id,{code:error.code,validity:error.validity,broadcastAttempted:false});}};
+ const onStage=(state:string,signature?:string,validity?:TransactionValidity)=>record('submission-stage',{submissionState:state,...(validity?{validity}:{}),...(signature&&/^[1-9A-HJ-NP-Za-km-z]{64,88}$/.test(signature)?{signature}:{})});
  const runtime=getRuntime();let signature:string;
  if(id.step==='launch'){
   const mintSigner=Keypair.generate();mint=mintSigner.publicKey.toBase58();
@@ -170,4 +174,4 @@ async function main(){
 }
 // Explicit allowlist only: never print arbitrary SDK/RPC exceptions or raw secret-bearing input.
 const SAFE_ERRORS=new Set(['UNTRUSTED_EXECUTION','LEDGER_IDENTITY','CLAIM_NOT_OWNED','CLAIM_ALREADY_CONSUMED','PRIOR_FINALIZED_REQUIRED','OUT_OF_ORDER_CLAIM','TOKEN_REQUIRED','LEDGER_API_FAILED','WORKFLOW_IDENTITY','WORKFLOW_SOURCE_MISMATCH','CHECKOUT_SOURCE_MISMATCH','CAS_OUTCOME_REQUIRES_MANUAL_RECONCILIATION','LEDGER_READBACK_MISMATCH','UNEXPECTED_PENDING_CLAIM','NETWORK_MISMATCH','PLATFORM_MISMATCH','SOL_CONFIG_MISSING','EXECUTION_RECOVERY_MUST_USE_LEDGER','PRIOR_IDENTITY_MISMATCH','RECEIPT_NOT_FINALIZED_OR_MISMATCH','LAUNCH_READBACK_MISMATCH','INSUFFICIENT_FREE_DEVNET_FUNDS','INVALID_SECRET_FORMAT','RECOVERED_WALLET_MISMATCH','ONE_SIGNATURE_ONLY','SIMULATION_OR_DEBIT_CAP','ONLY_LAUNCHLAB_ACCEPTANCE','FINALIZATION_UNKNOWN_RECONCILE_ORIGINAL','FINAL_LAUNCH_MISMATCH','LOOKUP_TABLE_NOT_ALLOWED','LOOKUP_TABLE_UNAVAILABLE','TOO_MANY_LOOKUP_TABLES','RECEIPT_LOADED_ADDRESSES_REQUIRED','RECOVERY_HISTORY_REQUIRED','ONE_RECONCILED_RECOVERY_ONLY','UNRECONCILED_PRIOR_ATTEMPT','RECOVERY_PROOF_REQUIRED','RECOVERY_MUST_USE_NEW_BOUND_CLAIM','ARCHIVED_ATTEMPT_REUSED','EXPECTED_ONE_PROTOCOL_INSTRUCTION','STEP_INSTRUCTION_MISMATCH','LAUNCH_ACCOUNTS_MISMATCH','TRADE_ACCOUNTS_MISMATCH','CREATOR_CLAIM_ACCOUNTS_MISMATCH','UNEXPECTED_CREATE_INSTRUCTION','PRIORITY_FEE_NOT_ALLOWED']);
-main().catch((error:unknown)=>{delete process.env.STONK_DEVNET_KEYPAIR_JSON;const code=error instanceof Error&&SAFE_ERRORS.has(error.message)?error.message:'VALIDATION_OR_TRANSACTION_FAILED';if(outputDirectory)try{record('blocked',{code,notice:'Stopped safely. Inspect public snapshots and original signature; never blindly rerun execution.'});}catch{console.error('PUBLIC_CHECKPOINT_WRITE_FAILED');}console.error(`BLOCKED: ${code}; no automatic retry.`);process.exitCode=1;});
+main().catch(async(error:unknown)=>{delete process.env.STONK_DEVNET_KEYPAIR_JSON;const code=error instanceof TransactionValidityError?error.code:error instanceof Error&&SAFE_ERRORS.has(error.message)?error.message:'VALIDATION_OR_TRANSACTION_FAILED';if(error instanceof TransactionValidityError&&annotateFailure)try{await annotateFailure(error);}catch{console.error('PUBLIC_FAILURE_ANNOTATION_UNCERTAIN');}if(outputDirectory)try{record('blocked',{code,notice:'Stopped safely. Inspect public snapshots and original signature; never blindly rerun execution.'});}catch{console.error('PUBLIC_CHECKPOINT_WRITE_FAILED');}console.error(`BLOCKED: ${code}; no automatic retry.`);process.exitCode=1;});

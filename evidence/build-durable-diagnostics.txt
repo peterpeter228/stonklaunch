@@ -1,0 +1,63 @@
+$ next build
+   ▲ Next.js 15.5.28
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 5.8s
+   Linting and checking validity of types ...
+   Collecting page data ...
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+   Generating static pages (0/14) ...
+   Generating static pages (3/14) 
+   Generating static pages (6/14) 
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+   Generating static pages (10/14) 
+ ✓ Generating static pages (14/14)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ○ /                                    5.11 kB         117 kB
+├ ○ /_not-found                            995 B         104 kB
+├ ƒ /actions.json                          190 B         103 kB
+├ ƒ /api/actions/buy/[poolId]              190 B         103 kB
+├ ƒ /api/admin/platform/prepare            190 B         103 kB
+├ ƒ /api/assets                            190 B         103 kB
+├ ƒ /api/auth/logout                       190 B         103 kB
+├ ƒ /api/auth/session                      190 B         103 kB
+├ ƒ /api/cron/index                        190 B         103 kB
+├ ƒ /api/discovery                         190 B         103 kB
+├ ƒ /api/drafts                            190 B         103 kB
+├ ƒ /api/fees                              190 B         103 kB
+├ ƒ /api/fees/prepare-claim                190 B         103 kB
+├ ƒ /api/health                            190 B         103 kB
+├ ƒ /api/launches                          190 B         103 kB
+├ ƒ /api/launches/[mint]                   190 B         103 kB
+├ ƒ /api/launches/prepare                  190 B         103 kB
+├ ƒ /api/posters/[mint]                    190 B         103 kB
+├ ƒ /api/runtime                           190 B         103 kB
+├ ƒ /api/tokens/[mint]/inspection          190 B         103 kB
+├ ƒ /api/trades/prepare                    190 B         103 kB
+├ ƒ /api/trades/quote                      190 B         103 kB
+├ ƒ /api/transactions/observe              190 B         103 kB
+├ ƒ /api/uploads                           190 B         103 kB
+├ ○ /launch                                173 B         121 kB
+├ ○ /terminal                            3.39 kB         120 kB
+├ ƒ /token/[mint]                          176 B         127 kB
+└ ƒ /token/[mint]/graduation               177 B         127 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/8657-c8edf2d81065093d.js      46.1 kB
+  ├ chunks/87345b37-a176da65dade9243.js  54.2 kB
+  └ other shared chunks (total)          2.26 kB
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

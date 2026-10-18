@@ -1,6 +1,8 @@
 /** Public, fixed four-step acceptance ledger. Never reset a consumed slot. */
 import {createHash} from 'node:crypto';
 import type {Connection, LoadedAddresses, VersionedTransaction} from '@solana/web3.js';
+import type {TransactionValidity, ValidityCode} from '../src/lib/raydium/client-transactions';
+export type SignedFailure={code:ValidityCode;validity:TransactionValidity;broadcastAttempted:false};
 export const WALLET='AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho';
 export const PLATFORM='9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz';
 export const REPOSITORY='peterpeter228/stonklaunch';
@@ -9,16 +11,31 @@ export const LEDGER_PATH='evidence/DURABLE_CREATOR_LEDGER.json';
 export const WORKFLOW_PATH='.github/workflows/devnet-creator-acceptance.yml';
 export const STEPS=['launch','buy','sell','claim-creator'] as const;
 export type Step=typeof STEPS[number];
-export type Claim={nonce:string;sourceSha:string;runId:string|null;state:'claimed'|'signing'|'signed'|'finalized';mint?:string;poolId?:string;signature?:string;messageHash?:string;slot?:number;recoveryOfRunId?:string};
+export type Claim={nonce:string;sourceSha:string;runId:string|null;state:'claimed'|'signing'|'signed'|'finalized';mint?:string;poolId?:string;signature?:string;messageHash?:string;slot?:number;recoveryOfRunId?:string;validity?:TransactionValidity;failure?:SignedFailure};
 export type UnsignedAttemptHistory={step:'launch';claim:Claim;proof:{runUrl:string;runStatus:'completed';runConclusion:'failure';runAttempt:1;errorCode:'LOOKUP_TABLE_NOT_ALLOWED';fundedWalletSigned:false;broadcastAttempted:false;ledgerBlobSha:string;reviewedAt:string;evidencePath:string}};
-export type Ledger={schemaVersion:1;network:'devnet';wallet:string;platformId:string;steps:Partial<Record<Step,Claim>>;attemptHistory?:UnsignedAttemptHistory[]};
+export type Ledger={schemaVersion:1;network:'devnet';wallet:string;platformId:string;steps:Partial<Record<Step,Claim>>;attemptHistory?:(UnsignedAttemptHistory|SignedBuyAttemptHistory)[]};
 // Exactly one independently reconciled pre-sign failure, not a general reset mechanism.
 export const RECOVERABLE_UNSIGNED_CLAIM:Claim={nonce:'stonk-launch-20261018-174350',sourceSha:'78f91071d443819c999fa0c92754993560ba67fd',runId:'39151038033',state:'signing'};
+export type SignedBuyAttemptHistory={step:'buy';claim:Claim;proof:{runUrl:string;runStatus:'completed';runConclusion:'failure';runAttempt:1;errorCode:'POST_SIGN_VALIDATION_FAILED_BEFORE_SUBMIT';fundedWalletSigned:true;broadcastAttempted:false;reviewedNoSubmitCodePath:true;originalSignedBytesPersisted:false;signatureStatus:null;walletBalanceLamports:4979382960;observedSlot:number;stages:['awaiting_signature','signed-before-broadcast','failed','blocked'];ledgerBlobSha:string;reviewedAt:string;evidencePath:string}};
+export const RECOVERABLE_SIGNED_BUY_CLAIM:Claim={nonce:'stonk-buy-20261018-175345',sourceSha:'60431d61defb46eb026999a45a0c4155399243ed',runId:'39151817814',state:'signed',mint:'6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU',poolId:'DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ',signature:'bdwh8ZUbAa55gAWKok88CAX5jZusHFtGmkFsbwoccrz7jCPHLdXWub6QnVxChJqnDeB134o3PGb4UqrWv12rJ6F',messageHash:'403041c3371fd27e00524befb44ea465f0fde69597b27c3b460f15af69266d11'};
+function assertBuyAttemptHistory(ledger:Ledger){
+ const archived=ledger.attemptHistory?.[1],active=ledger.steps.buy;
+ if(!archived){if(active?.recoveryOfRunId)throw Error('RECOVERY_HISTORY_REQUIRED');return;}
+ if(archived.step!=='buy')throw Error('UNRECONCILED_BUY_ATTEMPT');
+ const original=archived.claim,proof=archived.proof;
+ if(!original||Object.keys(original).length!==8||Object.entries(RECOVERABLE_SIGNED_BUY_CLAIM).some(([key,value])=>original[key as keyof Claim]!==value))throw Error('UNRECONCILED_BUY_ATTEMPT');
+ if(!proof||proof.runUrl!==`https://github.com/${REPOSITORY}/actions/runs/${original.runId}`||proof.runStatus!=='completed'||proof.runConclusion!=='failure'||proof.runAttempt!==1||proof.errorCode!=='POST_SIGN_VALIDATION_FAILED_BEFORE_SUBMIT'||proof.fundedWalletSigned!==true||proof.broadcastAttempted!==false||proof.reviewedNoSubmitCodePath!==true||proof.originalSignedBytesPersisted!==false||proof.signatureStatus!==null||proof.walletBalanceLamports!==4979382960||!Number.isSafeInteger(proof.observedSlot)||proof.observedSlot<512518716||JSON.stringify(proof.stages)!==JSON.stringify(['awaiting_signature','signed-before-broadcast','failed','blocked'])||proof.ledgerBlobSha!=='d7700694d9f4f6a2d632ea481b57db62e8176a14'||!Number.isFinite(Date.parse(proof.reviewedAt))||!/^evidence\/[a-zA-Z0-9_-]+\.json$/.test(proof.evidencePath))throw Error('BUY_RECOVERY_PROOF_REQUIRED');
+ if(!active||active.recoveryOfRunId!==original.runId||active.nonce===original.nonce||active.runId===original.runId||active.sourceSha===original.sourceSha)throw Error('RECOVERY_MUST_USE_NEW_BOUND_CLAIM');
+ const launch=ledger.steps.launch;if(launch?.state!=='finalized'||launch.mint!==original.mint||launch.poolId!==original.poolId)throw Error('BUY_RECOVERY_LAUNCH_MISMATCH');
+ if(Object.values(ledger.steps).some(claim=>claim?.runId===original.runId||claim?.nonce===original.nonce||claim?.signature===original.signature))throw Error('ARCHIVED_ATTEMPT_REUSED');
+}
 function assertAttemptHistory(ledger:Ledger){
  const history=ledger.attemptHistory,active=ledger.steps.launch;
- if(!history){if(active?.recoveryOfRunId)throw Error('RECOVERY_HISTORY_REQUIRED');return;}
- if(!Array.isArray(history)||history.length!==1)throw Error('ONE_RECONCILED_RECOVERY_ONLY');
- const archived=history[0],original=archived?.claim,proof=archived?.proof;
+ if(!history){if(active?.recoveryOfRunId||ledger.steps.buy?.recoveryOfRunId)throw Error('RECOVERY_HISTORY_REQUIRED');return;}
+ if(!Array.isArray(history)||history.length<1||history.length>2)throw Error('ONE_RECONCILED_RECOVERY_ONLY');
+ if(history.length===2&&history[1]?.step!=='buy')throw Error('ONE_RECONCILED_RECOVERY_ONLY');
+ assertBuyAttemptHistory(ledger);
+ const archived=history[0];if(archived?.step!=='launch')throw Error('UNRECONCILED_PRIOR_ATTEMPT');const original=archived.claim,proof=archived.proof;
  if(archived?.step!=='launch'||!original||Object.keys(original).length!==4||Object.entries(RECOVERABLE_UNSIGNED_CLAIM).some(([key,value])=>original[key as keyof Claim]!==value))throw Error('UNRECONCILED_PRIOR_ATTEMPT');
  if(!proof||proof.runUrl!==`https://github.com/${REPOSITORY}/actions/runs/${original.runId}`||proof.runStatus!=='completed'||proof.runConclusion!=='failure'||proof.runAttempt!==1||proof.errorCode!=='LOOKUP_TABLE_NOT_ALLOWED'||proof.fundedWalletSigned!==false||proof.broadcastAttempted!==false||proof.ledgerBlobSha!=='82253a96d8c0abb419b27d98cd5bc3096b332161'||!Number.isFinite(Date.parse(proof.reviewedAt))||!/^evidence\/[a-zA-Z0-9_-]+\.json$/.test(proof.evidencePath))throw Error('RECOVERY_PROOF_REQUIRED');
  if(!active||active.recoveryOfRunId!==original.runId||active.nonce===original.nonce||active.runId===original.runId||active.sourceSha===original.sourceSha)throw Error('RECOVERY_MUST_USE_NEW_BOUND_CLAIM');
@@ -71,11 +88,22 @@ export async function verifySource(sourceSha:string){
 export async function transition(current:Awaited<ReturnType<typeof readLedger>>,id:Identity,from:Claim['state'],to:Claim['state'],fields:Partial<Claim>={}){
  const claim=assertClaim(current.ledger,id,from);
  if(!({claimed:'signing',signing:'signed',signed:'finalized'} as Record<string,string>)[from]||({claimed:'signing',signing:'signed',signed:'finalized'} as Record<string,string>)[from]!==to)throw Error('INVALID_TRANSITION');
- if(Object.keys(fields).some(k=>!['mint','poolId','signature','messageHash','slot'].includes(k))||(['signature','messageHash','mint','poolId'] as const).some(k=>claim[k]!==undefined&&fields[k]!==undefined&&fields[k]!==claim[k]))throw Error('IMMUTABLE_CLAIM');
+ if(Object.keys(fields).some(k=>!['mint','poolId','signature','messageHash','slot','validity'].includes(k))||(['signature','messageHash','mint','poolId'] as const).some(k=>claim[k]!==undefined&&Object.hasOwn(fields,k)&&fields[k]!==claim[k]))throw Error('IMMUTABLE_CLAIM');
+ if(Object.hasOwn(fields,'validity')&&(from!=='signing'||to!=='signed'||claim.validity||!fields.validity))throw Error('IMMUTABLE_VALIDITY');
  const next:Ledger={...current.ledger,steps:{...current.ledger.steps,[id.step]:{...claim,...fields,state:to}}};
  if(to==='signed'&&(!fields.signature||!fields.messageHash||!fields.mint||!fields.poolId))throw Error('SIGNED_EVIDENCE_REQUIRED');
  // One CAS attempt only. A timeout may mean the write landed: caller stops, never signs/rebroadcasts again.
  try{await api(`contents/${LEDGER_PATH}`,'PUT',{message:`Record devnet ${id.step} ${to} for run ${id.runId}`,branch:'main',sha:current.sha,content:Buffer.from(JSON.stringify(next,null,2)+'\n').toString('base64')});}
+ catch{await readLedger().catch(()=>null);throw Error('CAS_OUTCOME_REQUIRES_MANUAL_RECONCILIATION');}
+ const observed=await readLedger();if(JSON.stringify(observed.ledger)!==JSON.stringify(next))throw Error('LEDGER_READBACK_MISMATCH');return observed;
+}
+
+/** One append-only diagnosis; never changes signed identity, state or eligibility for execution. */
+export async function annotateSignedFailure(current:Awaited<ReturnType<typeof readLedger>>,id:Identity,failure:SignedFailure){
+ const claim=assertClaim(current.ledger,id,'signed');
+ if(claim.failure||!claim.validity||!['BLOCKHEIGHT_RPC_FAILED','BLOCKHEIGHT_INVALID_RESPONSE','BLOCKHASH_EXPIRED','QUOTE_EXPIRED','QUOTE_INVALID'].includes(failure.code)||failure.broadcastAttempted!==false||failure.validity.phase!=='after-sign'||failure.validity.blockhash!==claim.validity.blockhash||failure.validity.lastValidBlockHeight!==claim.validity.lastValidBlockHeight||failure.validity.expiresAt!==claim.validity.expiresAt)throw Error('INVALID_FAILURE_ANNOTATION');
+ const next:Ledger={...current.ledger,steps:{...current.ledger.steps,[id.step]:{...claim,failure}}};
+ try{await api(`contents/${LEDGER_PATH}`,'PUT',{message:`Record devnet ${id.step} post-sign diagnostic for run ${id.runId}`,branch:'main',sha:current.sha,content:Buffer.from(JSON.stringify(next,null,2)+'\n').toString('base64')});}
  catch{await readLedger().catch(()=>null);throw Error('CAS_OUTCOME_REQUIRES_MANUAL_RECONCILIATION');}
  const observed=await readLedger();if(JSON.stringify(observed.ledger)!==JSON.stringify(next))throw Error('LEDGER_READBACK_MISMATCH');return observed;
 }

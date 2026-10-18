@@ -38,7 +38,7 @@ Prepare remains read-only and secret-free; its optional public recovery hints ar
 
 ## Local verification
 
-26 unit tests across the existing two files passed, including mismatched identity/rerun rejection, already-consumed empty-signature slots, prior ordering, competing stale CAS, ambiguous CAS no retry, and signed-field immutability. TypeScript checking passed. These are local fixtures/mocks only. Actions token permissions, real RPC preparation, simulated debit ceilings and funded steps remain unexecuted until authorized dispatch and independent receipt verification.
+26 unit tests across the existing two files passed, including mismatched identity/rerun rejection, already-consumed empty-signature slots, prior ordering, competing stale CAS, ambiguous CAS no retry, and signed-field immutability. TypeScript checking passed. These are local fixtures/mocks only. The original run exercised Actions permissions and RPC preparation but stopped before signing; the ALT-patched launch subsequently finalized. The buy then stopped after durable signing and before submission. Each result remains separate; the new diagnostic/recovery patch below has not been dispatched.
 
 
 ## Sole explicit pre-sign recovery: run 39151038033
@@ -64,3 +64,29 @@ attemptHistory must be exactly one entry with step "launch", claim equal to the 
 The runner only validates/preserves this history. It never archives an attempt, writes a replacement claim, resets a slot, or retries a failed operation. A different failed run, second recovery, signed archived entry, missing proof/history, reused nonce/run, or unchanged source SHA is rejected. The same repository-writer trust boundary applies to parent-authored reconciliation evidence; the runner does not claim that a boolean alone proves no broadcast.
 
 Additional local tests cover ALT live/historical account identity, missing lookup tables or receipt addresses, exact recovery case restriction, rejected signed/duplicate history, and history preservation through forward CAS transitions. 26/26 tests and typecheck pass; this patch remains unexecuted against Actions/RPC.
+
+
+## Buy diagnostic patch and sole explicit signed-attempt recovery
+
+Run 39151817814 preserved a signed buy checkpoint, then emitted failed without submitted. Source 60431d61defb46eb026999a45a0c4155399243ed places that post-sign validation failure before sendRawTransaction. The exact inner error was suppressed. Logs show claim consumption 17:56:20.049Z, awaiting signature 17:56:24.138Z, signed checkpoint 17:56:25.776Z, and failure 17:56:25.838Z. This does not establish quote expiry: quote creation occurred less than 5.79 seconds before failure, against an unchanged 20-second TTL. RPC or blockheight errors remain possible. Never relabel this failed buy as acceptance PASS.
+
+The diagnostic patch introduces typed public failure codes BLOCKHEIGHT_RPC_FAILED, BLOCKHEIGHT_INVALID_RESPONSE, BLOCKHASH_EXPIRED, QUOTE_EXPIRED and QUOTE_INVALID. No raw RPC error is serialized. Before signing, public snapshots record blockhash, lastValidBlockHeight, reviewed expiresAt, check phase, timestamp, observed height and read-attempt count. The exact validity context is also immutable in the signed ledger checkpoint. An after-sign typed error may add one failure annotation through CAS without changing state=signed, signature/hash, validity, mint or pool. Annotation uncertainty stops without another write or transaction attempt.
+
+Only the durable wallet adapter opts into at most two extra readonly blockheight calls. Retryable cases are 429, timeout and specified network failures; invalid responses, actual expired height, expired/invalid quote and non-transient errors never retry. Each opted-in read is bounded to four seconds and the overall operation is bounded by the original quote expiry (or 20 seconds for operations without one). No quote is refreshed/extended and no signing/broadcast is retried. Existing non-opted-in adapters keep zero retries and their connection timeout. Independent ALT checks, ledger read, payer account and fee lookup are parallelized; context-bound simulation and the post-sign validity guard remain mandatory.
+
+Parent may review one specific buy recovery but the runner cannot perform it. Preserve the complete original signed buy claim verbatim as attemptHistory[1], after the original launch history. Its run is 39151817814; source is 60431d61defb46eb026999a45a0c4155399243ed; nonce is stonk-buy-20261018-175345; state remains signed. Preserve mint, poolId, signature bdwh8ZUbAa55gAWKok88CAX5jZusHFtGmkFsbwoccrz7jCPHLdXWub6QnVxChJqnDeB134o3PGb4UqrWv12rJ6F and messageHash 403041c3371fd27e00524befb44ea465f0fde69597b27c3b460f15af69266d11. Never discard these fields or treat a null chain status alone as permission to resubmit.
+
+The second entry has step buy, claim equal to that complete original eight-field object, and proof with:
+
+- runUrl: https://github.com/peterpeter228/stonklaunch/actions/runs/39151817814
+- runStatus completed, runConclusion failure, runAttempt 1
+- errorCode POST_SIGN_VALIDATION_FAILED_BEFORE_SUBMIT (not an invented nested cause)
+- fundedWalletSigned true, broadcastAttempted false, reviewedNoSubmitCodePath true, originalSignedBytesPersisted false
+- signatureStatus null, walletBalanceLamports 4979382960, observedSlot at least 512518716
+- stages exactly [awaiting_signature, signed-before-broadcast, failed, blocked]
+- ledgerBlobSha d7700694d9f4f6a2d632ea481b57db62e8176a14
+- reviewedAt actual ISO reconciliation time and evidencePath pointing to the parent's persisted evidence/<filename>.json
+
+Only after reviewing terminal logs, no-submit code path, original signature status, unchanged balance/history and absence of persisted signed bytes may parent explicitly CAS-archive this attempt and create a new active buy claim. The new claim requires recoveryOfRunId 39151817814 and a fresh nonce/source/run binding; the finalized launch must still match the archived mint/pool. This is not automatic recovery and does not create authorization by itself. Any other signed failure, missing signature/hash, changed archived claim, absent proof or third history entry is rejected. No ledger reset helper exists.
+
+Local tests: 29/29 pass, typecheck passes. Coverage includes typed no-submit post-sign failures, transient read bounds, no retries for expired/invalid results, immutable diagnostic annotation and the exact signed-buy archive requirements. No funded execution or ledger mutation was performed during this patch.
