@@ -39,12 +39,12 @@ export async function confirmByHttp(c:Connection,signature:string,timeoutMs=4500
  const deadline=Date.now()+timeoutMs;
  while(true){
   const observed=await c.getSignatureStatuses([signature],{searchTransactionHistory:true});const status=observed.value[0];
-  if(status?.err||status?.confirmationStatus==='confirmed'||status?.confirmationStatus==='finalized')return {value:{err:status.err}};
+  if(status?.confirmationStatus==='confirmed'||status?.confirmationStatus==='finalized')return {value:{err:status.err}};
   if(Date.now()>=deadline)throw Error('确认超时');
   await new Promise(resolve=>setTimeout(resolve,Math.min(pollMs,Math.max(0,deadline-Date.now()))));
  }
 }
-async function submit(tx: VersionedTransaction, wallet: SigningWallet, c: Connection, blockhash: string, lastValidBlockHeight: number, onStage: StageCallback,context:{cluster:string;kind:string}) { checkPending(wallet,context.cluster);if (!tx.message.staticAccountKeys[0].equals(wallet.publicKey))
+async function submit(tx: VersionedTransaction, wallet: SigningWallet, c: Connection, blockhash: string, lastValidBlockHeight: number, onStage: StageCallback,context:{cluster:string;kind:string;expiresAt?:string}) { checkPending(wallet,context.cluster);if (!tx.message.staticAccountKeys[0].equals(wallet.publicKey))
     throw Error('交易付款钱包与已连接钱包不一致'); if ((await c.getBlockHeight('confirmed')) > lastValidBlockHeight)
     throw Error('区块哈希已过期，请重新准备并审阅'); onStage('awaiting_signature'); const reviewedMessage = tx.message.serialize(); let signed: VersionedTransaction; try {
     signed = await wallet.signTransaction(tx);
@@ -54,23 +54,19 @@ catch (e) {
     throw e;
 } if (!(signed.message.serialize().length === reviewedMessage.length && signed.message.serialize().every((b, i) => b === reviewedMessage[i])))
     throw Error('签名返回的交易消息已改变'); if (!signed.signatures[0]?.some(b => b !== 0))
-    throw Error('钱包没有返回有效签名'); const signature = base58(signed.signatures[0]); const record = { ...context,wallet:wallet.publicKey.toBase58(),signature, blockhash, lastValidBlockHeight, state: 'submitted', at: new Date().toISOString() }; writeRecovery('transaction',record); onStage('submitted', signature); let broadcastAccepted=false; try {
+    throw Error('钱包没有返回有效签名'); try {
+    // Approval may take longer than the reviewed quote or blockhash lifetime.
+    if((await c.getBlockHeight('confirmed'))>lastValidBlockHeight)throw Error('区块哈希已过期，请重新准备并审阅');
+    if(context.expiresAt)validExpiry(context.expiresAt);
+} catch(e) { onStage('failed','签名后核验失败；未广播交易'); throw e; } checkPending(wallet,context.cluster); const signature = base58(signed.signatures[0]); const record = { ...context,wallet:wallet.publicKey.toBase58(),signature, blockhash, lastValidBlockHeight, state: 'submitted', at: new Date().toISOString() }; writeRecovery('transaction',record); onStage('submitted', signature); let broadcastAccepted=false; let result:Awaited<ReturnType<typeof confirmByHttp>>; try {
     await c.sendRawTransaction(signed.serialize(), { skipPreflight: false, maxRetries: 0 }); broadcastAccepted=true;
-    const result=await confirmByHttp(c,signature);
-    if (result.value.err) {
-        onStage('failed', signature);
-        writeRecovery('transaction',{ ...record, state: 'failed' });
-        throw Error('链上执行失败');
-    }
-    onStage('confirmed', signature);
-    writeRecovery('transaction',{ ...record, state: 'confirmed' });
-    return signature;
+    result=await confirmByHttp(c,signature);
 }
 catch (e) {
     if (!broadcastAccepted && e instanceof SendTransactionError && e.message.startsWith('Simulation failed.')) { writeRecovery('transaction',{...record,state:'failed'}); onStage('failed',signature); throw e; }
     const observed = await c.getSignatureStatuses([signature], { searchTransactionHistory: true }).catch(() => null);
     const status = observed?.value[0];
-    if (status?.err) {
+    if (status?.err && (status.confirmationStatus === 'confirmed' || status.confirmationStatus === 'finalized')) {
         writeRecovery('transaction',{...record,state:'failed'});onStage('failed', signature);
         throw e;
     }
@@ -80,11 +76,15 @@ catch (e) {
     }
     writeRecovery('transaction',{...record,state:'confirmation_unknown'});onStage('confirmation_unknown', signature);
     throw Error(`广播结果未知，请先查询原签名，不要重发：${signature}`);
-} }
+}
+// A terminal on-chain result must not be downgraded by a second RPC request.
+if(result.value.err){writeRecovery('transaction',{...record,state:'failed'});onStage('failed',signature);throw Error('链上执行失败');}
+writeRecovery('transaction',{...record,state:'confirmed'});onStage('confirmed',signature);return signature;
+}
 export async function signAndSubmitPlan(plan: TransactionPlan, wallet: SigningWallet, runtime: RuntimeConfig, c: Connection, onStage: StageCallback) { mode(runtime); c=boundedConnection(c); await verifyNetwork(c, runtime); if (plan.cluster !== runtime.cluster || !plan.transactionBase64 || !plan.blockhash || !plan.lastValidBlockHeight || plan.blockers.length)
     throw Error('交易计划无效或仍有阻塞'); if(plan.kind==='trade')validExpiry(plan.summary.expiresAt); const bytes = Uint8Array.from(atob(plan.transactionBase64), v => v.charCodeAt(0)); const tx = VersionedTransaction.deserialize(bytes); if (tx.message.recentBlockhash !== plan.blockhash)
-    throw Error('交易 blockhash 与摘要不符'); await assertPlanTransaction(tx,plan,wallet.publicKey,runtime,c); return submit(tx, wallet, c, plan.blockhash, plan.lastValidBlockHeight, onStage,{cluster:runtime.cluster,kind:plan.kind}); }
-export async function signAndSubmitLaunch(built: Awaited<ReturnType<typeof buildClientLaunch>>, wallet: SigningWallet, runtime: RuntimeConfig, c: Connection, onStage: StageCallback) { mode(runtime); c=boundedConnection(c); await verifyNetwork(c, runtime);validExpiry(built.expiresAt); const signatures: string[] = []; writeRecovery('launch',{cluster:runtime.cluster,wallet:wallet.publicKey.toBase58(),kind:'create-launch', mint: built.mint, poolId: built.poolId, signatures, completedTransactions: 0, totalTransactions: built.transactions.length }); for (let i = 0; i < built.transactions.length; i++) {
+    throw Error('交易 blockhash 与摘要不符'); await assertPlanTransaction(tx,plan,wallet.publicKey,runtime,c); return submit(tx, wallet, c, plan.blockhash, plan.lastValidBlockHeight, onStage,{cluster:runtime.cluster,kind:plan.kind,...(plan.kind==='trade'?{expiresAt:String(plan.summary.expiresAt)}:{})}); }
+export async function signAndSubmitLaunch(built: Awaited<ReturnType<typeof buildClientLaunch>>, wallet: SigningWallet, runtime: RuntimeConfig, c: Connection, onStage: StageCallback) { mode(runtime); c=boundedConnection(c); await verifyNetwork(c, runtime);validExpiry(built.expiresAt); checkPending(wallet,runtime.cluster); const signatures: string[] = []; writeRecovery('launch',{cluster:runtime.cluster,wallet:wallet.publicKey.toBase58(),kind:'create-launch', mint: built.mint, poolId: built.poolId, signatures, completedTransactions: 0, totalTransactions: built.transactions.length }); for (let i = 0; i < built.transactions.length; i++) {
     const tx = built.transactions[i];
     const latest = await c.getLatestBlockhash('confirmed');
     tx.message.recentBlockhash = latest.blockhash;
@@ -93,7 +93,7 @@ export async function signAndSubmitLaunch(built: Awaited<ReturnType<typeof build
     const simulation = await c.simulateTransaction(tx, { sigVerify: false, commitment: 'confirmed' });
     if (simulation.value.err)
         throw Error('创建交易模拟失败；未提交该交易');
-    const signature = await submit(tx, wallet, c, latest.blockhash, latest.lastValidBlockHeight, onStage,{cluster:runtime.cluster,kind:'create-launch'});
+    const signature = await submit(tx, wallet, c, latest.blockhash, latest.lastValidBlockHeight, onStage,{cluster:runtime.cluster,kind:'create-launch',expiresAt:built.expiresAt});
     signatures.push(signature);
     writeRecovery('launch',{cluster:runtime.cluster,wallet:wallet.publicKey.toBase58(),kind:'create-launch', mint: built.mint, poolId: built.poolId, signatures, completedTransactions: i + 1, totalTransactions: built.transactions.length });
 } return {cluster:runtime.cluster,wallet:wallet.publicKey.toBase58(),kind:'create-launch', mint: built.mint, poolId: built.poolId, signatures }; }

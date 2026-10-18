@@ -1,0 +1,9 @@
+PASS runtime demo mode, wallet disabled
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+PASS launches/prepare refuses real construction in DEMO
+PASS trades/quote refuses real construction in DEMO
+PASS trades/prepare refuses real construction in DEMO
+PASS fees/prepare-claim refuses real construction in DEMO
+PASS admin/platform/prepare refuses real construction in DEMO
+PASS readonly trade rejection
+PASS Actions GET disabled, OPTIONS available, POST mode rejection

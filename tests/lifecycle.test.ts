@@ -102,7 +102,68 @@ test('mint inspection separates demo, verified no-fee, bad owners and epoch roll
 });
 import {confirmByHttp} from '../src/lib/raydium/client-transactions';
 test('confirmation uses HTTP status without websocket subscriptions or rebroadcast',async()=>{
- let calls=0;const c={getSignatureStatuses:async()=>({value:[++calls===1?{err:null,confirmationStatus:'processed'}:{err:null,confirmationStatus:'confirmed'}]}),confirmTransaction:()=>{throw Error('Websocket confirmation forbidden in fixture');}} as unknown as Connection;
+ let calls=0;const c={getSignatureStatuses:async()=>({value:[++calls===1?{err:{InstructionError:[0,'InvalidArgument']},confirmationStatus:'processed'}:{err:null,confirmationStatus:'confirmed'}]}),confirmTransaction:()=>{throw Error('Websocket confirmation forbidden in fixture');}} as unknown as Connection;
  assert.deepEqual(await confirmByHttp(c,'fixture-only',100,0),{value:{err:null}});assert.equal(calls,2);
  await assert.rejects(confirmByHttp({getSignatureStatuses:async()=>({value:[null]})} as unknown as Connection,'fixture-only',0,0),/超时/);
+});
+
+import {signAndSubmitLaunch, type TransactionStage} from '../src/lib/raydium/client-transactions';
+test('post-sign expiry and pending checks prevent broadcast; definitive failure keeps its terminal state',async()=>{
+ const walletKey=SystemProgram.programId,pool=new PublicKey('So11111111111111111111111111111111111111112');
+ const data=Buffer.alloc(17);anchorDataBuf.updatePlaformConfig.copy(data);data[8]=3;data.writeBigUInt64LE(5000n,9);
+ const tx=new VersionedTransaction(new TransactionMessage({payerKey:walletKey,recentBlockhash:walletKey.toBase58(),instructions:[new TransactionInstruction({programId:LAUNCHPAD_PROGRAM,keys:[{pubkey:walletKey,isSigner:true,isWritable:true},{pubkey:pool,isSigner:false,isWritable:true}],data})]}).compileToV0Message());
+ const plan:TransactionPlan={kind:'update-platform',cluster:'mainnet-beta',transactionBase64:Buffer.from(tx.serialize()).toString('base64'),blockhash:walletKey.toBase58(),lastValidBlockHeight:100,requiresWalletSignature:true,blockers:[],summary:{platformId:pool.toBase58(),change:'updateFeeRate',value:'5000'}};
+ const runtime={mode:'mainnet-live',cluster:'mainnet-beta',walletEnabled:true,platformId:pool.toBase58()} as RuntimeConfig;
+ const records=new Map<string,string>(),oldStorage=Object.getOwnPropertyDescriptor(globalThis,'localStorage'),originalFetch=globalThis.fetch,originalNow=Date.now;
+ Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:(k:string)=>records.get(k)||null,setItem:(k:string,v:string)=>records.set(k,v)}});
+ let scenario='blockheight',heightCalls=0,sends=0,statusCalls=0;const stages:TransactionStage[]=[];
+ globalThis.fetch=async(_url,init)=>{const req=JSON.parse(String(init?.body));let result:unknown;
+  if(req.method==='getGenesisHash')result='5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d';
+  else if(req.method==='getBlockHeight')result=scenario==='blockheight'&&++heightCalls===2?101:1;
+  else if(req.method==='getLatestBlockhash')result={context:{slot:1},value:{blockhash:walletKey.toBase58(),lastValidBlockHeight:100}};
+  else if(req.method==='simulateTransaction')result={context:{slot:1},value:{err:null,logs:[]}};
+  else if(req.method==='sendTransaction'){sends++;if(scenario==='processed')throw Error('Ambiguous network outcome');result='fixture-only';}
+  else if(req.method==='getSignatureStatuses'){statusCalls++;if(statusCalls>1)throw Error('RPC unavailable after definitive failure');result={context:{slot:1},value:[{slot:1,confirmations:1,err:scenario==='confirmed'?null:{InstructionError:[0,'InvalidArgument']},confirmationStatus:scenario==='processed'?'processed':'confirmed'}]};}
+  else throw Error('Unexpected RPC in test: '+req.method);
+  return new Response(JSON.stringify({jsonrpc:'2.0',id:req.id,result}),{headers:{'content-type':'application/json'}});
+ };
+ const pending={cluster:runtime.cluster,wallet:walletKey.toBase58(),kind:'trade',state:'confirmation_unknown',signature:'original-signature'};
+ const wallet={publicKey:walletKey,signTransaction:async(t:VersionedTransaction)=>{t.signatures[0].fill(1);if(scenario==='pending')writeRecovery('transaction',pending);if(scenario==='quote-expiry')Date.now=()=>originalNow()+120000;return t;}};
+ // Every RPC is intercepted and signatures are synthetic; these tests never sign or send on-chain.
+ try{
+  const c=new Connection('https://invalid.test');const run=()=>signAndSubmitPlan(plan,wallet,runtime,c,s=>stages.push(s));
+  await assert.rejects(run,/区块哈希已过期/);assert.equal(sends,0);assert.equal(records.size,0);assert.equal(stages.at(-1),'failed');
+  scenario='pending';await assert.rejects(run,/原交易/);assert.equal(sends,0);assert.deepEqual(readRecovery('transaction',runtime.cluster,walletKey.toBase58()),pending);
+  const originalLaunch={cluster:runtime.cluster,wallet:walletKey.toBase58(),kind:'create-launch',mint:'original-mint',poolId:'original-pool'};writeRecovery('launch',originalLaunch);
+  await assert.rejects(()=>signAndSubmitLaunch({expiresAt:new Date(Date.now()+60000).toISOString(),transactions:[],signers:[],mint:'new-mint',poolId:'new-pool'},wallet,runtime,c,()=>{}),/原交易/);
+  assert.deepEqual(readRecovery('launch',runtime.cluster,walletKey.toBase58()),originalLaunch);assert.equal(sends,0);
+  scenario='quote-expiry';records.clear();stages.length=0;await assert.rejects(()=>signAndSubmitLaunch({expiresAt:new Date(originalNow()+60000).toISOString(),transactions:[tx],signers:[[]],mint:'fixture-mint',poolId:'fixture-pool'},wallet,runtime,c,s=>stages.push(s)),/计划已过期/);Date.now=originalNow;assert.equal(sends,0);assert.equal(readRecovery('transaction',runtime.cluster,walletKey.toBase58()),null);assert.equal(stages.at(-1),'failed');
+  scenario='confirmed';records.clear();stages.length=0;assert.equal(typeof await run(),'string');assert.equal(sends,1);assert.equal(statusCalls,1);assert.equal(readRecovery('transaction',runtime.cluster,walletKey.toBase58())?.state,'confirmed');assert.deepEqual(stages,['awaiting_signature','submitted','confirmed']);
+  sends=0;statusCalls=0;scenario='failed';records.clear();stages.length=0;await assert.rejects(run,/链上执行失败/);assert.equal(sends,1);assert.equal(statusCalls,1);assert.equal(readRecovery('transaction',runtime.cluster,walletKey.toBase58())?.state,'failed');assert.deepEqual(stages,['awaiting_signature','submitted','failed']);
+  scenario='processed';records.clear();stages.length=0;statusCalls=0;await assert.rejects(run,/未知/);assert.equal(readRecovery('transaction',runtime.cluster,walletKey.toBase58())?.state,'confirmation_unknown');assert.deepEqual(stages,['awaiting_signature','submitted','confirmation_unknown']);
+ }finally{Date.now=originalNow;globalThis.fetch=originalFetch;if(oldStorage)Object.defineProperty(globalThis,'localStorage',oldStorage);else Reflect.deleteProperty(globalThis,'localStorage');}
+});
+
+import {Raydium} from '@raydium-io/raydium-sdk-v2';
+import {observeTransaction} from '../src/lib/raydium/service';
+test('server observation never treats processed or legacy unconfirmed errors as terminal',async()=>{
+ const originalFetch=globalThis.fetch,originalLoad=Raydium.load,originalMode=process.env.APP_MODE;
+ let confirmationStatus:string|undefined='processed',err:unknown={InstructionError:[0,'InvalidArgument']};
+ process.env.APP_MODE='mainnet-readonly';Raydium.load=async()=>({} as Awaited<ReturnType<typeof Raydium.load>>);
+ globalThis.fetch=async(_url,init)=>{const req=JSON.parse(String(init?.body));let result:unknown;
+  if(req.method==='getGenesisHash')result='5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d';
+  else if(req.method==='getSignatureStatuses')result={context:{slot:1},value:[{slot:1,confirmations:null,err,...(confirmationStatus?{confirmationStatus}:{})}]};
+  else if(req.method==='getTransaction')result=null;
+  else throw Error('Unexpected RPC in fixture: '+req.method);
+  return new Response(JSON.stringify({jsonrpc:'2.0',id:req.id,result}),{headers:{'content-type':'application/json'}});
+ };
+ try{
+  const signature='1'.repeat(88);
+  assert.equal((await observeTransaction(signature)).state,'submitted');
+  confirmationStatus=undefined;assert.equal((await observeTransaction(signature)).state,'submitted');
+  confirmationStatus='confirmed';assert.equal((await observeTransaction(signature)).state,'failed');
+  confirmationStatus='finalized';assert.equal((await observeTransaction(signature)).state,'failed');
+  err=null;assert.equal((await observeTransaction(signature)).state,'finalized');
+  confirmationStatus='confirmed';assert.equal((await observeTransaction(signature)).state,'confirmed');
+ }finally{globalThis.fetch=originalFetch;Raydium.load=originalLoad;if(originalMode===undefined)delete process.env.APP_MODE;else process.env.APP_MODE=originalMode;}
 });

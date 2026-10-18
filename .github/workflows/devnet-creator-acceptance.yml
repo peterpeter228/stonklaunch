@@ -1,0 +1,61 @@
+name: Durable devnet creator acceptance
+run-name: creator-acceptance:${{ inputs.mode }}:${{ inputs.step }}
+on:
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: Prepare reads only. Execute is deliberately blocked pending durable ledger review.
+        type: choice
+        options: [prepare, execute]
+        default: prepare
+      step:
+        description: Fixed acceptance order, one execution attempt per step for this workflow.
+        type: choice
+        options: [launch, buy, sell, claim-creator]
+        default: launch
+      public_recovery_json:
+        description: Public JSON only, mint, poolId and signatures keyed by step. Never a keypair.
+        type: string
+        default: '{}'
+permissions:
+  contents: read
+concurrency:
+  group: durable-devnet-creator-acceptance
+  cancel-in-progress: false
+jobs:
+  acceptance:
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      RUN_MODE: ${{ inputs.mode }}
+      RUN_STEP: ${{ inputs.step }}
+      PUBLIC_RECOVERY_JSON: ${{ inputs.public_recovery_json }}
+    steps:
+      - name: Execution is blocked in this prepare-only release
+        if: inputs.mode == 'execute'
+        run: |
+          echo "BLOCKED: durable cross-run uniqueness ledger must be reviewed before enabling signing."
+          exit 1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install locked dependencies without wallet secret
+        run: |
+          npm install --global pnpm@11.25.0 --ignore-scripts
+          pnpm install --frozen-lockfile --ignore-scripts
+      - name: Prepare public acceptance evidence without a wallet secret
+        if: inputs.mode == 'prepare'
+        run: node --import tsx scripts/devnet-durable-runner.ts
+      - name: Upload only new public evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: durable-creator-${{ github.run_id }}-${{ github.run_attempt }}
+          path: evidence/durable-creator/**/*.json
+          if-no-files-found: ignore
+          retention-days: 90
+          include-hidden-files: false

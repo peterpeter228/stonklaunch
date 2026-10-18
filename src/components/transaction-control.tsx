@@ -129,7 +129,7 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
         const p = await currentWallet(wallet);
         const c = await connection();
         const helpers = await import('@/lib/raydium/client-transactions');
-        const onStage = (s: TransactionStage, detail?: string) => { if(currentEpoch!==epoch.current)return; if(s==='failed')pending.current=false; setStage(s === 'confirmed' ? 'submitted' : s); if (['submitted', 'confirmed', 'confirmation_unknown'].includes(s) && detail) {
+        const onStage = (s: TransactionStage, detail?: string) => { if(currentEpoch!==epoch.current)return; if(s==='failed')pending.current=false; if(s==='confirmed')setPlan(null); setStage(s); if (['submitted', 'confirmed', 'confirmation_unknown'].includes(s) && detail) {
             setSignature(detail);
             pending.current = s !== 'confirmed';
         } };
@@ -146,12 +146,17 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
             sig = await helpers.signAndSubmitPlan(plan, p, runtime, c, onStage);
         }
         if(currentEpoch!==epoch.current)return;setSignature(sig);
-        await api('/api/transactions/observe', { signature: sig });
-        if (draft) {
-            await api('/api/launches/' + mint.current!.publicKey.toBase58());
-        }
         setStage('confirmed');
         setPlan(null);
+        try {
+            await api('/api/transactions/observe', { signature: sig });
+            if (draft) await api('/api/launches/' + mint.current!.publicKey.toBase58());
+        } catch {
+            if(currentEpoch!==epoch.current)return;
+            setError('Transaction confirmed on-chain, but refreshed application data is unavailable. Do not submit it again. Use Explorer to inspect the receipt; pool binding and balances still need verification.');
+            return;
+        }
+        if(currentEpoch!==epoch.current)return;
         onConfirmed?.();
     }
     catch (e) {
@@ -166,6 +171,7 @@ export function TransactionControl({ draft, endpoint, input, onConfirmed }: {
         if (result.state === 'confirmed' || result.state === 'finalized') {
             pending.current = false;
             setStage('confirmed');
+            setPlan(null);
             setError('The original transaction is confirmed. Pool binding and balances must still be read before treating the economic operation as settled.');
             const saved = runtime&&wallet?readRecovery('transaction',runtime.cluster,wallet):null;
             if(saved)writeRecovery('transaction',{ ...saved, state: 'confirmed' });
