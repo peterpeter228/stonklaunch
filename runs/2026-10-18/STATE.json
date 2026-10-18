@@ -26,9 +26,9 @@
     "deployed": false,
     "runtime_url": "http://localhost:3010",
     "repository": "https://github.com/peterpeter228/stonklaunch",
-    "commit": "271cafd03d8d51da4dd1827b7809fb3ab8bfc00d",
+    "commit": "ba06d922ea2e43bca8e7843e7b72c8c37b4eb944",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
-    "commit_scope": "Prior verified remote checkpoint; new devnet evidence and HTTP confirmation fix pending next commit",
+    "commit_scope": "Verified source/evidence checkpoint before this continuity update; HTTP confirmation fix and durable wallet recovery already persisted.",
     "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment"
   },
   "evidence_scope": [
@@ -96,10 +96,11 @@
     },
     "GATE-2 FEE_HARDCODED": {
       "status": "BLOCKED",
-      "environment": "local unit/route tests; no own PlatformConfig or signed transactions",
+      "environment": "Devnet own PlatformConfig, buy/sell and platform fee claim verified; creator claim only unsigned simulation; production and full gate remain unverified.",
       "evidence": [
         "evidence/unit-final.txt",
-        "evidence/public-rpc-check.json"
+        "evidence/public-rpc-check.json",
+        "evidence/DEVNET_ACCEPTANCE_SUMMARY.md"
       ]
     },
     "GATE-3 ANTI_BORING_UI": {
@@ -177,7 +178,8 @@
     "external_publish_or_paid_services": "follow_existing_explicit_authorization_else_prepare_for_review",
     "secrets_included": false,
     "disposable_devnet_tests": "Explicitly approved Sentinel_7eb7253e0ad48191aaefdaa3b2ea6607; in-memory key only, free test SOL, no mainnet",
-    "dependency_registry_audit": "Same explicit approval; completed"
+    "dependency_registry_audit": "Same explicit approval; completed",
+    "durable_devnet_tests": "Specific approval Sentinel_33dc25551e008191a1d8892c377f154c: store fixed devnet key in repository Actions Secret and use Actions for free devnet tests; no mainnet or secret disclosure."
   },
   "retry_counts": {},
   "known_constraints": [
@@ -186,9 +188,10 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Preserve verified devnet receipts and source fix in private repository",
-    "Do not request additional manual faucet claims",
-    "Complete remaining acceptance only with appropriately authorized deployment/auth/signing configuration; never substitute simulation for execution"
+    "Continue bounded non-funded failure-path review and actual DEMO UI regression per Sentinel_46a58ef43c9481919e1c62325272645f",
+    "Await user faucet claim to the verified durable wallet; user estimates quota recovery around 2026-10-18T15:45:21Z, not verified provider reset",
+    "Run remaining creator claim only after funding and approved devnet-only workflow checks",
+    "Complete remaining deployment/auth/metadata and migration acceptance; never substitute simulation for execution"
   ],
   "last_completed_work": "Five finalized devnet transactions with49 receipt assertions;16tests/typecheck/build pass; HTTP confirmation replaces leaking WebSocket wait; public checkpoints added; creator claim only simulated, not broadcast.",
   "verified_checks": [
@@ -215,7 +218,7 @@
     "completed_short_review_count": 3
   },
   "remaining_blockers": [
-    "Real creator claim not completed; no funded restorable test signer; do not ask user to repeat faucet claims",
+    "Real creator claim not completed; durable signer recovery PASS, waiting for free devnet funding.",
     "Supabase project/Auth/storage not configured or deployed",
     "NonSOL assets not enabled; xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
@@ -238,6 +241,13 @@
     "receipt_assertions_passed": 49,
     "creator_claim": "unsigned_simulation_only",
     "ephemeral_wallets": "processes closed; no restorable signing keys",
-    "faucet": "user quota exhausted; user requested no further manual claims"
+    "faucet": "AWAITING_USER; QuickNode actual form rejected empty-mainnet wallet despite FAQ; do not fund real SOL. User will claim after official quota recovery.",
+    "durable_wallet": {
+      "public_key": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+      "recovery": "PASS",
+      "evidence": "evidence/DURABLE_DEVNET_WALLET.json",
+      "run_url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39108491594",
+      "funding": "AWAITING_USER"
+    }
   }
 }
