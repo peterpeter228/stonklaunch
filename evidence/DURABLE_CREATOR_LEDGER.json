@@ -5,10 +5,34 @@
   "platformId": "9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz",
   "steps": {
     "launch": {
-      "nonce": "stonk-launch-20261018-174350",
-      "sourceSha": "78f91071d443819c999fa0c92754993560ba67fd",
-      "runId": "39151038033",
-      "state": "signing"
+      "nonce": "stonk-launch-alt-20261018-175046",
+      "sourceSha": "60431d61defb46eb026999a45a0c4155399243ed",
+      "runId": null,
+      "state": "claimed",
+      "recoveryOfRunId": "39151038033"
     }
-  }
+  },
+  "attemptHistory": [
+    {
+      "step": "launch",
+      "claim": {
+        "nonce": "stonk-launch-20261018-174350",
+        "sourceSha": "78f91071d443819c999fa0c92754993560ba67fd",
+        "runId": "39151038033",
+        "state": "signing"
+      },
+      "proof": {
+        "runUrl": "https://github.com/peterpeter228/stonklaunch/actions/runs/39151038033",
+        "runStatus": "completed",
+        "runConclusion": "failure",
+        "runAttempt": 1,
+        "errorCode": "LOOKUP_TABLE_NOT_ALLOWED",
+        "fundedWalletSigned": false,
+        "broadcastAttempted": false,
+        "ledgerBlobSha": "82253a96d8c0abb419b27d98cd5bc3096b332161",
+        "reviewedAt": "2026-10-18T17:50:46Z",
+        "evidencePath": "evidence/DURABLE_LAUNCH_ATTEMPT_1.json"
+      }
+    }
+  ]
 }
