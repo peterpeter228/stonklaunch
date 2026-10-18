@@ -17,14 +17,11 @@
       "slot": 512517543
     },
     "buy": {
-      "nonce": "stonk-buy-20261018-175345",
-      "sourceSha": "60431d61defb46eb026999a45a0c4155399243ed",
-      "runId": "39151817814",
-      "state": "signed",
-      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
-      "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
-      "signature": "bdwh8ZUbAa55gAWKok88CAX5jZusHFtGmkFsbwoccrz7jCPHLdXWub6QnVxChJqnDeB134o3PGb4UqrWv12rJ6F",
-      "messageHash": "403041c3371fd27e00524befb44ea465f0fde69597b27c3b460f15af69266d11"
+      "nonce": "stonk-buy-diag-20261018-180649",
+      "sourceSha": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
+      "runId": null,
+      "state": "claimed",
+      "recoveryOfRunId": "39151817814"
     }
   },
   "attemptHistory": [
@@ -47,6 +44,42 @@
         "ledgerBlobSha": "82253a96d8c0abb419b27d98cd5bc3096b332161",
         "reviewedAt": "2026-10-18T17:50:46Z",
         "evidencePath": "evidence/DURABLE_LAUNCH_ATTEMPT_1.json"
+      }
+    },
+    {
+      "step": "buy",
+      "claim": {
+        "nonce": "stonk-buy-20261018-175345",
+        "sourceSha": "60431d61defb46eb026999a45a0c4155399243ed",
+        "runId": "39151817814",
+        "state": "signed",
+        "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+        "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
+        "signature": "bdwh8ZUbAa55gAWKok88CAX5jZusHFtGmkFsbwoccrz7jCPHLdXWub6QnVxChJqnDeB134o3PGb4UqrWv12rJ6F",
+        "messageHash": "403041c3371fd27e00524befb44ea465f0fde69597b27c3b460f15af69266d11"
+      },
+      "proof": {
+        "runUrl": "https://github.com/peterpeter228/stonklaunch/actions/runs/39151817814",
+        "runStatus": "completed",
+        "runConclusion": "failure",
+        "runAttempt": 1,
+        "errorCode": "POST_SIGN_VALIDATION_FAILED_BEFORE_SUBMIT",
+        "fundedWalletSigned": true,
+        "broadcastAttempted": false,
+        "reviewedNoSubmitCodePath": true,
+        "originalSignedBytesPersisted": false,
+        "signatureStatus": null,
+        "walletBalanceLamports": 4979382960,
+        "observedSlot": 512518716,
+        "stages": [
+          "awaiting_signature",
+          "signed-before-broadcast",
+          "failed",
+          "blocked"
+        ],
+        "ledgerBlobSha": "d7700694d9f4f6a2d632ea481b57db62e8176a14",
+        "reviewedAt": "2026-10-18T18:06:49Z",
+        "evidencePath": "evidence/DURABLE_BUY_ATTEMPT_1_RECONCILIATION.json"
       }
     }
   ]
