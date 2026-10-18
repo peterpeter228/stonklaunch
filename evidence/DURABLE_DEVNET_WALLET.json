@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "network": "devnet",
+  "publicKey": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+  "secretLocation": "GitHub Actions repository secret STONK_DEVNET_KEYPAIR_JSON",
+  "secretSavedAt": "2026-10-18T07:36:31Z",
+  "storageVerification": "GitHub UI confirmed Repository secret added and secret name present",
+  "actionsRecoveryVerification": "NOT_RUN",
+  "funding": "AWAITING_USER",
+  "restrictions": [
+    "Free devnet test SOL only",
+    "Never fund old ephemeral wallets",
+    "Never print private key or upload it as an artifact",
+    "Only expose secret to dedicated trusted devnet workflow steps"
+  ],
+  "retiredPublicKeys": [
+    "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
+    "B2yhMVcoJxBgV9w7esdtKzeHUfsxkrxrvEQrRoexGavC"
+  ]
+}
