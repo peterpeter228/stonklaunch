@@ -61,7 +61,7 @@
       "nonce": "stonk-creator-20261018-193300",
       "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
       "runId": "39159461927",
-      "state": "claimed"
+      "state": "signing"
     }
   },
   "attemptHistory": [
