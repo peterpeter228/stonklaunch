@@ -5,7 +5,7 @@
   "secretLocation": "GitHub Actions repository secret STONK_DEVNET_KEYPAIR_JSON",
   "secretSavedAt": "2026-10-18T07:36:31Z",
   "storageVerification": "GitHub UI confirmed Repository secret added and secret name present",
-  "actionsRecoveryVerification": "NOT_RUN",
+  "actionsRecoveryVerification": "PASS",
   "funding": "AWAITING_USER",
   "restrictions": [
     "Free devnet test SOL only",
@@ -16,5 +16,21 @@
   "retiredPublicKeys": [
     "DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2",
     "B2yhMVcoJxBgV9w7esdtKzeHUfsxkrxrvEQrRoexGavC"
-  ]
+  ],
+  "recoveryEvidence": {
+    "verifiedAt": "2026-10-18T07:39:44Z",
+    "workflowCommit": "e6268e1d40bf38213bb6d2dbc6ec286807e1cb4d",
+    "workflowPath": ".github/workflows/verify-devnet-wallet.yml",
+    "runId": 39108491594,
+    "runUrl": "https://github.com/peterpeter228/stonklaunch/actions/runs/39108491594",
+    "jobId": 117619389855,
+    "conclusion": "success",
+    "publicKeyDerivedFromSeed": true,
+    "keypairPublicSuffixMatches": true,
+    "fixedLocalChallengeSignatureVerified": true,
+    "transactionsSent": 0,
+    "rpcCalls": 0,
+    "secretPresentInLogs": false,
+    "method": "Built-in Node.js crypto Ed25519; no checkout, dependency install, or external actions"
+  }
 }
