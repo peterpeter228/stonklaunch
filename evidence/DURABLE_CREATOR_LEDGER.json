@@ -36,6 +36,12 @@
         "observedBlockHeight": 499753167
       },
       "slot": 512539878
+    },
+    "sell": {
+      "nonce": "stonk-sell-20261018-192335",
+      "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
+      "runId": null,
+      "state": "claimed"
     }
   },
   "attemptHistory": [
