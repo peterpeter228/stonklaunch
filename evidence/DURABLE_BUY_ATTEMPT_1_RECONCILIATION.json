@@ -1,0 +1,51 @@
+{
+  "observedAt": "2026-10-18T17:57:51.261Z",
+  "runId": "39151817814",
+  "signature": "bdwh8ZUbAa55gAWKok88CAX5jZusHFtGmkFsbwoccrz7jCPHLdXWub6QnVxChJqnDeB134o3PGb4UqrWv12rJ6F",
+  "messageHash": "403041c3371fd27e00524befb44ea465f0fde69597b27c3b460f15af69266d11",
+  "status": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512518718
+    },
+    "value": [
+      null
+    ]
+  },
+  "balance": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512518716
+    },
+    "value": 4979382960
+  },
+  "history": [
+    {
+      "blockTime": 1792345990,
+      "confirmationStatus": "finalized",
+      "err": null,
+      "memo": null,
+      "signature": "2Mt9qNp4ae64K65vG78HvYRTUBvNdbd8KNf17ydKetpaXNqxbM62ak4badP5nLgtGKc7oEqDkAXWj2A3JTN8FoyZ",
+      "slot": 512517543,
+      "transactionIndex": 3
+    },
+    {
+      "blockTime": 1792344852,
+      "confirmationStatus": "finalized",
+      "err": null,
+      "memo": null,
+      "signature": "34bZ48UNTSVB3LGgPqbcLUZQ88oLZ9AVoZuXStcxCKx7UKVu7iepuVPoeppWeMrSGDxDwcbL8VmxRDE556vNc7gq",
+      "slot": 512512779,
+      "transactionIndex": 4
+    }
+  ],
+  "artifactId": 12145487543,
+  "artifactStages": [
+    "awaiting_signature",
+    "signed-before-broadcast",
+    "failed",
+    "blocked"
+  ],
+  "failureCode": "VALIDATION_OR_TRANSACTION_FAILED",
+  "analysis": "After durable signature write, client-transactions.ts post-sign blockheight/quote validity check failed before submitted stage and sendRawTransaction. Exact nested error suppressed. Preserve signed claim; no retry or reset."
+}
