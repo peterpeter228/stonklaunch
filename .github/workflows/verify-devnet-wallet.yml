@@ -1,0 +1,69 @@
+name: Verify durable devnet wallet
+
+on:
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  verify-recovery:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 2
+    steps:
+      # No checkout, dependency install, third-party action, RPC or transaction.
+      # The secret is provided only to this local cryptographic verification step.
+      - name: Recover public key and verify local challenge
+        shell: bash
+        env:
+          STONK_DEVNET_KEYPAIR_JSON: ${{ secrets.STONK_DEVNET_KEYPAIR_JSON }}
+        run: |
+          node <<'NODE'
+          const crypto = require('node:crypto');
+          const expected = 'AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho';
+          const alphabet = '123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz';
+          function base58(bytes) {
+            let number = BigInt('0x' + bytes.toString('hex'));
+            let encoded = '';
+            while (number > 0n) {
+              encoded = alphabet[Number(number % 58n)] + encoded;
+              number /= 58n;
+            }
+            for (const byte of bytes) {
+              if (byte !== 0) break;
+              encoded = '1' + encoded;
+            }
+            return encoded;
+          }
+          let secret;
+          try {
+            const parsed = JSON.parse(process.env.STONK_DEVNET_KEYPAIR_JSON || 'null');
+            delete process.env.STONK_DEVNET_KEYPAIR_JSON;
+            if (!Array.isArray(parsed) || parsed.length !== 64 ||
+                !parsed.every(value => Number.isInteger(value) && value >= 0 && value <= 255)) {
+              throw new Error('invalid keypair');
+            }
+            secret = Buffer.from(parsed);
+            parsed.fill(0);
+            const privateKey = crypto.createPrivateKey({
+              key: Buffer.concat([Buffer.from('302e020100300506032b657004220420', 'hex'), secret.subarray(0, 32)]),
+              format: 'der', type: 'pkcs8'
+            });
+            const publicKey = crypto.createPublicKey(privateKey);
+            const publicBytes = publicKey.export({ format: 'der', type: 'spki' }).subarray(-32);
+            if (!crypto.timingSafeEqual(publicBytes, secret.subarray(32)) || base58(publicBytes) !== expected) {
+              throw new Error('public key mismatch');
+            }
+            const challenge = Buffer.from('StonkLaunch devnet wallet recovery verification only; not a transaction; v1', 'utf8');
+            const signature = crypto.sign(null, challenge, privateKey);
+            if (!crypto.verify(null, challenge, publicKey, signature)) throw new Error('signature verification failed');
+            console.log('PASS: GitHub Actions secret restores expected devnet public key: ' + expected);
+            console.log('PASS: Fixed local challenge signed and verified. No RPC calls or transactions.');
+          } catch {
+            // Never log exceptions, parsed input, private keys, or signatures.
+            console.error('FAIL: Wallet recovery verification failed. Secret missing, malformed, mismatched, or unusable.');
+            process.exitCode = 1;
+          } finally {
+            delete process.env.STONK_DEVNET_KEYPAIR_JSON;
+            if (secret) secret.fill(0);
+          }
+          NODE
