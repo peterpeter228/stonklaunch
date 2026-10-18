@@ -1,12 +1,12 @@
 /** Fixed, single acceptance sequence. Never invoke the legacy ephemeral session here. */
 import {mkdirSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
-import {Connection, PublicKey, Keypair, VersionedTransaction, ComputeBudgetProgram} from '@solana/web3.js';
+import {Connection, PublicKey, Keypair, VersionedTransaction, ComputeBudgetProgram, type LoadedAddresses} from '@solana/web3.js';
 import {anchorDataBuf, DEV_LAUNCHPAD_PROGRAM, getPdaCreatorVault} from '@raydium-io/raydium-sdk-v2';
 import {getAssociatedTokenAddressSync} from '@solana/spl-token';
 import {getRuntime} from '../src/lib/runtime';
 import {buildClientLaunch, signAndSubmitLaunch, signAndSubmitPlan} from '../src/lib/raydium/client-transactions';
-import {WALLET, PLATFORM, STEPS, assertClaim, readLedger, transition, verifySource, messageHash, publicSignature, type Identity, type Step, type Claim} from './devnet-claim';
+import {WALLET, PLATFORM, STEPS, assertClaim, readLedger, transition, verifySource, messageHash, publicSignature, resolveAcceptanceKeys, type Identity, type Step, type Claim} from './devnet-claim';
 import {readPlatform, sdk, WSOL} from '../src/lib/raydium/chain';
 import {getVerifiedLaunch, readFees, prepareLaunch, prepareTrade, prepareFeeClaim} from '../src/lib/raydium/service';
 
@@ -37,20 +37,19 @@ async function configure(){
  const configs=await (await sdk()).api.fetchLaunchConfigs();const sol=configs.find(x=>x.key.mintB===WSOL);if(!sol)throw Error('SOL_CONFIG_MISSING');process.env.LAUNCHLAB_SOL_CONFIG_ID=sol.key.pubKey;
 }
 function identity():Identity{return {repository:process.env.GITHUB_REPOSITORY||'',ref:process.env.GITHUB_REF||'',runId,attempt,sourceSha:process.env.SOURCE_SHA||'',nonce:process.env.CLAIM_NONCE||'',step:step as Step};}
-function assertInstruction(tx:VersionedTransaction,name:Step,mint:string,poolId:string){
- // This fixed acceptance never uses address lookup tables or a graduated CPMM route.
- if(tx.message.addressTableLookups.length)throw Error('LOOKUP_TABLE_NOT_ALLOWED');
- const keys=tx.message.staticAccountKeys;
- if(!keys[0].equals(new PublicKey(WALLET)))throw Error('PAYER_MISMATCH');
- const instructions=tx.message.compiledInstructions.filter(ix=>keys[ix.programIdIndex].equals(DEV_LAUNCHPAD_PROGRAM));
+async function assertInstruction(tx:VersionedTransaction,name:Step,mint:string,poolId:string,receiptAddresses?:LoadedAddresses|null){
+ // Resolve every loaded account before checking the same fixed instruction and account policy.
+ const keys=await resolveAcceptanceKeys(tx,c,receiptAddresses);
+ if(!keys.get(0)!.equals(new PublicKey(WALLET)))throw Error('PAYER_MISMATCH');
+ const instructions=tx.message.compiledInstructions.filter(ix=>keys.get(ix.programIdIndex)!.equals(DEV_LAUNCHPAD_PROGRAM));
  if(instructions.length!==1)throw Error('EXPECTED_ONE_PROTOCOL_INSTRUCTION');
- const ix=instructions[0],accounts=Array.from(ix.accountKeyIndexes,i=>keys[i].toBase58());
+ const ix=instructions[0],accounts=Array.from(ix.accountKeyIndexes,i=>keys.get(i)!.toBase58());
  const prefix=name==='launch'?anchorDataBuf.initializeV2:name==='buy'?anchorDataBuf.buyExactIn:name==='sell'?anchorDataBuf.sellExactIn:anchorDataBuf.claimCreatorFee;
  if(!prefix.every((b,i)=>ix.data[i]===b)||accounts[0]!==WALLET)throw Error('STEP_INSTRUCTION_MISMATCH');
  if(name==='claim-creator'&&(ix.data.length!==8||accounts[2]!==getPdaCreatorVault(DEV_LAUNCHPAD_PROGRAM,new PublicKey(WALLET),new PublicKey(WSOL)).publicKey.toBase58()||accounts[3]!==getAssociatedTokenAddressSync(new PublicKey(WSOL),new PublicKey(WALLET)).toBase58()||accounts[4]!==WSOL))throw Error('CREATOR_CLAIM_ACCOUNTS_MISMATCH');
  if(name==='launch'){
   if(accounts[1]!==WALLET||accounts[3]!==PLATFORM||accounts[5]!==poolId||accounts[6]!==mint||accounts[7]!==WSOL)throw Error('LAUNCH_ACCOUNTS_MISMATCH');
-  for(const extra of tx.message.compiledInstructions){const program=keys[extra.programIdIndex];if(!program.equals(DEV_LAUNCHPAD_PROGRAM)&&!program.equals(ComputeBudgetProgram.programId))throw Error('UNEXPECTED_CREATE_INSTRUCTION');if(program.equals(ComputeBudgetProgram.programId)&&extra.data[0]===3&&(extra.data.length!==9||Buffer.from(extra.data).readBigUInt64LE(1)!==0n))throw Error('PRIORITY_FEE_NOT_ALLOWED');}
+  for(const extra of tx.message.compiledInstructions){const program=keys.get(extra.programIdIndex)!;if(!program.equals(DEV_LAUNCHPAD_PROGRAM)&&!program.equals(ComputeBudgetProgram.programId))throw Error('UNEXPECTED_CREATE_INSTRUCTION');if(program.equals(ComputeBudgetProgram.programId)&&extra.data[0]===3&&(extra.data.length!==9||Buffer.from(extra.data).readBigUInt64LE(1)!==0n))throw Error('PRIORITY_FEE_NOT_ALLOWED');}
  }else if(name==='buy'||name==='sell'){
   if(accounts[4]!==poolId||accounts[9]!==mint||accounts[10]!==WSOL||ix.data.length!==32||Buffer.from(ix.data).readBigUInt64LE(24)!==0n)throw Error('TRADE_ACCOUNTS_MISMATCH');
   if(name==='buy'&&Buffer.from(ix.data).readBigUInt64LE(8)!==10000000n)throw Error('BUY_AMOUNT_MISMATCH');
@@ -61,7 +60,7 @@ async function finalizedReceipt(name:Step,claim:Claim){
  const status=(await c.getSignatureStatuses([claim.signature],{searchTransactionHistory:true})).value[0];
  const tx=await c.getTransaction(claim.signature,{commitment:'finalized',maxSupportedTransactionVersion:0});
  if(!status||status.err||status.confirmationStatus!=='finalized'||!tx||!tx.meta||tx.meta.err||messageHash(tx.transaction.message.serialize())!==claim.messageHash)throw Error('RECEIPT_NOT_FINALIZED_OR_MISMATCH');
- const parsed=new VersionedTransaction(tx.transaction.message);assertInstruction(parsed,name,claim.mint,claim.poolId);
+ const parsed=new VersionedTransaction(tx.transaction.message);await assertInstruction(parsed,name,claim.mint,claim.poolId,tx.meta.loadedAddresses??null);
  return {step:name,signature:claim.signature,slot:tx.slot,transaction:tx};
 }
 async function executeClaim(gateOnly:boolean){
@@ -100,7 +99,7 @@ async function executeClaim(gateOnly:boolean){
  let signedOnce=false;
  const signingWallet={publicKey:wallet.publicKey,signTransaction:async(tx:VersionedTransaction)=>{
   if(signedOnce||!mint||!poolId)throw Error('ONE_SIGNATURE_ONLY');signedOnce=true;
-  assertInstruction(tx,id.step,mint,poolId);
+  await assertInstruction(tx,id.step,mint,poolId);
   const fresh=await readLedger();assertClaim(fresh.ledger,id,'signing');
   const before=await c.getAccountInfoAndContext(wallet.publicKey,'confirmed');if(!before.value)throw Error('PAYER_ACCOUNT_MISSING');
   const simulation=await c.simulateTransaction(tx,{sigVerify:false,commitment:'confirmed',minContextSlot:before.context.slot,accounts:{encoding:'base64',addresses:[WALLET]}});
@@ -170,5 +169,5 @@ async function main(){
 
 }
 // Explicit allowlist only: never print arbitrary SDK/RPC exceptions or raw secret-bearing input.
-const SAFE_ERRORS=new Set(['UNTRUSTED_EXECUTION','LEDGER_IDENTITY','CLAIM_NOT_OWNED','CLAIM_ALREADY_CONSUMED','PRIOR_FINALIZED_REQUIRED','OUT_OF_ORDER_CLAIM','TOKEN_REQUIRED','LEDGER_API_FAILED','WORKFLOW_IDENTITY','WORKFLOW_SOURCE_MISMATCH','CHECKOUT_SOURCE_MISMATCH','CAS_OUTCOME_REQUIRES_MANUAL_RECONCILIATION','LEDGER_READBACK_MISMATCH','UNEXPECTED_PENDING_CLAIM','NETWORK_MISMATCH','PLATFORM_MISMATCH','SOL_CONFIG_MISSING','EXECUTION_RECOVERY_MUST_USE_LEDGER','PRIOR_IDENTITY_MISMATCH','RECEIPT_NOT_FINALIZED_OR_MISMATCH','LAUNCH_READBACK_MISMATCH','INSUFFICIENT_FREE_DEVNET_FUNDS','INVALID_SECRET_FORMAT','RECOVERED_WALLET_MISMATCH','ONE_SIGNATURE_ONLY','SIMULATION_OR_DEBIT_CAP','ONLY_LAUNCHLAB_ACCEPTANCE','FINALIZATION_UNKNOWN_RECONCILE_ORIGINAL','FINAL_LAUNCH_MISMATCH','LOOKUP_TABLE_NOT_ALLOWED','EXPECTED_ONE_PROTOCOL_INSTRUCTION','STEP_INSTRUCTION_MISMATCH','LAUNCH_ACCOUNTS_MISMATCH','TRADE_ACCOUNTS_MISMATCH','CREATOR_CLAIM_ACCOUNTS_MISMATCH','UNEXPECTED_CREATE_INSTRUCTION','PRIORITY_FEE_NOT_ALLOWED']);
+const SAFE_ERRORS=new Set(['UNTRUSTED_EXECUTION','LEDGER_IDENTITY','CLAIM_NOT_OWNED','CLAIM_ALREADY_CONSUMED','PRIOR_FINALIZED_REQUIRED','OUT_OF_ORDER_CLAIM','TOKEN_REQUIRED','LEDGER_API_FAILED','WORKFLOW_IDENTITY','WORKFLOW_SOURCE_MISMATCH','CHECKOUT_SOURCE_MISMATCH','CAS_OUTCOME_REQUIRES_MANUAL_RECONCILIATION','LEDGER_READBACK_MISMATCH','UNEXPECTED_PENDING_CLAIM','NETWORK_MISMATCH','PLATFORM_MISMATCH','SOL_CONFIG_MISSING','EXECUTION_RECOVERY_MUST_USE_LEDGER','PRIOR_IDENTITY_MISMATCH','RECEIPT_NOT_FINALIZED_OR_MISMATCH','LAUNCH_READBACK_MISMATCH','INSUFFICIENT_FREE_DEVNET_FUNDS','INVALID_SECRET_FORMAT','RECOVERED_WALLET_MISMATCH','ONE_SIGNATURE_ONLY','SIMULATION_OR_DEBIT_CAP','ONLY_LAUNCHLAB_ACCEPTANCE','FINALIZATION_UNKNOWN_RECONCILE_ORIGINAL','FINAL_LAUNCH_MISMATCH','LOOKUP_TABLE_NOT_ALLOWED','LOOKUP_TABLE_UNAVAILABLE','TOO_MANY_LOOKUP_TABLES','RECEIPT_LOADED_ADDRESSES_REQUIRED','RECOVERY_HISTORY_REQUIRED','ONE_RECONCILED_RECOVERY_ONLY','UNRECONCILED_PRIOR_ATTEMPT','RECOVERY_PROOF_REQUIRED','RECOVERY_MUST_USE_NEW_BOUND_CLAIM','ARCHIVED_ATTEMPT_REUSED','EXPECTED_ONE_PROTOCOL_INSTRUCTION','STEP_INSTRUCTION_MISMATCH','LAUNCH_ACCOUNTS_MISMATCH','TRADE_ACCOUNTS_MISMATCH','CREATOR_CLAIM_ACCOUNTS_MISMATCH','UNEXPECTED_CREATE_INSTRUCTION','PRIORITY_FEE_NOT_ALLOWED']);
 main().catch((error:unknown)=>{delete process.env.STONK_DEVNET_KEYPAIR_JSON;const code=error instanceof Error&&SAFE_ERRORS.has(error.message)?error.message:'VALIDATION_OR_TRANSACTION_FAILED';if(outputDirectory)try{record('blocked',{code,notice:'Stopped safely. Inspect public snapshots and original signature; never blindly rerun execution.'});}catch{console.error('PUBLIC_CHECKPOINT_WRITE_FAILED');}console.error(`BLOCKED: ${code}; no automatic retry.`);process.exitCode=1;});

@@ -210,3 +210,36 @@ test('durable signed checkpoint cannot be replaced or moved back to a signable s
  for(const fields of [{mint:PLATFORM},{poolId:WALLET},{messageHash:'replacement'}])await assert.rejects(()=>transition({sha:'x',ledger},id,'signed','finalized',fields),/IMMUTABLE_CLAIM/);
  await assert.rejects(()=>transition({sha:'x',ledger},id,'signed','claimed'),/INVALID_TRANSITION/);
 });
+
+import {AddressLookupTableAccount} from '@solana/web3.js';
+import {resolveAcceptanceKeys, RECOVERABLE_UNSIGNED_CLAIM, type UnsignedAttemptHistory} from '../scripts/devnet-claim';
+test('bounded ALT resolution gives identical live and historical receipt account identities',async()=>{
+ const payer=new PublicKey(WALLET),loaded=new PublicKey(PLATFORM),tableKey=new PublicKey(new Uint8Array(32).fill(7));
+ const table=new AddressLookupTableAccount({key:tableKey,state:{deactivationSlot:18446744073709551615n,lastExtendedSlot:1,lastExtendedSlotStartIndex:0,addresses:[loaded]}});
+ const ix=new TransactionInstruction({programId:SystemProgram.programId,keys:[{pubkey:payer,isSigner:true,isWritable:true},{pubkey:loaded,isSigner:false,isWritable:true}],data:Buffer.alloc(4)});
+ const tx=new VersionedTransaction(new TransactionMessage({payerKey:payer,recentBlockhash:SystemProgram.programId.toBase58(),instructions:[ix]}).compileToV0Message([table]));
+ assert.equal(tx.message.addressTableLookups.length,1);let reads=0;
+ const connection={getAddressLookupTable:async()=>{reads++;return {value:table};}} as unknown as Connection;
+ const live=await resolveAcceptanceKeys(tx,connection);const index=tx.message.compiledInstructions[0].accountKeyIndexes[1];assert.equal(live.get(index)?.toBase58(),PLATFORM);
+ const historical=await resolveAcceptanceKeys(tx,connection,{writable:[loaded],readonly:[]});assert.equal(historical.get(index)?.toBase58(),PLATFORM);assert.equal(reads,1,'receipt must not refetch lookup tables');
+ await assert.rejects(()=>resolveAcceptanceKeys(tx,connection,null),/RECEIPT_LOADED_ADDRESSES_REQUIRED/);
+ await assert.rejects(()=>resolveAcceptanceKeys(tx,{getAddressLookupTable:async()=>({value:null})} as unknown as Connection),/LOOKUP_TABLE_UNAVAILABLE/);
+ await assert.rejects(()=>resolveAcceptanceKeys(tx,connection,{writable:[],readonly:[]}));
+});
+const recoveryHistory=():UnsignedAttemptHistory=>({step:'launch',claim:{...RECOVERABLE_UNSIGNED_CLAIM},proof:{runUrl:'https://github.com/peterpeter228/stonklaunch/actions/runs/39151038033',runStatus:'completed',runConclusion:'failure',runAttempt:1,errorCode:'LOOKUP_TABLE_NOT_ALLOWED',fundedWalletSigned:false,broadcastAttempted:false,ledgerBlobSha:'82253a96d8c0abb419b27d98cd5bc3096b332161',reviewedAt:'2026-10-18T17:46:00Z',evidencePath:'evidence/DURABLE_LAUNCH_PRESIGN_FAILURE.json'}});
+test('only the exact terminal pre-sign ALT failure can be preserved for one manually created replacement claim',()=>{
+ const {id,ledger}=claimedFixture();ledger.attemptHistory=[recoveryHistory()];ledger.steps.launch!.recoveryOfRunId=RECOVERABLE_UNSIGNED_CLAIM.runId!;assert.equal(assertClaim(ledger,id).state,'claimed');
+ const missing=structuredClone(ledger);delete missing.attemptHistory;assert.throws(()=>assertClaim(missing,id),/RECOVERY_HISTORY_REQUIRED/);
+ const twice=structuredClone(ledger);twice.attemptHistory!.push(recoveryHistory());assert.throws(()=>assertClaim(twice,id),/ONE_RECONCILED_RECOVERY_ONLY/);
+ const signed=structuredClone(ledger);signed.attemptHistory![0].claim.signature='any-public-signature';assert.throws(()=>assertClaim(signed,id),/UNRECONCILED_PRIOR_ATTEMPT/);
+ const wrongRun=structuredClone(ledger);wrongRun.attemptHistory![0].claim.runId='999';assert.throws(()=>assertClaim(wrongRun,id),/UNRECONCILED_PRIOR_ATTEMPT/);
+ const noProof=structuredClone(ledger);noProof.attemptHistory![0].proof.broadcastAttempted=true as false;assert.throws(()=>assertClaim(noProof,id),/RECOVERY_PROOF_REQUIRED/);
+ const old=structuredClone(ledger);old.steps.launch!.runId=RECOVERABLE_UNSIGNED_CLAIM.runId;assert.throws(()=>assertClaim(old,{...id,runId:RECOVERABLE_UNSIGNED_CLAIM.runId!}),/RECOVERY_MUST_USE_NEW_BOUND_CLAIM/);
+});
+test('forward claim transition preserves archived unsigned attempt and its proof without mutation',async()=>{
+ const {id,ledger}=claimedFixture();ledger.attemptHistory=[recoveryHistory()];ledger.steps.launch!.recoveryOfRunId=RECOVERABLE_UNSIGNED_CLAIM.runId!;
+ const original=JSON.stringify(ledger.attemptHistory),originalFetch=globalThis.fetch,token=process.env.GH_TOKEN;process.env.GH_TOKEN='test-only-not-a-credential';let server=ledger;
+ globalThis.fetch=(async(_url,init)=>{if(init?.method==='PUT'){const body=JSON.parse(String(init.body));server=JSON.parse(Buffer.from(body.content,'base64').toString());return new Response('{}');}return new Response(JSON.stringify({sha:'new',encoding:'base64',content:Buffer.from(JSON.stringify(server)).toString('base64')}));}) as typeof fetch;
+ try{const result=await transition({sha:'old',ledger},id,'claimed','signing');assert.equal(JSON.stringify(result.ledger.attemptHistory),original);assert.equal(result.ledger.steps.launch!.state,'signing');}
+ finally{globalThis.fetch=originalFetch;if(token===undefined)delete process.env.GH_TOKEN;else process.env.GH_TOKEN=token;}
+});

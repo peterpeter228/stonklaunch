@@ -1,5 +1,6 @@
 /** Public, fixed four-step acceptance ledger. Never reset a consumed slot. */
 import {createHash} from 'node:crypto';
+import type {Connection, LoadedAddresses, VersionedTransaction} from '@solana/web3.js';
 export const WALLET='AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho';
 export const PLATFORM='9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz';
 export const REPOSITORY='peterpeter228/stonklaunch';
@@ -8,13 +9,42 @@ export const LEDGER_PATH='evidence/DURABLE_CREATOR_LEDGER.json';
 export const WORKFLOW_PATH='.github/workflows/devnet-creator-acceptance.yml';
 export const STEPS=['launch','buy','sell','claim-creator'] as const;
 export type Step=typeof STEPS[number];
-export type Claim={nonce:string;sourceSha:string;runId:string|null;state:'claimed'|'signing'|'signed'|'finalized';mint?:string;poolId?:string;signature?:string;messageHash?:string;slot?:number};
-export type Ledger={schemaVersion:1;network:'devnet';wallet:string;platformId:string;steps:Partial<Record<Step,Claim>>};
+export type Claim={nonce:string;sourceSha:string;runId:string|null;state:'claimed'|'signing'|'signed'|'finalized';mint?:string;poolId?:string;signature?:string;messageHash?:string;slot?:number;recoveryOfRunId?:string};
+export type UnsignedAttemptHistory={step:'launch';claim:Claim;proof:{runUrl:string;runStatus:'completed';runConclusion:'failure';runAttempt:1;errorCode:'LOOKUP_TABLE_NOT_ALLOWED';fundedWalletSigned:false;broadcastAttempted:false;ledgerBlobSha:string;reviewedAt:string;evidencePath:string}};
+export type Ledger={schemaVersion:1;network:'devnet';wallet:string;platformId:string;steps:Partial<Record<Step,Claim>>;attemptHistory?:UnsignedAttemptHistory[]};
+// Exactly one independently reconciled pre-sign failure, not a general reset mechanism.
+export const RECOVERABLE_UNSIGNED_CLAIM:Claim={nonce:'stonk-launch-20261018-174350',sourceSha:'78f91071d443819c999fa0c92754993560ba67fd',runId:'39151038033',state:'signing'};
+function assertAttemptHistory(ledger:Ledger){
+ const history=ledger.attemptHistory,active=ledger.steps.launch;
+ if(!history){if(active?.recoveryOfRunId)throw Error('RECOVERY_HISTORY_REQUIRED');return;}
+ if(!Array.isArray(history)||history.length!==1)throw Error('ONE_RECONCILED_RECOVERY_ONLY');
+ const archived=history[0],original=archived?.claim,proof=archived?.proof;
+ if(archived?.step!=='launch'||!original||Object.keys(original).length!==4||Object.entries(RECOVERABLE_UNSIGNED_CLAIM).some(([key,value])=>original[key as keyof Claim]!==value))throw Error('UNRECONCILED_PRIOR_ATTEMPT');
+ if(!proof||proof.runUrl!==`https://github.com/${REPOSITORY}/actions/runs/${original.runId}`||proof.runStatus!=='completed'||proof.runConclusion!=='failure'||proof.runAttempt!==1||proof.errorCode!=='LOOKUP_TABLE_NOT_ALLOWED'||proof.fundedWalletSigned!==false||proof.broadcastAttempted!==false||proof.ledgerBlobSha!=='82253a96d8c0abb419b27d98cd5bc3096b332161'||!Number.isFinite(Date.parse(proof.reviewedAt))||!/^evidence\/[a-zA-Z0-9_-]+\.json$/.test(proof.evidencePath))throw Error('RECOVERY_PROOF_REQUIRED');
+ if(!active||active.recoveryOfRunId!==original.runId||active.nonce===original.nonce||active.runId===original.runId||active.sourceSha===original.sourceSha)throw Error('RECOVERY_MUST_USE_NEW_BOUND_CLAIM');
+ if(Object.values(ledger.steps).some(claim=>claim?.runId===original.runId||claim?.nonce===original.nonce))throw Error('ARCHIVED_ATTEMPT_REUSED');
+}
+/** Live checks resolve bounded ALT accounts; receipts must use historical loaded addresses, never current ALT contents. */
+export async function resolveAcceptanceKeys(tx:VersionedTransaction,connection:Connection,receiptAddresses?:LoadedAddresses|null){
+ if(tx.message.addressTableLookups.length>8)throw Error('TOO_MANY_LOOKUP_TABLES');
+ let keys;
+ if(receiptAddresses!==undefined){
+  if(tx.message.addressTableLookups.length&&!receiptAddresses)throw Error('RECEIPT_LOADED_ADDRESSES_REQUIRED');
+  keys=tx.message.getAccountKeys({accountKeysFromLookups:receiptAddresses||{writable:[],readonly:[]}});
+ }else{
+  const tables=await Promise.all(tx.message.addressTableLookups.map(async lookup=>{const table=await connection.getAddressLookupTable(lookup.accountKey);if(!table.value||!table.value.key.equals(lookup.accountKey))throw Error('LOOKUP_TABLE_UNAVAILABLE');return table.value;}));
+  keys=tx.message.getAccountKeys({addressLookupTableAccounts:tables});
+ }
+ if(keys.length>256)throw Error('TOO_MANY_TRANSACTION_ACCOUNTS');
+ for(const ix of tx.message.compiledInstructions){if(!keys.get(ix.programIdIndex)||Array.from(ix.accountKeyIndexes).some(index=>!keys.get(index)))throw Error('UNRESOLVED_INSTRUCTION_ACCOUNT');}
+ return keys;
+}
 export type Identity={repository:string;ref:string;runId:string;attempt:string;sourceSha:string;nonce:string;step:Step};
 const sha=/^[a-f0-9]{40}$/;
 export function assertClaim(ledger:Ledger,id:Identity,state:Claim['state']='claimed'){
  if(id.repository!==REPOSITORY||id.ref!==REF||id.attempt!=='1'||!/^\d+$/.test(id.runId)||!sha.test(id.sourceSha)||! /^[a-zA-Z0-9_-]{16,80}$/.test(id.nonce)||!STEPS.includes(id.step))throw Error('UNTRUSTED_EXECUTION');
  if(ledger.schemaVersion!==1||ledger.network!=='devnet'||ledger.wallet!==WALLET||ledger.platformId!==PLATFORM||!ledger.steps||Object.keys(ledger.steps).some(k=>!STEPS.includes(k as Step)))throw Error('LEDGER_IDENTITY');
+ assertAttemptHistory(ledger);
  const claim=ledger.steps[id.step];
  if(!claim||claim.nonce!==id.nonce||claim.sourceSha!==id.sourceSha||claim.runId!==id.runId||claim.state!==state)throw Error('CLAIM_NOT_OWNED');
  if((state==='claimed'||state==='signing')&&(claim.signature||claim.messageHash||claim.mint||claim.poolId))throw Error('CLAIM_ALREADY_CONSUMED');
