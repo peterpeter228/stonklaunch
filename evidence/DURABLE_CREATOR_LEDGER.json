@@ -19,7 +19,7 @@
     "buy": {
       "nonce": "stonk-buy-diag-20261018-180649",
       "sourceSha": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
-      "runId": null,
+      "runId": "39152770076",
       "state": "claimed",
       "recoveryOfRunId": "39151817814"
     }
