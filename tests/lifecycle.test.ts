@@ -65,3 +65,38 @@ test('recovery journals remain isolated across wallets and networks; corruption 
 });
 import {launchInput} from '../src/lib/data/validation';
 test('Chinese token names follow protocol UTF8-byte limit before upload',()=>{const draft={symbol:'TEST',description:'',assetKey:'SOL',clientMintPublicKey:'So11111111111111111111111111111111111111112'};assert.equal(launchInput.safeParse({...draft,name:'中文测试'}).success,true);assert.equal(launchInput.safeParse({...draft,name:'这是一个用于测试的中文代币名称'}).success,false);});
+import {TOKEN_2022_PROGRAM_ID,ExtensionType,TransferFeeConfigLayout,TRANSFER_FEE_CONFIG_SIZE,getMintLen} from '@solana/spl-token';
+import {calculateTransferFeeRaw,selectEpochTransferFee,inspectToken} from '../src/lib/raydium/token-inspection';
+test('transfer-cost inspection uses capped integer fees and the active epoch, not promised income',()=>{
+ const max=(1n<<64n)-1n;
+ assert.equal(calculateTransferFeeRaw(100000000n,300,max),3000000n);
+ assert.equal(calculateTransferFeeRaw(100000000n,300,2000000n),2000000n);
+ assert.equal(calculateTransferFeeRaw(1n,300,max),1n);
+ assert.equal(calculateTransferFeeRaw(0n,300,max),0n);
+ assert.equal(calculateTransferFeeRaw(max,10000,max),max);
+ assert.equal(calculateTransferFeeRaw(100n,300,0n),0n);
+ assert.throws(()=>calculateTransferFeeRaw(-1n,300,max));assert.throws(()=>calculateTransferFeeRaw(1n,10001,max));
+ const old={epoch:10n,maximumFee:20n,transferFeeBasisPoints:100},next={epoch:12n,maximumFee:30n,transferFeeBasisPoints:300};
+ assert.deepEqual(selectEpochTransferFee({olderTransferFee:old,newerTransferFee:next},11n),{current:old,next});
+ assert.deepEqual(selectEpochTransferFee({olderTransferFee:old,newerTransferFee:next},12n),{current:next,next:null});
+});
+test('mint inspection separates demo, verified no-fee, bad owners and epoch rollover without transactions',async()=>{
+ const mode=process.env.APP_MODE,originalFetch=globalThis.fetch;let calls=0,epochCalls=0,wrongOwner=false,uninitialized=false,rollover=false,extended=false,badDiscriminator=false,badTlv=false;
+ try{
+  process.env.APP_MODE='demo';globalThis.fetch=(async()=>{throw Error('Demo must not access network');}) as typeof fetch;
+  const demo=await inspectToken('external-demo-orbit');assert.equal(demo.synthetic,true);assert.equal(demo.transferFee?.currentBps,300);assert.equal(demo.verifiedPayouts,null);assert.equal(demo.tradingEnabled,false);
+  assert.equal((await inspectToken('external-demo-neon')).feeStatus,'none');await assert.rejects(inspectToken('not-a-mint'),/演示/);
+  process.env.APP_MODE='mainnet-readonly';
+  globalThis.fetch=(async(_url,init)=>{calls++;const request=JSON.parse(String(init?.body));let result:unknown;
+   if(request.method==='getGenesisHash')result='5eykt4UsFv8P8NJdTREpY1vzqKqZKvdpKuc147dw2N9d';
+   else if(request.method==='getEpochInfo'){epochCalls++;result={epoch:rollover&&epochCalls%2===0?101:100,absoluteSlot:1000,slotIndex:20,slotsInEpoch:432000};}
+   else if(request.method==='getAccountInfo'){const data=Buffer.alloc(extended?getMintLen([ExtensionType.TransferFeeConfig]):82);data[44]=6;data[45]=uninitialized?0:1;if(extended){data[165]=badDiscriminator?2:1;data.writeUInt16LE(ExtensionType.TransferFeeConfig,166);data.writeUInt16LE(badTlv?65535:TRANSFER_FEE_CONFIG_SIZE,168);TransferFeeConfigLayout.encode({transferFeeConfigAuthority:PublicKey.default,withdrawWithheldAuthority:PublicKey.default,withheldAmount:12n,olderTransferFee:{epoch:90n,maximumFee:2000000n,transferFeeBasisPoints:100},newerTransferFee:{epoch:102n,maximumFee:1000000n,transferFeeBasisPoints:300}},data,170);}result={context:{slot:1000},value:{data:[data.toString('base64'),'base64'],owner:wrongOwner?SystemProgram.programId.toBase58():extended?TOKEN_2022_PROGRAM_ID.toBase58():TOKEN_PROGRAM_ID.toBase58(),executable:false,lamports:1000000,rentEpoch:0}};}
+   else throw Error('Unexpected RPC action '+request.method);
+   return new Response(JSON.stringify({jsonrpc:'2.0',id:request.id,result}),{headers:{'content-type':'application/json'}});
+  }) as typeof fetch;
+  const d=await inspectToken('So11111111111111111111111111111111111111112');assert.equal(d.synthetic,false);assert.equal(d.feeStatus,'none');assert.equal(d.transferFee,null);assert.equal(d.verifiedPayouts,null);assert.equal(d.slot,1000);assert.equal(calls,4);
+  wrongOwner=true;await assert.rejects(inspectToken(d.mint),/不是受支持/);wrongOwner=false;epochCalls=0;uninitialized=true;await assert.rejects(inspectToken(d.mint),/尚未初始化/);uninitialized=false;epochCalls=0;rollover=true;await assert.rejects(inspectToken(d.mint),/epoch/);
+  rollover=false;extended=true;epochCalls=0;const ext=await inspectToken(d.mint);assert.equal(ext.feeStatus,'configured');assert.equal(ext.transferFee?.currentBps,100);assert.equal(ext.transferFee?.nextBps,300);assert.equal(ext.transferFee?.withdrawAuthority,null);assert.equal(ext.transferFee?.withheldRaw,'12');badDiscriminator=true;await assert.rejects(inspectToken(d.mint),/无法安全解析/);badDiscriminator=false;badTlv=true;await assert.rejects(inspectToken(d.mint),/无法安全解析/);
+  await assert.rejects(inspectToken('invalid'),/有效/);
+ }finally{globalThis.fetch=originalFetch;if(mode===undefined)delete process.env.APP_MODE;else process.env.APP_MODE=mode;}
+});

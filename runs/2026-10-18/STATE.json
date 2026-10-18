@@ -26,9 +26,9 @@
     "deployed": false,
     "runtime_url": "http://localhost:3010",
     "repository": "https://github.com/peterpeter228/stonklaunch",
-    "commit": "b59504d18b114b10e5c0a7d9915602170ae4ab5b",
+    "commit": "1252c48610f5090be67eca2b9775382e0a6a94c2",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
-    "commit_scope": "Prior verified checkpoint; current Argon hardening and evidence prepared for next commit",
+    "commit_scope": "Last verified remote checkpoint; read-only inspection increment pending next commit",
     "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment"
   },
   "evidence_scope": [
@@ -153,9 +153,9 @@
     "Configure actual Supabase Auth/storage and verify wallet browser flows",
     "Resolve remaining historical fee decoders and production gates before release"
   ],
-  "last_completed_work": "Two completed Argon reviews; independently verified findings and hardened transactions; 13 tests and production build pass; post-fix browser checks pass.",
+  "last_completed_work": "Read-only mint inspection implemented;15 tests/typecheck/build pass; actual USDC RPC read verified; desktop/500px UI flow checked with limits recorded in TOKEN_INSPECTION_QA.md; third completed Argon short review independently adjudicated.",
   "verified_checks": [
-    "13 unit tests pass",
+    "15 unit tests pass",
     "server route demo/read-only transaction refusal passed",
     "initial five-page Next production build passed",
     "embedded PostgreSQL migration/RLS ownership/forged financial-write tests passed with auth stub"
@@ -166,7 +166,7 @@
     "changes": "Separate external read-only discovery; preserve verified platform policy; reject fee unit error, unsupported revenue/competitor claims, defer obsolete Jupiter v1 Zap-In and unapproved extra fee."
   },
   "argon_review": {
-    "status": "two_reviews_completed_findings_independently_verified",
+    "status": "three_short_reviews_completed_findings_independently_verified",
     "budget_cny": null,
     "connectivity": "HTTP200_ARGON_OK_native_streaming",
     "endpoint": "https://api.xiaoyiapi.xyz",
@@ -183,5 +183,14 @@
     "Swap fee and creator historical decoders incomplete",
     "Exact360px and realmobile not tested",
     "No public deployment"
-  ]
+  ],
+  "token_inspection": {
+    "status": "implemented_read_only",
+    "live_legacy_mint": "USDC mainnet slot458312894 verified 2026-10-18T05:08:00.057Z",
+    "live_token2022": "One mint verified:78pERgfjdqXt8GbGjbXzhDC5kb1XCEXmd388zwT7HhS4 at mainnet slot458315142,2026-10-18T05:16:05.882Z;100bps;not coverage/trading proof",
+    "synthetic_and_mock_token2022": "PASS, not live evidence",
+    "payouts": "unknown",
+    "trading_enabled": false,
+    "qa": "evidence/TOKEN_INSPECTION_QA.md"
+  }
 }

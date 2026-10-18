@@ -1,0 +1,26 @@
+{
+  "runtimeWarnings": [
+    "bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)"
+  ],
+  "records": [
+    {
+      "cluster": "mainnet-beta",
+      "mint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "tokenProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "decimals": 6,
+      "slot": 458312894,
+      "observedAt": "2026-10-18T05:08:00.057Z",
+      "currentEpoch": 1060,
+      "mintAuthority": "BJE5MMbqXjVwjAF7oxwPYXnTXDyspzZyt4vwenNw5ruG",
+      "freezeAuthority": "7dGbd2QZcCKcTndnHcTL8q7SMVXAkp688NTQYwrRCrar",
+      "feeStatus": "none",
+      "transferFee": null,
+      "dataSource": "solana-rpc-confirmed-mint",
+      "isStale": false,
+      "synthetic": false,
+      "payoutStatus": "unknown",
+      "verifiedPayouts": null,
+      "tradingEnabled": false
+    }
+  ]
+}

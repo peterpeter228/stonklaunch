@@ -1,0 +1,58 @@
+{
+  "runtimeWarnings": [
+    "bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)"
+  ],
+  "records": [
+    {
+      "catalogEvidence": {
+        "cluster": "mainnet-beta",
+        "dataSource": "raydium-public-discovery-api (not RPC-verified)",
+        "observedAt": "2026-10-18T05:16:01.253Z",
+        "slot": null,
+        "isStale": false,
+        "mint": "78pERgfjdqXt8GbGjbXzhDC5kb1XCEXmd388zwT7HhS4",
+        "poolId": "4AgBRm5is3i9G9SDdVW9AL5whFrVjKAXV8gNaPZtKqGk",
+        "name": "SHIBAL INU",
+        "symbol": "SHIBAL",
+        "imageUrl": "https://gateway.irys.xyz/GB8K5m56CoCh7NTu1Lq7HLbqqpCWjWvdr6uoZJaTxJPE",
+        "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+        "external": true,
+        "tradingEnabled": false,
+        "incomeAttribution": "not-stonklaunch",
+        "detailsUrl": "https://explorer.solana.com/address/78pERgfjdqXt8GbGjbXzhDC5kb1XCEXmd388zwT7HhS4",
+        "quoteSymbol": "SHIB",
+        "taxWarning": true
+      }
+    },
+    {
+      "inspection": {
+        "cluster": "mainnet-beta",
+        "mint": "78pERgfjdqXt8GbGjbXzhDC5kb1XCEXmd388zwT7HhS4",
+        "tokenProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb",
+        "decimals": 6,
+        "slot": 458315142,
+        "observedAt": "2026-10-18T05:16:05.882Z",
+        "currentEpoch": 1060,
+        "mintAuthority": null,
+        "freezeAuthority": null,
+        "feeStatus": "configured",
+        "transferFee": {
+          "currentBps": 100,
+          "maximumFeeRaw": "1000000000000000",
+          "nextBps": null,
+          "nextMaximumFeeRaw": null,
+          "nextEpoch": null,
+          "configAuthority": "WLHv2UAZm6z4KyaaELi5pjdbJh6RESMva1Rnn8pJVVh",
+          "withdrawAuthority": "5KXDF6QnqhBj72hDtJNkkpFaQVUfbFXNybMsp3DiK6tD",
+          "withheldRaw": "1282062398600"
+        },
+        "dataSource": "solana-rpc-confirmed-mint",
+        "isStale": false,
+        "synthetic": false,
+        "payoutStatus": "unknown",
+        "verifiedPayouts": null,
+        "tradingEnabled": false
+      }
+    }
+  ]
+}

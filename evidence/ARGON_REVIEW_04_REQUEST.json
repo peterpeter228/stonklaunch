@@ -1,0 +1,24 @@
+{
+  "startedAt": "2026-10-18T05:09:00Z",
+  "format": "native-gemini-stream",
+  "model": "gemini-4-argon",
+  "files": [
+    "src/lib/raydium/token-inspection.ts",
+    "src/types/token-inspection.ts",
+    "src/app/api/tokens/[mint]/inspection/route.ts",
+    "src/components/token-inspection.tsx",
+    "src/components/external-discovery.tsx"
+  ],
+  "keyPersisted": false,
+  "httpStatus": 200,
+  "usage": {
+    "promptTokenCount": 5750,
+    "candidatesTokenCount": 1515,
+    "totalTokenCount": 7265,
+    "cachedContentTokenCount": 0
+  },
+  "finishReason": "STOP",
+  "elapsedSeconds": 28.14,
+  "startedAtApproximate": true,
+  "timestampNote": "Start label approximates the request window; elapsedSeconds measured using monotonic clock."
+}

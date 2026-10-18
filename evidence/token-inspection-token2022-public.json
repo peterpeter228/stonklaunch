@@ -1,0 +1,12 @@
+{
+  "runtimeWarnings": [
+    "bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)"
+  ],
+  "records": [
+    {
+      "status": "FAILED",
+      "code": 23,
+      "message": "The operation was aborted due to timeout"
+    }
+  ]
+}

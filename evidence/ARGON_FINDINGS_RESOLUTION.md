@@ -75,3 +75,12 @@ Evidence: guard-negative and seeded-WSOL-positive tests pass. This is not compre
 ## Acceptance boundary
 
 The current unit log contains 13 passing tests in two files. Compilation and actual DEMO UI testing are separate evidence classes. No test here proves production financial safety, profit, paid demand, complete historical fee accounting, live Supabase integration, or a successfully completed devnet financial journey. The final release decision must incorporate subsequent chain/UI evidence and unresolved dependency advisories.
+
+## Review 04: read-only token inspection
+Native streaming HTTP200 STOP, 28.14 seconds, reported 7265 tokens. No secret or test-wallet key sent.
+- RPC error leakage claim: not confirmed. The route wraps inspectToken in api(), and errors.ts normalizes unknown upstream failures to a generic503 without echoing provider messages. The model did not inspect that wrapper. Keep existing safe boundary.
+- Token-2022 discriminator at offset82 claim: rejected. Installed SPL unpackMint checks data[ACCOUNT_SIZE] (165), not82, before TLV parsing for every extended mint. Applying the proposed offset82 check would reject valid accounts. Added positive Token-2022 and negative discriminator/TLV fixtures to the existing test file.
+- Mint-address catalog search: confirmed and fixed. Name/symbol/mint are now searchable, whitespace trimmed, and no-match state is distinct from upstream empty state. Actual paste/search/clear recovery tested.
+- Duplicate catalog rows: robustness accepted. Deduplicate mint+pool identity at the data boundary and use composite React keys.
+- Runtime network switching: process-static server configuration; no UI mode switch exists. Panel is remounted for each inspection and close/reopen. No live cross-cluster switching guarantee added.
+Model findings remain independently verified rather than blindly applied.

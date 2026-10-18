@@ -23,3 +23,6 @@ Findings were independently checked against project source and installed SDK 0.2
 At this documentation checkpoint, the complete devnet create/buy/sell/claim journey, real wallet-extension signing, deployed Supabase Web3 authentication/storage, own-platform graduation, and mainnet transactions are **NOT_RUN / not established**. Test funding was still being investigated by the parent task. Do not infer a passed chain test from model approval, compilation, public RPC reads, or fixture tests. Later chain evidence must be assessed separately.
 
 The root developer retains responsibility for acceptance. Argon has not issued an independently validated all-clear for the final product, and unresolved dependency advisories remain documented.
+
+## Incremental review04
+A third completed short review covered token inspection and UI. HTTP200 STOP, 28.14s, 5750prompt+1515output=7265reported tokens. Actual charge remains unknown. The invalid offset82 patch was rejected after checking installed SPL source; valid search/dedup suggestions were implemented. See ARGON_FINDINGS_RESOLUTION.md.
