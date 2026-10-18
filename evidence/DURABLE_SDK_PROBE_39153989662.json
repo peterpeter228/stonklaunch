@@ -1,0 +1,312 @@
+{
+  "runId": "39153989662",
+  "jobId": "117753282562",
+  "sourceSha": "c0e8bf0cd85d8579f9f41b9c7c9a46f3de7f3ddc",
+  "conclusion": "success",
+  "records": [
+    {
+      "observedAt": "2026-10-18T18:24:32.6199427Z",
+      "stage": "prepare-trade",
+      "number": 1,
+      "method": "getGenesisHash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 178,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.6621893Z",
+      "stage": "prepare-trade",
+      "number": 2,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 31,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.7072531Z",
+      "stage": "prepare-trade",
+      "number": 3,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 35,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.7412628Z",
+      "stage": "prepare-trade",
+      "number": 4,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 29,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.8702820Z",
+      "stage": "prepare-trade",
+      "number": 5,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 156,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.8993809Z",
+      "stage": "prepare-trade",
+      "number": 6,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 28,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.9283205Z",
+      "stage": "prepare-trade",
+      "number": 7,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 25,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.9532623Z",
+      "stage": "prepare-trade",
+      "number": 8,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 25,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:32.9852314Z",
+      "stage": "prepare-trade",
+      "number": 9,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 26,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.0302506Z",
+      "stage": "prepare-trade",
+      "number": 10,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 31,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.0650288Z",
+      "stage": "prepare-trade",
+      "number": 11,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 28,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.0662496Z",
+      "stage": "prepare-trade",
+      "number": 12,
+      "method": "getTokenAccountsByOwner",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 28,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.1152510Z",
+      "stage": "prepare-trade",
+      "number": 13,
+      "method": "getTokenAccountsByOwner",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 74,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.2440354Z",
+      "stage": "prepare-trade",
+      "number": 14,
+      "method": "getMinimumBalanceForRentExemption",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 28,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.2705627Z",
+      "stage": "prepare-trade",
+      "number": 15,
+      "method": "getMultipleAccounts",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 24,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.2969630Z",
+      "stage": "prepare-trade",
+      "number": 16,
+      "method": "getSlot",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 24,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.3265448Z",
+      "stage": "prepare-trade",
+      "number": 17,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 24,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.3517449Z",
+      "stage": "prepare-trade",
+      "number": 18,
+      "method": "getLatestBlockhash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 23,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.3832589Z",
+      "stage": "prepare-trade",
+      "number": 19,
+      "method": "getLatestBlockhash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 23,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.4142737Z",
+      "stage": "prepare-trade",
+      "number": 20,
+      "method": "simulateTransaction",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 29,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.4392771Z",
+      "stage": "prepare-trade",
+      "number": 21,
+      "method": "getFeeForMessage",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 24,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.4652487Z",
+      "stage": "transaction-guard",
+      "number": 22,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 24,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.5003075Z",
+      "stage": "transaction-guard",
+      "number": 23,
+      "method": "getMinimumBalanceForRentExemption",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 23,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.5261391Z",
+      "stage": "height-before-callback",
+      "number": 24,
+      "method": "getBlockHeight",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 23,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.5520036Z",
+      "stage": "callback-reads",
+      "number": 27,
+      "method": "getFeeForMessage",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 25,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.5542826Z",
+      "stage": "callback-reads",
+      "number": 26,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 27,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.5560014Z",
+      "stage": "callback-reads",
+      "number": 25,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 28,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.5813303Z",
+      "stage": "callback-simulation",
+      "number": 28,
+      "method": "simulateTransaction",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 24,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.6071473Z",
+      "stage": "height-after-callback",
+      "number": 29,
+      "method": "getBlockHeight",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 25,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:24:33.6076842Z",
+      "status": "READONLY_SEQUENCE_COMPLETE",
+      "requests": 29,
+      "stage": "height-after-callback",
+      "beforeHeight": 499738811,
+      "afterHeight": 499738812,
+      "quoteExpired": false,
+      "signed": false,
+      "broadcast": false
+    }
+  ],
+  "finding": "Complete bounded readonly SDK sequence, 29 requests, all HTTP200/no RPC error. Guard, callback simulation, before/after height pass; quote unexpired. Does not establish earlier signed-run cause or prove it fixed.",
+  "signed": false,
+  "broadcast": false
+}
