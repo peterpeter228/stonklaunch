@@ -1,0 +1,59 @@
+[
+  {
+    "mode": "demo",
+    "status": 403,
+    "body": {
+      "error": {
+        "code": "DEMO_NO_REAL_TRANSACTIONS",
+        "message": "当前模式禁止真实资金交易构建"
+      },
+      "requestId": "b59f8068-e8bf-4ba9-b732-b1025e213662"
+    }
+  },
+  {
+    "mode": "mainnet-readonly",
+    "status": 403,
+    "body": {
+      "error": {
+        "code": "READ_ONLY_MODE",
+        "message": "当前模式禁止真实资金交易构建"
+      },
+      "requestId": "73e3c1b3-2924-4714-aaf1-a5b549448765"
+    }
+  },
+  {
+    "mode": "devnet",
+    "status": 503,
+    "body": {
+      "error": {
+        "code": "RPC_NOT_CONFIGURED",
+        "message": "尚未配置该网络的 RPC"
+      },
+      "requestId": "e169d430-c3a8-4c0e-8b88-9176e85e55c7"
+    }
+  },
+  {
+    "mode": "mainnet-live",
+    "status": 503,
+    "body": {
+      "error": {
+        "code": "RPC_NOT_CONFIGURED",
+        "message": "尚未配置该网络的 RPC"
+      },
+      "requestId": "7d6d7c1e-4e2e-4aa5-b138-d2c22fc04663"
+    }
+  },
+  {
+    "runtimeLeaksSecrets": false
+  },
+  {
+    "cronStatus": 401,
+    "body": {
+      "error": {
+        "code": "CRON_UNAUTHORIZED",
+        "message": "批处理认证失败"
+      },
+      "requestId": "a978ef35-c2c4-4ca6-b822-fff93cad9109"
+    }
+  }
+]

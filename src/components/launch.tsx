@@ -51,7 +51,7 @@ export function LaunchPage() {
         return; if (!['image/png', 'image/jpeg', 'image/webp'].includes(file.type) || file.size > 2 * 1024 * 1024) {
         setError('Choose a PNG, JPG, or WebP image smaller than 2 MB.');
         return;
-    } if (image)
+    } setError(''); if (image)
         URL.revokeObjectURL(image); setImage(URL.createObjectURL(file)); if (runtime?.mode === 'demo') {
         notify('Image preview only in demo. The file is not uploaded or saved to the draft.');
         return;

@@ -1,9 +1,17 @@
 # StonkLaunch
 
-Private full-stack Solana LaunchLab application, initiated by explicit user request on 2026-10-18.
+Private full-stack Solana LaunchLab application. Next.js15.5.28 / React19.3.1 / TypeScript5.9.3 / Raydium SDK0.2.74-alpha / Supabase.
 
-Implementation is in progress. This repository does not yet demonstrate deployed software, confirmed platform configuration, transactions, fee claims, or revenue.
+## Current state
 
-Scope: Next.js 15.5.28, React 19, TypeScript, Supabase, official Raydium SDK, five-page creator and trading interface. Candidate quote assets remain disabled until independently verified. Wallet holders review and execute financial transactions themselves.
+The five-page **DEMO** application builds and has been exercised in a real cloud browser, including validation, draft recovery, PNG/QR, terminal and graduation states. Backend mode boundaries and embedded PostgreSQL RLS checks pass. All observed UI defects were fixed and retested.
 
-See runs/2026-10-18/STATE.json for verified phase and acceptance evidence as implementation lands.
+This is **not a launched or revenue-verified platform**. Own PlatformConfig, live Supabase deployment, real wallet transactions/fee claims, non-SOL capability, and parts of historical fee indexing remain unverified or incomplete. Argon connectivity succeeds; independent review awaits verified pricing/hard quota within the authorized CNY20 budget.
+
+Read [DELIVERY_README_ZH.md](DELIVERY_README_ZH.md), [state](runs/2026-10-18/STATE.json) and [browser evidence](evidence/BROWSER_QA.md). The kickoff documents are the requested specification, not proof that every requirement passed.
+
+## Local demo
+
+Use Node24 and pnpm11.25.0. `pnpm install --frozen-lockfile`, then `pnpm build` and `pnpm start`. Default mode is DEMO; no credentials are required and no real financial transaction can be built. See `.env.example` for the explicit deployed configuration. Never place private keys or seed phrases in this app.
+
+Source uses the official Raydium SDK, whose GPL-3.0 notice is retained under deploy. No permissive license is asserted over third-party code. Review licensing and remaining dependency advisories before external distribution or mainnet use.

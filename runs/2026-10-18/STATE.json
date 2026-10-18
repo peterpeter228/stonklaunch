@@ -4,8 +4,8 @@
   "run_date": "2026-10-18",
   "timezone": "Asia/Shanghai",
   "artifact_kind": "dot_development_handoff",
-  "phase": "d01",
-  "phase_status": "integration_and_browser_validation_in_progress",
+  "phase": "d04",
+  "phase_status": "partial_acceptance_external_review_and_live_configuration_blocked",
   "d00_confirmation": {
     "received": true,
     "message_id": "Sentinel_cfb0ddb72cb48191b9d6e8dfc86c6185",
@@ -14,21 +14,22 @@
   },
   "phases": {
     "d00": "confirmed",
-    "d01": "in_progress",
-    "d02": "in_progress",
-    "d03": "implemented_pending_validation",
-    "d04": "not_started"
+    "d01": "implemented_with_live_configuration_and_historical_decoder_limits",
+    "d02": "demo_browser_verified_desktop_and_500px",
+    "d03": "implemented_install_checks_passed",
+    "d04": "in_progress"
   },
   "application": {
     "implemented": true,
     "build_verified": true,
-    "browser_verified": false,
+    "browser_verified": true,
     "deployed": false,
-    "runtime_url": null,
+    "runtime_url": "http://localhost:3010",
     "repository": "https://github.com/peterpeter228/stonklaunch",
-    "commit": "772940edbf3b16c18e753bec40bb73fccf81bd95",
+    "commit": "0afc9ac4213b846b5d84309581e630fb44562370",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
-    "commit_scope": "Initial README only; implementation checkpoint uploading, latest wallet/discovery changes require fresh build/browser validation"
+    "commit_scope": "Verified implementation checkpoint; later UI fixes and final evidence pending follow-up commit",
+    "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment"
   },
   "evidence_scope": [
     "official_documentation_read",
@@ -86,29 +87,44 @@
   ],
   "gates": {
     "GATE-1 RED_ZONE": {
-      "status": "NOT_RUN",
-      "environment": null,
-      "evidence": []
+      "status": "BLOCKED",
+      "environment": "source inspection + public RPC read",
+      "evidence": [
+        "src/lib/raydium",
+        "evidence/public-rpc-check.json"
+      ]
     },
     "GATE-2 FEE_HARDCODED": {
-      "status": "NOT_RUN",
-      "environment": null,
-      "evidence": []
+      "status": "BLOCKED",
+      "environment": "local unit/route tests; no own PlatformConfig or signed transactions",
+      "evidence": [
+        "evidence/unit-final.txt",
+        "evidence/public-rpc-check.json"
+      ]
     },
     "GATE-3 ANTI_BORING_UI": {
-      "status": "NOT_RUN",
-      "environment": null,
-      "evidence": []
+      "status": "BLOCKED",
+      "environment": "Desktop and500px DEMO pass; exact360px untested",
+      "evidence": [
+        "evidence/BROWSER_QA.md"
+      ]
     },
     "GATE-4 PSYCHOLOGY_EMBEDDED": {
-      "status": "NOT_RUN",
-      "environment": null,
-      "evidence": []
+      "status": "BLOCKED",
+      "environment": "DEMO draft/poster/QR pass; real-identity creation untested",
+      "evidence": [
+        "evidence/BROWSER_QA.md",
+        "evidence/poster-qr-verification.json"
+      ]
     },
     "GATE-5 BOUNTY_READY": {
-      "status": "NOT_RUN",
-      "environment": null,
-      "evidence": []
+      "status": "PASS",
+      "environment": "Local source, Skill/API docs/install checks; no bounty submission",
+      "evidence": [
+        "skill/SKILL.md",
+        "skill/references/API_REFERENCE.md",
+        "scripts/install.sh"
+      ]
     }
   },
   "chain_transactions": [],
@@ -135,7 +151,7 @@
     "Resolve supported Next.js/SDK versions and establish code project",
     "Start d01 with SOL config and platform fee binding read/prepare flow; parallel UI/data work where possible"
   ],
-  "last_completed_work": "Initial code integration builds; active actual browser validation, real unsigned adapter integration and read-only RPC checks. No signed transactions or hosted deployment.",
+  "last_completed_work": "Five-page DEMO browser journey and all observed UI defect regressions passed; PostgreSQL/RLS embedded checks pass; private source checkpoint verified; Argon connectivity succeeds but budget-bounded review awaits pricing.",
   "verified_checks": [
     "7 unit tests pass",
     "server route demo/read-only transaction refusal passed",
@@ -146,5 +162,24 @@
     "message_id": "Sentinel_adb96e5d86908191937e0f4be8000bbf",
     "decision_file": "evidence/GEMINI_REVIEW_DECISIONS.md",
     "changes": "Separate external read-only discovery; preserve verified platform policy; reject fee unit error, unsupported revenue/competitor claims, defer obsolete Jupiter v1 Zap-In and unapproved extra fee."
-  }
+  },
+  "argon_review": {
+    "status": "pending_verified_pricing_or_hard_quota",
+    "budget_cny": 20,
+    "connectivity": "HTTP200_ARGON_OK_native_streaming",
+    "endpoint": "https://api.xiaoyiapi.xyz",
+    "project_source_sent": false,
+    "key_saved": false
+  },
+  "remaining_blockers": [
+    "Argon review pricing/hard quota unavailable",
+    "Final dependency audit approval pending",
+    "Supabase project/Auth/storage not configured or deployed",
+    "Own PlatformConfig and operator public keys/economic allocations not provided",
+    "Wallet signing and real financial tests user-executed; none done",
+    "NonSOL assets not enabled; xStocks capability not proven",
+    "Swap fee and creator historical decoders incomplete",
+    "Exact360px and realmobile not tested",
+    "No public deployment"
+  ]
 }

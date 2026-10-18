@@ -1,88 +1,73 @@
-# StonkLaunch 交付说明
+# StonkLaunch 开发交付状态
 
-本文件为待主任务填入实测证据的交付底稿。已编写源码与文档不等于门禁通过；下列 NOT_RUN 不能在没有证据时改成 PASS。
+更新时间：2026-10-18。当前为可运行、已实操的私有 DEMO 工程，不是已经上线收费的成品。用户要求的 Argon 独立审查仍待核实费用，不能宣称全部验收完成。
 
-## 1. 可运行结果
+## 1. 已有结果
 
-- 源码：本仓库根目录；分支/SHA：待最终提交后填写。
-- SDK：@raydium-io/raydium-sdk-v2 0.2.74-alpha；Next 15.5.28、React 19.3.1。
-- 默认模式 demo；正式 URL 未提供，公开生产部署未验证。
-- 实际预览入口、开始时间、日志与截图：NOT_RUN，主任务验收后填写。
-- demo 使用 src/lib/data/demo.ts 合成资料，始终标记；不能用于真实交易、财务或毕业证据。
+仓库：https://github.com/peterpeter228/stonklaunch （私有）。实现检查点0afc9ac4213b846b5d84309581e630fb44562370已验证推送；后续修复以main实际提交为准，不用文档自指最新SHA。
 
-## 2. 启动方式与实测记录
+五页：发现、连续创建、代币交易、毕业证据、终端。默认DEMO隔离真实资金；本平台与外部发行分开，外部发行只读、不算本平台收入。
 
-基线 Node 24.19.0、pnpm 11.25.0。运行 `bash scripts/install.sh`：已有 .env/.env.local 不覆盖；缺少时复制 .env.example 为仅本地默认 demo；安装锁定依赖，不执行账号创建、SQL、部署或主网操作。
+实际浏览器完成首页→草稿刷新→校验→费用预览→演示详情→买卖模式隔离→PNG→毕业→终端。修复并复测负数输入、图标错误恢复、窄屏装饰溢出及钱包按钮可访问名称。详见evidence/BROWSER_QA.md。
 
-命令顺序：`pnpm typecheck`、`pnpm test`、`pnpm build`；开发 `pnpm dev`，生产 `pnpm start`；indexer 单批 `pnpm indexer`、持续 `pnpm indexer --watch`。worker 环境由部署宿主注入，不能假定自动读取 .env.local。
+实际PNG为1080×1350，二维码已独立解码至对应本地DEMO详情页；不等于公开分享地址可达。桌面和500px已测，360px与真机未测。
 
-| 项目 | 状态 | 已有证据/限制 |
-|---|---|---|
-| 脚本语法、--help、--check-only | PASS（仅脚本检查） | 本工作环境实跑，退出 0；未输出环境秘密，未创建配置 |
-| 干净安装、typecheck、测试、build/start | NOT_RUN | 由主任务统一记录执行结果 |
-| SQL migration/RLS | NOT_RUN | supabase/migrations/0001_initial.sql；未连接真实 Supabase，当前无 psql |
-| Docker web/indexer | NOT_RUN | Dockerfile/docker-compose.yml 已写；当前无 Docker，不声称镜像已构建 |
-| 生产索引持久运行/补扫 | NOT_RUN | 配置与源码不等于已上线后台 |
+## 2. 启动
 
-数据库、Auth Web3 provider、公开资源 bucket 和 Docker 步骤见 deploy/README_ZH.md。脚本不替用户购买或注册 Supabase。容器公开构建变量与运行秘密分开，外部 Supabase 不由 compose 创建。
+已使用Node24.19.0、pnpm11.25.0、Next15.5.28、React19.3.1、TypeScript5.9.3、SDK0.2.74-alpha。
 
-## 3. 收款配置
+在项目目录执行：
 
-管理员、领取钱包、平台 PDA：未填写/未核验。默认期望 platform 50 bps、creator 50 bps、referral 0；LaunchLab units=bps×100。协议费须当前链上读取；不是“固定总费 1%”。
+1. pnpm install --frozen-lockfile
+2. pnpm build
+3. pnpm start
+4. 打开http://localhost:3000
 
-配置路径：env 目标 → /api/admin/platform/prepare 标准 create/update → 管理员钱包审阅签名 → 链上确认 → 同一 PlatformConfig 回读匹配。仅改 env 不会更改链上费率或领取权。已有池显示实际绑定；毕业后 CPMM 费用与 LP 收益权单独核验。claim 需真实领取钱包和标准协议 builder，不由服务器签名。
+默认APP_MODE=demo，不需要API Key、钱包或Supabase账号。已验证安装、类型检查、构建和本地生产服务。scripts/install.sh支持--help、--check-only，不覆盖已有环境文件。Windows安装Node/pnpm后可执行相同命令；没有验证Windows本机，不能把云端成功写成Windows实机通过。
+
+环境示例保留空凭据。真实部署需按deploy/README_ZH.md配置Supabase、RLS、对象存储、正式URL和独立索引进程。Docker配置已提供但未运行Docker验收。pnpm indexer默认有限一次；--watch用于受监督的后台服务，不把当前临时电脑当生产服务。
+
+## 3. 链上与费用
+
+默认平台50bps、creator50bps、referral0。LaunchLab单位为百万分率，50bps转换5000，不能传50。公开主网SOL GlobalConfig已通过RPC与owner检查，slot458280673，协议费2500，最小募集24SOL。该证据不含自家平台、交易或领取。
+
+平台创建/更新由标准SDK准备，LP比例/权限公钥必须显式配置，不猜测经济权利。env改变只表示期望；钱包签名、确认、回读后才生效。真实签名和资金操作交给用户本人。
+
+没有创建自家平台或发币，没有买入/卖出/claim/迁移签名，没有真实收入。实际收入0，成本结算未知。非SOL发现列表仅是公共API观察，不证明本平台能使用对应GlobalConfig；USDC/xStocks不能宣传已支持。
 
 ## 4. 五门禁
 
-| 门禁 | 状态 | 网络/证据与剩余影响 |
+| 门禁 | 状态 | 证据与限制 |
 |---|---|---|
-| GATE-1 RED_ZONE | NOT_RUN | 需代码及实际交易账户核验，不能仅凭无 Rust 目录 |
-| GATE-2 FEE_HARDCODED | NOT_RUN | 尚无真实绑定、成交、claim/到账证据 |
-| GATE-3 ANTI_BORING_UI | NOT_RUN | 主任务填写桌面/手机业务旅程证据 |
-| GATE-4 PSYCHOLOGY_EMBEDDED | NOT_RUN | 主任务填写草稿恢复、真实身份海报及分享证据 |
-| GATE-5 BOUNTY_READY | NOT_RUN | Skill/安装/分镜文件已写，仍需工程与接口实际验收；不宣称悬赏资格 |
+| GATE-1 RED_ZONE | BLOCKED（源码部分已核查） | 标准SDK、无自建资金池、无服务端钱包私钥；尚无实际签名交易审阅证据 |
+| GATE-2 FEE_HARDCODED | BLOCKED | 单位/绑定测试、公开GlobalConfig读取通过；自家配置、真实费用归属和领取未验 |
+| GATE-3 ANTI_BORING_UI | BLOCKED（桌面/500px通过） | 五页实际点击与失败恢复通过；严格360px条件未验 |
+| GATE-4 PSYCHOLOGY_EMBEDDED | BLOCKED（DEMO通过） | 草稿连续、演示PNG/QR通过；真实创建后的身份海报未验 |
+| GATE-5 BOUNTY_READY | PASS（工程材料范围） | 源码、Skill/API、配置、安装、分镜齐备；未提交悬赏、不证明参赛资格或收益 |
 
-独立验收项目见 deploy/ACCEPTANCE_CHECKLIST_ZH.md。保持原五门禁，不另加轮次。仅有 demo UI PASS 不代表主网商业通过。
+支持证据：unit-final.txt、route-smoke-initial.txt、backend-route-smoke.json、database-smoke.txt、build-overflow-recovery.txt、BROWSER_QA.md、poster-qr-verification.json。
 
-## 5. 资产与功能范围
+数据库迁移/RLS在嵌入式PostgreSQL执行，Supabase Auth由最小stub替代：自有草稿可读写、另一身份不可读、伪造钱包/财务写入被拒、mint身份不能替换。不能据此宣称真实Supabase部署/登录/Storage已通过。
 
-| 计价 | 创建 | 买卖 | CPMM 迁移路径 | 领取 |
-|---|---|---|---|---|
-| SOL | NOT_RUN | NOT_RUN | NOT_RUN | NOT_RUN |
-| USDC | 待逐集群验证 | 待验证 | 待验证 | 待验证 |
-| 每种 xStock | 待逐 mint 与接入条件验证 | 待验证 | 待验证 | 待验证 |
+## 5. 已知缺口
 
-候选资产登记不等于多计价能力完成。SOL 若最终验证成功，而非 SOL 未通过，只能声明 SOL 范围闭环。计价资产不是价格锚定、股票所有权或担保。
+- Argon新入口连通成功，项目审查尚未发送，等待单价或20元硬限额证明。
+- 最终在线依赖审查待批准。已修Next传递PostCSS；SDK传递依赖仍有已知告警，详见DEPENDENCY_SECURITY_REVIEW.md。不能把私有演示当金融生产安全认证。
+- 没有Supabase实际项目接入、真实钱包、平台配置或部署账户。
+- 元数据索引尚未完整；真实RPC列表部分名称显示mint缩写。
+- 已实现有限历史平台vault领取对账，swap费用、creator历史及CPI包装领取未完整解码，未知金额保留null，禁止捏造收入。
+- 没有验证真实创建、买卖、领取、毕业后LP权利；Actions格式/模式隔离通过，真实客户端展开未验。
+- 没有公开网站、录制视频或外部用户/付费验证。
+- Next15维护窗口临近2026-10-21，发布前须重新核对支持情况；不能带过期支持声明上线。
 
-API 使用与模式/权限见 skill/references/API_REFERENCE.md。Action GET/POST/OPTIONS 规范验证：NOT_RUN；真实客户端/Blink 展开：NOT_RUN。没有上线 registry 或 X 内嵌交易保证。
+## 6. Gemini审查采纳
 
-## 6. 真实链上结果
+v2.1已覆盖真实平台配置/计价白名单；保留并加固。新增独立外部只读发现缓解空页，不挪用外部池收入。拒绝协议费率单位错误、保证盈利和未经核实的竞品指控。Jupiter v1已过时；V2 Zap-In需要路由、Key、两腿失败恢复和明确费用政策，当前未启用，不新增0.8%抽成。详见evidence/GEMINI_REVIEW_DECISIONS.md。
 
-本底稿未记录任何本次创建、买入、卖出、claim 或毕业签名。缺签名/slot/网络/账户回读，不宣布发行、收入或领取完成。status=1 只是等待迁移；status=2 仍需目标 CPMM 验证；LP burn/lock/fee-key 独立证明。
+## 7. 两分钟分镜（未录视频）
 
-当前索引为有限池快照批处理；若尚无完整事件/claim 解码回放，不得把快照观察称为财务对账闭环。最终覆盖限制由主任务根据实际实现填写。
+00:00–00:15：首页、DEMO与资产能力；00:15–00:35：草稿/图标/预览；00:35–00:55：费用与模式拒绝；00:55–01:10：演示海报PNG与二维码；01:10–01:30：买卖校验、无真实报价时的明确反馈；01:30–01:45：status0/1与LP未知；01:45–02:00：终端分账、Skill与当前缺口。全程不把样例身份或金额冒充真实交易。
 
-## 7. 两分钟演示分镜
+## 8. 继续验收所需
 
-- 00:00–00:15：首页、SOL 与有状态候选资产，网络/DEMO 标签可见。
-- 00:15–00:35：草稿带入创建，图标验证、折叠高级参数与海报预览。
-- 00:35–00:55：完整费用摘要，钱包审阅；缺钱包则明确只演示流程，展示失败/草稿恢复。
-- 00:55–01:10：只有已确认记录才展示真实发行成功；海报下载/打开 X 编辑器不等于发帖。
-- 01:10–01:30：交易页金额、报价、minOut、费用、确认或明确失败。
-- 01:30–01:45：毕业等待与 CPMM 核验；既有池标来源，不伪装本次新池毕业。
-- 01:45–02:00：终端原币种费用、领取入口、Skill/API；结尾准确列完成范围。
-
-视频状态 NOT_RUN：未实际录制/提供文件，不称“附演示视频”。海报 1080×1350、OG 1200×630，demo/devnet 显眼标记。
-
-## 8. 商业口径与许可证
-
-本次尚无经验证实际收入/领取证据，不用 demo 数字填补。若没有实际成交，本次实际收入为 0；未知历史 vault 余额不能归成本期收益。分别记原币种 accrued、claimable、claimed，creator 聚合领取不可当平台营业收入；USD 估值要注明价格来源/时间与成本。
-
-Raydium SDK 声明 GPL-3.0，许可证副本与分发提醒见 deploy/THIRD_PARTY_NOTICES.md。未擅自把整个应用声明 MIT；外部分发前应审阅相应源码/通知等义务。本工程不自动取得悬赏资格或奖励。
-
-## 9. 剩余具体动作
-
-1. 在已授权部署环境填写真实 RPC、外部 Supabase/存储/登录 provider、允许 URL，运行并验证 migration/RLS；如接入尚未授权，先确认具体服务操作，不自动新建账号。
-2. 在目标集群填写管理员/领取公钥和真实平台/GlobalConfig/CPMM 配置，逐资产回读。准备交易费用摘要后由对应钱包审阅；本底稿不预设主网支出上限或签名授权。
-3. 沿用现有仓库/部署授权完成可完成操作；仍需钱包签名/新服务权限的，仅说明具体目标、费用上限与待决定事项，不重复确认常规实现。
-4. 主任务把实测命令、浏览器、真实链上与资产能力证据写回本文件及同一 d04 记录，保持未验证项诚实状态。
+先完成预算可控的Argon审查与本地修复，再集中连接实际Supabase/部署环境和平台管理员、领取钱包等公开配置。任何钱包签名由用户本人执行，不能要求用户把资金私钥交给程序。公开部署、真实金融操作和商业收入各自验收，不能相互替代。
