@@ -20,7 +20,7 @@
       "nonce": "stonk-buy-paced-20261018-190720",
       "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
       "runId": "39158381095",
-      "state": "signed",
+      "state": "finalized",
       "recoveryOfRunId": "39152770076",
       "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
       "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
@@ -34,7 +34,8 @@
         "observedAt": "2026-10-18T19:21:56.062Z",
         "readAttempts": 1,
         "observedBlockHeight": 499753167
-      }
+      },
+      "slot": 512539878
     }
   },
   "attemptHistory": [
