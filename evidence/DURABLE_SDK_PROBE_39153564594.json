@@ -1,0 +1,120 @@
+{
+  "runId": "39153564594",
+  "jobId": "117752004720",
+  "sourceSha": "442598da0cba4706ebbc9d54599014299fd3da57",
+  "conclusion": "failure",
+  "records": [
+    {
+      "observedAt": "2026-10-18T18:18:55.8788042Z",
+      "stage": "prepare-trade",
+      "number": 1,
+      "method": "getGenesisHash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 276,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:55.9428136Z",
+      "stage": "prepare-trade",
+      "number": 2,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 54,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.0033149Z",
+      "stage": "prepare-trade",
+      "number": 3,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 53,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.0553442Z",
+      "stage": "prepare-trade",
+      "number": 4,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 50,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.2008610Z",
+      "stage": "prepare-trade",
+      "number": 5,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 194,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.2520337Z",
+      "stage": "prepare-trade",
+      "number": 6,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 49,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.3014088Z",
+      "stage": "prepare-trade",
+      "number": 7,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 48,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.3507387Z",
+      "stage": "prepare-trade",
+      "number": 8,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 48,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.4188339Z",
+      "stage": "prepare-trade",
+      "number": 9,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 60,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.4718964Z",
+      "stage": "prepare-trade",
+      "number": 10,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 47,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:18:56.4780895Z",
+      "status": "READONLY_SEQUENCE_STOPPED",
+      "requests": 11,
+      "stage": "prepare-trade",
+      "code": "RPC_METHOD_NOT_ALLOWED",
+      "signed": false,
+      "broadcast": false
+    }
+  ],
+  "finding": "Probe allowlist stopped preparation with RPC_METHOD_NOT_ALLOWED before height sequence. Rejected method name not emitted. 11 RPC starts reported; 10 successful response traces. No underlying RPC error reproduced; not evidence of earlier signed-run root cause.",
+  "signed": false,
+  "broadcast": false
+}
