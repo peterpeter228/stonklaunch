@@ -1,4 +1,5 @@
 /** Fixed, single acceptance sequence. Never invoke the legacy ephemeral session here. */
+import {pacedDevnetFetch} from './devnet-rpc-pacing';
 import {mkdirSync, writeFileSync} from 'node:fs';
 import {join} from 'node:path';
 import {Connection, PublicKey, Keypair, VersionedTransaction, ComputeBudgetProgram, type LoadedAddresses} from '@solana/web3.js';
@@ -26,6 +27,8 @@ function record(status:string, fields:Record<string,unknown>={}) {
  console.log(JSON.stringify({status,step,runId,mint:checkpoint.mint,signature:checkpoint.signature}));
 }
 let sequence=0;
+// Installed before configure; SDK and boundedConnection dynamically use global fetch.
+globalThis.fetch=pacedDevnetFetch(globalThis.fetch.bind(globalThis),event=>console.log(JSON.stringify({rpc:event})));
 const c=new Connection('https://api.devnet.solana.com',{commitment:'confirmed',disableRetryOnRateLimit:true,fetch:(input,init)=>fetch(input,{...init,signal:AbortSignal.timeout(15000)})});
 async function configure(){
  if(await c.getGenesisHash()!==GENESIS)throw Error('NETWORK_MISMATCH');

@@ -1,6 +1,6 @@
 # StonkLaunch
 
-Private full-stack Solana LaunchLab application. Next.js15.5.28 / React19.3.1 / TypeScript5.9.3 / Raydium SDK0.2.74-alpha / Supabase.
+Private full-stack Solana LaunchLab application. Next.js16.4.2 / React19.3.1 / TypeScript5.9.3 / Raydium SDK0.2.74-alpha / Supabase.
 
 ## Current state
 
@@ -19,3 +19,5 @@ Source uses the official Raydium SDK, whose GPL-3.0 notice is retained under dep
 Read-only token inspection now exposes active/capped transfer fees, scheduled changes and mint authorities, with unknown payouts kept separate.15 unit tests pass; an actual USDC mainnet mint snapshot was read. One actual Token-2022 mint read also succeeded after a bounded timeout retry; global coverage and actual trading remain separate gates.
 
 Latest chain acceptance: [DEVNET_ACCEPTANCE_SUMMARY.md](evidence/DEVNET_ACCEPTANCE_SUMMARY.md).16 unit tests pass; no production or mainnet readiness claim.
+
+Dependency hardening now uses Next 16.4.2 with explicit Webpack, a scoped UUID 11.1.1 override, and a locked patch disabling bigint-buffer native loading. `pnpm verify:dependencies` checks the resolved runtime offline and also runs before build/start/indexer. Remaining advisories are not audit-clean; see [current and historical dependency evidence](evidence/DEPENDENCY_SECURITY_REVIEW.md).

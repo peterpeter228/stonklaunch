@@ -1,0 +1,51 @@
+{
+  "checkedAt": "2026-10-18T18:59:10Z",
+  "projectRef": "mvhrxnspbzomtpdftxqp",
+  "region": "ap-southeast-1",
+  "plan": "free",
+  "quotedMonthlyUSD": 0,
+  "status": "ACTIVE_HEALTHY",
+  "initialPublicTables": 0,
+  "migration": {
+    "version": "20261018185806",
+    "name": "stonklaunch_initial",
+    "success": true
+  },
+  "tablesWithRLS": 8,
+  "storage": {
+    "bucket": "stonklaunch-assets",
+    "publicRead": true,
+    "allowedMimeTypes": [
+      "image/png",
+      "application/json"
+    ],
+    "maxBytes": 2097152,
+    "clientWritePolicies": 0
+  },
+  "catalogPrivilegeChecks": {
+    "anonAndAuthenticatedProtectedTableSelectInsertUpdate": false,
+    "serviceRoleProtectedTableSelectInsertUpdate": true,
+    "tables": [
+      "verified_wallets",
+      "chain_events",
+      "fee_claims",
+      "indexer_cursors",
+      "growth_events"
+    ]
+  },
+  "securityAdvisors": {
+    "info": 5,
+    "meaning": "RLS enabled with no client policy on five intentionally server-only tables; not a request to grant public access"
+  },
+  "notVerified": [
+    "Hosted Web3 Auth",
+    "Two real wallet isolation",
+    "HTTP storage upload and public retrieval",
+    "Web deployment",
+    "Indexer process",
+    "Production RPC",
+    "Mainnet financial readiness"
+  ],
+  "credentialsAccessed": false,
+  "productionReady": false
+}

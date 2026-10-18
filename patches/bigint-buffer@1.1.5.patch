@@ -1,0 +1,19 @@
+--- a/dist/node.js
++++ b/dist/node.js
+@@ -2,14 +2,8 @@
+ 
+ Object.defineProperty(exports, "__esModule", { value: true });
+ let converter;
+-{
+-    try {
+-        converter = require('bindings')('bigint_buffer');
+-    }
+-    catch (e) {
+-        console.warn('bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)');
+-    }
+-}
++// Native bindings intentionally disabled: GHSA-3gc7-fjrx-p6mg.
++// Preserve the upstream pure-JavaScript conversion implementation below.
+ /**
+  * Convert a little-endian buffer into a BigInt.
+  * @param buf The little-endian buffer to convert

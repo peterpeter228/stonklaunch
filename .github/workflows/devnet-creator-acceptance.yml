@@ -63,6 +63,7 @@ jobs:
         run: |
           npm install --global pnpm@11.25.0 --ignore-scripts
           pnpm install --frozen-lockfile --ignore-scripts
+          node scripts/verify-dependency.mjs
       - name: Verify public run claim and reviewed workflow before secret exposure
         if: inputs.mode == 'execute'
         env:

@@ -5,7 +5,7 @@
   "timezone": "Asia/Shanghai",
   "artifact_kind": "dot_development_handoff",
   "phase": "d04",
-  "phase_status": "partial_acceptance_five_devnet_transactions_verified_creator_claim_and_deployment_blocked",
+  "phase_status": "production_readiness_in_progress_no_mainnet_release",
   "d00_confirmation": {
     "received": true,
     "message_id": "Sentinel_cfb0ddb72cb48191b9d6e8dfc86c6185",
@@ -15,7 +15,7 @@
   "phases": {
     "d00": "confirmed",
     "d01": "implemented_with_live_configuration_and_historical_decoder_limits",
-    "d02": "demo_browser_verified_desktop_and_500px",
+    "d02": "rendered_demo_desktop_and_360px_pass_at_b05da08",
     "d03": "implemented_install_checks_passed",
     "d04": "in_progress"
   },
@@ -29,7 +29,8 @@
     "commit": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
     "commit_scope": "Latest reviewed implementation; subsequent commits retain public claims and evidence.",
-    "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment"
+    "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment",
+    "framework": "Next.js 16.4.2 local upgrade; fresh CI pending"
   },
   "evidence_scope": [
     "official_documentation_read",
@@ -105,9 +106,10 @@
     },
     "GATE-3 ANTI_BORING_UI": {
       "status": "BLOCKED",
-      "environment": "Desktop and500px DEMO pass; exact360px untested",
+      "environment": "Actual Chromium desktop1440 and mobile360 DEMO complete journeys PASS at b05da08; new framework CI and production identity flow pending",
       "evidence": [
-        "evidence/BROWSER_QA.md"
+        "evidence/BROWSER_QA.md",
+        "evidence/BROWSER_ACCEPTANCE_BASELINE.json"
       ]
     },
     "GATE-4 PSYCHOLOGY_EMBEDDED": {
@@ -188,17 +190,18 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Earlier post-sign BLOCKHEIGHT_RPC_FAILED remains unproven despite successful complete readonly SDK sequence; retain signed claim and do not blindly retry or declare live readiness.",
-    "Preserve consumed signed claims and reconcile originals before any reviewed recovery",
-    "Restore actual rendered UI QA; current fresh tests blocked",
-    "Complete remaining deployment/auth/metadata/migration acceptance; no mainnet release yet"
+    "Push reviewed framework/dependency mitigation and final buy recovery implementation after local gates",
+    "Run fresh Next16 rendered acceptance and one explicitly claimed final durable buy; continue sell/creator claim only after finalized success",
+    "Supabase schema and public asset bucket configured; Render workspace confirmed. Create staging only after reviewed source push. Credentials and paid services require specific approval.",
+    "Finish hosted Auth/RLS/storage/indexer and production configuration. Mainnet funding/signing remains user-executed"
   ],
-  "last_completed_work": "Durable wallet funded with 5devnetSOL; independent recovery and one new finalized devnet launch PASS. Two buy attempts stopped before broadcast; second diagnosed BLOCKHEIGHT_RPC_FAILED after3readonly attempts, not quote expiry. No buy/sell/creator-claim PASS inferred. Complete 29-request secret-free SDK probe PASS, including guard/simulation/before-after heights; prior signing-run transport cause remains unknown.",
+  "last_completed_work": "Baseline CI39155838228 actual desktop and360px DEMO journeys2/2 PASS. Next16 initial build PASS.31tests/typecheck PASS. Clean installed bigint native-disable patch+uuid11.1.1 gatePASS. New patched build/audit pending. Patched Next16 build and clean-install dependency gate PASS; audit0critical/1high/3moderate. Hosted Supabase empty project migration8RLS tables and PNG/JSON bucket configured; actual client auth/storage acceptance pending.",
   "verified_checks": [
     "29 unit tests pass; typecheck and production build PASS for diagnostic patch",
     "server route demo/read-only transaction refusal passed",
     "initial five-page Next production build passed",
-    "embedded PostgreSQL migration/RLS ownership/forged financial-write tests passed with auth stub"
+    "embedded PostgreSQL migration/RLS ownership/forged financial-write tests passed with auth stub",
+    "31/31 Next16.4.2 patched-dependency unit tests, typecheck, build and offline dependency gate PASS"
   ],
   "user_review": {
     "message_id": "Sentinel_adb96e5d86908191937e0f4be8000bbf",
@@ -218,13 +221,13 @@
     "completed_short_review_count": 3
   },
   "remaining_blockers": [
-    "Durable buy halted before broadcast on blockheight RPC read failure; signature retained, balance unchanged except successful launch. Need concrete transport diagnosis; do not reset signed claim or extend retry gate blindly.",
-    "Supabase project/Auth/storage not configured or deployed",
+    "Durable buy2 signed claim expired with finalized no-settlement proof. Reviewed third and final paced attempt prepared, not yet dispatched. Do not retry automatically.",
+    "Supabase schema/storage bucket deployed; Auth/provider, upload retrieval and application secret configuration pending",
     "NonSOL assets not enabled; xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
-    "Exact360px and realmobile not tested",
     "No public deployment",
-    "Production platform/operator configuration remains separate; devnet platform is test-only"
+    "Production platform/operator configuration remains separate; devnet platform is test-only",
+    "Real phone/wallet-extension and deployed Auth/storage/worker acceptance pending; desktop Chromium mobile emulation is not real device"
   ],
   "token_inspection": {
     "status": "implemented_read_only",
@@ -297,5 +300,21 @@
     "signing": false,
     "broadcast": false,
     "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
+  },
+  "updated_at": "2026-10-18T18:54:00Z",
+  "production_setup": {
+    "supabase_connected": true,
+    "project_ref": "mvhrxnspbzomtpdftxqp",
+    "region": "ap-southeast-1",
+    "plan": "free",
+    "migration": "20261018185806",
+    "bucket_created": true,
+    "render_connected": true,
+    "render_workspace_confirmation": "confirmed_Sentinel_e5ccfeb885048191b1f7a00b10275a4c",
+    "github_retry_confirmation": "confirmed_Sentinel_feaac58a26f88191822b87cc0ae82481",
+    "new_paid_services": false,
+    "credentials_accessed": false,
+    "evidence": "evidence/HOSTED_SUPABASE_SETUP.json",
+    "render_workspace": "tea-dbahbeijnfac73fnfna0"
   }
 }

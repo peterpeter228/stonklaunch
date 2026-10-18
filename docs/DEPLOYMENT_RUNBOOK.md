@@ -1,12 +1,12 @@
 # StonkLaunch 生产启动手册
 
-2026-10-18 源码审阅。本文是可执行操作顺序，不是上线证明。当前没有已确认的公网部署、生产 Supabase 项目或主网资金验收。先完成隔离的 devnet 验收，再以 mainnet-readonly 做生产基础设施验收；不得把切换 APP_MODE 当作主网启用完成。
+2026-10-18 源码审阅。本文是可执行操作顺序，不是上线证明。当前没有已确认的公网部署或主网资金验收。2026-10-18 已配置免费新加坡 Supabase 项目 mvhrxnspbzomtpdftxqp，真实 Auth/上传/worker 验收尚未完成。先完成隔离的 devnet 验收，再以 mainnet-readonly 做生产基础设施验收；不得把切换 APP_MODE 当作主网启用完成。
 
 ## 1. 选择一个目标与权限边界
 
 部署需要：一个长期运行 Node 服务、一个独立 worker（或者已有受保护定时调度器，二选一）、Supabase Auth/Postgres/Storage、RPC、稳定 HTTPS 域名。现有 Docker 路径可用于已经授权的主机；不要把临时开发进程当作生产后台。
 
-已检索插件目录：Supabase、Railway、Render、Vercel 可提供连接入口，但本次均未安装，不能据此声称已有服务权限或套餐。没有调用注册、安装、创建项目、支付、部署或凭据操作。供应商价格和账号实际权益未核实，费用未知；不能承诺免费生产运行。当前建议路线为 Render + Supabase，连接仍待用户完成；这不是已购买、已创建项目或已批准持久配置凭据。
+2026-10-18 已验证 Supabase 与 Render 插件连接。用户已确认 Supabase 组织、免费方案及新加坡区，项目已 ACTIVE_HEALTHY，迁移 20261018185806 已应用。Render 工作区名称为 123，仍待用户确认目标。没有购买付费服务，没有读取或配置服务端密钥；连接插件不等于生产部署完成。
 
 待操作者一次性明确：
 
@@ -52,7 +52,7 @@ select schemaname, tablename, policyname, roles, cmd
 from pg_policies where schemaname in ('public', 'storage');
 ```
 
-确认 bucket 不存在且获得创建/公开读取权限后，操作员可执行以下一次性配置（不是应用 migration，也没有在本次运行）：
+以下 bucket 配置已于 2026-10-18 在上述空项目执行并回读确认；不要重复执行。没有添加任何客户端写入 policy：
 
 ```sql
 insert into storage.buckets(id, name, public, file_size_limit, allowed_mime_types)
@@ -121,6 +121,6 @@ from public.launches group by cluster, platform_id;
 
 记录实际 commit、环境、构建结果、非秘密公网 URL、Auth/Storage 检查时间、索引游标/新鲜度和交易证据；不要记录 cookie、Bearer header、secret 或私钥。出现资金路由/来源异常时由运营者将应用切为 mainnet-readonly 并重启，停止新交易构建；保留已有原 signature/mint 用于查询，不自动重发。回滚应用版本不删除数据库、不改写链上事实、不自动退还资金。
 
-当前明确待办：目标供应商/项目与费用范围未选择；凭据持久配置未授权执行；托管迁移/Auth/Storage/索引验收 NOT_RUN；公网部署 NOT_RUN；主网钱包操作未执行。以上是具体外部前置条件，不是可以靠继续本地修改变为 PASS 的项目。
+当前明确待办：Render 工作区确认待答；凭据持久配置未授权执行；Supabase 托管迁移及8表RLS、bucket配置已回读通过，但 Auth/真实Storage上传/索引验收 NOT_RUN；公网部署 NOT_RUN；主网钱包操作未执行。以上是具体外部前置条件，不是可以靠继续本地修改变为 PASS 的项目。
 
 新增 readiness 验证：8 个 mock 检查已执行通过，无真实外部服务访问；主任务随后复跑 readiness 8 项及清单 12 项通过，并清理陈旧缓存后确认整仓 typecheck 通过。宿主可选择 `/api/ready` 为部署 readiness 检查；现有 Docker `/api/health` 检查未改动。

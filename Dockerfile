@@ -3,7 +3,9 @@ FROM node:24.19.0-bookworm-slim AS dependencies
 WORKDIR /app
 RUN npm install --global pnpm@11.25.0
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-RUN pnpm install --frozen-lockfile
+COPY patches ./patches
+COPY scripts/verify-dependency.mjs ./scripts/verify-dependency.mjs
+RUN pnpm install --frozen-lockfile --ignore-scripts && node scripts/verify-dependency.mjs
 
 FROM dependencies AS build
 COPY src ./src

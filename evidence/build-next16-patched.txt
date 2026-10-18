@@ -1,0 +1,51 @@
+▲ Next.js 16.4.2 (webpack)
+✓ Running next.config.ts took 26ms
+
+  Creating an optimized production build ...
+✓ Compiled successfully in 8.1s
+  Running TypeScript ...
+  Finished TypeScript in 2.2s ...
+  Collecting page data using 8 workers ...
+  Generating static pages using 8 workers (0/13) ...
+  Generating static pages using 8 workers (3/13) 
+  Generating static pages using 8 workers (6/13) 
+  Generating static pages using 8 workers (9/13) 
+✓ Generating static pages using 8 workers (13/13) in 464ms
+  Finalizing page optimization ...
+  Collecting build traces ...
+
+Route (app)
+┌ ○ /
+├ ○ /_not-found
+├ ƒ /actions.json
+├ ƒ /api/actions/buy/[poolId]
+├ ƒ /api/admin/platform/prepare
+├ ƒ /api/assets
+├ ƒ /api/auth/logout
+├ ƒ /api/auth/session
+├ ƒ /api/cron/index
+├ ƒ /api/discovery
+├ ƒ /api/drafts
+├ ƒ /api/fees
+├ ƒ /api/fees/prepare-claim
+├ ƒ /api/health
+├ ƒ /api/launches
+├ ƒ /api/launches/[mint]
+├ ƒ /api/launches/prepare
+├ ƒ /api/posters/[mint]
+├ ƒ /api/ready
+├ ƒ /api/runtime
+├ ƒ /api/tokens/[mint]/inspection
+├ ƒ /api/trades/prepare
+├ ƒ /api/trades/quote
+├ ƒ /api/transactions/observe
+├ ƒ /api/uploads
+├ ○ /launch
+├ ○ /terminal
+├ ƒ /token/[mint]
+└ ƒ /token/[mint]/graduation
+
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+

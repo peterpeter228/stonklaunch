@@ -1,0 +1,274 @@
+{
+  "checkedAtUtc": "2026-10-18T18:55:00Z",
+  "nextVersion": "16.4.2",
+  "buildEvidence": "build-next16-patched.txt",
+  "traceFilesScanned": 32,
+  "traceCounts": {
+    "jayson": 17,
+    "stream-json": 0,
+    "bigint-buffer": 17
+  },
+  "matches": {
+    "jayson": [
+      {
+        "trace": ".next/server/app/terminal/page.js.nft.json",
+        "files": [
+          "../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/launch/page.js.nft.json",
+        "files": [
+          "../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/admin/platform/prepare/route.js.nft.json",
+        "files": [
+          "../../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/launches/route.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/launches/prepare/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/launches/[mint]/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/cron/index/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/trades/quote/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/trades/prepare/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/transactions/observe/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/actions/buy/[poolId]/route.js.nft.json",
+        "files": [
+          "../../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/assets/route.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/posters/[mint]/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/fees/route.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/fees/prepare-claim/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/token/[mint]/page.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/token/[mint]/graduation/page.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/client/browser/index.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/lib/generateRequest.js",
+          "../../../../../../node_modules/.pnpm/jayson@4.3.0_bufferutil@4.1.0_utf-8-validate@6.0.6/node_modules/jayson/package.json"
+        ]
+      }
+    ],
+    "stream-json": [],
+    "bigint-buffer": [
+      {
+        "trace": ".next/server/app/terminal/page.js.nft.json",
+        "files": [
+          "../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/launch/page.js.nft.json",
+        "files": [
+          "../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/admin/platform/prepare/route.js.nft.json",
+        "files": [
+          "../../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/launches/route.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/launches/prepare/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/launches/[mint]/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/cron/index/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/trades/quote/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/trades/prepare/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/transactions/observe/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/actions/buy/[poolId]/route.js.nft.json",
+        "files": [
+          "../../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/assets/route.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/posters/[mint]/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/fees/route.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/api/fees/prepare-claim/route.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/token/[mint]/page.js.nft.json",
+        "files": [
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      },
+      {
+        "trace": ".next/server/app/token/[mint]/graduation/page.js.nft.json",
+        "files": [
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/dist/node.js",
+          "../../../../../../node_modules/.pnpm/bigint-buffer@1.1.5_patch_hash=8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831/node_modules/bigint-buffer/package.json"
+        ]
+      }
+    ]
+  },
+  "scope": "Post-build static dependency tracing, not full dynamic execution or a deployed-image assessment. No claim of an audit-clean tree."
+}

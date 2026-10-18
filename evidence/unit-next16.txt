@@ -1,0 +1,39 @@
+✔ migration threshold is not confirmed graduation (1.623382ms)
+✔ unknown confirmation must not create duplicate economic action (0.185362ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.160264ms)
+✔ on-chain metadata prefix validates mint and bounded UTF8 fields (0.869874ms)
+✔ client guard validates trade discriminator, amounts, pool and extra instructions (19.832795ms)
+✔ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (26.331108ms)
+✔ official seeded WSOL setup and close shape passes the client guard without a real transaction (5.387116ms)
+✔ recovery journals remain isolated across wallets and networks; corruption blocks continuation (0.387596ms)
+✔ Chinese token names follow protocol UTF8-byte limit before upload (3.608704ms)
+✔ transfer-cost inspection uses capped integer fees and the active epoch, not promised income (1.871743ms)
+✔ mint inspection separates demo, verified no-fee, bad owners and epoch rollover without transactions (55.16302ms)
+✔ confirmation uses HTTP status without websocket subscriptions or rebroadcast (11.629717ms)
+✔ post-sign expiry and pending checks prevent broadcast; definitive failure keeps its terminal state (531.985947ms)
+✔ server observation never treats processed or legacy unconfirmed errors as terminal (6.580437ms)
+✔ durable claim binds exact repository, ref, attempt, source, nonce and run before signing (0.981545ms)
+✔ consumed or out-of-order durable slots cannot be reused, even without a signature (0.46486ms)
+✔ ledger CAS must succeed and read back before advancing; stale simultaneous claimant is rejected (1.90736ms)
+✔ ambiguous ledger write stops after a read and is never retried or treated as authorization (0.845021ms)
+✔ durable signed checkpoint cannot be replaced or moved back to a signable state (0.652133ms)
+✔ bounded ALT resolution gives identical live and historical receipt account identities (1.722944ms)
+✔ only the exact terminal pre-sign ALT failure can be preserved for one manually created replacement claim (1.155656ms)
+✔ forward claim transition preserves archived unsigned attempt and its proof without mutation (0.65984ms)
+✔ height retries are readonly, bounded and only transient; expiry or invalid response is never retried (501.904224ms)
+✔ post-sign diagnostics preserve signed identity and cannot reset or overwrite the claim (1.39198ms)
+✔ sole reviewed prebroadcast buy recovery retains original signed claim and requires exact proof (0.860371ms)
+✔ last exact expired buy recovery preserves full signed claim and rejects any fourth attempt (1.115804ms)
+✔ runner pacing spaces all RPC starts and stops queued network after 429 or 403 without retry (3.743072ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (2.881898ms)
+✔ invalid configuration is rejected, never silently defaulted (0.387702ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.368788ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.612559ms)
+ℹ tests 31
+ℹ suites 0
+ℹ pass 31
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2082.563459

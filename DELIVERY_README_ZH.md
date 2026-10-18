@@ -14,7 +14,7 @@
 
 ## 2. 启动
 
-已使用Node24.19.0、pnpm11.25.0、Next15.5.28、React19.3.1、TypeScript5.9.3、SDK0.2.74-alpha。
+已使用Node24.19.0、pnpm11.25.0、Next16.4.2、React19.3.1、TypeScript5.9.3、SDK0.2.74-alpha。
 
 在项目目录执行：
 
@@ -52,13 +52,13 @@
 ## 5. 已知缺口
 
 - Argon原生流式两轮审查已完成，另一次长审查超时未形成结论。用户已取消20元门槛；实际费用未知。采纳与反证见ARGON_FINDINGS_RESOLUTION.md。
-- 最终在线依赖审查已获授权并完成：0 critical、1 high、4 moderate；不等于无风险。已修Next传递PostCSS；SDK传递依赖仍有已知告警，详见DEPENDENCY_SECURITY_REVIEW.md。不能把私有演示当金融生产安全认证。
+- 历史 Next15 审计为 0 critical、1 high、4 moderate，不是升级后的最新结果。当前 Next16.4.2 保留 PostCSS 覆盖，并已验证 jayson>uuid 11.1.1；bigint-buffer 原生加载已通过锁定补丁禁用，运行门禁验证通过。bigint 高危项属于缓解而非上游修复，stream-json 三项中危保留并做限定入口可达性评估；当前补丁构建通过，最新生产审计为 0 critical、1 high、3 moderate；32 份构建追踪中未发现 stream-json。最新与历史证据分列于 evidence/DEPENDENCY_SECURITY_REVIEW.md，不能称为审计全清或金融生产认证。
 - 没有Supabase实际项目接入、真实钱包、平台配置或部署账户。
 - 已接入链上Metaplex名称/符号/URI并校验owner和mint；任意外部URI图片与描述未自动抓取，索引仍有范围限制。
 - 已实现有限历史平台vault领取对账，swap费用、creator历史及CPI包装领取未完整解码，未知金额保留null，禁止捏造收入。
 - 没有验证真实创建、买卖、领取、毕业后LP权利；Actions格式/模式隔离通过，真实客户端展开未验。
 - 没有公开网站、录制视频或外部用户/付费验证。
-- Next15维护窗口临近2026-10-21，发布前须重新核对支持情况；不能带过期支持声明上线。
+- 当前已升级 Next16.4.2，开发/构建显式使用 Webpack；Next15 的历史维护期限不再代表当前安装版本。发布前仍须核对当前支持与安全公告，并在实际镜像运行依赖门禁。
 
 ## 6. Gemini审查采纳
 

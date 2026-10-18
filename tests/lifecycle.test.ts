@@ -280,3 +280,24 @@ test('sole reviewed prebroadcast buy recovery retains original signed claim and 
  const repeated=structuredClone(ledger);repeated.attemptHistory!.push(buyRecoveryHistory());assert.throws(()=>assertClaim(repeated,buyId),/ONE_RECONCILED_RECOVERY_ONLY/);
  const replaced=structuredClone(ledger);replaced.attemptHistory![1].claim.messageHash='different';assert.throws(()=>assertClaim(replaced,buyId),/UNRECONCILED_BUY_ATTEMPT/);
 });
+
+import {RECOVERABLE_EXPIRED_BUY_CLAIM,type ExpiredBuyAttemptHistory} from '../scripts/devnet-claim';
+import {pacedDevnetFetch} from '../scripts/devnet-rpc-pacing';
+test('last exact expired buy recovery preserves full signed claim and rejects any fourth attempt',()=>{
+ const {id,ledger}=claimedFixture();
+ const proof:ExpiredBuyAttemptHistory['proof']={runUrl:'https://github.com/peterpeter228/stonklaunch/actions/runs/39152770076',runStatus:'completed',runConclusion:'failure',runAttempt:1,errorCode:'BLOCKHEIGHT_RPC_FAILED',broadcastAttempted:false,ledgerBlobSha:'6a688b21f68d5643aae992e067998c8d81444aa0',reviewedAt:'2026-10-18T18:45:00Z',evidencePath:'evidence/DURABLE_BUY_ATTEMPT_2_EXPIRY.json',commitment:'finalized',blockHeight:499743878,blockhashValid:false,blockhashContextSlot:512530531,signatureStatus:null,searchTransactionHistory:true,transaction:null,walletBalanceLamports:4979382960,walletBalanceSlot:512530537,tokenAta:'EhPWDSteuHz8YchU9Ub3QGhJy38E6V1J8hSDkBzeY21Z',tokenAtaAccount:null,tokenAtaSlot:512530539};
+ ledger.attemptHistory=[recoveryHistory(),buyRecoveryHistory(),{step:'buy',claim:structuredClone(RECOVERABLE_EXPIRED_BUY_CLAIM),proof}];
+ ledger.steps.launch={...ledger.steps.launch!,state:'finalized',recoveryOfRunId:RECOVERABLE_UNSIGNED_CLAIM.runId!,mint:RECOVERABLE_SIGNED_BUY_CLAIM.mint,poolId:RECOVERABLE_SIGNED_BUY_CLAIM.poolId,signature:'launch',messageHash:'hash',slot:512517543};
+ const buyId={...id,step:'buy' as const,runId:'778',nonce:'last_buy_recovery_0001'};ledger.steps.buy={nonce:buyId.nonce,sourceSha:buyId.sourceSha,runId:buyId.runId,state:'claimed',recoveryOfRunId:'39152770076'};assert.equal(assertClaim(ledger,buyId).state,'claimed');
+ for(const key of ['signature','messageHash','validity','failure'] as const){const bad=structuredClone(ledger);delete bad.attemptHistory![2].claim[key];assert.throws(()=>assertClaim(bad,buyId));}
+ for(const [key,value] of Object.entries({blockHeight:499734995,blockhashValid:true,signatureStatus:{},transaction:{},walletBalanceLamports:1,tokenAtaAccount:{},searchTransactionHistory:false,commitment:'confirmed'})){const bad=structuredClone(ledger);(bad.attemptHistory![2].proof as unknown as Record<string,unknown>)[key]=value;assert.throws(()=>assertClaim(bad,buyId),/BUY_EXPIRY_PROOF_REQUIRED/);}
+ ledger.attemptHistory.push(structuredClone(ledger.attemptHistory[2]));assert.throws(()=>assertClaim(ledger,buyId),/ONE_RECONCILED_RECOVERY_ONLY/);
+});
+test('runner pacing spaces all RPC starts and stops queued network after 429 or 403 without retry',async()=>{
+ const endpoint='https://api.devnet.solana.com';const request={method:'POST',body:JSON.stringify({method:'getBlockHeight'})};
+ let now=0;const starts:number[]=[];const events:Record<string,unknown>[]=[];
+ const paced=pacedDevnetFetch((async()=>{starts.push(now);return new Response('{"result":1}',{status:200});}) as typeof fetch,e=>events.push(e),()=>now,async ms=>{now+=ms;});
+ await Promise.all(Array.from({length:5},()=>paced(endpoint,request)));assert.deepEqual(starts,[0,334,668,1002,1336]);assert.equal(events.length,5);
+ for(const status of [429,403]){let calls=0;const f=pacedDevnetFetch((async()=>{calls++;return new Response('private raw body',{status});}) as typeof fetch,()=>{});await assert.rejects(()=>f(endpoint,request),/DEVNET_RPC_STOPPED/);await assert.rejects(()=>f(endpoint,request),/DEVNET_RPC_STOPPED/);assert.equal(calls,1);}
+ let calls=0;const aborted=new AbortController();aborted.abort();const f=pacedDevnetFetch((async()=>{calls++;return new Response('{}');}) as typeof fetch,()=>{});await assert.rejects(()=>f(endpoint,{...request,signal:aborted.signal}));assert.equal(calls,0);await f('https://api.github.com/repos/example',{});assert.equal(calls,1);
+});

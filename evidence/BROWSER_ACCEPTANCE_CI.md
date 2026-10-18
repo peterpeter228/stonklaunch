@@ -1,6 +1,6 @@
 # Rendered Chromium acceptance harness
 
-Status: IMPLEMENTED, NOT YET EXECUTED. This document is not a PASS receipt.
+Status: Actual Chromium DEMO baseline PASS on Next.js 15.5.28; see the dated run below. Not a production-readiness or wallet-execution receipt.
 
 ## Execution
 
@@ -76,3 +76,24 @@ No actual journey screenshot exists for this run. Correction sets webServer cwd
 explicitly to the repository root. Static validation confirms Next CLI and
 `.next/BUILD_ID` resolve there; discovery still lists two project cases in one
 file. A corrected CI run is required; no PASS claimed.
+
+## Corrected actual rendered baseline, 2026-10-18 18:48–18:50 UTC
+
+Run: https://github.com/peterpeter228/stonklaunch/actions/runs/39155838228
+Source: `b05da0815ce134dab9536e14882cd2345772fafb` (Next.js 15.5.28).
+Actual Chromium journey: **2 passed in 18.5s**, desktop and mobile-360. Artifact
+`12147231206` (30,326,554 bytes) was downloaded and its report inspected.
+Each project's nine viewport checkpoints has viewport=client=scroll: 1440 on
+desktop, 360 on mobile. Actual PNG downloads passed 1080×1350 and QR checks.
+Each project logged four expected resource errors: two trade refusals (403),
+one injected catalog outage (503), one invalid demo-mint request (400). There
+were no uncaught page errors or unexpected network requests/errors.
+
+Desktop home, mobile home and mobile external-inspection screenshots were also
+visually inspected. Responsive layout and DEMO/read-only disclosures are visible;
+no horizontal clipping was observed. The rapid mobile journey captured the
+expected six-second synthetic image-preview toast over part of inspection; this
+is transient overlay, not a fee assertion failure. Full screenshots and traces
+remain in the run artifact. `BROWSER_ACCEPTANCE_BASELINE.json` stores exact
+viewport evidence, diagnostics and screenshot mappings. This PASS is tied to
+the source above; later framework upgrades require their own fresh run.

@@ -1,40 +1,56 @@
 # Dependency security review
 
-Updated 2026-10-18 04:46 UTC. The user approved sending dependency names and versions to the npm registry for audit. The subsequent audit actually completed; it is no longer waiting for permission. Raw machine-readable result: `dependency-audit-final.json`.
+Updated 2026-10-18 18:55 UTC. Dependency audit metadata submission to the npm registry was authorized. No source, API keys, or wallet keys were submitted. This report separates historical evidence from the current locked installation; neither is financial-production acceptance.
 
-## Result
+## Current implementation and evidence
 
-Production audit: **0 critical, 1 high, 4 moderate**, across 228 total dependencies reported by the tool (187 dependencies and 41 optional dependencies; zero development dependencies in this audit). This is **not a clean audit** and not production financial acceptance.
+- Next.js **16.4.2**, React 19.3.1, TypeScript 5.9.3, Node 24.19.0 and pnpm 11.25.0. Development and production builds explicitly use Webpack. This replaces the former Next 15.5.28 baseline; old build logs are not evidence for the upgraded tree.
+- `pnpm-workspace.yaml` retains `next>postcss: 8.5.30`, adds the narrowly scoped `jayson>uuid: 11.1.1`, and records the exact `bigint-buffer@1.1.5` patch. The lockfile contains these resolutions.
+- Clean frozen installation and `scripts/verify-dependency.mjs` passed: one patched bigint package copy, 16 integer cases, zero native-loader attempts, two SPL fixtures, UUID 11.1.1, and no stream-json in the inspected runtime module cache. Machine-readable result: `dependency-runtime-next16.json`.
+- `unit-next16.txt`: 31 tests passed. `typecheck-next16.txt`: typecheck passed. These are scoped engineering checks, not proof of deployed exploitability or financial correctness.
+- Final patched Next 16.4.2 Webpack build completed: `build-next16-patched.txt`. Fresh production audit `dependency-audit-next16.json` reports **0 critical, 1 high, 3 moderate**, across 231 dependencies (187 dependencies and 44 optional dependencies; zero development dependencies). UUID and PostCSS are absent from the remaining advisories. **This is not an audit-clean result.**
+- Post-build scan of all 32 `.next/**/*.nft.json` traces found 17 with Jayson and bigint-buffer, zero with stream-json. The Jayson files are exclusively its browser client, request generator, and package manifest. Full trace matches: `dependency-reachability-next16.json`. Static traces and the runtime-import check are complementary bounded evidence; they do not prove all possible dynamic/deployed paths safe.
 
-Initial audit reported nine advisories. The `next>postcss: 8.5.30` same-major override replaces the vulnerable 8.4.31 resolution; the final result no longer lists the four PostCSS advisories. `pnpm-workspace.yaml` records the override. `build-argon-ui-final.txt` and `unit-final.txt` provide subsequent successful build and 13-test evidence; that evidence does not independently prove exploitability is absent.
+## Historical audit, not the current result
 
-## Remaining advisories and scoped mitigations
+`dependency-audit-final.json` is the earlier Next 15 audit: **0 critical, 1 high, 4 moderate**, with 228 reported dependencies (187 dependencies and 41 optional dependencies). Its filename does not make it the latest audit after dependency changes.
 
-### bigint-buffer 1.1.5: one high
+The still earlier audit had nine advisories. The PostCSS override removed four PostCSS advisories. Historical `build-argon-ui-final.txt` and `unit-final.txt` recorded a successful build and 13 tests for that earlier tree; they must not be presented as current upgrade verification.
 
-- [GHSA-3gc7-fjrx-p6mg](https://github.com/advisories/GHSA-3gc7-fjrx-p6mg): buffer overflow via `toBigIntLE`; the audit lists no patched version.
-- Native builds are explicitly disabled in `pnpm-workspace.yaml`. Inspection found no `.node` binary in the installed bigint-buffer package, and the test log confirms the pure JavaScript fallback is used.
-- This mitigates the reported native binding path for this installation only. It is not removal of the vulnerable dependency or a guarantee for another build image. Recheck the packaged deployment and do not re-enable native compilation without review.
+## bigint-buffer 1.1.5: high advisory retained, native path mitigated
 
-### uuid 8.3.2: one moderate
+[GHSA-3gc7-fjrx-p6mg](https://github.com/advisories/GHSA-3gc7-fjrx-p6mg) describes a native buffer overflow through `toBigIntLE`; no upstream patched version is listed. The package enters via `@solana/spl-token > @solana/buffer-layout-utils`, including the SDK's SPL dependency.
 
-- [GHSA-w5hq-g745-h8pq](https://github.com/advisories/GHSA-w5hq-g745-h8pq): missing buffer bounds checks in v3/v5/v6 with caller-provided buffers; audit patched range is >=11.1.1.
-- Installed jayson 4.3.0 browser client imports `require('uuid').v4` for request IDs. This is different from the advisory's described paths, but does not prove all transitive execution paths safe.
-- No incompatible major-version override was applied solely to hide the audit warning. Upstream remediation or verified compatible replacement remains open.
+The prior mitigation only disabled compilation and observed JavaScript fallback in one installation. The current committed `patches/bigint-buffer@1.1.5.patch` removes only the native `bindings` loader from the official package's `dist/node.js`. Upstream JavaScript conversion functions and package licensing remain unchanged. No community replacement or new funds contract was introduced.
 
-### stream-json 1.9.1: three moderate
+Patch SHA256: `8b6415ba0cf2075d00961458a4ca8bbd263ef2e00458315a8c427a39361c2831`.
+Patched module SHA256: `b536bb4aad1f59646c54e612c19eb498f31c0d79903276a0ae9acf6d2e6e8693`.
 
-- [GHSA-528h-pc64-c93x](https://github.com/advisories/GHSA-528h-pc64-c93x): nested filter complexity denial of service; audit patched range >=3.5.0.
-- [GHSA-hqr4-qq8f-hg3x](https://github.com/advisories/GHSA-hqr4-qq8f-hg3x): accumulated JSONC comment rescanning; audit patched range >=3.6.0.
-- [GHSA-mjw6-4jj6-33hc](https://github.com/advisories/GHSA-mjw6-4jj6-33hc): Assembler prototype pollution; audit patched range >=3.6.0.
-- These packages are introduced through jayson. The inspected web3.js client path uses `jayson/lib/client/browser`, not its streaming server/parser. This is scoped reachability evidence, not a full exploitability assessment. All deployment/import paths still require review; do not blindly force a cross-major stream-json update.
+The offline verification gate checks the exact resolved module hash and all installed pnpm bigint copies. A sandbox records any attempted require, preventing even caught native-load attempts from passing. It exercises the patched code without loading a native binary, LE/BE conversion boundaries for u64/u128, empty/invalid input, and fixed raw SPL mint/account decoding. Removing the loader means a stale native binary cannot be selected by this patched entrypoint.
+
+The gate runs before `build`, `start`, and `indexer`. Docker copies the patch and verifier before a frozen, scripts-disabled install and runs the gate. Native build denial is retained. **The package advisory remains present and is mitigated, not a clean upstream fix.** Actual Docker/deployed-image execution remains an independent gate. Directly bypassing the provided scripts, altering installed code, or future dependency/entrypoint changes invalidate this assessment. The patch does not claim to correct every upstream JavaScript API edge case or eliminate resource-exhaustion risk for arbitrary oversized inputs.
+
+## uuid: narrowly scoped verified remediation
+
+The [maintainer advisory](https://github.com/uuidjs/uuid/security/advisories/GHSA-w5hq-g745-h8pq) lists 11.1.1 as patched. The [official 11.1.1 manifest](https://raw.githubusercontent.com/uuidjs/uuid/v11.1.1/package.json) provides both CommonJS and browser exports.
+
+Jayson 4.3.0 uses `require('uuid').v4()` without arguments in the inspected browser client, request generator, and utilities. The exact `jayson>uuid: 11.1.1` override therefore preserves the APIs actually consumed without upgrading unrelated UUID dependencies. The gate resolves UUID from Jayson's actual dependency context and verifies a generated v4 request ID plus an entirely local JSON-RPC request/response. Broader build/tests remain necessary, and future Jayson API changes require reassessment.
+
+## stream-json 1.9.1: three residual moderate advisories
+
+- [GHSA-528h-pc64-c93x](https://github.com/advisories/GHSA-528h-pc64-c93x): quadratic nested path-filter work; fixed in 3.5.0. The advisory expressly excludes StreamValues/StreamArray/StreamObject from this particular filter issue.
+- [GHSA-hqr4-qq8f-hg3x](https://github.com/advisories/GHSA-hqr4-qq8f-hg3x): JSONC comment rescanning; fixed in 3.6.0. The advisory expressly distinguishes the unaffected plain JSON parser.
+- [GHSA-mjw6-4jj6-33hc](https://github.com/advisories/GHSA-mjw6-4jj6-33hc): Assembler parsed-object prototype replacement; fixed in 3.6.0. It is not global Object.prototype pollution, but can alter application decisions if affected parsed objects are consumed.
+
+Jayson introduces this package. Its streaming utilities require legacy CommonJS paths `stream-json/streamers/StreamValues` and `stream-json/utils/Verifier`. The [official 3.6.0 package](https://raw.githubusercontent.com/uhop/stream-json/3.6.0/package.json) is ESM with reorganized paths/API, so a forced cross-major override is not a verified compatible fix.
+
+The application has no direct jayson/stream-json imports. The inspected web3 RPC entrypoint is `jayson/lib/client/browser`, which uses request generation and ordinary JSON parsing, not the streaming server/parser. Loading the resolved SPL/Web3/Raydium SDK paths in the offline gate did not load stream-json. This supports scoped non-reachability, not a universal absence-of-exploitability claim. Importing Jayson's server/utilities or adding streaming/JSONC parsing requires a new assessment before release. The current build trace coverage is recorded above and in `dependency-reachability-next16.json`.
 
 ## Release gates
 
-- Before a public/mainnet release, resolve or explicitly assess all remaining advisories against the actual deployed bundle and runtime inputs, and repeat the production audit.
-- Verify native-binding build policy in the delivery image, not just this workspace.
-- Check Raydium SDK GPL-3.0 distribution obligations; do not describe the whole dependency tree as unconditionally MIT or legally cleared.
-- Recheck current Next 15 support status before production; the project has recorded the approaching 2026-10-21 support boundary. This report did not independently revalidate the vendor support schedule.
-- Private DEMO use, fixture tests, source review, and an LLM review are not a substitute for protocol, authentication, real-wallet, and deployment acceptance.
-
-No source code, API keys, or wallet keys were part of the npm audit metadata submission. Actual financial/deployed integration coverage remains separately documented and must not be inferred from this audit.
+- Repeat the production audit after dependency changes. Do not suppress the remaining high/moderate advisories or describe this tree as audit-clean.
+- Run the dependency gate in the actual delivery image and preserve its locked patch, scripts, and entrypoints. Local and configured Docker checks are not proof that a deployed image was built or started.
+- Review actual deployment imports and untrusted inputs; preserve evidence for any residual-risk acceptance. Recheck stream-json reachability whenever those change.
+- Check current Next support/security releases before deployment; the obsolete Next 15 deadline is no longer the installed-version baseline, but this is not an indefinite support guarantee for Next 16.
+- Check Raydium SDK GPL-3.0 distribution obligations. The dependency tree is not unconditionally MIT or legally cleared.
+- Private DEMO, offline fixtures, source/LLM review, build and test success do not replace authentication, protocol, real-wallet, deployment or financial acceptance.

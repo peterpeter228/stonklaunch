@@ -1,0 +1,11 @@
+{
+  "status": "PASS",
+  "bigintSourceSha256": "b536bb4aad1f59646c54e612c19eb498f31c0d79903276a0ae9acf6d2e6e8693",
+  "checkedCopies": 1,
+  "integerCases": 16,
+  "nativeLoadAttempts": 0,
+  "splFixtures": 2,
+  "uuidVersion": "11.1.1",
+  "streamJsonLoaded": false,
+  "scope": "Offline resolved dependencies only. Audit advisories remain; deployment and financial acceptance are separate."
+}
