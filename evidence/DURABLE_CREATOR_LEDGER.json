@@ -34,6 +34,18 @@
         "observedAt": "2026-10-18T18:08:39.732Z",
         "readAttempts": 1,
         "observedBlockHeight": 499734845
+      },
+      "failure": {
+        "code": "BLOCKHEIGHT_RPC_FAILED",
+        "validity": {
+          "blockhash": "8XReEE7UMcRBRXbg3En5TSKLszoncoZozmNGQ61USrmv",
+          "lastValidBlockHeight": 499734995,
+          "expiresAt": "2026-10-18T18:08:59.127Z",
+          "phase": "after-sign",
+          "observedAt": "2026-10-18T18:08:41.815Z",
+          "readAttempts": 3
+        },
+        "broadcastAttempted": false
       }
     }
   },
