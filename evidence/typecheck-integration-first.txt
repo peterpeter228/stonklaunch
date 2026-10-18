@@ -1,0 +1,5 @@
+$ tsc --noEmit
+src/app/layout.tsx(3,8): error TS2882: Cannot find module or type declarations for side-effect import of './globals.css'.
+src/lib/raydium/service.ts(14,485): error TS2339: Property 'mintB' does not exist on type 'ApiLaunchConfig'.
+src/lib/raydium/service.ts(14,1708): error TS2339: Property 'checkLaunchParams' does not exist on type 'typeof Curve'.
+[ELIFECYCLE] Command failed with exit code 1.

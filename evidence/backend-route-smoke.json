@@ -1,0 +1,56 @@
+[
+  {
+    "name": "runtime",
+    "status": 200,
+    "body": "{\"data\":{\"mode\":\"demo\",\"cluster\":\"demo\",\"origin\":\"http://localhost:3000\",\"platformId\":null,\"platformAdmin\":null,\"walletEnabled\":false,\"authConfigured\":false,\"storageConfigured\":false,\"actionsEnabled\":false,\"feePolicy\":{\"platformBps\":50,\"creatorBps\":50,\"shareBps\":0},\"blockers\":[\"DEMO_NO_REAL_TRANSACTIONS\",\"PLATFORM_NOT_CONFIGURED\",\"AUTH_NOT_CONFIGURED\",\"STORAGE_NOT_CONFIGURED\"]},\"requestId\":\"11a1342a-aca9-4647-b6a2-7f4874bc8e5f\"}",
+    "cors": null
+  },
+  {
+    "name": "assets",
+    "status": 200,
+    "body": "{\"data\":{\"items\":[{\"assetKey\":\"SOL\",\"symbol\":\"SOL\",\"name\":\"Solana\",\"cluster\":\"demo\",\"mint\":null,\"tokenProgram\":null,\"decimals\":9,\"globalConfigId\":null,\"cpmmConfigId\":null,\"status\":\"preview\",\"canCreate\":false,\"canBuy\":false,\"canSell\":false,\"migrationPathVerified\":false,\"reasonCodes\":[\"DEMO_NO_REAL_TRANSACTIONS\"],\"checkedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null},{\"assetKey\":\"USDC\",\"symbol\":\"USDC\",\"name\":\"USD Coin\",\"cluster\":\"demo\",\"mint\":null,\"tokenProgram\":null,\"decimals\":6,\"globalConfigId\":null,\"cpmmConfigId\":null,\"status\":\"verification_required\",\"canCreate\":false,\"canBuy\":false,\"canSell\":false,\"migrationPathVerified\":false,\"reasonCodes\":[\"QUOTE_CONFIG_UNVERIFIED\",\"CPMM_COMPATIBILITY_UNVERIFIED\"],\"checkedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null},{\"assetKey\":\"TSLAx\",\"symbol\":\"TSLAx\",\"name\":\"Tesla xStock\",\"cluster\":\"demo\",\"mint\":null,\"tokenProgram\":null,\"decimals\":6,\"globalConfigId\":null,\"cpmmConfigId\":null,\"status\":\"verification_required\",\"canCreate\":false,\"canBuy\":false,\"canSell\":false,\"migrationPathVerified\":false,\"reasonCodes\":[\"QUOTE_CONFIG_UNVERIFIED\",\"CPMM_COMPATIBILITY_UNVERIFIED\",\"ISSUER_ELIGIBILITY_UNVERIFIED\"],\"checkedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null},{\"assetKey\":\"AAPLx\",\"symbol\":\"AAPLx\",\"name\":\"Apple xStock\",\"cluster\":\"demo\",\"mint\":null,\"tokenProgram\":null,\"decimals\":6,\"globalConfigId\":null,\"cpmmConfigId\":null,\"status\":\"verification_required\",\"canCreate\":false,\"canBuy\":false,\"canSell\":false,\"migrationPathVerified\":false,\"reasonCodes\":[\"QUOTE_CONFIG_UNVERIFIED\",\"CPMM_COMPATIBILITY_UNVERIFIED\",\"ISSUER_ELIGIBILITY_UNVERIFIED\"],\"checkedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null},{\"assetKey\":\"NVDAx\",\"symbol\":\"NVDAx\",\"name\":\"NVIDIA xStock\",\"cluster\":\"demo\",\"mint\":null,\"tokenProgram\":null,\"decimals\":6,\"globalConfigId\":null,\"cpmmConfigId\":null,\"status\":\"verification_required\",\"canCreate\":false,\"canBuy\":false,\"canSell\":false,\"migrationPathVerified\":false,\"reasonCodes\":[\"QUOTE_CONFIG_UNVERIFIED\",\"CPMM_COMPATIBILITY_UNVERIFIED\",\"ISSUER_ELIGIBILITY_UNVERIFIED\"],\"checkedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null}]},\"requestId\":\"77102a99-2a96-423d-b502-815d8325c4ee\"}",
+    "cors": null
+  },
+  {
+    "name": "launches",
+    "status": 200,
+    "body": "{\"data\":{\"items\":[{\"cluster\":\"demo\",\"dataSource\":\"synthetic-demo-fixture\",\"observedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null,\"isStale\":false,\"mint\":\"demo-lunar\",\"poolId\":\"demo-pool-lunar\",\"name\":\"Lunar Society\",\"symbol\":\"LUNAR\",\"description\":\"A little cat. A much bigger orbit. 演示发行，不是真实链上资产。\",\"imageUrl\":null,\"quoteSymbol\":\"SOL\",\"quoteMint\":\"demo-sol\",\"platformId\":null,\"creator\":null,\"status\":1,\"progress\":100,\"raisedRaw\":\"85000000000\",\"targetRaw\":\"85000000000\",\"volumeRaw\":\"216800000000\",\"createdAt\":\"2026-10-18T00:00:00.000Z\",\"cpmmPoolId\":null,\"cpmmVerified\":false,\"lpEvidence\":null,\"metadataUri\":null,\"signature\":null},{\"cluster\":\"demo\",\"dataSource\":\"synthetic-demo-fixture\",\"observedAt\":\"2026-10-18T00:00:00.000Z\",\"slot\":null,\"isStale\":false,\"mint\":\"demo-neon\",\"poolId\":\"demo-pool-neon\",\"name\":\"Neon Index\",\"symbol\":\"NEON\",\"description\":\"A little cat. A much bigger orbit. 演示发行，不是真实链上资产。\",\"imageUrl\":null,\"quoteSymbol\":\"SOL\",\"quoteMint\":\"demo-sol\",\"platformId\":null,\"creator\":null,\"status\":0,\"progress\":42.8,\"raisedRaw\":\"36380000000\",\"targetRaw\":\"85000000000\",\"volumeRaw\":\"96300000000\",\"createdAt\":\"2026-10-18T00:00:00.000Z\",\"cpmmPoolId\":null,\"cpmmVerified\":false,\"lpEvidence\":null,\"metadataUri\":null,\"signature\":null}],\"nextCursor\":\"demo-pool-neon\",\"coverage\":\"Synthetic demonstration fixtures only\"},\"requestId\":\"88b22195-7828-4f9d-a816-091dde232304\"}",
+    "cors": null
+  },
+  {
+    "name": "tradeDemoDenied",
+    "status": 403,
+    "body": "{\"error\":{\"code\":\"DEMO_NO_REAL_TRANSACTIONS\",\"message\":\"当前模式禁止真实资金交易构建\"},\"requestId\":\"a3ed586d-a8c8-4bef-88f9-d734d885b016\"}",
+    "cors": null
+  },
+  {
+    "name": "actionGet",
+    "status": 200,
+    "body": "{\"type\":\"action\",\"title\":\"Buy on StonkLaunch\",\"icon\":\"http://localhost:3000/icon.svg\",\"description\":\"Actions 当前未启用；请在网页查看网络与资产状态\",\"label\":\"Buy\",\"disabled\":true,\"error\":{\"message\":\"Actions 当前未启用；请在网页查看网络与资产状态\"}}",
+    "cors": "*"
+  },
+  {
+    "name": "actionPostDenied",
+    "status": 403,
+    "body": "{\"message\":\"DEMO_NO_REAL_TRANSACTIONS: 当前模式禁止真实资金交易构建\"}",
+    "cors": "*"
+  },
+  {
+    "name": "actionOptions",
+    "status": 204,
+    "body": "",
+    "cors": "*"
+  },
+  {
+    "name": "cronDenied",
+    "status": 503,
+    "body": "{\"error\":{\"code\":\"CRON_NOT_CONFIGURED\",\"message\":\"批处理凭据未配置\"},\"requestId\":\"c0350df7-1131-422b-a0a3-66159c3a22f1\"}",
+    "cors": null
+  },
+  {
+    "name": "posterPNG",
+    "status": 200,
+    "bytes": 117756,
+    "magic": "89504e470d0a1a0a"
+  }
+]

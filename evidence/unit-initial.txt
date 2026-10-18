@@ -1,0 +1,15 @@
+✔ migration threshold is not confirmed graduation (1.266321ms)
+✔ unknown confirmation must not create duplicate economic action (0.184667ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.189184ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (1.573092ms)
+✔ invalid configuration is rejected, never silently defaulted (0.227341ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.300281ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.407192ms)
+ℹ tests 7
+ℹ suites 0
+ℹ pass 7
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 233.312601

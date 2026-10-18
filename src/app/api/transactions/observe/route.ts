@@ -1,0 +1,2 @@
+import {z} from 'zod';import {api,readJson} from '@/lib/errors';import {getRuntime} from '@/lib/runtime';import {AppError} from '@/lib/errors';import {observeTransaction} from '@/lib/raydium/service';
+export const POST=(r:Request)=>api(async()=>{if(getRuntime().mode==='demo')throw new AppError('DEMO_NO_REAL_TRANSACTIONS','演示不接受真实交易证据',403);const {signature}=z.object({signature:z.string().regex(/^[1-9A-HJ-NP-Za-km-z]{80,90}$/)}).strict().parse(await readJson(r));return observeTransaction(signature);});

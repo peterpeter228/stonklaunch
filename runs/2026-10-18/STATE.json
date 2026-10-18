@@ -1,0 +1,150 @@
+{
+  "project": "StonkLaunch",
+  "charter_version": "2.1",
+  "run_date": "2026-10-18",
+  "timezone": "Asia/Shanghai",
+  "artifact_kind": "dot_development_handoff",
+  "phase": "d01",
+  "phase_status": "integration_and_browser_validation_in_progress",
+  "d00_confirmation": {
+    "received": true,
+    "message_id": "Sentinel_cfb0ddb72cb48191b9d6e8dfc86c6185",
+    "received_at": "2026-10-18T02:57:18Z",
+    "scope": "User explicitly requested implementation from complete kit and independent private repository; real financial actions and wallet signing remain user-executed."
+  },
+  "phases": {
+    "d00": "confirmed",
+    "d01": "in_progress",
+    "d02": "in_progress",
+    "d03": "implemented_pending_validation",
+    "d04": "not_started"
+  },
+  "application": {
+    "implemented": true,
+    "build_verified": true,
+    "browser_verified": false,
+    "deployed": false,
+    "runtime_url": null,
+    "repository": "https://github.com/peterpeter228/stonklaunch",
+    "commit": "772940edbf3b16c18e753bec40bb73fccf81bd95",
+    "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
+    "commit_scope": "Initial README only; implementation checkpoint uploading, latest wallet/discovery changes require fresh build/browser validation"
+  },
+  "evidence_scope": [
+    "official_documentation_read",
+    "official_sdk_source_read",
+    "official_public_idl_read",
+    "official_configs_api_observed"
+  ],
+  "sdk_source_observation": {
+    "repository": "raydium-io/raydium-sdk-V2",
+    "ref": "e2e8bcd865189c994682a9477ec8eaf1e2da8aaf",
+    "package_version": "0.2.74-alpha",
+    "installed": false,
+    "cluster_compatibility_verified": false
+  },
+  "fee_policy": {
+    "platform_bps": 50,
+    "creator_bps": 50,
+    "share_bps": 0,
+    "launchlab_denominator": 1000000,
+    "observed_sol_protocol_rate": 2500,
+    "observed_source": "https://launch-mint-v1.raydium.io/main/configs",
+    "onchain_fee_binding_verified": false
+  },
+  "asset_capabilities": [
+    {
+      "asset": "SOL",
+      "status": "verification_required",
+      "api_candidate_found": true,
+      "rpc_verified": false,
+      "canCreate": false,
+      "canBuy": false,
+      "canSell": false,
+      "migrationPathVerified": false
+    },
+    {
+      "asset": "USDC",
+      "status": "verification_required",
+      "api_candidate_found": false,
+      "rpc_verified": false,
+      "canCreate": false,
+      "canBuy": false,
+      "canSell": false,
+      "migrationPathVerified": false
+    },
+    {
+      "asset": "xStocks",
+      "status": "preview",
+      "api_candidate_found": false,
+      "rpc_verified": false,
+      "canCreate": false,
+      "canBuy": false,
+      "canSell": false,
+      "migrationPathVerified": false
+    }
+  ],
+  "gates": {
+    "GATE-1 RED_ZONE": {
+      "status": "NOT_RUN",
+      "environment": null,
+      "evidence": []
+    },
+    "GATE-2 FEE_HARDCODED": {
+      "status": "NOT_RUN",
+      "environment": null,
+      "evidence": []
+    },
+    "GATE-3 ANTI_BORING_UI": {
+      "status": "NOT_RUN",
+      "environment": null,
+      "evidence": []
+    },
+    "GATE-4 PSYCHOLOGY_EMBEDDED": {
+      "status": "NOT_RUN",
+      "environment": null,
+      "evidence": []
+    },
+    "GATE-5 BOUNTY_READY": {
+      "status": "NOT_RUN",
+      "environment": null,
+      "evidence": []
+    }
+  },
+  "chain_transactions": [],
+  "actual_revenue": {
+    "amount_raw": "0",
+    "currency": null,
+    "reason": "No application or fee-generating transaction has been executed in this handoff preparation."
+  },
+  "authorization": {
+    "routine_local_development": "per_user_task",
+    "mainnet_funds": "user_execution_required",
+    "external_publish_or_paid_services": "follow_existing_explicit_authorization_else_prepare_for_review",
+    "secrets_included": false
+  },
+  "retry_counts": {},
+  "known_constraints": [
+    "GlobalConfig quote capability is protocol-controlled",
+    "SDK documentation and public IDL exhibit version differences",
+    "Next.js 15 support window must be rechecked at execution time"
+  ],
+  "next_steps": [
+    "Record explicit d00 confirmation from the executing user message",
+    "Inspect actual dot runtime and project directory without assuming access",
+    "Resolve supported Next.js/SDK versions and establish code project",
+    "Start d01 with SOL config and platform fee binding read/prepare flow; parallel UI/data work where possible"
+  ],
+  "last_completed_work": "Initial code integration builds; active actual browser validation, real unsigned adapter integration and read-only RPC checks. No signed transactions or hosted deployment.",
+  "verified_checks": [
+    "7 unit tests pass",
+    "server route demo/read-only transaction refusal passed",
+    "initial five-page Next production build passed",
+    "embedded PostgreSQL migration/RLS ownership/forged financial-write tests passed with auth stub"
+  ],
+  "user_review": {
+    "message_id": "Sentinel_adb96e5d86908191937e0f4be8000bbf",
+    "decision_file": "evidence/GEMINI_REVIEW_DECISIONS.md",
+    "changes": "Separate external read-only discovery; preserve verified platform policy; reject fee unit error, unsupported revenue/competitor claims, defer obsolete Jupiter v1 Zap-In and unapproved extra fee."
+  }
+}

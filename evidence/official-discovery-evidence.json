@@ -1,0 +1,908 @@
+{
+  "retrievedAt": "2026-10-18T03:16:41.524645+00:00",
+  "source": "https://launch-mint-v1.raydium.io/get/list?sort=new",
+  "count": 100,
+  "scope": "External API reported listings, not RPC-verified; tax fields are external base-token claims, not our minted base configuration.",
+  "observations": [
+    {
+      "mint": "8maXYbpB4HQ1EeU8eiB4QRUHMBwuPoGqbD9FAzATyzhn",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "4BMZdhB2PeXM9o2G4nUFxuE1JZgtUfjAXEEBhj868A28",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "FRONTIER",
+      "quoteMint": "58QyXQ1UDgHh64EiTsCeevVM9cLPqBDNf3qZE6EdfUhZ",
+      "globalConfigId": "8vChNhMLR5X3YAvHJ4s6PPWo2272eRcCvmhNwmLWkvSZ",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "Fp33jdDbYa6HBi8DpfRVQkUtGiCco5PGeaG6KpAVaQZB",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "2Zk1JTPD1C8uuHVseiyNwnEF7QK7t8zNSgFcCu125cCW",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "7jptNViTRsTS5GX7YHeEbjXw5ujCoXkEkwGqe3WUxANY",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "PUMP",
+      "quoteMint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "globalConfigId": "7aojgjFgzz9k3fpQp1JXmU9rR6HVbhzJjVucTPyFGC9Q",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "Ce6E7edzL92BTPgfgLgYsFBFQJkgFsJkpiF2KewJgray",
+      "platformId": "4Bu96XjU84XjPDSpveTVf6LYGCkfW5FK7SNkREWcEfV4",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "7VtPz9mikiXskwfV5HhsW4bUQrFUqEijaoSu4GtQbonk",
+      "platformId": "FfYek5vEz23cMkWsdJwG2oa6EphsvXSHrGpdALN4g6W1",
+      "quoteSymbol": "Bonk",
+      "quoteMint": "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263",
+      "globalConfigId": "7G6Gg6rCnaegAhPBdZnRKCkzDWB6K6j4vmhtivSJhVtA",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "Hk1EhBMuJoNYwGxdfhkmKdND3RB26MJzNxkaX48rLNwE",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "PUMP",
+      "quoteMint": "pumpCmXqMfrsAkQ5r49WcJnRayYRqmXz6ae8H7H9Dfn",
+      "globalConfigId": "7aojgjFgzz9k3fpQp1JXmU9rR6HVbhzJjVucTPyFGC9Q",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "3av48Hwd2n87Dbd23ict3ow53WqW1HX66egXD9yUYi56",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "FRONTIER",
+      "quoteMint": "58QyXQ1UDgHh64EiTsCeevVM9cLPqBDNf3qZE6EdfUhZ",
+      "globalConfigId": "8vChNhMLR5X3YAvHJ4s6PPWo2272eRcCvmhNwmLWkvSZ",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "D38ptRhEkZhuT8AQE8wHnn6Eker99fstNjLMRTjn1Tsj",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "FRONTIER",
+      "quoteMint": "58QyXQ1UDgHh64EiTsCeevVM9cLPqBDNf3qZE6EdfUhZ",
+      "globalConfigId": "8vChNhMLR5X3YAvHJ4s6PPWo2272eRcCvmhNwmLWkvSZ",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "59q7MmBESTiHaRJjgEV5LvjzmjyTtN1c8Y37KnkaaqDY",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "5cTBqm3auBjzQN7733RUN8dyVBPTSZ99ezDHZqqR8DPn",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "NVDAx",
+      "quoteMint": "Xsc9qvGR1efVDFGLrVsmkzv3qi45LTBjeUKSPmx9qEh",
+      "globalConfigId": "2NuVPU5ViAyQsZamVfJ1vU6Cp77WSzret4LtNTMiWFQ4",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "6TQxdXJb9b1YCdHTtQb6GMzkmKieuys5HEeNUHGsUSst",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "STRK",
+      "quoteMint": "HsRpHQn6VbyMs5b5j5SV6xQ2VvpvvCCzu19GjytVSCoz",
+      "globalConfigId": "ErmJD84y4XXKLqDm7vp266eoptkFj1kadx7UKGT9k5Fe",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "AQwkQm2k8Lc2UuH49gWt6xeTeHfQodJnTTcnxxqhvNAR",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "OPENAI",
+      "quoteMint": "PreweJYECqtQwBtpxHL171nL2K6umo692gTm7Q3rpgF",
+      "globalConfigId": "6ttGGqhKaRWMdS8ZkM7T6X2heg9GEMNeePXA3MJos6dj",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "imtgxYwd8PJCNQdE8B8gzi8M44H4WxaPLQWrQkCo6e9",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "BABA",
+      "quoteMint": "BABANGA4JE7Kkam4nTrALAwAVgsNJUuFJnnkF7S16BZp",
+      "globalConfigId": "6nGs94rrtkAAKAUz17MWRBYFMVThNL5dqxzdD19zoCF4",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "C7B8Vex3TC1hihcSZVNmMfAz5Z1b3yF8EQjTTbS22fQJ",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "2SyVBbezrnL5aU4pLEfeCLCJcS4jBNZoxuuszBXF99Bu",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "D3mEbwmyg9FBDeKoqRiZgDcoan3NBqUvzJd59KaKhiZ",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "xSOL",
+      "quoteMint": "4sWNB8zGWHkh6UnmwiEtzNxL4XrN7uK9tosbESbJFfVs",
+      "globalConfigId": "89Jix6Gj2s3UgMZLzDfbqVGB6h2tLhdhPxv8KzVFZzCE",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "FyLBRmTbgwqZQAgZrvzEAUexCHEnZE5hSe6fPmBUwdtB",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "FRONTIER",
+      "quoteMint": "58QyXQ1UDgHh64EiTsCeevVM9cLPqBDNf3qZE6EdfUhZ",
+      "globalConfigId": "8vChNhMLR5X3YAvHJ4s6PPWo2272eRcCvmhNwmLWkvSZ",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "GGXATL7RPZM79XJzzzxJFAPEgwSJyfbP2DS4y3upiaP5",
+      "platformId": "CUqSiwPs6C4WyntMgaFazLp7wYQfaLp5URbjUP9V7SNi",
+      "quoteSymbol": "TSLAx",
+      "quoteMint": "XsDoVfqeBukxuZHWhdvWHBhgEHjGNst4MLodqsJHzoB",
+      "globalConfigId": "Fny7wPYnkeR5AU285YLSJv9giQUbxDA2DpXQAinTe2nR",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "4u49qS9NjP4zAW3r6TYRGKzsMizTk7SfQK5A9LWHiJ2M",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "TF9DGLgppqPAgvsnb4s9k9Jny3RKnm55Ui6BaR3ACCm",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "2ptaq3xTDqMaufKfDbZu3nSjBhePRSWeDjBTYbQ1XySo",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "EwkiJSkPRUYoijGDiTHEeVTJiPgY8A8P4MWxqPpTwuBC",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "9FwCA3gZeJQHJhmxVeJJmmxfKm8DTZbtfuwkf2oegYVq",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "AMK1F3Ewp3QCuxDU11FGtMUhTemyeE8uBJ8wBFnWxd96",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "5J7aLJ5V4VqggbZobHGsFzDffhS45SAmXdH3GuQNDV37",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "STRK",
+      "quoteMint": "HsRpHQn6VbyMs5b5j5SV6xQ2VvpvvCCzu19GjytVSCoz",
+      "globalConfigId": "ErmJD84y4XXKLqDm7vp266eoptkFj1kadx7UKGT9k5Fe",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "8Ka4DSK7pdJpbqkgeCGouUZ7qHyTpj8btCcV9qniwFqK",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "3Xk7scv7TY7iVkrZ7GBEe4abmsyDrDgNEadz4oSUtDbS",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "A32VJ7CGR2XASv6muNh2dJF9S42XxiTriwnDNAni99Hb",
+      "platformId": "6ng7Dae5VPNu2i8sZTspF8cgnHay8PZV7bbTmwnS16ma",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "2xaDHcrAvAajnEihFhzFAyQDD2zodsq4cTGewJds6zNx",
+      "platformId": "6ng7Dae5VPNu2i8sZTspF8cgnHay8PZV7bbTmwnS16ma",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "2s1pwsz6Nwx7m4QNcnqT7HnNeLroFmtmXecSLBZdtray",
+      "platformId": "4Bu96XjU84XjPDSpveTVf6LYGCkfW5FK7SNkREWcEfV4",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "6BmCkwBEbBCK8xJWK9Z1RUGNfeVDBGjtAA5o1gbD69PC",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "F8su1XjigJgtk3xXifkJst8u1kAn5MBxUUzBCcF2PRLS",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "Czv8xZc9txS7SKzgqkGSCAtfh6TJn26vf6fVC9dD93Xd",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "D4MjkrVwBLfA6GyaXNsayXbfJBn1AUNUAs79aHBTnPeW",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "J3TYiWLNoarG1mBsNqwVyZFiZADQZZ1Hv85f6TdUiEnk",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "BNT7GSZCh3ATcWC4HdBovjuzr6WKmzW9mNs5VcDTKaD",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "Gwz8ibcJRooTUfwYMi9diHEmPghNUSUWfECv14fZHTPp",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "C5BPXnpnZBSVmSsKV68r8uyCh3Raxu9PY3q4Q71iByL6",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "CeBgsTNGog1f6yk2sRDA7niqAiKngteZDmVzRyuwSTNK",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "EuEr897rF6G4bHyoAPUUNiKo9DNjhw4abMNBsATcde3n",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "51VHaJ1GRa3RDXKCVSAcNKK3tzFz21Zta3u7SaoUpREk",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "9kENEjy9zjQwRc4ByucvQG83LL1FC9E8JreNh82zqzhT",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "DhYFjW5jH12FKEWPkeTgHy7pLHLpAg37naM8XUZ27ray",
+      "platformId": "4Bu96XjU84XjPDSpveTVf6LYGCkfW5FK7SNkREWcEfV4",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "6Pd5EzmWVmHLNjwKQQsYK3p3HYduqEz6NVvWrXSj7ray",
+      "platformId": "4Bu96XjU84XjPDSpveTVf6LYGCkfW5FK7SNkREWcEfV4",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "FV4aeg8SDYjkah6GPGyDXV1a6Wy5dzoSQzTovfdRxr7p",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "CiLFjBhLL5T4DkWf4z4J8fGyywiYvfHDhibW1MgwUo4q",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "54QdCkPSKxnALXHp133kvw3ArocE8bKRjEi4wnUjXUcW",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "DfYmFRxBVuCKgPMN1H7NtgWo3ySaEkVMsQ7g4WdgPHRQ",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "DdzcLmu6GaT1VE9kie7bnD5P98mEDx9TjgsVm3KGYJBF",
+      "platformId": "4EGpKR5NV8brUneCgRERg1r6MeSjjfCJBiednrB7WqXn",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "EsJqAyyXUBESLw3REb7crXr4sr5S7jiF7TPuN6PHPZyA",
+      "platformId": "HaR3CqfR1fohJbjpZYWDwDmyqa9gF7KfJgV7rgLbaNca",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "2q24NJpTdebVXYPRJWxXip7ukK1gXFFWNWZiqV3HSTNK",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "3hVUT23XCmKs4MTVFk3eNFo3neWrUx1nWzk98nLBzZZ6",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "5eRJDB7SZeNZgkQBjjSFrnYPzo5pPF6KYuQVbgGnJray",
+      "platformId": "4Bu96XjU84XjPDSpveTVf6LYGCkfW5FK7SNkREWcEfV4",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "6shsXtWqPGqATi8kyVV48v7STK2h2zyfSmUPamC9STNK",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "Ag9agPm7mRmmyjBZrRqWZ74tT7kTwv9WHK9E7YVBMQwF",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "GR3g1yUCa1pq9bJshisSm47cBWPLWNwySN4YqwcjSTNK",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "ELON",
+      "quoteMint": "B2GESkSErPjuCq6n4LcaJP5v2z1kJnw3xHVZnop2sZx",
+      "globalConfigId": "BceKoPAwm4S6mzeWBG5kc85kVqpYBspg71wCoYESUMe4",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "5dRde3wsfeEZgmKVLyDHVrEnzRP7iYe5wRnTgKe5SLTS",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "AJoVuyRd9ezRdJhLx6jf1Ujs15zbLgQo6bziy7EuTEWF",
+      "platformId": "CopsumExnyPpuva7UK9prgjCK5iAR9uTQpR48zz6ZG4R",
+      "quoteSymbol": "SKR",
+      "quoteMint": "SKRbvo6Gf7GondiT3BbTfuRDPqLWei4j2Qy2NPGZhW3",
+      "globalConfigId": "6BYhrqg6ybkJgUQ9Yn6wXUp4P3BBnwrzcEe6Su51rYZg",
+      "baseTransferFeeBps": null,
+      "baseProgram": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+    },
+    {
+      "mint": "6KRRQhLBFhvDrQDsSBpDb2m7q5vgAXPAcQ9yXbmsSTNK",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "tOpenAI",
+      "quoteMint": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+      "globalConfigId": "DrQRhq4L7LvqncmP9FXfevc3cJrbjh1cPydxA6PWRXfu",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "AWyGwmBEFgtmbM7QkZ1wEeMwJVoQJ5WCZLEHsC3WW6ht",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "tOpenAI",
+      "quoteMint": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+      "globalConfigId": "DrQRhq4L7LvqncmP9FXfevc3cJrbjh1cPydxA6PWRXfu",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "F9bvaoFHEMrKtsPcaqau1kj47r8sepvJPq6iFjWQentd",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "tOpenAI",
+      "quoteMint": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+      "globalConfigId": "DrQRhq4L7LvqncmP9FXfevc3cJrbjh1cPydxA6PWRXfu",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "6s5SaEn5hwU6fBeq293BTqjpdxtLeXfU6B6KT7QUp44q",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "7Trehpdo9c1W4g2sjrPbmZLFdNfd1XsiejwqbfnTEH35",
+      "platformId": "CUqSiwPs6C4WyntMgaFazLp7wYQfaLp5URbjUP9V7SNi",
+      "quoteSymbol": "PSOL",
+      "quoteMint": "pSo1f9nQXWgXibFtKf7NWYxb5enAM4qfP6UJSiXRQfL",
+      "globalConfigId": "GhS5tPXTKjZMcXe2ri3NVzs79bHpvs1rJ8BM88vSV99f",
+      "baseTransferFeeBps": 300,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "84zEfsQASfGj7gtzaH7dP49LKLasXPktNZQguTqEthwN",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "tOpenAI",
+      "quoteMint": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+      "globalConfigId": "DrQRhq4L7LvqncmP9FXfevc3cJrbjh1cPydxA6PWRXfu",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "4nRei5b999JcH2U2daa7pCo231bx7heqw2bsipsms4cm",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "MUSK4",
+      "quoteMint": "ysPp2Bt2j2UQu2tZwtSJz7JxyrmQ8GJcNJE5NyDoS5a",
+      "globalConfigId": "6k9BeZy15VW54ga75ebohrU9bhimtWnGZDuJqmB6Tzb",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "6BCG3vWAU5YxCd4RGfAztskejoC6dEw8HJdiB5L9YcYn",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "tOpenAI",
+      "quoteMint": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+      "globalConfigId": "DrQRhq4L7LvqncmP9FXfevc3cJrbjh1cPydxA6PWRXfu",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "tS57CeWRfnix3m3BXBvaF2ZjbPzGV51SQMH3tatSC4f",
+      "platformId": "4E876qZTE9FJMrBzgVtBrSrzz2TLivB5Y5QXPjB4gZL7",
+      "quoteSymbol": "HYPE",
+      "quoteMint": "98sMhvDwXj1RQi5c5Mndm3vPe9cBqPrbLaufMXFNMh5g",
+      "globalConfigId": "3yFuYHJBZ6Fw4KSVNFp7F6kJLk7BEPkTrnPcSmVWyPBV",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "6BziwEaAHjeJkUTiiaX6ZKNADQf27t5cSwnWNuzpQXer",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "6ZW8ffuZP6uamBD3wMy5nbHi89UPorxkqqwt35taH7MA",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "7XZxLVPqDP7FuqhmCuTBhgC5b98AYsrcYNaU9Rzy31Yv",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "5H8qWGJfJHK4SyWiu6fVEQYZ2fL3yEG4YFGNMo2sF3ov",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "ENtoE3MFkW5miBJZHSDG1GsWNf44eS8Kwt822mYWRmWM",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "79p4zVvfPR9rV6A21hgEQDCZiq7AzzHvD7X9YgK3pKWd",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "USDC",
+      "quoteMint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+      "globalConfigId": "8gj14w8vkNZjJTPak6e96Uf1sY438WKheH4s5dHyxiRw",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "FBFp8fZMHbER81gYEKH7qr28RCECfyVwYqdz2R4Y4YvM",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "9dG2YM9yegRXj2NH1SQUww5p25gEtUeRahULgENzvGQ2",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "FWHLLtxoqNdRern1xFQnufySvnowjmmQszYZAWEzjyFw",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "tOpenAI",
+      "quoteMint": "oPAiAikWTaFj9RYoRFD35ccfwhnMcB3ThgBZRHSkjTZ",
+      "globalConfigId": "DrQRhq4L7LvqncmP9FXfevc3cJrbjh1cPydxA6PWRXfu",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "De1aehLcy7JCDzNckDQZdQzZk3gtsDgFCxFb3grFCWVo",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "7c7JLAkXKm8WuUTeoZqo8ZJwtCT21ohthgZXZkewFeE1",
+      "platformId": "Fo1dp1JYQQWgYgAdiZWfmJpA7KRreCdCEyEEVcE1Q2TN",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 0,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "44tXPGQ1U9Tx5itk52y4cVxw74YDcJY9BWmsX7jowHM9",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "Hkf8LmARg2vqhkjP65X3kmZCiGYZhjDYDvfgdXpnU6Am",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "3ReQujtg5uaWsQroSaRBCfT7N6Szgj7wCYNs7Ldk5sgu",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "7z5SnktT4e5sixCZ8WweLRj97wz4sVqfhaEFpbydD64H",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "AJywhzBgQFVRGHr2CNRUynCFiiWyZptzYXuWCZzxM9uP",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "GsZsqH7fjK9vFHMsdhykmVkcSmbtzmMpeSzWGRNpWZ3y",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "CcHXDMSUvimQ9vaQA64vjirx6wdK3A1AfApC33btwAWP",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "94UyPsLJMPV3bVoVzPHc2E5y3Y9TqbfYN16evppoUXme",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "kH95hudLtPjqD4djVHCdbmuXwDvUF33bL54VtCwyACT",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "3dkNVzes3Tb3xxzKYpGKvbtxBj1yhQ4MHouYdhsyMwv9",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "CrBeprpTkY3ct65ER8gVTkNK8bTA5oBUNnVsCRNgH1Hr",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "CYcYDcCuQ982C2cLxmrKCDXieEgxPtSPnNJqZ6xXHMas",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "CCDYYckpZ3VA5UwSDqoiw8zVakXqRrygEb4JHbs8TomJ",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "FNgPRc4zAfD5yJZ9DQCWnV2X2nLzSLRbW3EwBqYeqUtD",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "7PWFfRLo7hprqng2t5ZiQLU9SKp9enhC5ai1hTrnAxaN",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "8dbFUWjECSVKkZkZ7gNz6Lzs4ufdM5svqBtGXeKyVYGR",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "J4T2L6xDJwP55a9oTAc5pbYBD1NWr9fU183W9pLE6CSL",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "FmHJ5B4x7gpfZXM5qZeop37efkniXw8948ReTmGpekHX",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "4uvace5yjbYQLWpHfnSiusKvh8P7bevjKCRmJMq9w97y",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    },
+    {
+      "mint": "JBen2T1URiGwdYbGvLvKYF7TyyrNjCyeMjo9FhLveiXt",
+      "platformId": "6BwHHDg3u1854jC8PDLXvR4spTcLNaoBxLJNGC4nTESt",
+      "quoteSymbol": "WSOL",
+      "quoteMint": "So11111111111111111111111111111111111111112",
+      "globalConfigId": "6s1xP3hpbAfFoNtUNF8mfHsjr2Bd97JxFJRWLbL6aHuX",
+      "baseTransferFeeBps": 100,
+      "baseProgram": "TokenzQdBNbLqP5VEhdkAS6EPFLC1PHnBqCXEpPxuEb"
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+PASS original migration executes in embedded PostgreSQL (Supabase auth stub only)
+PASS owner can insert and read own draft
+PASS other identity cannot read draft
+PASS forged wallet ownership rejected
+PASS authenticated financial evidence write rejected
+PASS draft mint identity immutable
+LIMIT: embedded PostgreSQL validates migration/RLS, not deployed Supabase Auth/storage/connectivity

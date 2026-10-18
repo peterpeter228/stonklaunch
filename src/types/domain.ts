@@ -1,0 +1,12 @@
+export type AppMode = 'demo'|'devnet'|'mainnet-readonly'|'mainnet-live';
+export type Cluster = 'demo'|'devnet'|'mainnet-beta';
+export type Provenance = {cluster: Cluster; dataSource: string; observedAt: string|null; slot: number|null; isStale: boolean};
+export type AssetCapability = {assetKey:string; symbol:string; name:string; cluster:Cluster; mint:string|null; tokenProgram:string|null; decimals:number|null; globalConfigId:string|null; cpmmConfigId:string|null; status:'enabled'|'verification_required'|'preview'|'blocked'|'temporarily_unavailable'; canCreate:boolean;canBuy:boolean;canSell:boolean;migrationPathVerified:boolean;reasonCodes:string[];checkedAt:string|null;slot:number|null};
+export type Launch = Provenance & {mint:string;poolId:string;name:string;symbol:string;description:string;imageUrl:string|null;quoteSymbol:string;quoteMint:string;baseDecimals?:number;quoteDecimals?:number;platformId:string|null;creator:string|null;status:0|1|2;progress:number;raisedRaw:string;targetRaw:string;volumeRaw:string|null;createdAt:string;cpmmPoolId:string|null;cpmmVerified:boolean;lpEvidence:string|null;metadataUri:string|null;signature:string|null};
+export type RuntimeConfig = {mode:AppMode;cluster:Cluster;origin:string;platformId:string|null;platformAdmin:string|null;walletEnabled:boolean;authConfigured:boolean;storageConfigured:boolean;actionsEnabled:boolean;feePolicy:{platformBps:number;creatorBps:number;shareBps:number};blockers:string[]};
+export type FeeRow = {quoteMint:string;symbol:string;decimals:number;accruedRaw:string|null;claimableRaw:string|null;claimedRaw:string|null;attributionStatus:string;claimScope:string};
+export type Fees = Provenance & {rows:FeeRow[];role:'public'|'creator'|'admin';blockers:string[]};
+export type LaunchDraft = {name:string;symbol:string;description:string;assetKey:string;imageUrl?:string;metadataUri?:string;clientMintPublicKey?:string;initialBuyRaw?:string};
+export type ApiError = {code:string;message:string;details?:unknown};
+export type ApiEnvelope<T> = {data:T;requestId:string} | {error:ApiError;requestId:string};
+export type TransactionPlan = {kind:string;cluster:Cluster;transactionBase64:string|null;blockhash:string|null;lastValidBlockHeight:number|null;summary:Record<string,unknown>;requiresWalletSignature:true;blockers:string[]};

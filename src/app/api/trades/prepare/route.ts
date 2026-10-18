@@ -1,0 +1,2 @@
+import {api,readJson} from '@/lib/errors';import {requireFinancialMode,assertSameOrigin} from '@/lib/runtime';import {tradeInput} from '@/lib/data/validation';import {requireSession} from '@/lib/auth/server';import {prepareTrade} from '@/lib/raydium/service';
+export const POST=(r:Request)=>api(async()=>{assertSameOrigin(r);requireFinancialMode();const s=await requireSession(r);return prepareTrade({...tradeInput.parse(await readJson(r)),wallet:s.wallet});});

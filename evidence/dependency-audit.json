@@ -1,0 +1,257 @@
+{
+  "advisories": {
+    "1103747": {
+      "findings": [
+        {
+          "version": "1.1.5",
+          "paths": [
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/buffer-layout-utils>bigint-buffer",
+            ".>@solana/spl-token>@solana/buffer-layout-utils>bigint-buffer"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1103747,
+      "title": "bigint-buffer Vulnerable to Buffer Overflow via toBigIntLE() Function",
+      "module_name": "bigint-buffer",
+      "vulnerable_versions": "<=1.1.5",
+      "patched_versions": null,
+      "severity": "high",
+      "cwe": "CWE-120",
+      "github_advisory_id": "GHSA-3gc7-fjrx-p6mg",
+      "url": "https://github.com/advisories/GHSA-3gc7-fjrx-p6mg",
+      "patched_versions_unpublished": true
+    },
+    "1117015": {
+      "findings": [
+        {
+          "version": "8.4.31",
+          "paths": [
+            ".>next>postcss"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1117015,
+      "title": "PostCSS has XSS via Unescaped </style> in its CSS Stringify Output",
+      "module_name": "postcss",
+      "vulnerable_versions": "<8.5.10",
+      "patched_versions": ">=8.5.10",
+      "severity": "moderate",
+      "cwe": "CWE-79",
+      "github_advisory_id": "GHSA-qx2v-qp2m-jg93",
+      "url": "https://github.com/advisories/GHSA-qx2v-qp2m-jg93"
+    },
+    "1119441": {
+      "findings": [
+        {
+          "version": "8.3.2",
+          "paths": [
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>uuid",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>uuid",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>uuid",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/web3.js>jayson>uuid",
+            ".>@raydium-io/raydium-sdk-v2>@solana/web3.js>jayson>uuid",
+            ".>@solana/actions>@solana/web3.js>jayson>uuid",
+            ".>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>uuid",
+            ".>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>uuid",
+            ".>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>uuid",
+            ".>@solana/spl-token>@solana/web3.js>jayson>uuid",
+            ".>@solana/web3.js>jayson>uuid"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1119441,
+      "title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+      "module_name": "uuid",
+      "vulnerable_versions": "<11.1.1",
+      "patched_versions": ">=11.1.1",
+      "severity": "moderate",
+      "cwe": "CWE-787, CWE-1285",
+      "github_advisory_id": "GHSA-w5hq-g745-h8pq",
+      "url": "https://github.com/advisories/GHSA-w5hq-g745-h8pq"
+    },
+    "1124252": {
+      "findings": [
+        {
+          "version": "8.4.31",
+          "paths": [
+            ".>next>postcss"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1124252,
+      "title": "PostCSS: Arbitrary file read and information disclosure via attacker-controlled sourceMappingURL in CSS comments",
+      "module_name": "postcss",
+      "vulnerable_versions": "<=8.5.11",
+      "patched_versions": ">=8.5.12",
+      "severity": "high",
+      "cwe": "CWE-22, CWE-200",
+      "github_advisory_id": "GHSA-6g55-p6wh-862q",
+      "url": "https://github.com/advisories/GHSA-6g55-p6wh-862q"
+    },
+    "1130709": {
+      "findings": [
+        {
+          "version": "8.4.31",
+          "paths": [
+            ".>next>postcss"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1130709,
+      "title": "PostCSS: incomplete fix of GHSA-6g55-p6wh-862q — attacker-controlled sourceMappingURL reads arbitrary .map files when `from` is unset",
+      "module_name": "postcss",
+      "vulnerable_versions": "<=8.5.22",
+      "patched_versions": ">=8.5.23",
+      "severity": "moderate",
+      "cwe": "CWE-22, CWE-200",
+      "github_advisory_id": "GHSA-fxqj-rqcc-2cmp",
+      "url": "https://github.com/advisories/GHSA-fxqj-rqcc-2cmp"
+    },
+    "1139510": {
+      "findings": [
+        {
+          "version": "8.4.31",
+          "paths": [
+            ".>next>postcss"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1139510,
+      "title": "PostCSS: Path Traversal in Previous Source Map Auto-Loading (sourceMappingURL) leads to Arbitrary .map File Disclosure",
+      "module_name": "postcss",
+      "vulnerable_versions": "<=8.5.17",
+      "patched_versions": ">=8.5.18",
+      "severity": "high",
+      "cwe": "CWE-22",
+      "github_advisory_id": "GHSA-r28c-9q8g-f849",
+      "url": "https://github.com/advisories/GHSA-r28c-9q8g-f849"
+    },
+    "1164823": {
+      "findings": [
+        {
+          "version": "1.9.1",
+          "paths": [
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/web3.js>jayson>stream-json",
+            ".>@solana/actions>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/web3.js>jayson>stream-json",
+            ".>@solana/web3.js>jayson>stream-json"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1164823,
+      "title": "stream-json: pick/ignore/filter/replace filters are O(depth²) on nested input — small crafted JSON blocks the event loop for seconds→minutes (DoS)",
+      "module_name": "stream-json",
+      "vulnerable_versions": "<=3.4.0",
+      "patched_versions": ">=3.5.0",
+      "severity": "moderate",
+      "cwe": "CWE-407",
+      "github_advisory_id": "GHSA-528h-pc64-c93x",
+      "url": "https://github.com/advisories/GHSA-528h-pc64-c93x"
+    },
+    "1241262": {
+      "findings": [
+        {
+          "version": "1.9.1",
+          "paths": [
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/web3.js>jayson>stream-json",
+            ".>@solana/actions>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/web3.js>jayson>stream-json",
+            ".>@solana/web3.js>jayson>stream-json"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1241262,
+      "title": "stream-json: JSONC parser and verifier re-scan the whole accumulated comment on every input chunk",
+      "module_name": "stream-json",
+      "vulnerable_versions": "<=3.5.0",
+      "patched_versions": ">=3.6.0",
+      "severity": "moderate",
+      "cwe": "CWE-407",
+      "github_advisory_id": "GHSA-hqr4-qq8f-hg3x",
+      "url": "https://github.com/advisories/GHSA-hqr4-qq8f-hg3x"
+    },
+    "1241263": {
+      "findings": [
+        {
+          "version": "1.9.1",
+          "paths": [
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/spl-token>@solana/web3.js>jayson>stream-json",
+            ".>@raydium-io/raydium-sdk-v2>@solana/web3.js>jayson>stream-json",
+            ".>@solana/actions>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/buffer-layout-utils>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/spl-token-group>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/spl-token-metadata>@solana/web3.js>jayson>stream-json",
+            ".>@solana/spl-token>@solana/web3.js>jayson>stream-json",
+            ".>@solana/web3.js>jayson>stream-json"
+          ],
+          "dev": false,
+          "optional": false,
+          "bundled": false
+        }
+      ],
+      "id": 1241263,
+      "title": "stream-json has a prototype pollution issue: Assembler writes this.current[this.key] on plain objects",
+      "module_name": "stream-json",
+      "vulnerable_versions": "<3.6.0",
+      "patched_versions": ">=3.6.0",
+      "severity": "moderate",
+      "cwe": "CWE-1321",
+      "github_advisory_id": "GHSA-mjw6-4jj6-33hc",
+      "url": "https://github.com/advisories/GHSA-mjw6-4jj6-33hc"
+    }
+  },
+  "metadata": {
+    "vulnerabilities": {
+      "info": 0,
+      "low": 0,
+      "moderate": 6,
+      "high": 3,
+      "critical": 0
+    },
+    "dependencies": 187,
+    "devDependencies": 0,
+    "optionalDependencies": 41,
+    "totalDependencies": 228
+  }
+}

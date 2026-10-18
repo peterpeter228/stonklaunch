@@ -1,0 +1,2 @@
+import {z} from 'zod';import {api,readJson} from '@/lib/errors';import {requireFinancialMode,assertSameOrigin} from '@/lib/runtime';import {publicKey} from '@/lib/data/validation';import {requireSession} from '@/lib/auth/server';import {prepareFeeClaim} from '@/lib/raydium/service';
+export const POST=(r:Request)=>api(async()=>{assertSameOrigin(r);requireFinancialMode();const s=await requireSession(r);const input=z.object({quoteMint:publicKey,scope:z.enum(['creator','platform'])}).strict().parse(await readJson(r));return prepareFeeClaim(input,s.wallet);});
