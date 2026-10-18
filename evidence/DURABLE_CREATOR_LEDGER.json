@@ -56,6 +56,12 @@
         "observedBlockHeight": 499754043
       },
       "slot": 512540762
+    },
+    "claim-creator": {
+      "nonce": "stonk-creator-20261018-193300",
+      "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
+      "runId": null,
+      "state": "claimed"
     }
   },
   "attemptHistory": [
