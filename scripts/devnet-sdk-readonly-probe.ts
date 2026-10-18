@@ -19,7 +19,8 @@ globalThis.fetch=async(input,init)=>{
   const rejectedMethod=typeof request?.method==='string'&&/^[A-Za-z][A-Za-z0-9]{0,63}$/.test(request.method)?request.method:'UNKNOWN';
   emit({stage,rejectedMethod,requests,stopped:true});return stop('RPC_METHOD_NOT_ALLOWED');
  }
- if(requests>=25)return stop('RPC_CAP_REACHED');
+ // Run39153765247 verified #1-24; remaining: ALT account25, payer26, fee27, simulation28, final height29. Final bounded probe only.
+ if(requests>=30)return stop('RPC_CAP_REACHED');
  const number=++requests,method=request.method,started=Date.now();let status:number|null=null;
  try{
   const response=await rawFetch(ENDPOINT,{...init,redirect:'error',signal:AbortSignal.any([abort.signal,AbortSignal.timeout(10000),...(init.signal?[init.signal]:[])])});
