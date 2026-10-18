@@ -26,11 +26,11 @@
     "deployed": false,
     "runtime_url": "http://localhost:3010",
     "repository": "https://github.com/peterpeter228/stonklaunch",
-    "commit": "3bfb88bec023ff2312f6165d5faf7cac4f198301",
+    "commit": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
     "local_path": "/workspace/scratch/c01bd6fe117d/stonklaunch",
     "commit_scope": "Latest reviewed implementation; subsequent commits retain public claims and evidence.",
     "runtime_url_scope": "Cloud local DEMO only, not public/user-accessible deployment",
-    "framework": "Next.js 16.4.2 local upgrade; fresh CI pending"
+    "framework": "Next.js16.4.2 verified local and CI"
   },
   "evidence_scope": [
     "official_documentation_read",
@@ -190,12 +190,12 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Push reviewed framework/dependency mitigation and final buy recovery implementation after local gates",
-    "Run fresh Next16 rendered acceptance and one explicitly claimed final durable buy; continue sell/creator claim only after finalized success",
-    "Supabase schema and public asset bucket configured; Render workspace confirmed. Create staging only after reviewed source push. Credentials and paid services require specific approval.",
-    "Finish hosted Auth/RLS/storage/indexer and production configuration. Mainnet funding/signing remains user-executed"
+    "Finish approved source distribution and hosted staging deployment",
+    "Await specific Solana Auth enablement confirmation, then configure actual allowed origin",
+    "Configure service credentials with specific approval and verify two-wallet Auth/storage/indexer workflows",
+    "Production dedicated RPC, wallet/operator and mainnet user-executed gates remain separate"
   ],
-  "last_completed_work": "Baseline CI39155838228 actual desktop and360px DEMO journeys2/2 PASS. Next16 initial build PASS.31tests/typecheck PASS. Clean installed bigint native-disable patch+uuid11.1.1 gatePASS. New patched build/audit pending. Patched Next16 build and clean-install dependency gate PASS; audit0critical/1high/3moderate. Hosted Supabase empty project migration8RLS tables and PNG/JSON bucket configured; actual client auth/storage acceptance pending.",
+  "last_completed_work": "Durable devnet launch,buy,sell,creator fee claim all independently finalized; creator received74691rawWSOL,not mainnetrevenue. Next16 actualbrowser2/2and18viewportPASS. Supabase schema/bucket/HTTPreadaccesschecksPASS; correctdashboardloginverified, SolanaAuthdisabledpendingapproval. GPLsource distribution approved, localarchive workongoing.",
   "verified_checks": [
     "29 unit tests pass; typecheck and production build PASS for diagnostic patch",
     "server route demo/read-only transaction refusal passed",
@@ -221,13 +221,13 @@
     "completed_short_review_count": 3
   },
   "remaining_blockers": [
-    "Durable buy2 signed claim expired with finalized no-settlement proof. Reviewed third and final paced attempt prepared, not yet dispatched. Do not retry automatically.",
     "Supabase schema/storage bucket deployed; Auth/provider, upload retrieval and application secret configuration pending",
     "NonSOL assets not enabled; xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
     "No public deployment",
     "Production platform/operator configuration remains separate; devnet platform is test-only",
-    "Real phone/wallet-extension and deployed Auth/storage/worker acceptance pending; desktop Chromium mobile emulation is not real device"
+    "Real phone/wallet-extension and deployed Auth/storage/worker acceptance pending; desktop Chromium mobile emulation is not real device",
+    "Complete sanitized GPL source archive/notices and actual public integration before deployment"
   ],
   "token_inspection": {
     "status": "implemented_read_only",
@@ -242,7 +242,7 @@
     "summary": "evidence/DEVNET_ACCEPTANCE_SUMMARY.md",
     "finalized_transactions": 5,
     "receipt_assertions_passed": 49,
-    "creator_claim": "unsigned_simulation_only",
+    "creator_claim": "PASS_durable_devnet_creator_aggregate_WSOL",
     "ephemeral_wallets": "processes closed; no restorable signing keys",
     "faucet": "Completed by user; finalized 5devnetSOL. Do not request further claims.",
     "durable_wallet": {
@@ -251,24 +251,35 @@
       "evidence": "evidence/DURABLE_DEVNET_WALLET.json",
       "run_url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39108491594",
       "funding": "FINALIZED_5_DEVNET_SOL",
-      "latest_balance_lamports": 4979382960,
-      "latest_balance_slot": 512521657
+      "latest_balance_lamports": 4969779223,
+      "latest_balance_slot": 512521657,
+      "balance_scope": "Finalized creator receipt; plus74691rawWSOL in newly created destination"
     },
     "durable_execution": {
       "ledger": "evidence/DURABLE_CREATOR_LEDGER.json",
       "launch": "PASS_finalized_slot512517543",
       "launch_run": 39151585237,
       "launch_receipt": "evidence/DURABLE_LAUNCH_INDEPENDENT_RECEIPT.json",
-      "buy": "BLOCKED_preserved_signed_claim_no_broadcast",
+      "buy": "PASS_finalized_slot512539878",
       "buy_runs": [
         39151817814,
         39152770076
       ],
       "buy_error": "BLOCKHEIGHT_RPC_FAILED",
       "buy_evidence": "evidence/DURABLE_BUY_ATTEMPT_2_RECONCILIATION.json",
-      "sell": "NOT_RUN",
-      "creator_claim": "NOT_RUN",
-      "no_automatic_retry": true
+      "sell": "PASS_finalized_slot512540762",
+      "creator_claim": "PASS_finalized_slot512543431",
+      "no_automatic_retry": true,
+      "third_claim_nonce": "stonk-buy-paced-20261018-190720",
+      "third_run_id": 39158381095,
+      "buy_run": 39158381095,
+      "sell_run": 39158649664,
+      "creator_claim_run": 39159461927,
+      "independent_receipts": [
+        "evidence/DURABLE_BUY_FINAL_RECEIPT.json",
+        "evidence/DURABLE_SELL_FINAL_RECEIPT.json",
+        "evidence/DURABLE_CREATOR_FINAL_RECEIPT.json"
+      ]
     }
   },
   "unfunded_followup": {
@@ -301,7 +312,7 @@
     "broadcast": false,
     "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
   },
-  "updated_at": "2026-10-18T18:54:00Z",
+  "updated_at": "2026-10-18T19:38:30Z",
   "production_setup": {
     "supabase_connected": true,
     "project_ref": "mvhrxnspbzomtpdftxqp",
@@ -310,11 +321,25 @@
     "migration": "20261018185806",
     "bucket_created": true,
     "render_connected": true,
-    "render_workspace_confirmation": "confirmed_Sentinel_e5ccfeb885048191b1f7a00b10275a4c",
-    "github_retry_confirmation": "confirmed_Sentinel_feaac58a26f88191822b87cc0ae82481",
+    "render_workspace_confirmation": "confirmed",
+    "github_retry_confirmation": "confirmed_push_succeeded",
     "new_paid_services": false,
     "credentials_accessed": false,
     "evidence": "evidence/HOSTED_SUPABASE_SETUP.json",
-    "render_workspace": "tea-dbahbeijnfac73fnfna0"
+    "render_workspace": "tea-dbahbeijnfac73fnfna0",
+    "public_source_license_decision": "approved_Sentinel_7f9c17623c5481918e488106d87dc037",
+    "deployed": false,
+    "supabase_browser_login": "verified_correct_org_via_ChatGPT",
+    "solana_auth_provider": "disabled_enable_confirmation_pending"
+  },
+  "browser_next16": {
+    "run": 39157362123,
+    "source": "2b80ecf54d1a3d6be4658c9a47c904949552a35d",
+    "implementationEquivalentTo": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
+    "status": "PASS",
+    "tests": 2,
+    "viewportAssertions": 18,
+    "scope": "Actual Chromium DEMO desktop and360px; not productionwallet/auth",
+    "evidence": "evidence/BROWSER_ACCEPTANCE_NEXT16.json"
   }
 }

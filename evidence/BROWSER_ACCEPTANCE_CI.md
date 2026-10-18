@@ -97,3 +97,25 @@ is transient overlay, not a fee assertion failure. Full screenshots and traces
 remain in the run artifact. `BROWSER_ACCEPTANCE_BASELINE.json` stores exact
 viewport evidence, diagnostics and screenshot mappings. This PASS is tied to
 the source above; later framework upgrades require their own fresh run.
+
+## Next.js 16 actual rendered acceptance, 2026-10-18 19:08–19:09 UTC
+
+Run: https://github.com/peterpeter228/stonklaunch/actions/runs/39157362123
+Source: `2b80ecf54d1a3d6be4658c9a47c904949552a35d`; GitHub comparison verifies
+only the public creator ledger differs from implementation commit
+`0ea1179cfea4b98962334c1e0e97abb1fb5c48ae`.
+Logs confirm Next.js 16.4.2 webpack build and runtime. Both actual Chromium
+journeys passed in **13.5 seconds**, desktop and 360px mobile emulation. Exactly
+one new workflow was dispatched; no rerun, financial workflow or secrets used.
+
+Artifact `12147726388` (28,675,451 bytes) was downloaded; its ZIP SHA256 matches
+`419612f77a201df80bc22e835d444191971a823ad45aad6e631d763d08f78aa4`.
+Report verification again confirms all 18 viewport/client/scroll width checks,
+expected refusal/outage/invalid-input errors only, no page errors and no outbound
+network attempts. Mobile launch form, desktop denied-trade token page and mobile
+terminal screenshots were visually inspected; responsive content and DEMO
+boundaries remain visible. A transient image-preview toast is visible during
+rapid automated navigation, as in the baseline. Poster dimensions/QR assertions
+passed in both cases. Exact diagnostic and screenshot mappings are preserved
+in `BROWSER_ACCEPTANCE_NEXT16.json`. This validates the upgraded rendered DEMO
+application, not live wallet execution, physical mobile or production readiness.

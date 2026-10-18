@@ -1,0 +1,92 @@
+{
+  "observedAt": "2026-10-18T19:37:59.095Z",
+  "endpoint": "https://api.devnet.solana.com",
+  "commitment": "finalized",
+  "signature": "3Nxwjs17i1f3NxqqxUAA2mnE3uSvCNphGPxHdE27PoKpciEG25NS5xoHa2PhhYjBXLpWkKWjVZWK24ENshfydz65",
+  "slot": 512543431,
+  "messageHash": "aece0b6335332d3c1489628317eb1377b7b8d66d3b0294bd07e7f8cae1b52060",
+  "wallet": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+  "vault": "3vBAZd5p8xHTdGidc421j9puJCX6EvjZqj1rVaMa71AX",
+  "destination": "Ebi67YkGDMbEnxpVGrzxmNzX5Xc1SAApaeuo3ws8bUob",
+  "quoteMint": "So11111111111111111111111111111111111111112",
+  "checks": {
+    "finalized": true,
+    "noError": true,
+    "slot": true,
+    "messageHash": true,
+    "payer": true,
+    "creator": true,
+    "vault": true,
+    "destination": true,
+    "quoteMint": true,
+    "discriminator": true
+  },
+  "status": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512543890
+    },
+    "value": [
+      {
+        "confirmationStatus": "finalized",
+        "confirmations": null,
+        "err": null,
+        "slot": 512543431,
+        "status": {
+          "Ok": null
+        }
+      }
+    ]
+  },
+  "claimedRaw": "74691",
+  "vaultBefore": {
+    "accountIndex": 2,
+    "mint": "So11111111111111111111111111111111111111112",
+    "owner": "AnWhtzWn6RxXXYAJW3UCMYvyvC7hGNWHUJzVWKfT2GBX",
+    "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "uiTokenAmount": {
+      "amount": "74691",
+      "decimals": 9,
+      "uiAmount": 0.000074691,
+      "uiAmountString": "0.000074691"
+    }
+  },
+  "vaultAfter": {
+    "accountIndex": 2,
+    "mint": "So11111111111111111111111111111111111111112",
+    "owner": "AnWhtzWn6RxXXYAJW3UCMYvyvC7hGNWHUJzVWKfT2GBX",
+    "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+    "uiTokenAmount": {
+      "amount": "0",
+      "decimals": 9,
+      "uiAmount": null,
+      "uiAmountString": "0"
+    }
+  },
+  "destinationPre": [],
+  "destinationPost": [
+    {
+      "accountIndex": 1,
+      "mint": "So11111111111111111111111111111111111111112",
+      "owner": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+      "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "uiTokenAmount": {
+        "amount": "74691",
+        "decimals": 9,
+        "uiAmount": 0.000074691,
+        "uiAmountString": "0.000074691"
+      }
+    }
+  ],
+  "feeLamports": 5000,
+  "payerPreLamports": 4971272663,
+  "payerPostLamports": 4969779223,
+  "payerNetLamports": -1493440,
+  "currentWalletBalance": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512543893
+    },
+    "value": 4969779223
+  }
+}

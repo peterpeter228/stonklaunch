@@ -1,0 +1,279 @@
+{
+  "run_url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39157362123",
+  "source_sha": "2b80ecf54d1a3d6be4658c9a47c904949552a35d",
+  "implementation_sha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
+  "source_difference": "Only evidence/DURABLE_CREATOR_LEDGER.json changed from implementation SHA; verified via GitHub compare",
+  "framework": "Next.js 16.4.2",
+  "artifact_id": 12147726388,
+  "artifact_sha256": "419612f77a201df80bc22e835d444191971a823ad45aad6e631d763d08f78aa4",
+  "result": "PASS",
+  "scope": "Actual Chromium-rendered DEMO journey only; no wallet, chain execution or mainnet-readonly evidence",
+  "projects": [
+    {
+      "project": "desktop",
+      "outcome": "expected",
+      "duration_ms": 6038,
+      "viewports": {
+        "01-home-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "02-form-recovered-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "03-demo-result-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "04-trade-denied-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "05-poster-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "06-graduation-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "07-injected-catalog-outage-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "08-inspection-recovered-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        },
+        "09-terminal-fees-viewport": {
+          "viewport": 1440,
+          "client": 1440,
+          "scroll": 1440
+        }
+      },
+      "diagnostics": {
+        "scope": "DEMO only; catalog outage intentionally injected; no mainnet or wallet claim",
+        "consoleErrors": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/trades/quote",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          },
+          {
+            "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/trades/quote",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          },
+          {
+            "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/discovery",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          },
+          {
+            "text": "Failed to load resource: the server responded with a status of 400 (Bad Request)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/tokens/not-a-mint/inspection",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          }
+        ],
+        "pageErrors": [],
+        "failedResponses": [
+          {
+            "url": "http://127.0.0.1:3110/api/trades/quote",
+            "status": 403,
+            "expected": true
+          },
+          {
+            "url": "http://127.0.0.1:3110/api/trades/quote",
+            "status": 403,
+            "expected": true
+          },
+          {
+            "url": "http://127.0.0.1:3110/api/discovery",
+            "status": 503,
+            "expected": true
+          },
+          {
+            "url": "http://127.0.0.1:3110/api/tokens/not-a-mint/inspection",
+            "status": 400,
+            "expected": true
+          }
+        ],
+        "unexpectedNetwork": []
+      },
+      "screenshots": {
+        "01-home": "data/60bbb3dca765b9b579cbbf536173f5f5bd0ca5ca.png",
+        "02-form-recovered": "data/b91ad8fa1d1b53e8b8a2b0f4d1401805e0ee04d3.png",
+        "03-demo-result": "data/3a7ba7571e8fe5856a7768da0a586d7a999f14ae.png",
+        "04-trade-denied": "data/c935b2d4015f2a2150bc8bf03b0968b7af6562a5.png",
+        "downloaded-demo-poster": "data/280c6b95d45debe3418e33741febd80857a9d8cd.png",
+        "05-poster": "data/f90cadfff04d63b50cc56473614acef343b094f5.png",
+        "06-graduation": "data/e7d53cc2f56c513b685bc5a8275b336b34e3610d.png",
+        "07-injected-catalog-outage": "data/94f14ed356944d1dd2f9ecf8f8e29b9c172c9590.png",
+        "08-inspection-recovered": "data/ce5744d167c93ac47b6bdf18981bdc3a60afc1b0.png",
+        "09-terminal-fees": "data/bbce97a5750f6364e43047a11f1dd29e4a53e326.png"
+      }
+    },
+    {
+      "project": "mobile-360",
+      "outcome": "expected",
+      "duration_ms": 4684,
+      "viewports": {
+        "01-home-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "02-form-recovered-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "03-demo-result-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "04-trade-denied-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "05-poster-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "06-graduation-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "07-injected-catalog-outage-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "08-inspection-recovered-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        },
+        "09-terminal-fees-viewport": {
+          "viewport": 360,
+          "client": 360,
+          "scroll": 360
+        }
+      },
+      "diagnostics": {
+        "scope": "DEMO only; catalog outage intentionally injected; no mainnet or wallet claim",
+        "consoleErrors": [
+          {
+            "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/trades/quote",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          },
+          {
+            "text": "Failed to load resource: the server responded with a status of 403 (Forbidden)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/trades/quote",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          },
+          {
+            "text": "Failed to load resource: the server responded with a status of 503 (Service Unavailable)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/discovery",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          },
+          {
+            "text": "Failed to load resource: the server responded with a status of 400 (Bad Request)",
+            "location": {
+              "url": "http://127.0.0.1:3110/api/tokens/not-a-mint/inspection",
+              "line": 0,
+              "column": 0,
+              "lineNumber": 0,
+              "columnNumber": 0
+            }
+          }
+        ],
+        "pageErrors": [],
+        "failedResponses": [
+          {
+            "url": "http://127.0.0.1:3110/api/trades/quote",
+            "status": 403,
+            "expected": true
+          },
+          {
+            "url": "http://127.0.0.1:3110/api/trades/quote",
+            "status": 403,
+            "expected": true
+          },
+          {
+            "url": "http://127.0.0.1:3110/api/discovery",
+            "status": 503,
+            "expected": true
+          },
+          {
+            "url": "http://127.0.0.1:3110/api/tokens/not-a-mint/inspection",
+            "status": 400,
+            "expected": true
+          }
+        ],
+        "unexpectedNetwork": []
+      },
+      "screenshots": {
+        "01-home": "data/2a4ddc5a2edcfdcf8009fbde50bff7d8708b0dd8.png",
+        "02-form-recovered": "data/9426d2c3ebc1b6f092487ebd19fd73980ad10a82.png",
+        "03-demo-result": "data/a064fd04745b3f975f856c7b435c801860e53153.png",
+        "04-trade-denied": "data/f24929215a4025eae98fe83593c26fe3bdfd92fa.png",
+        "downloaded-demo-poster": "data/280c6b95d45debe3418e33741febd80857a9d8cd.png",
+        "05-poster": "data/ae7edcedae50347285c88d3259415547a86bed2c.png",
+        "06-graduation": "data/7d724e64d34ad7012812d35bba0fb033a55d37d7.png",
+        "07-injected-catalog-outage": "data/f6e43e106e6bc8c34de71dbc4640d9d078c87cbd.png",
+        "08-inspection-recovered": "data/4933107b72fbe9c56d40a58f2c3090ca068ccaf9.png",
+        "09-terminal-fees": "data/450c6fbd2ad5293ce716611cd911ce80ee0a8b35.png"
+      }
+    }
+  ]
+}

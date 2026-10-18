@@ -1,0 +1,66 @@
+{
+  "observedAt": "2026-10-18T19:23:15.639Z",
+  "endpoint": "https://api.devnet.solana.com",
+  "commitment": "finalized",
+  "signature": "2nvREfGedfy7pDvesyZ4WwCdJdo8L8tbj8DiYha5M2eRGauFuZhZ1dGC87mPeuS1r4DaxY7RkzusfFgai2zAyJzF",
+  "slot": 512539878,
+  "messageHash": "87d49df857f54ff013f557bac868bafabd38736650bce5c97461781ba46e4426",
+  "wallet": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+  "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+  "pool": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
+  "checks": {
+    "finalized": true,
+    "noError": true,
+    "slot": true,
+    "messageHash": true,
+    "payer": true,
+    "pool": true,
+    "mint": true
+  },
+  "status": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512540194
+    },
+    "value": [
+      {
+        "confirmationStatus": "finalized",
+        "confirmations": null,
+        "err": null,
+        "slot": 512539878,
+        "status": {
+          "Ok": null
+        }
+      }
+    ]
+  },
+  "feeLamports": 5000,
+  "payerPreLamports": 4979382960,
+  "payerPostLamports": 4966401080,
+  "payerDebitLamports": 12981880,
+  "tokenAmountBefore": "0",
+  "tokenAmountAfter": "353078001725",
+  "tokenIncrease": "353078001725",
+  "preTokenBalances": [],
+  "postTokenBalances": [
+    {
+      "accountIndex": 1,
+      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+      "owner": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+      "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "uiTokenAmount": {
+        "amount": "353078001725",
+        "decimals": 6,
+        "uiAmount": 353078.001725,
+        "uiAmountString": "353078.001725"
+      }
+    }
+  ],
+  "currentWalletBalance": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512540196
+    },
+    "value": 4966401080
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "observedAt": "2026-10-18T19:11:35Z",
+  "credentialType": "non-secret publishable key",
+  "scope": "Read-only HTTP access control, no login or mutation",
+  "results": [
+    {
+      "table": "asset_capabilities",
+      "httpStatus": 200,
+      "expectedPublicRead": true,
+      "pass": true
+    },
+    {
+      "table": "chain_events",
+      "httpStatus": 401,
+      "expectedPublicRead": false,
+      "pass": true
+    },
+    {
+      "table": "verified_wallets",
+      "httpStatus": 401,
+      "expectedPublicRead": false,
+      "pass": true
+    },
+    {
+      "table": "indexer_cursors",
+      "httpStatus": 401,
+      "expectedPublicRead": false,
+      "pass": true
+    }
+  ]
+}

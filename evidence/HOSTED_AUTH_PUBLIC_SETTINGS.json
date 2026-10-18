@@ -1,0 +1,16 @@
+{
+  "observedAt": "2026-10-18T19:11:15Z",
+  "endpoint": "public_auth_settings",
+  "responseFields": [
+    "external",
+    "disable_signup",
+    "mailer_autoconfirm",
+    "phone_autoconfirm",
+    "sms_provider",
+    "saml_enabled",
+    "saml_private_key_next_configured",
+    "passkeys_enabled"
+  ],
+  "web3Fields": {},
+  "scope": "Public settings only; absent fields do not prove provider disabled. No session/login/signature."
+}

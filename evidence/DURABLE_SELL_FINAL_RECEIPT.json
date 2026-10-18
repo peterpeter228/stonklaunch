@@ -1,0 +1,81 @@
+{
+  "observedAt": "2026-10-18T19:26:33.850Z",
+  "endpoint": "https://api.devnet.solana.com",
+  "commitment": "finalized",
+  "signature": "46VgXEsG8dm1dGCeS8NSTLpRAnbp6HY3EEhmZv7p5JMDRDXESLXYrsEwsG7GRvGmrUUDqVPH3S1gZxNfBe4CV3RS",
+  "slot": 512540762,
+  "messageHash": "baa3bdcb2bb0221f49e58e3367c8a670d4a253a207d7f8c49a98ef201bf530f5",
+  "wallet": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+  "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+  "pool": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
+  "checks": {
+    "finalized": true,
+    "noError": true,
+    "slot": true,
+    "messageHash": true,
+    "payer": true,
+    "pool": true,
+    "mint": true
+  },
+  "status": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512541026
+    },
+    "value": [
+      {
+        "confirmationStatus": "finalized",
+        "confirmations": null,
+        "err": null,
+        "slot": 512540762,
+        "status": {
+          "Ok": null
+        }
+      }
+    ]
+  },
+  "feeLamports": 5000,
+  "payerPreLamports": 4966401080,
+  "payerPostLamports": 4971272663,
+  "payerDebitLamports": -4871583,
+  "tokenAmountBefore": "353078001725",
+  "tokenAmountAfter": "176539000863",
+  "tokenDecrease": "176539000862",
+  "netSolProceedsLamports": 4871583,
+  "solProceedsBeforeNetworkFeeLamports": 4876583,
+  "preTokenBalances": [
+    {
+      "accountIndex": 3,
+      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+      "owner": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+      "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "uiTokenAmount": {
+        "amount": "353078001725",
+        "decimals": 6,
+        "uiAmount": 353078.001725,
+        "uiAmountString": "353078.001725"
+      }
+    }
+  ],
+  "postTokenBalances": [
+    {
+      "accountIndex": 3,
+      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+      "owner": "AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho",
+      "programId": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA",
+      "uiTokenAmount": {
+        "amount": "176539000863",
+        "decimals": 6,
+        "uiAmount": 176539.000863,
+        "uiAmountString": "176539.000863"
+      }
+    }
+  ],
+  "currentWalletBalance": {
+    "context": {
+      "apiVersion": "4.4.0-beta.0",
+      "slot": 512541029
+    },
+    "value": 4971272663
+  }
+}
