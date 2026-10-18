@@ -1,0 +1,260 @@
+{
+  "runId": "39153765247",
+  "jobId": "117752602661",
+  "sourceSha": "7b507f29c6b55740be66f15ad4f8ef7be2b6aba6",
+  "conclusion": "failure",
+  "records": [
+    {
+      "observedAt": "2026-10-18T18:21:35.9223332Z",
+      "stage": "prepare-trade",
+      "number": 1,
+      "method": "getGenesisHash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 140,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:35.9441908Z",
+      "stage": "prepare-trade",
+      "number": 2,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 15,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:35.9657427Z",
+      "stage": "prepare-trade",
+      "number": 3,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 18,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:35.9833582Z",
+      "stage": "prepare-trade",
+      "number": 4,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 16,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.0126741Z",
+      "stage": "prepare-trade",
+      "number": 5,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 44,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.0266632Z",
+      "stage": "prepare-trade",
+      "number": 6,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 13,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.0413476Z",
+      "stage": "prepare-trade",
+      "number": 7,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 14,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.0553286Z",
+      "stage": "prepare-trade",
+      "number": 8,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 13,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.0903311Z",
+      "stage": "prepare-trade",
+      "number": 9,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 29,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.1102067Z",
+      "stage": "prepare-trade",
+      "number": 10,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 13,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.1266364Z",
+      "stage": "prepare-trade",
+      "number": 12,
+      "method": "getTokenAccountsByOwner",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 14,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.1270525Z",
+      "stage": "prepare-trade",
+      "number": 11,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 15,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.1539865Z",
+      "stage": "prepare-trade",
+      "number": 13,
+      "method": "getTokenAccountsByOwner",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 41,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.2273603Z",
+      "stage": "prepare-trade",
+      "number": 14,
+      "method": "getMinimumBalanceForRentExemption",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 13,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.2408875Z",
+      "stage": "prepare-trade",
+      "number": 15,
+      "method": "getMultipleAccounts",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 12,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.2547645Z",
+      "stage": "prepare-trade",
+      "number": 16,
+      "method": "getSlot",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 11,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.2707143Z",
+      "stage": "prepare-trade",
+      "number": 17,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 13,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.2836289Z",
+      "stage": "prepare-trade",
+      "number": 18,
+      "method": "getLatestBlockhash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 12,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3056110Z",
+      "stage": "prepare-trade",
+      "number": 19,
+      "method": "getLatestBlockhash",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 16,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3194352Z",
+      "stage": "prepare-trade",
+      "number": 20,
+      "method": "simulateTransaction",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 13,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3327262Z",
+      "stage": "prepare-trade",
+      "number": 21,
+      "method": "getFeeForMessage",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 12,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3464530Z",
+      "stage": "transaction-guard",
+      "number": 22,
+      "method": "getAccountInfo",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 12,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3648097Z",
+      "stage": "transaction-guard",
+      "number": 23,
+      "method": "getMinimumBalanceForRentExemption",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 12,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3775728Z",
+      "stage": "height-before-callback",
+      "number": 24,
+      "method": "getBlockHeight",
+      "httpStatus": 200,
+      "rpcErrorCode": null,
+      "durationMs": 12,
+      "stopped": false
+    },
+    {
+      "observedAt": "2026-10-18T18:21:36.3812712Z",
+      "status": "READONLY_SEQUENCE_STOPPED",
+      "requests": 25,
+      "stage": "callback-reads",
+      "code": "RPC_CAP_REACHED",
+      "signed": false,
+      "broadcast": false
+    }
+  ],
+  "finding": "Stopped by fixed RPC_CAP_REACHED at 25 starts during callback-reads. All 24 completed traces HTTP200/no RPC error, including pre-callback getBlockHeight. Callback simulation and post-callback height not reached. Cap is not evidence of earlier signed-run root cause.",
+  "signed": false,
+  "broadcast": false
+}
