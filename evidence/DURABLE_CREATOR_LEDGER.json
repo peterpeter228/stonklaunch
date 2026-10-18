@@ -20,7 +20,11 @@
       "nonce": "stonk-buy-20261018-175345",
       "sourceSha": "60431d61defb46eb026999a45a0c4155399243ed",
       "runId": "39151817814",
-      "state": "signing"
+      "state": "signed",
+      "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
+      "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
+      "signature": "bdwh8ZUbAa55gAWKok88CAX5jZusHFtGmkFsbwoccrz7jCPHLdXWub6QnVxChJqnDeB134o3PGb4UqrWv12rJ6F",
+      "messageHash": "403041c3371fd27e00524befb44ea465f0fde69597b27c3b460f15af69266d11"
     }
   },
   "attemptHistory": [
