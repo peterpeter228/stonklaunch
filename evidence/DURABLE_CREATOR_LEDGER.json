@@ -41,7 +41,7 @@
       "nonce": "stonk-sell-20261018-192335",
       "sourceSha": "0ea1179cfea4b98962334c1e0e97abb1fb5c48ae",
       "runId": "39158649664",
-      "state": "signed",
+      "state": "finalized",
       "mint": "6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU",
       "poolId": "DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ",
       "signature": "46VgXEsG8dm1dGCeS8NSTLpRAnbp6HY3EEhmZv7p5JMDRDXESLXYrsEwsG7GRvGmrUUDqVPH3S1gZxNfBe4CV3RS",
@@ -54,7 +54,8 @@
         "observedAt": "2026-10-18T19:25:26.281Z",
         "readAttempts": 1,
         "observedBlockHeight": 499754043
-      }
+      },
+      "slot": 512540762
     }
   },
   "attemptHistory": [
