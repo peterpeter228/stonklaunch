@@ -63,3 +63,16 @@ The trade refusal is `DEMO_NO_REAL_TRANSACTIONS`, not a claim of live or
 mainnet-readonly wallet testing. No real token is created. Do not change launch
 readiness or acceptance gates until the actual run and artifacts are reviewed.
 Record run URL, exact SHA, result and any failing assertion after execution.
+
+## First CI execution, 2026-10-18 18:43–18:44 UTC
+
+Run: https://github.com/peterpeter228/stonklaunch/actions/runs/39155438226
+Source: `c38b51d65ec236b35e15d4eb4594c5a83e8044ba`.
+Install, Chromium installation and production build passed. Acceptance failed
+before browser navigation: Playwright defaulted webServer cwd to `e2e/`, so the
+relative Next CLI path was absent. This is a harness startup defect, not an app
+failure or UI evidence. Artifact `12146088777` contains build/test logs and HTML.
+No actual journey screenshot exists for this run. Correction sets webServer cwd
+explicitly to the repository root. Static validation confirms Next CLI and
+`.next/BUILD_ID` resolve there; discovery still lists two project cases in one
+file. A corrected CI run is required; no PASS claimed.
