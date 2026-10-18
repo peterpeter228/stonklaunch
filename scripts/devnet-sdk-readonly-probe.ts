@@ -2,7 +2,7 @@
 const ENDPOINT='https://api.devnet.solana.com',WALLET='AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho';
 const PLATFORM='9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz',ADMIN='DotkAg6PowGVeqKTax9rYaBtVhYVLkysDJ3ruGLLJ2z2';
 const MINT='6cdzhss7UKfcNU9HSqs7kZbv1b6znut3EPDj2iFhdQhU',POOL='DiMsXdpVBZZcL1Vq6YVXNUYyBkD1FjLBtmzSqnEtxerZ';
-const methods=new Set(['getGenesisHash','getAccountInfo','getMultipleAccounts','getMinimumBalanceForRentExemption','getSlot','getLatestBlockhash','simulateTransaction','getFeeForMessage','getBlockHeight']);
+const methods=new Set(['getGenesisHash','getAccountInfo','getTokenAccountsByOwner','getMultipleAccounts','getMinimumBalanceForRentExemption','getSlot','getLatestBlockhash','simulateTransaction','getFeeForMessage','getBlockHeight']);
 const names=new Set(['Error','TypeError','SyntaxError','AbortError','TimeoutError']);
 const codes=new Set(['ECONNRESET','ECONNREFUSED','ETIMEDOUT','ENOTFOUND','EAI_AGAIN','UND_ERR_CONNECT_TIMEOUT','UND_ERR_SOCKET']);
 const output=console.log.bind(console),rawFetch=globalThis.fetch.bind(globalThis),abort=new AbortController();
@@ -15,7 +15,10 @@ globalThis.fetch=async(input,init)=>{
  if(stopped)throw Error('PROBE_STOPPED');
  if(String(input)!==ENDPOINT||init?.method!=='POST')return stop('UNEXPECTED_ENDPOINT_OR_METHOD');
  let request:{method?:unknown;params?:unknown;id?:unknown};try{request=JSON.parse(String(init.body));}catch{return stop('INVALID_REQUEST');}
- if(!request||typeof request.method!=='string'||!methods.has(request.method))return stop('RPC_METHOD_NOT_ALLOWED');
+ if(!request||typeof request.method!=='string'||!methods.has(request.method)){
+  const rejectedMethod=typeof request?.method==='string'&&/^[A-Za-z][A-Za-z0-9]{0,63}$/.test(request.method)?request.method:'UNKNOWN';
+  emit({stage,rejectedMethod,requests,stopped:true});return stop('RPC_METHOD_NOT_ALLOWED');
+ }
  if(requests>=25)return stop('RPC_CAP_REACHED');
  const number=++requests,method=request.method,started=Date.now();let status:number|null=null;
  try{
