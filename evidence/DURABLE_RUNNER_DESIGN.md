@@ -1,40 +1,39 @@
-# Durable creator acceptance runner: prepare-only release
+# Durable creator acceptance runner: claimed single-step execution
 
-Status: PREPARED, execution BLOCKED. This change has not been dispatched and has not loaded a wallet secret, signed a transaction, requested faucet funds, or broadcast anything. Local TypeScript checking is not chain acceptance.
+Status: IMPLEMENTED FOR REVIEW, not dispatched. No secret loaded or funded transaction executed during implementation. Unit tests and typechecking are not chain acceptance.
 
-## Fixed scope
+## Fixed boundary
 
-- Network is Solana devnet, fixed RPC `https://api.devnet.solana.com`, verified genesis `EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG`.
-- Expected durable wallet: `AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho`. Existing repository secret only: `STONK_DEVNET_KEYPAIR_JSON`. No new wallet vault, secrets, or persistence destination.
-- Existing synthetic test platform: `9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz`. Original admin and claim wallet remain unchanged. Fee binding must still be 50 bps platform and creator.
-- Candidate ordered sequence: new launch with zero initial buy, buy 0.01 free devnet SOL, sell half the resulting token balance, creator fee claim. Each dispatch would perform exactly one step, never platform creation, update, platform claim, faucet request, mainnet transfer, or automatic retry.
-- Synthetic `example.invalid` metadata is not hosted-metadata acceptance. Creator vault is creator-plus-quote protocol-wide, not attributed platform revenue.
+- Private repository `peterpeter228/stonklaunch`, `refs/heads/main`, workflow `.github/workflows/devnet-creator-acceptance.yml`, attempt 1 only.
+- Solana devnet RPC `https://api.devnet.solana.com`, verified genesis `EtWTRABZaYq6iMfeYKouRu166VU2xqa1wcaWoxPkrZBG`.
+- Existing durable wallet `AFa5wrbY5ExUjf6qSuC2mtfNGV97Fo7xxBTgtcRouKho`, recovered only from existing repository secret `STONK_DEVNET_KEYPAIR_JSON`. Never create another funding wallet.
+- Existing test platform `9ZVMxPgFLvgKGyyKVRVxaocst4UNuq6ATwrF5g8N85Cz`; original admin/claim wallet unchanged. Platform and creator fees remain 50 bps each, referral zero.
+- One fixed sequence: zero-buy launch; 0.01 free devnet SOL buy; sell half current token balance; creator fee claim. One transaction and one funded-wallet signing callback per dispatch. No platform creation/update/claim, faucet, mainnet, custom amounts, or automatic resubmission.
+- Fixed simulated payer-debit ceilings including conservatively added network fee: launch 0.05 SOL, buy 0.02 SOL, sell and claim 0.01 SOL each. Account context/minimum simulation slot reduce stale-balance risk; this is a preflight check, not a price guarantee.
+- Synthetic `example.invalid` metadata is not hosted-metadata acceptance. Creator fee vault is creator-plus-quote protocol-wide, not attributable platform revenue.
 
-## What can run now
+## Durable ownership and source pinning
 
-Manual default-branch workflow `devnet-creator-acceptance.yml` defaults to `prepare`. It reads network/platform/wallet balance/fee vaults and validates supplied public recovery receipts. No wallet secret is supplied to that step. Dependency install disables lifecycle scripts. This workflow has no secret-bearing step; the existing recovery-verification workflow remains separate.
+`evidence/DURABLE_CREATOR_LEDGER.json` is the sole public acceptance ledger. The four slots are append-only in meaning: never delete, clear, replace or reset a claimed slot. Repository history/artifacts alone are not a uniqueness ledger; the current consumed slot blocks even when no signature exists. This trusts authorized repository writers not to roll back/delete the ledger or change reviewed workflow code. It does not protect against a malicious repository administrator.
 
-Optional `public_recovery_json` has only `mint`, `poolId`, and `signatures` fields. Signatures are keyed by `launch`, `buy`, `sell`, `claim-creator`. Example shape: `{"mint":"PUBLIC_MINT","poolId":"PUBLIC_POOL","signatures":{"launch":"PUBLIC_SIGNATURE"}}`. Never supply a keypair or secret. Preparation validates recovered mint creator, platform and quote; finalized successful transactions, expected payer, distinct signatures and pool account membership. Later steps require all preceding receipts. Missing or uncertain evidence blocks rather than inventing a new mint.
+1. After code review and commit, choose the reviewed full source commit SHA. The source commit contains the workflow and empty initial ledger; later ledger-only commits may advance main without changing execution code.
+2. Parent uses GitHub file SHA compare-and-set to add exactly the next slot with `nonce`, `sourceSha`, `runId: null`, `state: "claimed"`. Nonce is a fresh public 16–80-character alphanumeric/underscore/hyphen identifier. All prior slots must already be finalized and independently verified. Do not alter them.
+3. Parent dispatches `mode=execute`, exact `step`, `source_sha`, `claim_nonce`, and default empty `public_recovery_json`. Verify the resulting unique run ID, then CAS-bind that ID into this same slot. Never bind a different dispatch or rerun. The read-only gate waits up to 180 seconds for this binding. If the gate times out before signing, inspect and retain the claim; do not silently replace it.
+4. Checkout is pinned to `source_sha`, never latest main for execute. Runner verifies actual Git HEAD; claim source matches; the workflow file blob at `GITHUB_WORKFLOW_SHA` must equal that at reviewed source. Repository, ref, workflow identity, run ID, nonce and attempt are all bound. Reruns reject before checkout, dependencies and secret exposure.
+5. Gate checks identity without the wallet secret. After dependencies install with lifecycle scripts disabled, only the execute step receives the existing secret. GITHUB_TOKEN contents-write permission is job-scoped; checkout does not retain credentials. No PAT or new persistent credential is created.
+6. Runner verifies prior on-chain finalized receipts, exact signed-message hashes, instruction discriminators, payer, mint/pool, creator/platform/quote binding, then CAS-transitions `claimed -> signing` and reads it back before parsing the wallet secret or generating a mint. A consumed slot cannot sign again, including a process failure before signing.
+7. The awaited wallet callback independently validates the exact step instruction and simulates bounded debit. Trades/claims additionally pass the existing detailed transaction guard. Launch permits only one initializeV2 plus compute-budget instructions, fixed wallet/platform/mint/pool/quote, no extra transfers/programs or nonzero priority fee.
+8. After signing but before any submission, CAS-transitions `signing -> signed` with public mint, pool, signature and SHA-256 serialized message hash. Readback must exactly match before the callback returns and existing submit code can broadcast. Public local snapshot/log is also written before broadcast. No signed transaction bytes or secret keys are persisted. Existing signed identity fields are immutable.
+9. Submit has `maxRetries: 0`. Poll only the original signature, then verify successful finalized transaction, exact message hash and instruction identity plus launch binding. Record full public receipt/readback and fees. Only then CAS `signed -> finalized` with slot, with exact readback.
 
-These are preliminary recovery checks, not a complete semantic proof of each transaction's instruction kind. No execution can rely on these checks alone in this release.
+## Ambiguity and recovery
 
-## Why execution remains blocked
+Every CAS write is attempted once. A failed/timeout write triggers one read to inspect durable state and then stops regardless of whether the write landed. No retry, resigning or broadcast follows an uncertain write. If signed CAS landed but readback/local checkpoint failed, the recorded signature is still available for public reconciliation; the helper never receives a return value authorizing broadcast.
 
-Concurrency groups prevent overlap, not duplicates across workflow invocations. GitHub run history may be deleted or aged out; artifact upload may never run after a process crash. Neither is a durable claim or sufficient uniqueness ledger. A rerun after signing but before artifact upload must not silently generate another mint, buy twice, or claim twice.
+A claimed/signing slot with no signature is not permission to start again. A signed slot with no chain receipt is not proof of failure. Do not rerun or clear it. Parent must manually inspect the original run logs, public ledger and on-chain signature/mint; distinguish definitely unbroadcast/expired from unknown outcome before proposing any further action. The runner intentionally provides no reset/retry path. An on-chain finalized receipt with a failed final ledger update can be manually reconciled into the same immutable slot, never replaced by a new transaction.
 
-The workflow's first step rejects execute mode before dependency install or secret exposure. The runner independently rejects execute mode before network work. No signing, keypair parsing, faucet, or broadcast code is present. Selecting execute does not enable it.
+Prepare remains read-only and secret-free; its optional public recovery hints are not used as execution authority. Earlier five-transaction evidence and old ephemeral checkpoints remain untouched. Public snapshots are append-only under `evidence/durable-creator/<run-id>-<attempt>-<timestamp>/`; artifact upload includes only JSON there, never private keys, signed bytes, environment dumps or arbitrary error text.
 
-Before enabling execution, implement and review a durable public single-acceptance ledger with atomic compare-and-set ownership of each step, bound to trusted repository/ref and run ID. Commit the claim before signing. A prior claimed step must block new submission even when there is no signature/artifact. Reconcile original signature/mint and instruction semantics before advancing; unknown outcomes require investigation, not a new mint. Ledger permission and persistence choice require review. Do not merely remove the guards or substitute run-history scanning. Actions reruns must remain signing-disabled.
+## Local verification
 
-## Evidence and secret hygiene
-
-- Old five-transaction receipts, assertions, execution report, and `DEVNET_PUBLIC_CHECKPOINT.json` are untouched.
-- New public snapshots are append-only under `evidence/durable-creator/<run-id>-<attempt>-<timestamp>/`. Artifact names include run ID and attempt. Upload is limited to this directory's JSON files, never repository globs, node_modules, `.env`, keypair files, or home directories.
-- Public snapshots contain allowlisted identity/context/transaction data, never wallet or mint keypair objects, environment dumps, raw recovery input, signed transaction bytes, or arbitrary exception text.
-- This runner does not access the secret. Wallet identity is a fixed public key whose recovery proof is in `DURABLE_DEVNET_WALLET.json`; the separate existing verification workflow performs key recovery. Live recovery is not asserted by preparation.
-- Error handling fails closed and emits only generic error text plus public snapshots. Evidence collection failure also stops the run.
-- Legacy `devnet-session.ts` and `devnet-steps.ts` remain historical ephemeral tooling, not the new workflow path. Their old storage claim still describes that historical path; the durable runner uses its own accurate storage metadata and unique output directory.
-
-## Verification performed locally
-
-`pnpm typecheck` passed. An execute-mode rejection test uses no secret and must fail before any RPC or signing. Live prepare/network validation and Actions behavior remain untested until an authorized dispatch; funding remains awaiting the user. No existing finalized transaction evidence is replaced by these local checks.
+23 unit tests across the existing two files passed, including mismatched identity/rerun rejection, already-consumed empty-signature slots, prior ordering, competing stale CAS, ambiguous CAS no retry, and signed-field immutability. TypeScript checking passed. These are local fixtures/mocks only. Actions token permissions, real RPC preparation, simulated debit ceilings and funded steps remain unexecuted until authorized dispatch and independent receipt verification.

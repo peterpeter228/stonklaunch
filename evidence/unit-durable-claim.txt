@@ -1,0 +1,33 @@
+$ node --import tsx --test tests/*.test.ts
+bigint: Failed to load bindings, pure JS will be used (try npm run rebuild?)
+✔ migration threshold is not confirmed graduation (1.531243ms)
+✔ unknown confirmation must not create duplicate economic action (0.18325ms)
+✔ event uniqueness includes cluster and instruction, not just signature (0.198596ms)
+✔ on-chain metadata prefix validates mint and bounded UTF8 fields (1.05333ms)
+✔ client guard validates trade discriminator, amounts, pool and extra instructions (24.541014ms)
+✔ actual submit helper distinguishes typed preflight failure from ambiguous network outcome (20.328078ms)
+✔ official seeded WSOL setup and close shape passes the client guard without a real transaction (6.126647ms)
+✔ recovery journals remain isolated across wallets and networks; corruption blocks continuation (0.562092ms)
+✔ Chinese token names follow protocol UTF8-byte limit before upload (4.384896ms)
+✔ transfer-cost inspection uses capped integer fees and the active epoch, not promised income (1.905735ms)
+✔ mint inspection separates demo, verified no-fee, bad owners and epoch rollover without transactions (47.456737ms)
+✔ confirmation uses HTTP status without websocket subscriptions or rebroadcast (18.144031ms)
+✔ post-sign expiry and pending checks prevent broadcast; definitive failure keeps its terminal state (37.310822ms)
+✔ server observation never treats processed or legacy unconfirmed errors as terminal (8.170932ms)
+✔ durable claim binds exact repository, ref, attempt, source, nonce and run before signing (0.688865ms)
+✔ consumed or out-of-order durable slots cannot be reused, even without a signature (0.313313ms)
+✔ ledger CAS must succeed and read back before advancing; stale simultaneous claimant is rejected (2.476307ms)
+✔ ambiguous ledger write stops after a read and is never retried or treated as authorization (0.717537ms)
+✔ durable signed checkpoint cannot be replaced or moved back to a signable state (0.53422ms)
+✔ 50 bps is 5000 LaunchLab units; referral disabled (2.077641ms)
+✔ invalid configuration is rejected, never silently defaulted (0.638534ms)
+✔ fee owner and platform binding cannot be cosmetically replaced (0.513769ms)
+✔ amount parsing exact, exponent and overprecision rejected (0.62207ms)
+ℹ tests 23
+ℹ suites 0
+ℹ pass 23
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1019.374889

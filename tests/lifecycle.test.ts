@@ -167,3 +167,46 @@ test('server observation never treats processed or legacy unconfirmed errors as 
   confirmationStatus='confirmed';assert.equal((await observeTransaction(signature)).state,'confirmed');
  }finally{globalThis.fetch=originalFetch;Raydium.load=originalLoad;if(originalMode===undefined)delete process.env.APP_MODE;else process.env.APP_MODE=originalMode;}
 });
+
+import {assertClaim, transition, WALLET, PLATFORM, REPOSITORY, REF, type Ledger, type Identity} from '../scripts/devnet-claim';
+const claimedFixture=()=>{
+ const id:Identity={repository:REPOSITORY,ref:REF,runId:'12345',attempt:'1',sourceSha:'a'.repeat(40),nonce:'test_claim_nonce_0001',step:'launch'};
+ const ledger:Ledger={schemaVersion:1,network:'devnet',wallet:WALLET,platformId:PLATFORM,steps:{launch:{nonce:id.nonce,sourceSha:id.sourceSha,runId:id.runId,state:'claimed'}}};
+ return {id,ledger};
+};
+test('durable claim binds exact repository, ref, attempt, source, nonce and run before signing',()=>{
+ const {id,ledger}=claimedFixture();assert.equal(assertClaim(ledger,id).state,'claimed');
+ for(const change of [{repository:'other/repo'},{ref:'refs/heads/other'},{attempt:'2'},{sourceSha:'b'.repeat(40)},{nonce:'different_nonce_0001'},{runId:'54321'}])assert.throws(()=>assertClaim(ledger,{...id,...change}));
+ ledger.steps.launch!.runId=null;assert.throws(()=>assertClaim(ledger,id));
+});
+test('consumed or out-of-order durable slots cannot be reused, even without a signature',()=>{
+ const {id,ledger}=claimedFixture();ledger.steps.launch!.state='signing';assert.throws(()=>assertClaim(ledger,id));
+ ledger.steps.launch!.state='claimed';ledger.steps.launch!.signature='public-signature';assert.throws(()=>assertClaim(ledger,id));delete ledger.steps.launch!.signature;
+ ledger.steps.sell={...ledger.steps.launch!};assert.throws(()=>assertClaim(ledger,id));delete ledger.steps.sell;
+ ledger.steps.buy={...ledger.steps.launch!};assert.throws(()=>assertClaim(ledger,{...id,step:'buy'}));
+});
+test('ledger CAS must succeed and read back before advancing; stale simultaneous claimant is rejected',async()=>{
+ const {id,ledger}=claimedFixture(),originalFetch=globalThis.fetch,token=process.env.GH_TOKEN;process.env.GH_TOKEN='test-only-not-a-credential';
+ let server=structuredClone(ledger),sha='initial',puts=0;
+ globalThis.fetch=(async(_url,init)=>{
+  if(init?.method==='PUT'){puts++;const body=JSON.parse(String(init.body));if(body.sha!==sha)return new Response('{}',{status:409});server=JSON.parse(Buffer.from(body.content,'base64').toString());sha='consumed';return new Response('{}');}
+  return new Response(JSON.stringify({sha,encoding:'base64',content:Buffer.from(JSON.stringify(server)).toString('base64')}));
+ }) as typeof fetch;
+ try{
+  const original={sha:'initial',ledger};const consumed=await transition(original,id,'claimed','signing');assert.equal(consumed.ledger.steps.launch!.state,'signing');
+  await assert.rejects(()=>transition(original,id,'claimed','signing'),/CAS_OUTCOME/);assert.equal(puts,2);
+  await assert.rejects(()=>transition(consumed,id,'claimed','signing'),/CLAIM_NOT_OWNED/);assert.equal(puts,2);
+ }finally{globalThis.fetch=originalFetch;if(token===undefined)delete process.env.GH_TOKEN;else process.env.GH_TOKEN=token;}
+});
+test('ambiguous ledger write stops after a read and is never retried or treated as authorization',async()=>{
+ const {id,ledger}=claimedFixture(),originalFetch=globalThis.fetch,token=process.env.GH_TOKEN;process.env.GH_TOKEN='test-only-not-a-credential';let puts=0,reads=0;
+ globalThis.fetch=(async(_url,init)=>{if(init?.method==='PUT'){puts++;throw Error('timeout');}reads++;return new Response(JSON.stringify({sha:'unknown',encoding:'base64',content:Buffer.from(JSON.stringify(ledger)).toString('base64')}));}) as typeof fetch;
+ try{await assert.rejects(()=>transition({sha:'initial',ledger},id,'claimed','signing'),/CAS_OUTCOME/);assert.equal(puts,1);assert.equal(reads,1);}
+ finally{globalThis.fetch=originalFetch;if(token===undefined)delete process.env.GH_TOKEN;else process.env.GH_TOKEN=token;}
+});
+test('durable signed checkpoint cannot be replaced or moved back to a signable state',async()=>{
+ const {id,ledger}=claimedFixture();ledger.steps.launch={...ledger.steps.launch!,state:'signed',signature:'original',messageHash:'digest',mint:WALLET,poolId:PLATFORM};
+ await assert.rejects(()=>transition({sha:'x',ledger},id,'signed','finalized',{signature:'replacement',slot:1}),/IMMUTABLE_CLAIM/);
+ for(const fields of [{mint:PLATFORM},{poolId:WALLET},{messageHash:'replacement'}])await assert.rejects(()=>transition({sha:'x',ledger},id,'signed','finalized',fields),/IMMUTABLE_CLAIM/);
+ await assert.rejects(()=>transition({sha:'x',ledger},id,'signed','claimed'),/INVALID_TRANSITION/);
+});

@@ -1,20 +1,28 @@
 name: Durable devnet creator acceptance
-run-name: creator-acceptance:${{ inputs.mode }}:${{ inputs.step }}
+run-name: creator-acceptance:${{ inputs.mode }}:${{ inputs.step }}:${{ inputs.claim_nonce }}
 on:
   workflow_dispatch:
     inputs:
       mode:
-        description: Prepare reads only. Execute is deliberately blocked pending durable ledger review.
+        description: Prepare reads only. Execute consumes one precommitted and run-bound public claim.
         type: choice
         options: [prepare, execute]
         default: prepare
       step:
-        description: Fixed acceptance order, one execution attempt per step for this workflow.
+        description: Fixed acceptance order, exactly one execution attempt per step.
         type: choice
         options: [launch, buy, sell, claim-creator]
         default: launch
+      source_sha:
+        description: Reviewed full source commit, required for execute. Must match the public claim.
+        type: string
+        default: ''
+      claim_nonce:
+        description: Unique public claim nonce, required for execute; never a secret.
+        type: string
+        default: ''
       public_recovery_json:
-        description: Public JSON only, mint, poolId and signatures keyed by step. Never a keypair.
+        description: Prepare only, public mint/pool/signatures. Execute uses the repository ledger exclusively.
         type: string
         default: '{}'
 permissions:
@@ -24,21 +32,29 @@ concurrency:
   cancel-in-progress: false
 jobs:
   acceptance:
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+    if: github.repository == 'peterpeter228/stonklaunch' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-24.04
-    timeout-minutes: 10
+    timeout-minutes: 12
+    permissions:
+      contents: write
     env:
       RUN_MODE: ${{ inputs.mode }}
       RUN_STEP: ${{ inputs.step }}
+      SOURCE_SHA: ${{ inputs.source_sha }}
+      CLAIM_NONCE: ${{ inputs.claim_nonce }}
       PUBLIC_RECOVERY_JSON: ${{ inputs.public_recovery_json }}
     steps:
-      - name: Execution is blocked in this prepare-only release
+      - name: Reject reruns and malformed execution identities before checkout
         if: inputs.mode == 'execute'
+        shell: bash
         run: |
-          echo "BLOCKED: durable cross-run uniqueness ledger must be reviewed before enabling signing."
-          exit 1
+          test "$GITHUB_RUN_ATTEMPT" = 1
+          [[ "$SOURCE_SHA" =~ ^[a-f0-9]{40}$ ]]
+          [[ "$CLAIM_NONCE" =~ ^[a-zA-Z0-9_-]{16,80}$ ]]
+          test "$PUBLIC_RECOVERY_JSON" = '{}'
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
+          ref: ${{ inputs.mode == 'execute' && inputs.source_sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
@@ -47,8 +63,20 @@ jobs:
         run: |
           npm install --global pnpm@11.25.0 --ignore-scripts
           pnpm install --frozen-lockfile --ignore-scripts
-      - name: Prepare public acceptance evidence without a wallet secret
+      - name: Verify public run claim and reviewed workflow before secret exposure
+        if: inputs.mode == 'execute'
+        env:
+          RUN_MODE: gate
+          GH_TOKEN: ${{ github.token }}
+        run: node --import tsx scripts/devnet-durable-runner.ts
+      - name: Prepare public acceptance evidence without wallet secret
         if: inputs.mode == 'prepare'
+        run: node --import tsx scripts/devnet-durable-runner.ts
+      - name: Execute exactly one claimed devnet step
+        if: inputs.mode == 'execute'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          STONK_DEVNET_KEYPAIR_JSON: ${{ secrets.STONK_DEVNET_KEYPAIR_JSON }}
         run: node --import tsx scripts/devnet-durable-runner.ts
       - name: Upload only new public evidence
         if: always()
