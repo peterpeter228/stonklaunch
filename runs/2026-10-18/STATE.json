@@ -190,10 +190,9 @@
     "Next.js 15 support window must be rechecked at execution time"
   ],
   "next_steps": [
-    "Finish approved source distribution and hosted staging deployment",
-    "Await specific Solana Auth enablement confirmation, then configure actual allowed origin",
-    "Configure service credentials with specific approval and verify two-wallet Auth/storage/indexer workflows",
-    "Production dedicated RPC, wallet/operator and mainnet user-executed gates remain separate"
+    "Review dedicated read-only RPC/indexer and platform configuration requirements without creating credentials or paid services",
+    "Preserve disabled financial actions until separately satisfied mainnet gates and user-executed financial steps",
+    "Complete real wallet-extension/mobile verification separately from synthetic provider login tests"
   ],
   "last_completed_work": "Durable devnet launch,buy,sell,creator fee claim all independently finalized; creator received74691rawWSOL,not mainnetrevenue. Next16 actualbrowser2/2and18viewportPASS. Supabase schema/bucket/HTTPreadaccesschecksPASS; correctdashboardloginverified, SolanaAuthdisabledpendingapproval. GPLsource distribution approved, localarchive workongoing.",
   "verified_checks": [
@@ -221,13 +220,11 @@
     "completed_short_review_count": 3
   },
   "remaining_blockers": [
-    "Supabase schema/storage bucket deployed; Auth/provider, upload retrieval and application secret configuration pending",
-    "NonSOL assets not enabled; xStocks capability not proven",
+    "Production dedicated RPC and platform/operator configuration unresolved; financial actions remain disabled",
+    "NonSOL assets and xStocks capability not proven",
     "Swap fee and creator historical decoders incomplete",
-    "No public deployment",
-    "Production platform/operator configuration remains separate; devnet platform is test-only",
-    "Real phone/wallet-extension and deployed Auth/storage/worker acceptance pending; desktop Chromium mobile emulation is not real device",
-    "Complete sanitized GPL source archive/notices and actual public integration before deployment"
+    "Real phone/wallet-extension testing and indexer/worker acceptance remain unverified",
+    "Commercial demand, net economics and mainnet readiness are not established by offchain acceptance"
   ],
   "token_inspection": {
     "status": "implemented_read_only",
@@ -312,7 +309,7 @@
     "broadcast": false,
     "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
   },
-  "updated_at": "2026-10-19T02:03:06.758147+00:00",
+  "updated_at": "2026-10-19T02:48:00Z",
   "production_setup": {
     "supabase_connected": true,
     "project_ref": "mvhrxnspbzomtpdftxqp",
@@ -328,7 +325,7 @@
     "evidence": "evidence/HOSTED_SUPABASE_SETUP.json",
     "render_workspace": "tea-dbahbeijnfac73fnfna0",
     "public_source_license_decision": "approved_Sentinel_7f9c17623c5481918e488106d87dc037",
-    "deployed": false,
+    "deployed": true,
     "supabase_browser_login": "verified_correct_org_via_ChatGPT",
     "solana_auth_provider": "enabled_solana_only_verified",
     "render_creation": "created_free_demo",
@@ -343,7 +340,10 @@
     "auth_redirects": [
       "https://stonklaunch-demo.onrender.com/"
     ],
-    "server_key": "manual_user_configuration_pending_no_agent_secret_access"
+    "server_key": "user_manually_configured_actual_authenticated_storage_verified_no_agent_secret_access",
+    "current_mode": "mainnet-readonly",
+    "current_deployed_commit": "77df96f6d3bee3d8bd799a8b6688e499f4517884",
+    "current_deploy_id": "dep-dbao20dg1s2s73crmmag"
   },
   "browser_next16": {
     "run": 39157362123,
@@ -385,9 +385,13 @@
     "mock_browser_cases": 4,
     "mock_browser_assertions": "PASS",
     "artifact_retention": "FAILED_quota",
-    "real_hosted_auth_storage": "NOT_RUN",
+    "real_hosted_auth_storage": "PASS",
     "ephemeral_two_wallet_test_approval": "Sentinel_eccef929b7e48191bebb3b1965cbd110",
-    "test_execution": "not_dispatched_waiting_credentials_readiness",
-    "source_sha256": "e5aef8f6c2c8b1de3f57c58d2c9c34354f1e66f60e2f0adfe41fed09da569902"
+    "test_execution": "completed_61_checks",
+    "source_sha256": "e5aef8f6c2c8b1de3f57c58d2c9c34354f1e66f60e2f0adfe41fed09da569902",
+    "real_run": 39191420301,
+    "evidence": "evidence/HOSTED_ACCOUNT_ACCEPTANCE_PASS.json",
+    "replacement_pair_approval": "Sentinel_7fa7d3b3e7448191a86b2d3b1d0b602e",
+    "retained_test_accounts": 4
   }
 }
