@@ -1,0 +1,73 @@
+{
+  "run_id": 39190929440,
+  "job_id": 117863343437,
+  "url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39190929440",
+  "harness_source": "40d7e0b39c46269a728d16ae4a4278ffb10735d5",
+  "deployed_application_source": "77df96f6d3bee3d8bd799a8b6688e499f4517884",
+  "conclusion": "failure",
+  "summary": {
+    "status": "FAIL",
+    "phase": "public-upload",
+    "failedAssertion": null,
+    "fixture": "hosted-fixture-1792377561614",
+    "checks": [
+      "explicit-execution-gate",
+      "public-supabase-project-url",
+      "public-not-service-key",
+      "runtime-readable",
+      "mode-mainnet-readonly",
+      "cluster-mainnet-beta",
+      "financial-guards-disabled",
+      "canonical-app-origin",
+      "hosted-auth-storage-configured",
+      "A-real-web3-auth-response",
+      "A-one-login-message-signature",
+      "A-public-config-matches-site",
+      "A-web3-grant",
+      "A-server-session",
+      "A-saved-server-draft",
+      "A-reload-persists-text",
+      "B-real-web3-auth-response",
+      "B-one-login-message-signature",
+      "B-public-config-matches-site",
+      "B-web3-grant",
+      "B-server-session",
+      "B-saved-server-draft",
+      "B-reload-persists-text",
+      "distinct-users-and-wallets",
+      "A-api-private-isolation",
+      "A-ui-private-isolation",
+      "A-database-RLS-isolation",
+      "B-api-private-isolation",
+      "B-ui-private-isolation",
+      "B-database-RLS-isolation",
+      "foreign-draft-id-write-rejected",
+      "foreign-write-leaves-owner-data-intact",
+      "A-public-png-upload",
+      "A-upload-owner-namespace"
+    ],
+    "preflightDiagnostic": {
+      "hostname": "stonklaunch-demo.onrender.com",
+      "stage": "verified",
+      "status": 200,
+      "contentType": "application/json",
+      "elapsedMs": 358
+    },
+    "accounts": [
+      "A6PQU7j14KpGzdBriakEvaihLiFJHWBzqYgqhsvqpjuk",
+      "GRkhCeBWMmjG8TSCH3PzQ4gfc8KABD152hUpsvUPbYWK"
+    ],
+    "retained": "Two test auth accounts, labelled private drafts and tiny public PNG fixtures. No deletion."
+  },
+  "confirmed_harness_defect": "upload() line 136 invokes native fetch result.ok() instead of boolean result.ok; throws TypeError after public PNG upload and owner namespace checks.",
+  "completed": "Two real Web3 logins; persisted private drafts; bidirectional UI/API/database RLS isolation; rejected foreign update; A public image upload and owner namespace.",
+  "not_reached": [
+    "public image bytes verification",
+    "B image upload",
+    "wallet-session mismatch",
+    "financial prepare denials",
+    "logout"
+  ],
+  "reconciliation_required": true,
+  "rerun_performed": false
+}

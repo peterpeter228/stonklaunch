@@ -133,7 +133,7 @@ async function upload(actor, png) {
   const url=new URL(body.data.url);
   check(url.origin===new URL(publicURL).origin && new RegExp(`/storage/v1/object/public/[^/]+/icons/${actor.userId}/[a-f0-9]{64}\\.png$`).test(url.pathname),`${actor.label}-upload-owner-namespace`);
   const result=await fetch(url,{signal:AbortSignal.timeout(20000)});const bytes=Buffer.from(await result.arrayBuffer());
-  check(result.ok()&&result.headers.get('content-type')?.startsWith('image/png')&&bytes.length===body.data.bytes,`${actor.label}-public-image-readable`);
+  check(result.ok&&result.headers.get('content-type')?.startsWith('image/png')&&bytes.length===body.data.bytes,`${actor.label}-public-image-readable`);
   const expected=await sharp(png,{limitInputPixels:16000000,animated:false}).rotate().resize(512,512,{fit:'cover',withoutEnlargement:true}).png().toBuffer();
   check(createHash('sha256').update(bytes).digest('hex')===createHash('sha256').update(expected).digest('hex'),`${actor.label}-image-bytes-roundtrip`);
   actor.image=url.href;
