@@ -162,3 +162,117 @@ test('DEMO creation, poster, denied trades and external inspection recovery', as
     await info.attach('browser-diagnostics', { body: JSON.stringify({ scope: 'DEMO only; catalog outage intentionally injected; no mainnet or wallet claim', consoleErrors, pageErrors, failedResponses, unexpectedNetwork }, null, 2), contentType: 'application/json' });
   }
 });
+
+// Mocked off-chain journey only: no keys, signatures, Auth accounts, Storage or RPC.
+test('readonly private drafts isolate changed wallets and clear expired sessions', async ({ page, context }, info) => {
+  const origin = 'http://127.0.0.1:3110';
+  const walletA = '11111111111111111111111111111111';
+  const walletB = 'So11111111111111111111111111111111111111112';
+  let account = walletA, signedIn = true, rejectSession = false, failRead = false;
+  let saved = [], writes = 0, financialRequests = 0, holdNextRead = false;
+  let releaseRead, readStarted, readFinished;
+  const pageErrors = [], outsideRequests = [];
+  page.on('pageerror', error => pageErrors.push(error.message));
+  await page.addInitScript(({ walletA }) => {
+    const listeners = {};
+    window.solana = {
+      publicKey: { toBase58: () => walletA, toString: () => walletA },
+      connect: async () => ({ publicKey: window.solana.publicKey }),
+      on: (event, listener) => (listeners[event] ||= []).push(listener),
+      removeListener: (event, listener) => { listeners[event] = (listeners[event] || []).filter(item => item !== listener); },
+    };
+    // This fixture has neither signMessage nor signTransaction. Session verification is mocked separately.
+    window.changeDraftFixtureWallet = wallet => {
+      window.solana.publicKey = { toBase58: () => wallet, toString: () => wallet };
+      (listeners.accountChanged || []).forEach(listener => listener());
+    };
+  }, { walletA });
+  await context.route('**/*', async route => {
+    const request = route.request(), url = new URL(request.url());
+    if (url.origin !== origin) { outsideRequests.push(url.origin + url.pathname); return route.abort('blockedbyclient'); }
+    const data = value => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ data: value }) });
+    const error = (status, code) => route.fulfill({ status, contentType: 'application/json', body: JSON.stringify({ error: { code, message: `Fixture ${code}` } }) });
+    if (url.pathname === '/api/runtime') return data({ mode: 'mainnet-readonly', cluster: 'mainnet-beta', origin, platformId: null, platformAdmin: null, walletEnabled: false, authConfigured: true, storageConfigured: true, actionsEnabled: false, feePolicy: { platformBps: 50, creatorBps: 50, shareBps: 0 }, blockers: ['READ_ONLY_MODE'] });
+    if (url.pathname === '/api/auth/session') return data({ session: signedIn ? { userId: account === walletA ? 'fixture-user-a' : 'fixture-user-b', wallet: account } : null });
+    if (url.pathname === '/api/auth/logout') { signedIn = false; return data({ signedOut: true }); }
+    if (url.pathname === '/api/drafts') {
+      if (rejectSession) return error(401, 'AUTH_REQUIRED');
+      if (request.method() === 'POST') {
+        expect(request.headers()['x-wallet-address']).toBe(account);
+        const body = request.postDataJSON();
+        saved = [{ draft_id: body.draftId, parameters: body, confirmed_signature: null, updated_at: '2026-10-19T00:00:00Z' }];
+        writes++;
+        return data({ draftId: body.draftId, saved: true });
+      }
+      if (failRead) { failRead = false; return error(503, 'DRAFT_READ_FAILED'); }
+      const items = account === walletA ? saved : [];
+      if (holdNextRead) {
+        holdNextRead = false;
+        readStarted();
+        await new Promise(resolve => { releaseRead = resolve; });
+        await data({ items });
+        readFinished();
+        return;
+      }
+      return data({ items });
+    }
+    if (url.pathname.includes('/prepare') || url.pathname.includes('/actions/')) financialRequests++;
+    return route.continue();
+  });
+  async function connect() {
+    await page.locator('.workflow-page').getByRole('button', { name: 'Connect wallet', exact: true }).click();
+    await page.getByRole('dialog').getByRole('button', { name: 'Connect Solana wallet', exact: true }).click();
+    await expect(page.getByLabel('Private draft name')).toBeVisible();
+  }
+  async function capture(name) {
+    const dimensions = await page.evaluate(() => ({ viewport: innerWidth, client: document.documentElement.clientWidth, scroll: document.documentElement.scrollWidth }));
+    expect(dimensions.viewport).toBe(info.project.use.viewport.width);
+    expect(dimensions.scroll).toBeLessThanOrEqual(dimensions.client + 1);
+    await info.attach(name, { body: await page.screenshot({ fullPage: true }), contentType: 'image/png' });
+  }
+  await page.goto('/drafts');
+  await connect();
+  await page.getByLabel('Private draft name').fill('Fixture A private draft');
+  await page.getByLabel('Private draft symbol').fill('FIXA');
+  await page.getByLabel('Private draft description').fill('Non-sensitive mock text only.');
+  await page.getByRole('button', { name: 'Save private draft', exact: true }).click();
+  await expect(page.getByText('Private draft saved to the server.')).toBeVisible();
+  expect(writes).toBe(1);
+  await page.getByRole('button', { name: 'New draft', exact: true }).click();
+  await page.getByRole('button', { name: 'Open draft', exact: true }).click();
+  await expect(page.getByLabel('Private draft name')).toHaveValue('Fixture A private draft');
+  await capture('private-draft-fixture-a');
+  failRead = true;
+  await page.getByRole('button', { name: 'Reload private drafts', exact: true }).click();
+  await expect(page.getByText('Fixture DRAFT_READ_FAILED', { exact: false })).toBeVisible();
+  await expect(page.getByLabel('Private draft name')).toHaveValue('Fixture A private draft');
+  const started = new Promise(resolve => { readStarted = resolve; });
+  const finished = new Promise(resolve => { readFinished = resolve; });
+  holdNextRead = true;
+  await page.getByRole('button', { name: 'Reload private drafts', exact: true }).click();
+  await started;
+  account = walletB;
+  await page.evaluate(wallet => window.changeDraftFixtureWallet(wallet), walletB);
+  await expect(page.getByLabel('Private draft name')).toHaveCount(0);
+  releaseRead();
+  await finished;
+  await connect();
+  await expect(page.getByLabel('Private draft name')).toHaveValue('');
+  await expect(page.getByText('No private drafts for this wallet and network.')).toBeVisible();
+  await expect(page.getByText('Fixture A private draft', { exact: false })).toHaveCount(0);
+  await capture('private-draft-fixture-b-isolated');
+  rejectSession = true;
+  await page.getByRole('button', { name: 'Reload private drafts', exact: true }).click();
+  await expect(page.getByText('Fixture AUTH_REQUIRED', { exact: false })).toBeVisible();
+  await expect(page.getByLabel('Private draft name')).toHaveCount(0);
+  await expect(page.getByRole('heading', { name: 'Saved on the server' })).toHaveCount(0);
+  rejectSession = false;
+  await page.getByRole('button', { name: 'Sign in with wallet', exact: true }).click();
+  await expect(page.getByLabel('Private draft name')).toBeVisible();
+  await page.getByRole('button', { name: 'Sign out', exact: true }).click();
+  await expect(page.getByLabel('Private draft name')).toHaveCount(0);
+  expect(financialRequests).toBe(0);
+  expect(pageErrors).toEqual([]);
+  expect(outsideRequests).toEqual([]);
+  await info.attach('private-draft-mock-scope', { body: JSON.stringify({ scope: 'Mock API/session/provider only; not actual wallet login, Supabase or Storage evidence', writes, financialRequests, pageErrors, outsideRequests }), contentType: 'application/json' });
+});

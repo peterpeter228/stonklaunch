@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useRef, useState, ReactNode } from 'react';
 import { ArrowUpRight, ArrowRight, Wallet, X, Orbit, ShieldCheck, Info, RefreshCw, Check, Copy } from 'lucide-react';
 import type { RuntimeConfig, AssetCapability, Launch, ApiEnvelope } from '@/types/domain';
 export async function api<T>(url: string, body?: unknown): Promise<T> { const res = await fetch(url, body ? { method: 'POST', headers: { 'Content-Type': 'application/json', 'x-wallet-address': typeof window==='undefined'?'':((window as unknown as {solana?:{publicKey?:{toBase58:()=>string}}}).solana?.publicKey?.toBase58()||'') }, body: JSON.stringify(body) } : { cache: 'no-store' }); const result = await res.json() as ApiEnvelope<T>; if ('error' in result)
@@ -23,6 +23,8 @@ type Provider = {
         };
     }>;
     disconnect?: () => Promise<void>;
+    on?: (event:string, listener:()=>void)=>void;
+    removeListener?: (event:string, listener:()=>void)=>void;
 };
 type Platform = {
     runtime: RuntimeConfig | null;
@@ -38,6 +40,8 @@ export function Shell({ children }: {
     const path = usePathname();
     const { data: runtime, error } = useApi<RuntimeConfig>('/api/runtime');
     const [wallet, setWallet] = useState<string | null>(null);
+    const connectionEpoch=useRef(0);
+    useEffect(()=>{const provider=(window as unknown as {solana?:Provider}).solana;const changed=()=>{connectionEpoch.current++;setWallet(null);};provider?.on?.('accountChanged',changed);provider?.on?.('disconnect',changed);window.addEventListener('stonklaunch:logout',changed);return()=>{provider?.removeListener?.('accountChanged',changed);provider?.removeListener?.('disconnect',changed);window.removeEventListener('stonklaunch:logout',changed);};},[]);
     const [modal, setModal] = useState(false);
     const [toast, setToast] = useState('');
     const [connecting, setConnecting] = useState(false);
@@ -57,7 +61,9 @@ export function Shell({ children }: {
         return;
     } try {
         setConnecting(true);
+        const attempt=++connectionEpoch.current;
         const result = await provider.connect();
+        if(attempt!==connectionEpoch.current)return;
         setWallet(result.publicKey.toString());
         setModal(false);
     }
@@ -67,7 +73,7 @@ export function Shell({ children }: {
     finally {
         setConnecting(false);
     } }
-    return <Context.Provider value={{ runtime, wallet, connect: () => setModal(true), notify }}><div className="app-shell"><header className="topbar"><Link href="/" className="brand" aria-label="StonkLaunch home"><span className="brand-icon"><Orbit size={25}/></span><span>Stonk<span>Launch</span></span></Link><nav aria-label="Main navigation">{[['/', 'Discover'], ['/launch', 'Create'], ['/terminal', 'Terminal']].map(([href, label]) => <Link key={href} href={href} className={(path === href ? 'active' : '')}>{label}</Link>)}</nav><div className="header-actions"><span className={'network-badge ' + (runtime?.mode === 'demo' ? 'demo' : '')}><span />{runtime ? runtime.mode === 'demo' ? 'DEMO' : runtime.cluster : 'Connecting'}</span><button className="button wallet-button" aria-label="Connect Solana wallet" onClick={() => setModal(true)}><Wallet size={16}/><span>{wallet ? short(wallet) : 'Connect wallet'}</span></button></div></header><div className="mode-bar"><span><span className="status-dot"/>{runtime?.mode === 'demo' ? 'Demo playground. Sample data, no real transactions.' : runtime?.mode === 'mainnet-readonly' ? 'Mainnet · Read-only. Financial actions are disabled.' : runtime ? 'On-chain data · Verify every transaction in your wallet.' : error ? 'Data connection unavailable. No financial actions are enabled.' : 'Checking network and platform configuration…'}</span><span className="mode-right">Built on Solana <ArrowUpRight size={12}/></span></div><main>{children}</main><footer><Link href="/" className="footer-brand">StonkLaunch</Link><span>Ideas become communities. Transactions stay yours.</span><span><Link href="/source">Source &amp; licenses</Link></span></footer></div>{toast && <div className="toast" role="status"><Info size={18}/>{toast}<button onClick={() => setToast('')} aria-label="Dismiss"><X size={16}/></button></div>}{modal && <div className="modal-backdrop" onClick={() => setModal(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="wallet-title" onClick={e => e.stopPropagation()}><button className="close" onClick={() => setModal(false)} aria-label="Close wallet dialog"><X /></button><div className="large-icon"><Wallet /></div><h2 id="wallet-title">Your wallet. Your control.</h2><p>Connect a Solana wallet to prepare transactions. Connecting does not sign a transaction or grant administrator access.</p>{runtime?.mode === 'demo' ? <Notice>Demo mode never connects a funds workflow. Explore with sample tokens, or configure a verified network to use your wallet.</Notice> : <button className="button primary full" onClick={connectWallet} disabled={connecting}>{connecting ? 'Connecting…' : wallet ? 'Reconnect wallet' : 'Connect Solana wallet'}<ArrowRight size={17}/></button>}{wallet && <p className="address">{wallet}</p>}{walletError && <Notice tone="warning">{walletError}</Notice>}<div className="fine-print"><ShieldCheck size={16}/> We never ask for a seed phrase or private key.</div></section></div>}</Context.Provider>;
+    return <Context.Provider value={{ runtime, wallet, connect: () => setModal(true), notify }}><div className="app-shell"><header className="topbar"><Link href="/" className="brand" aria-label="StonkLaunch home"><span className="brand-icon"><Orbit size={25}/></span><span>Stonk<span>Launch</span></span></Link><nav aria-label="Main navigation">{[['/', 'Discover'], ['/launch', 'Create'], ['/terminal', 'Terminal'], ['/drafts', 'Drafts']].map(([href, label]) => <Link key={href} href={href} className={(path === href ? 'active' : '')}>{label}</Link>)}</nav><div className="header-actions"><span className={'network-badge ' + (runtime?.mode === 'demo' ? 'demo' : '')}><span />{runtime ? runtime.mode === 'demo' ? 'DEMO' : runtime.cluster : 'Connecting'}</span><button className="button wallet-button" aria-label="Connect Solana wallet" onClick={() => setModal(true)}><Wallet size={16}/><span>{wallet ? short(wallet) : 'Connect wallet'}</span></button></div></header><div className="mode-bar"><span><span className="status-dot"/>{runtime?.mode === 'demo' ? 'Demo playground. Sample data, no real transactions.' : runtime?.mode === 'mainnet-readonly' ? 'Mainnet · Read-only. Financial actions are disabled.' : runtime ? 'On-chain data · Verify every transaction in your wallet.' : error ? 'Data connection unavailable. No financial actions are enabled.' : 'Checking network and platform configuration…'}</span><span className="mode-right">Built on Solana <ArrowUpRight size={12}/></span></div><main>{children}</main><footer><Link href="/" className="footer-brand">StonkLaunch</Link><span>Ideas become communities. Transactions stay yours.</span><span><Link href="/source">Source &amp; licenses</Link></span></footer></div>{toast && <div className="toast" role="status"><Info size={18}/>{toast}<button onClick={() => setToast('')} aria-label="Dismiss"><X size={16}/></button></div>}{modal && <div className="modal-backdrop" onClick={() => setModal(false)}><section className="modal" role="dialog" aria-modal="true" aria-labelledby="wallet-title" onClick={e => e.stopPropagation()}><button className="close" onClick={() => setModal(false)} aria-label="Close wallet dialog"><X /></button><div className="large-icon"><Wallet /></div><h2 id="wallet-title">Your wallet. Your control.</h2><p>Connect a Solana wallet to prepare transactions. Connecting does not sign a transaction or grant administrator access.</p>{runtime?.mode === 'demo' ? <Notice>Demo mode never connects a funds workflow. Explore with sample tokens, or configure a verified network to use your wallet.</Notice> : <button className="button primary full" onClick={connectWallet} disabled={connecting}>{connecting ? 'Connecting…' : wallet ? 'Reconnect wallet' : 'Connect Solana wallet'}<ArrowRight size={17}/></button>}{wallet && <p className="address">{wallet}</p>}{walletError && <Notice tone="warning">{walletError}</Notice>}<div className="fine-print"><ShieldCheck size={16}/> We never ask for a seed phrase or private key.</div></section></div>}</Context.Provider>;
 }
 export function Notice({ children, tone = 'info' }: {
     children: ReactNode;

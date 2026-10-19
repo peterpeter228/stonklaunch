@@ -302,7 +302,7 @@ test('runner pacing spaces all RPC starts and stops queued network after 429 or 
  let calls=0;const aborted=new AbortController();aborted.abort();const f=pacedDevnetFetch((async()=>{calls++;return new Response('{}');}) as typeof fetch,()=>{});await assert.rejects(()=>f(endpoint,{...request,signal:aborted.signal}));assert.equal(calls,0);await f('https://api.github.com/repos/example',{});assert.equal(calls,1);
 });
 
-import {getRuntime,assertSameOrigin} from '../src/lib/runtime';
+import {getRuntime,assertSameOrigin,requireFinancialMode} from '../src/lib/runtime';
 test('Render assigned origin is trusted only in Render and explicit origin takes precedence',()=>{
  const names=['APP_MODE','APP_ORIGIN','RENDER','RENDER_EXTERNAL_URL'] as const;
  const saved=Object.fromEntries(names.map(k=>[k,process.env[k]]));
@@ -315,4 +315,26 @@ test('Render assigned origin is trusted only in Render and explicit origin takes
   assert.throws(()=>assertSameOrigin(new Request('https://preview.example.test/api',{headers:{origin:'https://wrong.example.test'}})),/请求来源不允许/);
   process.env.APP_ORIGIN='https://chosen.example.test';assert.equal(getRuntime().origin,'https://chosen.example.test');
  }finally{for(const k of names){if(saved[k]===undefined)delete process.env[k];else process.env[k]=saved[k];}}
+});
+
+import {draftScope,currentPrivateResponse,rejectsPrivateSession} from '../src/lib/data/draft-scope';
+test('private draft query scopes every read/update to user, wallet and network',()=>{
+ assert.deepEqual(draftScope('user-a','wallet-a','mainnet-beta'),{owner_user_id:'user-a',owner_wallet:'wallet-a',cluster:'mainnet-beta'});
+});
+test('private draft stale responses are discarded after logout, wallet or network change',()=>{
+ const start={generation:3,wallet:'wallet-a',cluster:'mainnet-beta'};
+ assert.equal(currentPrivateResponse(start,{...start}),true);
+ for(const changed of [{...start,generation:4},{...start,wallet:'wallet-b'},{...start,wallet:null},{...start,cluster:'devnet'},{...start,cluster:undefined}])assert.equal(currentPrivateResponse(start,changed),false);
+});
+
+test('readonly off-chain authentication configuration cannot enable financial preparation',()=>{
+ const keys=['APP_MODE','SOLANA_RPC_URL','ENABLE_SOLANA_ACTIONS'] as const;const saved=Object.fromEntries(keys.map(k=>[k,process.env[k]]));
+ try{process.env.APP_MODE='mainnet-readonly';process.env.SOLANA_RPC_URL='https://rpc.invalid';process.env.ENABLE_SOLANA_ACTIONS='true';assert.equal(getRuntime().walletEnabled,false);assert.equal(getRuntime().actionsEnabled,false);assert.throws(()=>requireFinancialMode(),(e:unknown)=>(e as {code:string}).code==='READ_ONLY_MODE');}
+ finally{for(const k of keys){if(saved[k]===undefined)delete process.env[k];else process.env[k]=saved[k];}}
+});
+
+test('private identity clears only on explicit auth or wallet-context rejection, not transient failures',()=>{
+ assert.equal(rejectsPrivateSession(401,'AUTH_REQUIRED'),true);
+ for(const code of ['WALLET_SESSION_MISMATCH','VERIFIED_SOLANA_IDENTITY_REQUIRED','WALLET_CONTEXT_REQUIRED'])assert.equal(rejectsPrivateSession(403,code),true);
+ for(const [status,code] of [[503,'DRAFT_READ_FAILED'],[503,'STORAGE_WRITE_FAILED'],[503,'AUTH_NOT_CONFIGURED'],[403,'ORIGIN_NOT_ALLOWED'],[400,'INVALID_IMAGE'],[0,undefined]])assert.equal(rejectsPrivateSession(Number(status),code),false);
 });

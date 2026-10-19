@@ -1,0 +1,17 @@
+{
+  "verified_at": "2026-10-19T01:50:16.473419+00:00",
+  "project_ref": "mvhrxnspbzomtpdftxqp",
+  "authorization": "Sentinel_4c52f096e7108191a77b299a299ed10a",
+  "solana_web3_enabled": true,
+  "ethereum_web3_enabled": false,
+  "site_url": "https://stonklaunch-demo.onrender.com",
+  "redirect_urls": [
+    "https://stonklaunch-demo.onrender.com/"
+  ],
+  "wildcards": false,
+  "other_auth_security_settings_changed": false,
+  "verification": "Provider reopened; Solana1/Ethereum0; Site URL and exactly one redirect read back in dashboard",
+  "service_role_configured_by_agent": false,
+  "server_key_status": "manual_user_configuration_pending",
+  "real_login_test": "NOT_RUN"
+}
