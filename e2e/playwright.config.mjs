@@ -16,7 +16,7 @@ export default defineConfig({
   use: {
     browserName: 'chromium',
     baseURL: 'http://127.0.0.1:3110',
-    trace: 'on',
+    trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     serviceWorkers: 'block',
     locale: 'en-US',

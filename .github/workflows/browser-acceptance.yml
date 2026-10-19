@@ -64,5 +64,5 @@ jobs:
           name: browser-demo-${{ github.run_id }}-${{ github.run_attempt }}
           path: evidence/browser-acceptance/
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 7
           include-hidden-files: false
