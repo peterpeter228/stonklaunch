@@ -312,7 +312,7 @@
     "broadcast": false,
     "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
   },
-  "updated_at": "2026-10-19T00:30:11.438577+00:00",
+  "updated_at": "2026-10-19T01:36:14.172017+00:00",
   "production_setup": {
     "supabase_connected": true,
     "project_ref": "mvhrxnspbzomtpdftxqp",
@@ -331,9 +331,14 @@
     "deployed": false,
     "supabase_browser_login": "verified_correct_org_via_ChatGPT",
     "solana_auth_provider": "disabled_enable_confirmation_pending",
-    "render_creation": "specific_approval_received_HTTP400_repo_unfetchable",
+    "render_creation": "created_free_demo",
     "render_approval": "Sentinel_844964cfca3c8191ba783ac0cc7254c7",
-    "render_deployment_evidence": "evidence/RENDER_DEMO_DEPLOYMENT.json"
+    "render_deployment_evidence": "evidence/RENDER_DEMO_DEPLOYMENT.json",
+    "demo_deployed": true,
+    "demo_url": "https://stonklaunch-demo.onrender.com",
+    "demo_commit": "f64fc79ef8548d3761aa764cd1fe6a4be77f1933",
+    "demo_acceptance": "PASS_desktop_rendered_and_HTTP_no_real_auth_storage_transactions",
+    "production_ready": false
   },
   "browser_next16": {
     "run": 39157362123,
@@ -346,11 +351,11 @@
     "evidence": "evidence/BROWSER_ACCEPTANCE_NEXT16.json"
   },
   "source_release": {
-    "commit": "c6b4dfb2a8a75f8126775eb37fa551c56023d310",
-    "sha256": "7866398c5036d45eb424cb4df3771247bfd5bf2ba6007e0cbccb721241336525",
+    "commit": "f64fc79ef8548d3761aa764cd1fe6a4be77f1933",
+    "sha256": "15b204478ed4c4cf07a2641b7860b3ac0fb39b93f0b2f29e19d97ad15239a5fd",
     "local_tests": 32,
     "gate": "PASS",
-    "evidence": "evidence/SOURCE_RELEASE_ACCEPTANCE.json"
+    "evidence": "evidence/HOSTED_DEMO_HTTP_FINAL.json"
   },
   "browser_source_release": {
     "run": 39180000615,
@@ -359,5 +364,11 @@
     "failure": "artifact_storage_quota",
     "current_screenshots_reviewed": false,
     "evidence": "evidence/BROWSER_ACCEPTANCE_SOURCE_FINAL.json"
+  },
+  "hosted_browser": {
+    "receipt": "evidence/hosted-browser/HOSTED_BROWSER_RESULT.json",
+    "desktop": "PASS",
+    "exact_mobile_360": "NOT_RUN",
+    "scope": "DEMO only; no real wallet login, storage or mainnet"
   }
 }

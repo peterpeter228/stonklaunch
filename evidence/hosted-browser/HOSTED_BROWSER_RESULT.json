@@ -1,0 +1,34 @@
+{
+  "origin": "https://stonklaunch-demo.onrender.com",
+  "final_source_sha": "f64fc79ef8548d3761aa764cd1fe6a4be77f1933",
+  "deployment": "dep-dban513bc2fs73c1ldk0",
+  "observed_at": "2026-10-19T01:35:10Z",
+  "hosted_desktop_ui": "PASS scoped journey",
+  "source_archive_sha256": "15b204478ed4c4cf07a2641b7860b3ac0fb39b93f0b2f29e19d97ad15239a5fd",
+  "source_download_via_browser": "PASS",
+  "poster_font_visual": "PASS readable final PNG including DEMO watermark",
+  "poster": {
+    "width": 1080,
+    "height": 1350,
+    "qr": "https://stonklaunch-demo.onrender.com/token/demo-orbit"
+  },
+  "post_redeploy_sell_refusal": "PASS DEMO_NO_REAL_TRANSACTIONS,0.1 retained and button recovered",
+  "non_extension_error_entries_in_latest500": [],
+  "extension_noise": "Automation extension metadata errors observed; excluded from application fault classification",
+  "hosted_mobile_360": "NOT_RUN: supported tab APIs expose no viewport control",
+  "physical_mobile": "NOT_RUN",
+  "wallet_signing_and_financial_writes": "NOT_RUN; prohibited in DEMO",
+  "screenshots": [
+    "07-source.jpg",
+    "06-inspection-recovered.jpg",
+    "01-home.jpg",
+    "08-source-fixed-runtime.jpg",
+    "04-trade-blocked.jpg",
+    "02-name-validation.jpg",
+    "10-sell-refusal-fixed.jpg",
+    "03-demo-complete.jpg",
+    "05-poster-modal.jpg",
+    "09-poster-fixed.jpg"
+  ],
+  "historical_bad_poster": "demo-poster.png preserved, superseded by demo-poster-fixed.png"
+}
