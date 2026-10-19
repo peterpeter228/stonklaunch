@@ -1,6 +1,10 @@
 # No secrets or .env files are copied into this image. Build context allowlist below.
 FROM node:24.19.0-bookworm-slim AS dependencies
 WORKDIR /app
+# Server-side SVG/PNG rendering needs real fonts; slim images have none.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    fontconfig fonts-dejavu-core fonts-noto-cjk fonts-noto-color-emoji \
+    && fc-cache -f && rm -rf /var/lib/apt/lists/*
 RUN npm install --global pnpm@11.25.0
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY patches ./patches
