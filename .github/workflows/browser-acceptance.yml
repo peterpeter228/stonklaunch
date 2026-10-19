@@ -42,6 +42,8 @@ jobs:
           node -e "if(require('@playwright/test/package.json').version!=='1.64.1')throw Error('Unexpected Playwright version')"
       - name: Install official Chromium and Linux dependencies
         run: pnpm exec playwright install --with-deps chromium
+      - name: Verify public corresponding source matches this checkout
+        run: python3 deploy/verify-source-release.py
       - name: Build actual production application in DEMO mode
         shell: bash
         run: |

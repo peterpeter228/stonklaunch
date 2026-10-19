@@ -1,9 +1,20 @@
-# 第三方依赖与分发注意事项
+# Third-party notices and release status
 
-安装的 `@raydium-io/raydium-sdk-v2@0.2.74-alpha` 在 package.json 中声明 `GPL-3.0`。随附原始 LICENSE：`RAYDIUM_SDK_LICENSE.txt`，来自本次已安装 npm 包的 LICENSE。
+@raydium-io/raydium-sdk-v2@0.2.74-alpha declares GPL-3.0 and includes GNU GPL version 3. Its upstream repository is https://github.com/raydium-io/raydium-sdk-V2 . Preserve its LICENSE, original source notices and any modification notices. RAYDIUM_SDK_LICENSE.txt is the license copied from the installed package. The source-release builder includes the pinned package's src, README, package.json and LICENSE under third_party/raydium-sdk-v2.
 
-官方源码：https://github.com/raydium-io/raydium-sdk-V2
+StonkLaunch application source is being prepared for GPLv3 distribution with the development repository remaining private. Root LICENSE and SOURCE_RELEASE.md describe the application license, source delivery method and remaining review gates. A LICENSE file alone does not discharge corresponding-source obligations.
 
-当前工作不等于公开发布许可审查，也未给整个应用擅自添加 MIT 许可。对外分发应用、容器、浏览器 bundle 或改动版 SDK 前，需要审查适用的 GPL 源码提供、许可证、版权与修改声明等义务及其他依赖许可。此提醒不是法律意见，也不保证任何特定发行方式合规。保留上游许可证，不以私有仓库或服务端部署字样推断所有义务消失。
+Other dependency names, versions and declared licenses are recorded by the builder in DEPENDENCY_LICENSE_INVENTORY.json. That metadata is not a complete attribution list or bundled-source audit. Additional dependencies may require preserving notices or supplying source; GPL compatibility and complete corresponding-source coverage must be reviewed before release. pnpm-lock.yaml pins the dependency graph, including native-disable patches in patches/. No blanket permission for third-party branding, fonts, images, chain metadata or trademarks is asserted.
 
-依赖精确版本见 pnpm-lock.yaml；此文件不是完整软件物料清单。不要将第三方 logo、商标、链上 metadata 当成已获营销授权的资产。
+This is a local preparation record, not legal advice or a claim that every public distribution requirement has been satisfied.
+
+## Bounded dependency review, 2026-10-18
+
+- rpc-websockets 9.3.9: LGPL-3.0-only. Its reconnect/autoconnect implementation appears in actual client chunks 2589.87e8fd86ccf15f7f.js and 67132cdd.cad9e22bdb1d60fd.js. It also appears in 17 Next server file traces. Preferred TS source, LICENSE, package-lock and upstream build configurations are included from official release commit af8980776b55c2320b790556f775266fd5afc3ce; all 18 installed source-map source entries match. The full app source and build inputs permit modification and recombination; see the vendored SOURCE_ORIGIN.md.
+- eyes 0.1.8: package uses the older licenses:["MIT"] field; installed LICENSE confirms MIT. The original notice is included, not treated as an unknown license.
+- text-encoding-utf-8 1.0.2: package omits a license field, but installed LICENSE.md includes public-domain/Unlicense wording and explicitly attributes encoding indexes/algorithms/comments to the WHATWG Encoding Standard. The complete original notice is included. This is not represented as a blanket public-domain claim over the attributed standard material.
+- caniuse-lite 1.0.30001816: CC-BY-4.0 data license and original attribution retained. It is build-time browser-compatibility input, with no occurrence in the inspected server file traces. It is conservatively included in the notice collection regardless.
+- lightningcss 1.32.0 and its native package: MPL-2.0, build-time CSS tooling. No occurrence in inspected server file traces; native binaries are not browser JS. Original notices retained. No modified MPL library source is claimed.
+- sharp/libvips: sharp is server image processing (three server traces, including image uploads and Next server). The installed libvips package declares LGPL-3.0-or-later. It is not shipped as a browser library. Notices retained. This review covers browser web delivery, not public redistribution of the server/container/native library; a later downloadable container requires its own source/notice assessment.
+
+The archive conservatively collects all installed package license/copyright/notice files, including bundled Next component notices, rather than relying on minifiers to retain them. The notice index identifies the package and archive location. Client marker searches and server traces support the classifications above; absence of a minified package name alone is not proof of non-inclusion. These findings close the identified browser GPL/LGPL source gap without claiming legal certainty for every possible distribution mode.

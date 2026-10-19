@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
+import { createHash } from 'node:crypto';
 import jsQR from 'jsqr';
 
 // One bounded customer journey repeated at desktop and exact 360px emulation.
@@ -136,6 +137,21 @@ test('DEMO creation, poster, denied trades and external inspection recovery', as
     await expect(page.getByRole('heading', { name: 'No verified fees to show' })).toBeVisible();
     await expect(page.getByText('DEMO_NO_REAL_REVENUE', { exact: false })).toBeVisible();
     await capture('09-terminal-fees');
+    await page.getByRole('link', { name: 'Source & licenses', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Source & licenses', exact: true })).toBeVisible();
+    const sourceDownloadPromise = page.waitForEvent('download');
+    await page.getByRole('link', { name: 'Download corresponding source', exact: true }).click();
+    const sourceDownload = await sourceDownloadPromise;
+    const sourceBytes = await readFile(await sourceDownload.path());
+    expect([...sourceBytes.subarray(0, 2)]).toEqual([31, 139]);
+    const checksumResponse = await page.request.get('/source/SHA256SUMS.txt');
+    expect(checksumResponse.status()).toBe(200);
+    const expectedHash = (await checksumResponse.text()).trim().split(/\s+/)[0];
+    expect(createHash('sha256').update(sourceBytes).digest('hex')).toBe(expectedHash);
+    const licenseResponse = await page.request.get('/source/LICENSE.txt');
+    expect(licenseResponse.status()).toBe(200);
+    expect(await licenseResponse.text()).toContain('GNU GENERAL PUBLIC LICENSE');
+    await capture('10-source-license');
     expect(pageErrors).toEqual([]);
     expect(unexpectedNetwork).toEqual([]);
     expect(failedResponses.filter(item => !item.expected)).toEqual([]);

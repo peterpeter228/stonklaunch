@@ -15,7 +15,7 @@ export function getRuntime():RuntimeConfig{
  if(!authConfigured)blockers.push('AUTH_NOT_CONFIGURED');
  if(!storageConfigured)blockers.push('STORAGE_NOT_CONFIGURED');
  const policy=loadFeePolicy(process.env);
- return {mode,cluster,origin:process.env.APP_ORIGIN||'http://localhost:3000',platformId:process.env.LAUNCHLAB_PLATFORM_ID||null,platformAdmin:process.env.LAUNCHLAB_PLATFORM_ADMIN||null,walletEnabled:mode==='devnet'||mode==='mainnet-live',authConfigured,storageConfigured,actionsEnabled:process.env.ENABLE_SOLANA_ACTIONS==='true'&&(mode==='devnet'||mode==='mainnet-live'),feePolicy:{platformBps:policy.platformBps,creatorBps:policy.creatorBps,shareBps:policy.shareBps},blockers};
+ return {mode,cluster,origin:process.env.APP_ORIGIN||(process.env.RENDER==='true'?process.env.RENDER_EXTERNAL_URL:undefined)||'http://localhost:3000',platformId:process.env.LAUNCHLAB_PLATFORM_ID||null,platformAdmin:process.env.LAUNCHLAB_PLATFORM_ADMIN||null,walletEnabled:mode==='devnet'||mode==='mainnet-live',authConfigured,storageConfigured,actionsEnabled:process.env.ENABLE_SOLANA_ACTIONS==='true'&&(mode==='devnet'||mode==='mainnet-live'),feePolicy:{platformBps:policy.platformBps,creatorBps:policy.creatorBps,shareBps:policy.shareBps},blockers};
 }
 export function requireFinancialMode(){const r=getRuntime();if(!r.walletEnabled)throw new AppError(r.mode==='demo'?'DEMO_NO_REAL_TRANSACTIONS':'READ_ONLY_MODE','当前模式禁止真实资金交易构建',403);if(!process.env.SOLANA_RPC_URL)throw new AppError('RPC_NOT_CONFIGURED','尚未配置该网络的 RPC',503);return r;}
 export function assertSameOrigin(request:Request){const origin=request.headers.get('origin');if(origin&&origin!==new URL(getRuntime().origin).origin)throw new AppError('ORIGIN_NOT_ALLOWED','请求来源不允许',403);}

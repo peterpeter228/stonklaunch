@@ -1,0 +1,7 @@
+# Source provenance and replacement
+
+rpc-websockets 9.3.9, LGPL-3.0-only. Retrieved from the official repository at commit af8980776b55c2320b790556f775266fd5afc3ce (release commit message 9.3.9): https://github.com/elpheria/rpc-websockets/tree/af8980776b55c2320b790556f775266fd5afc3ce . Source, build configuration, package-lock.json and upstream license are retained. No upstream source modifications were made. The application archive builder verifies source-map sourcesContent against the installed package for all browser and server map entries. This identifies the preferred TypeScript source, rather than claiming compiled dist output is sufficient source.
+
+To rebuild this library separately, install its declared development tools with npm ci and use npm run build in this directory. To exercise modified browser code in the application, rebuild the library, replace the installed rpc-websockets package with that rebuilt package (or use an explicit local package-manager override), then rebuild the complete StonkLaunch source. The application build inputs and source are supplied to permit recombination; no restriction on modification, relinking, debugging or redistribution is imposed beyond applicable licenses. These are recipient instructions, not commands run during release packaging.
+
+The root application LICENSE supplies GPLv3 text; this directory's LICENSE supplies LGPLv3 supplemental permissions. Both must remain available with distribution. No public upload has been performed by this preparation step.

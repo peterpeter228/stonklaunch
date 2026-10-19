@@ -301,3 +301,18 @@ test('runner pacing spaces all RPC starts and stops queued network after 429 or 
  for(const status of [429,403]){let calls=0;const f=pacedDevnetFetch((async()=>{calls++;return new Response('private raw body',{status});}) as typeof fetch,()=>{});await assert.rejects(()=>f(endpoint,request),/DEVNET_RPC_STOPPED/);await assert.rejects(()=>f(endpoint,request),/DEVNET_RPC_STOPPED/);assert.equal(calls,1);}
  let calls=0;const aborted=new AbortController();aborted.abort();const f=pacedDevnetFetch((async()=>{calls++;return new Response('{}');}) as typeof fetch,()=>{});await assert.rejects(()=>f(endpoint,{...request,signal:aborted.signal}));assert.equal(calls,0);await f('https://api.github.com/repos/example',{});assert.equal(calls,1);
 });
+
+import {getRuntime,assertSameOrigin} from '../src/lib/runtime';
+test('Render assigned origin is trusted only in Render and explicit origin takes precedence',()=>{
+ const names=['APP_MODE','APP_ORIGIN','RENDER','RENDER_EXTERNAL_URL'] as const;
+ const saved=Object.fromEntries(names.map(k=>[k,process.env[k]]));
+ try{
+  process.env.APP_MODE='demo';delete process.env.APP_ORIGIN;delete process.env.RENDER;
+  process.env.RENDER_EXTERNAL_URL='https://preview.example.test';
+  assert.equal(getRuntime().origin,'http://localhost:3000');
+  process.env.RENDER='true';assert.equal(getRuntime().origin,'https://preview.example.test');
+  assert.doesNotThrow(()=>assertSameOrigin(new Request('https://preview.example.test/api',{headers:{origin:'https://preview.example.test'}})));
+  assert.throws(()=>assertSameOrigin(new Request('https://preview.example.test/api',{headers:{origin:'https://wrong.example.test'}})),/请求来源不允许/);
+  process.env.APP_ORIGIN='https://chosen.example.test';assert.equal(getRuntime().origin,'https://chosen.example.test');
+ }finally{for(const k of names){if(saved[k]===undefined)delete process.env[k];else process.env[k]=saved[k];}}
+});
