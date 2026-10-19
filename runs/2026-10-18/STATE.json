@@ -312,7 +312,7 @@
     "broadcast": false,
     "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
   },
-  "updated_at": "2026-10-18T19:38:30Z",
+  "updated_at": "2026-10-19T00:20:13.290841+00:00",
   "production_setup": {
     "supabase_connected": true,
     "project_ref": "mvhrxnspbzomtpdftxqp",
@@ -330,7 +330,8 @@
     "public_source_license_decision": "approved_Sentinel_7f9c17623c5481918e488106d87dc037",
     "deployed": false,
     "supabase_browser_login": "verified_correct_org_via_ChatGPT",
-    "solana_auth_provider": "disabled_enable_confirmation_pending"
+    "solana_auth_provider": "disabled_enable_confirmation_pending",
+    "render_creation": "denied_specific_public_service_approval_pending"
   },
   "browser_next16": {
     "run": 39157362123,
@@ -341,5 +342,20 @@
     "viewportAssertions": 18,
     "scope": "Actual Chromium DEMO desktop and360px; not productionwallet/auth",
     "evidence": "evidence/BROWSER_ACCEPTANCE_NEXT16.json"
+  },
+  "source_release": {
+    "commit": "c6b4dfb2a8a75f8126775eb37fa551c56023d310",
+    "sha256": "7866398c5036d45eb424cb4df3771247bfd5bf2ba6007e0cbccb721241336525",
+    "local_tests": 32,
+    "gate": "PASS",
+    "evidence": "evidence/SOURCE_RELEASE_ACCEPTANCE.json"
+  },
+  "browser_source_release": {
+    "run": 39180000615,
+    "assertions": "PASS",
+    "overall_job": "failure",
+    "failure": "artifact_storage_quota",
+    "current_screenshots_reviewed": false,
+    "evidence": "evidence/BROWSER_ACCEPTANCE_SOURCE_FINAL.json"
   }
 }

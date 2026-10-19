@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "verified_at": "2026-10-19T00:20:13.290252+00:00",
+  "source_commit": "c6b4dfb2a8a75f8126775eb37fa551c56023d310",
+  "archive_sha256": "7866398c5036d45eb424cb4df3771247bfd5bf2ba6007e0cbccb721241336525",
+  "archive_files": 605,
+  "authored_files": 115,
+  "authored_git_blob_match": "PASS",
+  "local_unit_tests": {
+    "passed": 32,
+    "failed": 0
+  },
+  "local_build": "PASS",
+  "source_integrity_gate": "PASS",
+  "browser_run": 39180000615,
+  "browser_status": "assertions_pass_artifact_upload_failed",
+  "render_status": "creation_denied_pending_specific_public_service_approval",
+  "solana_auth": "disabled_specific_confirmation_pending",
+  "scope": "Corresponding-source release integrity; not legal clearance, hosted authentication, production trading or profitability.",
+  "browser_screenshots_reviewed": false
+}

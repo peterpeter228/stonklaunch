@@ -1,0 +1,15 @@
+{
+  "run_url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39180000615",
+  "source_sha": "c6b4dfb2a8a75f8126775eb37fa551c56023d310",
+  "job_id": 117830533140,
+  "source_archive_sha256": "7866398c5036d45eb424cb4df3771247bfd5bf2ba6007e0cbccb721241336525",
+  "source_consistency_gate": "PASS",
+  "production_build": "PASS",
+  "actual_rendered_journey": "PASS: 2 cases in 19.5s, desktop and mobile-360",
+  "overall_job": "FAILURE: artifact upload storage quota",
+  "artifacts": [],
+  "screenshots_independently_reviewed": false,
+  "blocker": "Artifact storage quota hit. GitHub says usage recalculated every 6-12 hours. No artifact can be downloaded for this run.",
+  "scope": "DEMO only; source download/gzip/hash/license assertions and recovery journey passed; not production deployment or wallet execution.",
+  "log_excerpt": "2026-10-19T00:16:11.8548498Z \u001b[36;1m  echo 'Environment files are forbidden in secret-free browser acceptance.'\u001b[0m\n2026-10-19T00:16:43.9302848Z (Reading database ... 203540 files and directories currently installed.)\n2026-10-19T00:16:58.0462905Z   \"sha256\": \"7866398c5036d45eb424cb4df3771247bfd5bf2ba6007e0cbccb721241336525\",\n2026-10-19T00:16:58.0463979Z   \"authored_files\": 115,\n2026-10-19T00:16:58.0464944Z   \"archive_files\": 605,\n2026-10-19T00:16:59.4970926Z \u25b2 Next.js 16.4.2 (webpack)\n2026-10-19T00:17:52.8181730Z [WebServer] \u25b2 Next.js 16.4.2\n2026-10-19T00:17:54.0792297Z [1/2] [desktop] \u203a e2e/customer-journey.spec.mjs:9:1 \u203a DEMO creation, poster, denied trades and external inspection recovery\n2026-10-19T00:18:05.4687134Z [2/2] [mobile-360] \u203a e2e/customer-journey.spec.mjs:9:1 \u203a DEMO creation, poster, denied trades and external inspection recovery\n2026-10-19T00:18:11.9163173Z   2 passed (19.5s)\n2026-10-19T00:18:12.0135097Z   if-no-files-found: warn\n2026-10-19T00:18:12.0135562Z   include-hidden-files: false\n2026-10-19T00:18:12.2657162Z With the provided path, there will be 47 files uploaded\n2026-10-19T00:18:12.3502781Z ##[error]Failed to CreateArtifact: Artifact storage quota has been hit. Unable to upload any new artifacts. Usage is recalculated every 6-12 hours."
+}
