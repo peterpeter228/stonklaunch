@@ -1,0 +1,31 @@
+{
+  "run_id": 39190507018,
+  "job_id": 117862045797,
+  "url": "https://github.com/peterpeter228/stonklaunch/actions/runs/39190507018",
+  "source": "77df96f6d3bee3d8bd799a8b6688e499f4517884",
+  "deploy_id": "dep-dbao20dg1s2s73crmmag",
+  "deployment_status": "live",
+  "pre_dispatch_runtime": {
+    "mode": "mainnet-readonly",
+    "authConfigured": true,
+    "storageConfigured": true,
+    "walletEnabled": false,
+    "actionsEnabled": false
+  },
+  "conclusion": "failure",
+  "summary": {
+    "status": "FAIL",
+    "phase": "preflight",
+    "failedAssertion": null,
+    "fixture": "hosted-fixture-1792377247411",
+    "checks": [
+      "explicit-execution-gate",
+      "public-supabase-project-url",
+      "public-not-service-key"
+    ],
+    "accounts": [],
+    "retained": "Two test auth accounts, labelled private drafts and tiny public PNG fixtures. No deletion."
+  },
+  "interpretation": "Harness defect confirmed by code inspection: native fetch Response.ok was invoked as runtime.ok(), although it is a boolean property. This throws TypeError before runtime-readable is recorded. No browser launch or identity generation reached; no actual account/storage assertions ran. Network failure is not established.",
+  "rerun_performed": false
+}

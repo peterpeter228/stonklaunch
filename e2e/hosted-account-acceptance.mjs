@@ -10,11 +10,12 @@ const publicURL = process.env.NEXT_PUBLIC_SUPABASE_URL || '';
 const publicKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '';
 const fixture = `hosted-fixture-${Date.now()}`;
 let phase = 'preflight', browser, failedAssertion=null;
+let preflightDiagnostic = null;
 const checks = [], identities = [];
 function check(condition, label) { if (!condition) {failedAssertion=label;throw new Error(label);} checks.push(label); }
 function ok(label) { checks.push(label); }
 function summary(status) {
-  console.log(JSON.stringify({status, phase, failedAssertion, fixture, checks,
+  console.log(JSON.stringify({status, phase, failedAssertion, fixture, checks, preflightDiagnostic,
     accounts:identities.map(x=>x.address),
     retained:'Two test auth accounts, labelled private drafts and tiny public PNG fixtures. No deletion.'}));
 }
@@ -143,8 +144,28 @@ try {
   const isPublishable=publicKey.startsWith('sb_publishable_');
   let isAnon=false;try{isAnon=JSON.parse(Buffer.from(publicKey.split('.')[1],'base64url').toString()).role==='anon';}catch{}
   check(isPublishable||isAnon,'public-not-service-key');
-  const runtime=await fetch(`${ORIGIN}/api/runtime`,{signal:AbortSignal.timeout(30000)});
-  check(runtime.ok(),'runtime-readable');guardRuntime(await runtime.json());
+  const preflightStarted = Date.now();
+  preflightDiagnostic = { hostname: 'stonklaunch-demo.onrender.com', stage: 'fetch' };
+  try {
+    const runtime=await fetch(`${ORIGIN}/api/runtime`,{signal:AbortSignal.timeout(30000)});
+    const contentType=(runtime.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+    Object.assign(preflightDiagnostic, { stage: 'response', status: runtime.status,
+      contentType: ['application/json','text/html'].includes(contentType) ? contentType : 'other' });
+    // Native fetch Response.ok is a boolean; Playwright APIResponse.ok() below is a method.
+    check(runtime.ok,'runtime-readable');
+    preflightDiagnostic.stage = 'json';
+    guardRuntime(await runtime.json());
+    preflightDiagnostic.stage = 'verified';
+  } catch (error) {
+    const names = ['TypeError','SyntaxError','AbortError','TimeoutError','Error'];
+    const codes = ['ENOTFOUND','EAI_AGAIN','ECONNREFUSED','ECONNRESET','ENETUNREACH','EHOSTUNREACH',
+      'ETIMEDOUT','UND_ERR_CONNECT_TIMEOUT','UND_ERR_SOCKET','CERT_HAS_EXPIRED',
+      'UNABLE_TO_VERIFY_LEAF_SIGNATURE','DEPTH_ZERO_SELF_SIGNED_CERT','ERR_TLS_CERT_ALTNAME_INVALID'];
+    preflightDiagnostic.errorName = names.includes(error?.name) ? error.name : 'OTHER';
+    preflightDiagnostic.causeCode = codes.includes(error?.cause?.code) ? error.cause.code : 'OTHER';
+    // No error message, stack, arbitrary property, response body, cookie or header is logged.
+    throw new Error('PREFLIGHT_FAILED');
+  } finally { preflightDiagnostic.elapsedMs = Date.now() - preflightStarted; }
   browser=await chromium.launch({headless:true});
   phase='account-A-login-save';const a=await createActor('A');await save(a);
   phase='account-B-login-save';const b=await createActor('B');await save(b);
