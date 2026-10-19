@@ -24,4 +24,7 @@ FROM build AS runtime
 ENV NODE_ENV=production
 USER node
 EXPOSE 3000
-CMD ["pnpm", "start"]
+# Dependencies are immutable at runtime. pnpm may attempt an automatic install
+# when its root-owned build metadata differs under the unprivileged runtime user.
+# Keep the safety gate, then replace the shell so Next receives shutdown signals.
+CMD ["sh", "-c", "node scripts/verify-dependency.mjs && exec node node_modules/next/dist/bin/next start --hostname 0.0.0.0"]
