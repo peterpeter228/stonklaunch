@@ -1,0 +1,47 @@
+name: Real hosted wallet account acceptance
+run-name: hosted-auth-storage:${{ github.sha }}
+on:
+  workflow_dispatch:
+    inputs:
+      acknowledge_ready:
+        description: Reviewed deployed commit is ready; two ephemeral no-funds test accounts and labelled retained fixtures are approved.
+        type: boolean
+        required: true
+        default: false
+permissions:
+  contents: read
+concurrency:
+  group: hosted-auth-storage-acceptance
+  cancel-in-progress: false
+jobs:
+  hosted:
+    if: github.repository == 'peterpeter228/stonklaunch' && github.ref == 'refs/heads/main' && inputs.acknowledge_ready == true
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    env:
+      CI: 'true'
+      HOSTED_ACCEPTANCE_APPROVED: two-ephemeral-wallets-no-transactions
+      # Public client configuration only, NOT a server key.
+      NEXT_PUBLIC_SUPABASE_URL: https://mvhrxnspbzomtpdftxqp.supabase.co
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: sb_publishable_8bPjKBnMVN0Q6TT7bYg4Cw_BJqfCQWx
+    steps:
+      - name: Reject reruns to avoid silently creating extra accounts
+        run: test "$GITHUB_RUN_ATTEMPT" = 1
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: '22'
+      - name: Install existing locked dependencies
+        run: |
+          npm install --global pnpm@11.25.0 --ignore-scripts
+          pnpm install --frozen-lockfile --ignore-scripts
+          node -e "if(require('@playwright/test/package.json').version!=='1.64.1')throw Error('Unexpected Playwright version')"
+      - name: Install official Chromium
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Run bounded hosted Auth and storage acceptance
+        # Deliberately no tee, traces, screenshots, HTML reporter, HAR, storageState or artifact upload.
+        # The harness prints exactly one sanitized summary and never raw error objects.
+        run: node e2e/hosted-account-acceptance.mjs
