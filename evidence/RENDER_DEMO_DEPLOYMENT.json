@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "checked_at": "2026-10-19T00:29:12.869387+00:00",
+  "workspace": "tea-dbahbeijnfac73fnfna0",
+  "requested_service": "stonklaunch-demo",
+  "plan": "free",
+  "region": "singapore",
+  "mode": "demo",
+  "auto_deploy": false,
+  "secrets_configured": false,
+  "approval_message": "Sentinel_844964cfca3c8191ba783ac0cc7254c7",
+  "attempt_status": "failed_HTTP400_repository_invalid_or_unfetchable",
+  "repo": "https://github.com/peterpeter228/stonklaunch",
+  "service_created": false,
+  "next": "Inspect Render repository connection without changing permissions"
+}

@@ -312,7 +312,7 @@
     "broadcast": false,
     "evidence": "evidence/DURABLE_SDK_PROBE_39153989662.json"
   },
-  "updated_at": "2026-10-19T00:20:13.290841+00:00",
+  "updated_at": "2026-10-19T00:30:11.438577+00:00",
   "production_setup": {
     "supabase_connected": true,
     "project_ref": "mvhrxnspbzomtpdftxqp",
@@ -331,7 +331,9 @@
     "deployed": false,
     "supabase_browser_login": "verified_correct_org_via_ChatGPT",
     "solana_auth_provider": "disabled_enable_confirmation_pending",
-    "render_creation": "denied_specific_public_service_approval_pending"
+    "render_creation": "specific_approval_received_HTTP400_repo_unfetchable",
+    "render_approval": "Sentinel_844964cfca3c8191ba783ac0cc7254c7",
+    "render_deployment_evidence": "evidence/RENDER_DEMO_DEPLOYMENT.json"
   },
   "browser_next16": {
     "run": 39157362123,
